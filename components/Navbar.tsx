@@ -18,7 +18,7 @@ function Navlink({
 
 function Navbar() {
   return (
-    <nav className="flex justify-between uppercase p-4 shadow-lg items-center text-gray-700 select-none sticky top-0 bg-white">
+    <nav className="flex justify-between uppercase p-4 shadow-lg items-center text-gray-700 select-none sticky top-0 bg-white opacity-95">
       <Link href="/">
         <h1 className="text-2xl font-bold w-40 text-black cursor-pointer">
           Luke & Jadi
