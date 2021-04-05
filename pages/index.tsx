@@ -1,13 +1,8 @@
-import {
-  GetStaticPropsContext,
-  GetStaticPropsResult,
-  InferGetStaticPropsType,
-} from 'next';
+import { InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 import React from 'react';
 import path from 'path';
 import { promises as fs } from 'fs';
-import { stringify } from 'node:querystring';
 
 function WeddingPartyMember({
   children,
@@ -19,23 +14,30 @@ function WeddingPartyMember({
   name: string;
 }) {
   return (
-    <div className="w-2/5">
+    <div className="md:w-2/5">
       <h2 className="text-3xl font-bold pb-4">{name}</h2>
       <div className="pb-4 flex justify-center w-full">
         <div className="w-1/2">
           <img src={src} alt="Luke Shay" className="shadow-lg rounded" />
         </div>
       </div>
-      <p>{children}</p>
+      <p className="pb-4">{children}</p>
     </div>
   );
 }
 
+function Divider() {
+  return <div className="w-full border-b my-8" />;
+}
+
 function Header({ children, id }: { children: string; id: string }) {
   return (
-    <h1 className="text-4xl font-bold py-8" id={id}>
-      {children}
-    </h1>
+    <>
+      <Divider />
+      <h1 className="text-4xl font-bold pb-4" id={id}>
+        {children}
+      </h1>
+    </>
   );
 }
 
@@ -64,7 +66,7 @@ export default function Home({
   weddingPartyConfig,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div className="flex justify-center w-full">
+    <div className="flex justify-center w-full px-2">
       <main className="max-w-screen-lg">
         <div className="w-full">
           <Header id="our-story">Our Story</Header>
@@ -139,7 +141,7 @@ export default function Home({
         </div>
         <div className="w-full">
           <Header id="wedding-party">Wedding Party</Header>
-          <div className="flex justify-between">
+          <div className="md:flex justify-between">
             {weddingPartyConfig.map((pm, i) => (
               <WeddingPartyMember key={i} src={pm.img} name={pm.name}>
                 {pm.bio}
