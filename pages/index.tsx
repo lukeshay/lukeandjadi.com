@@ -14,14 +14,14 @@ function WeddingPartyMember({
   name: string;
 }) {
   return (
-    <div className="md:w-2/5">
-      <h2 className="text-3xl font-bold pb-4">{name}</h2>
+    <div className="col-span-1">
       <div className="pb-4 flex justify-center w-full">
-        <div className="w-1/2">
-          <img src={src} alt="Luke Shay" className="shadow-lg rounded" />
+        <div>
+          <img src={src} alt="Luke Shay" className="shadow-lg" />
         </div>
       </div>
-      <p className="pb-4">{children}</p>
+      <h2 className="text-2xl font-bold pb-1 text-gray-900">{name}</h2>
+      <h3 className="uppercase text-gray-700">{children}</h3>
     </div>
   );
 }
@@ -51,7 +51,7 @@ export async function getStaticProps() {
     {
       img: string;
       name: string;
-      bio: string;
+      role: string;
     }
   ];
 
@@ -68,6 +68,7 @@ export default function Home({
   return (
     <div className="flex justify-center w-full px-2">
       <main className="max-w-screen-lg">
+        <img src="/cover-photo.jpg" alt="Cover" className="rounded shadow-lg w-full" />
         <div className="w-full">
           <Header id="our-story">Our Story</Header>
           <p>
@@ -141,10 +142,10 @@ export default function Home({
         </div>
         <div className="w-full">
           <Header id="wedding-party">Wedding Party</Header>
-          <div className="md:flex justify-between">
+          <div className="md:grid grid-cols-4 gap-10">
             {weddingPartyConfig.map((pm, i) => (
               <WeddingPartyMember key={i} src={pm.img} name={pm.name}>
-                {pm.bio}
+                {pm.role}
               </WeddingPartyMember>
             ))}
           </div>
