@@ -1,85 +1,118 @@
-import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to
-          {' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
+    <div className="flex justify-center w-full">
+      <main className="max-w-screen-lg">
+        <h1 className="text-4xl font-bold py-4" id="our-story">
+          Our Story
         </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing
-          {' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+          maximus, urna vel vulputate tempor, diam metus rhoncus mauris, viverra
+          volutpat odio leo eu purus. Nullam feugiat nibh posuere vulputate
+          dapibus. Quisque ornare congue leo ac fringilla. Nam non diam
+          ultrices, dapibus enim in, rhoncus erat. Nam nec justo lacinia massa
+          volutpat convallis ut sit amet sapien. Sed at odio facilisis, varius
+          eros ut, gravida nisi. Orci varius natoque penatibus et magnis dis
+          parturient montes, nascetur ridiculus mus. Vestibulum mollis ultricies
+          tortor vitae porta. Class aptent taciti sociosqu ad litora torquent
+          per conubia nostra, per inceptos himenaeos. Donec vehicula, purus
+          porta lacinia lacinia, nibh diam sollicitudin nulla, pellentesque
+          interdum arcu arcu nec erat. Fusce fringilla ullamcorper tellus, in
+          facilisis mauris ultricies non. Donec dui orci, porta eu aliquet in,
+          pharetra eu arcu. Curabitur pharetra quis massa ut sollicitudin. Cras
+          at molestie quam.
+          <br />
+          <br />
+          Cras sagittis ullamcorper diam, sed commodo enim rutrum in. Aliquam
+          convallis eros vitae rhoncus hendrerit. Pellentesque vel dui eget
+          neque ultrices sodales. Vestibulum quis viverra ante. Donec commodo
+          cursus ipsum, sed dapibus dolor venenatis in. Class aptent taciti
+          sociosqu ad litora torquent per conubia nostra, per inceptos
+          himenaeos. Suspendisse volutpat tincidunt lorem quis aliquet. Nulla
+          facilisi.
+          <br />
+          <br />
+          Ut nisl metus, auctor id neque et, mollis pulvinar nibh. Nam in erat
+          luctus, sodales lacus eget, sollicitudin urna. Proin vel cursus nisl.
+          Vestibulum mauris purus, elementum vitae pellentesque in, dictum vel
+          ex. Nullam in arcu ex. Donec varius viverra orci, eu congue ligula
+          efficitur quis. Curabitur et libero vulputate, laoreet mauris eget,
+          semper ante. Curabitur et ipsum a eros convallis maximus nec quis
+          orci. Suspendisse finibus suscipit nulla, id dignissim sapien sagittis
+          non. Vestibulum at risus vitae lacus tincidunt tempus. Aliquam nec
+          felis eros. Maecenas vel leo libero. Nulla in placerat ante.
+          Vestibulum nisi magna, volutpat at molestie in, suscipit quis diam.
+          Aenean vulputate nisl ac purus rutrum efficitur.
+          <br />
+          <br />
+          Aliquam rhoncus hendrerit volutpat. Nullam finibus vitae velit ut
+          rhoncus. In et eleifend arcu, quis rhoncus massa. Morbi ac libero
+          velit. Vestibulum eget nulla eu magna maximus aliquet a in nibh.
+          Curabitur et rutrum urna. In elementum id turpis a condimentum.
+          Aliquam vitae erat pretium, rutrum purus vitae, eleifend est.
+          Curabitur pretium efficitur elementum. Suspendisse libero risus,
+          iaculis ultricies dignissim ut, pellentesque a enim. Nullam faucibus,
+          ligula vitae placerat commodo, arcu elit porttitor nisl, ut fringilla
+          justo sem ac felis. Integer dictum, justo ac eleifend vestibulum,
+          felis massa aliquet elit, a gravida quam ex ut enim.
+          <br />
+          <br />
+          Proin tristique tortor tristique elit tempor, sed gravida risus
+          facilisis. Cras sed iaculis tortor, sit amet faucibus dui. Sed
+          sollicitudin vitae sem vel ullamcorper. Aenean vel hendrerit quam.
+          Duis orci lorem, bibendum ac euismod a, viverra vestibulum velit.
+          Vivamus aliquet purus vel neque blandit, at ultricies odio
+          ullamcorper. Curabitur dignissim et nisi quis ornare. Morbi laoreet
+          lectus nibh, vitae hendrerit nunc dapibus ac. Quisque eget ipsum at
+          tellus tincidunt sodales vel ac justo. Etiam sed lectus in nibh
+          posuere lacinia vitae nec justo. Nullam sodales felis ac urna
+          sollicitudin, eget pharetra diam mollis. Pellentesque in dolor ligula.
+          Quisque iaculis, risus id dignissim luctus, ex lectus vulputate orci,
+          at sagittis massa arcu eget dolor. Aenean ac venenatis mi, et
+          consectetur turpis. Sed vel enim eu dui venenatis dapibus hendrerit
+          eget nulla.
         </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div className="w-full flex">
+          <div className="w-1/2">
+            <h1 className="text-4xl font-bold py-8" id="ceremony">
+              Ceremony
+            </h1>
+            <p>1234 Address Street</p>
+            <p>City, State 12345</p>
+            <div className="py-2">
+              <Link href="/rsvp/ceremony">
+                <a className="text-blue-500">RSVP Here</a>
+              </Link>
+            </div>
+          </div>
+          <div className="w-1/2">
+            <h1 className="text-4xl font-bold py-8" id="reception">
+              Reception
+            </h1>
+            <p>1234 Address Street</p>
+            <p>City, State 12345</p>
+            <div className="py-2">
+              <Link href="/rsvp/reception">
+                <a className="text-blue-500">RSVP Here</a>
+              </Link>
+            </div>
+          </div>
+        </div>
+        <h1 className="text-4xl font-bold py-8" id="registry">
+          Registry
+        </h1>
+        <div>
+          <a className="text-blue-500 cursor-pointer">Link to registry</a>
+        </div>
+        <div>
+          <a className="text-blue-500 cursor-pointer">Link to registry</a>
+        </div>
+        <div>
+          <a className="text-blue-500 cursor-pointer">Link to registry</a>
         </div>
       </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by
-          {' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
     </div>
   );
 }
