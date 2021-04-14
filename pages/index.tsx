@@ -34,9 +34,17 @@ function Header({ children, id }: { children: string; id: string }) {
   return (
     <>
       <Divider />
-      <h1 className="text-4xl font-bold pb-4" id={id}>
-        {children}
-      </h1>
+      {/* eslint-disable-next-line */}
+      <a
+        id={id}
+        style={{
+          display: 'block',
+          position: 'relative',
+          top: '-120px',
+          visibility: 'hidden',
+        }}
+      />
+      <h1 className="text-4xl font-bold pb-4">{children}</h1>
     </>
   );
 }
@@ -68,7 +76,11 @@ export default function Home({
   return (
     <div className="flex justify-center w-full px-2">
       <main className="max-w-screen-lg">
-        <img src="/cover-photo.jpg" alt="Cover" className="rounded shadow-lg w-full" />
+        <img
+          src="/cover-photo.jpg"
+          alt="Cover"
+          className="rounded shadow-lg w-full"
+        />
         <div className="w-full">
           <Header id="our-story">Our Story</Header>
           <p>
