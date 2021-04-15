@@ -1,8 +1,8 @@
-import { InferGetStaticPropsType } from 'next';
-import Link from 'next/link';
 import React from 'react';
-import path from 'path';
+import { InferGetStaticPropsType } from 'next';
 import { promises as fs } from 'fs';
+import Link from 'next/link';
+import path from 'path';
 
 function WeddingPartyMember({
   children,
@@ -49,12 +49,26 @@ function Header({ children, id }: { children: string; id: string }) {
   );
 }
 
+function RegistryLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <a className="text-blue-500 cursor-pointer" about="_blank" href={href}>
+      {children}
+    </a>
+  );
+}
+
 export async function getStaticProps() {
   const weddingPartyConfigPath = path.join(process.cwd(), 'wedding-party.json');
   const weddingPartyConfigFile = await fs.readFile(weddingPartyConfigPath);
 
   const weddingPartyConfig = JSON.parse(
-    weddingPartyConfigFile.toString('utf-8')
+    weddingPartyConfigFile.toString('utf-8'),
   ) as [
     {
       img: string;
@@ -156,6 +170,7 @@ export default function Home({
           <Header id="wedding-party">Wedding Party</Header>
           <div className="md:grid grid-cols-4 gap-10">
             {weddingPartyConfig.map((pm, i) => (
+              // eslint-disable-next-line react/no-array-index-key
               <WeddingPartyMember key={i} src={pm.img} name={pm.name}>
                 {pm.role}
               </WeddingPartyMember>
@@ -169,6 +184,7 @@ export default function Home({
             <p>City, State 12345</p>
             <div className="py-2">
               <Link href="/rsvp/ceremony">
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a className="text-blue-500">RSVP Here</a>
               </Link>
             </div>
@@ -179,6 +195,7 @@ export default function Home({
             <p>City, State 12345</p>
             <div className="py-2">
               <Link href="/rsvp/reception">
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a className="text-blue-500">RSVP Here</a>
               </Link>
             </div>
@@ -187,13 +204,15 @@ export default function Home({
         <div className="w-full">
           <Header id="registry">Registry</Header>
           <div>
-            <a className="text-blue-500 cursor-pointer">Link to registry</a>
+            <RegistryLink href="https://amazon.com">Amazon</RegistryLink>
           </div>
           <div>
-            <a className="text-blue-500 cursor-pointer">Link to registry</a>
+            <RegistryLink href="https://target.com">Target</RegistryLink>
           </div>
           <div>
-            <a className="text-blue-500 cursor-pointer">Link to registry</a>
+            <RegistryLink href="https://bedbathandbeyond.com">
+              Bed, Bath & Beyond
+            </RegistryLink>
           </div>
         </div>
       </main>
