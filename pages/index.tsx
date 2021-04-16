@@ -57,7 +57,7 @@ function RegistryLink({
   children: React.ReactNode;
 }) {
   return (
-    <a className="text-blue-500 cursor-pointer" about="_blank" href={href}>
+    <a about="_blank" href={href}>
       {children}
     </a>
   );

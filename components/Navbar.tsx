@@ -10,8 +10,13 @@ function NavLink({
   href: string;
 }) {
   return (
-    <li className="px-0 md:px-3 lg:px-6 py-1 md:py-0 hover:text-gray-500 text-base md:text-sm lg:text-base">
-      <Link href={href}>{children}</Link>
+    <li className="px-0 md:px-3 lg:px-6 py-1 md:py-0">
+      <Link href={href}>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+        <a className="text-gray-700 hover:no-underline hover:opacity-75 text-base md:text-sm lg:text-base">
+          {children}
+        </a>
+      </Link>
     </li>
   );
 }
@@ -68,7 +73,10 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
           </ul>
           <div className="pt-4">
             <Link href="/account">
-              <UserIconOutline size={34} />
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+              <a className="text-black hover:opacity-75 hover:no-underline">
+                <UserIconOutline size={34} />
+              </a>
             </Link>
           </div>
         </>
@@ -79,10 +87,10 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
 
 function Navbar() {
   const links = [
-    { href: '#wedding-party', text: 'Wedding party' },
-    { href: '#ceremony', text: 'Ceremony' },
-    { href: '#reception', text: 'Reception' },
-    { href: '#registry', text: 'Registry' },
+    { href: '/#wedding-party', text: 'Wedding party' },
+    { href: '/#ceremony', text: 'Ceremony' },
+    { href: '/#reception', text: 'Reception' },
+    { href: '/#registry', text: 'Registry' },
   ];
 
   return (

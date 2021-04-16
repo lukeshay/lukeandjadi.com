@@ -1,7 +1,26 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import Head from 'next/head';
+import Link from 'next/link';
+import React from 'react';
 import Navbar from '../components/Navbar';
 import '../styles/globals.css';
+
+function FooterLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <li>
+      <Link href={href}>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+        <a className="text-gray-500">{children}</a>
+      </Link>
+    </li>
+  );
+}
 
 function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   return (
@@ -17,15 +36,29 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
           <Component {...pageProps} />
         </div>
 
-        <footer className="flex items-center justify-center w-full h-24 border-t mt-8">
-          <a
-            className="flex items-center justify-center"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            &#169; 2021 Luke Shay and Jadi Reding
-          </a>
+        <footer className="w-full h-24 border-t mt-8 py-8">
+          <div className="flex justify-center w-full">
+            <div className="block sm:flex justify-between w-full max-w-screen-lg px-2 lg:px-0">
+              <div>
+                <h4 className="font-semibold">The Wedding</h4>
+                <ul>
+                  <FooterLink href="#our-story">Our Story</FooterLink>
+                  <FooterLink href="#wedding-party">Wedding party</FooterLink>
+                  <FooterLink href="#ceremony">Ceremony</FooterLink>
+                  <FooterLink href="#reception">Reception</FooterLink>
+                  <FooterLink href="#registry">Registry</FooterLink>
+                </ul>
+              </div>
+              <div className="pt-4 sm:pt-0">
+                <h4 className="font-semibold">RSVP</h4>
+                <ul>
+                  <FooterLink href="/rsvp/ceremony">Ceremony</FooterLink>
+                  <FooterLink href="/rsvp/reception">Reception</FooterLink>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="w-full text-center py-6">&#169; 2021 Luke Shay and Jadi Reding</div>
         </footer>
       </div>
     </>
