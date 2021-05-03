@@ -74,7 +74,7 @@ export async function getStaticProps() {
       img: string;
       name: string;
       role: string;
-    }
+    },
   ];
 
   return {
@@ -98,6 +98,12 @@ export default function Home({
         <div className="w-full">
           <Header id="our-story">Our Story</Header>
           <p>
+            <span className="hidden md:inline-block py-4 pl-4 w-80 float-right">
+              <img
+                src="/campanile.jpg"
+                alt="campanile"
+              />
+            </span>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
             maximus, urna vel vulputate tempor, diam metus rhoncus mauris,
             viverra volutpat odio leo eu purus. Nullam feugiat nibh posuere
@@ -177,8 +183,8 @@ export default function Home({
             ))}
           </div>
         </div>
-        <div className="w-full flex">
-          <div className="w-1/2">
+        <div className="w-full block md:flex">
+          <div className="w-full md:w-1/2">
             <Header id="ceremony">Ceremony</Header>
             <p>1234 Address Street</p>
             <p>City, State 12345</p>
@@ -189,7 +195,7 @@ export default function Home({
               </Link>
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="w-full md:w-1/2">
             <Header id="reception">Reception</Header>
             <p>1234 Address Street</p>
             <p>City, State 12345</p>

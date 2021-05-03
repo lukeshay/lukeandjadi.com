@@ -58,7 +58,8 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
               </div>
             </div>
           </div>
-          <div className="w-full text-center py-6">&#169; 2021 Luke Shay and Jadi Reding</div>
+          <div className="w-full text-center pt-6 pb-2">&#169;2021 Luke Shay and Jadi Reding</div>
+          <div className="w-full text-center pb-6">Built by Luke Shay</div>
         </footer>
       </div>
     </>

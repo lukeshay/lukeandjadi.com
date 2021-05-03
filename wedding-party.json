@@ -6,17 +6,17 @@
   },
   {
     "img": "/luke-shay.jpg",
+    "name": "Tyler Krueger",
+    "role": "Groomsman"
+  },
+  {
+    "img": "/luke-shay.jpg",
+    "name": "Jonny Behounek",
+    "role": "Groomsman"
+  },
+  {
+    "img": "/luke-shay.jpg",
     "name": "Kaeden Sisler",
-    "role": "Groomsman"
-  },
-  {
-    "img": "/luke-shay.jpg",
-    "name": "TBD",
-    "role": "Groomsman"
-  },
-  {
-    "img": "/luke-shay.jpg",
-    "name": "TBD",
     "role": "Groomsman"
   },
   {
@@ -36,7 +36,7 @@
   },
   {
     "img": "/luke-shay.jpg",
-    "name": "TBD",
+    "name": "Kelsy Sisler",
     "role": "Bridesmaid"
   }
 ]
