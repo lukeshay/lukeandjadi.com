@@ -21,6 +21,11 @@
   },
   {
     "img": "/luke-shay.jpg",
+    "name": "Nick Schiefelbein",
+    "role": "Groomsman"
+  },
+  {
+    "img": "/luke-shay.jpg",
     "name": "Jaclyn Reding",
     "role": "Maid of Honor"
   },
@@ -37,6 +42,11 @@
   {
     "img": "/luke-shay.jpg",
     "name": "Kelsy Sisler",
+    "role": "Bridesmaid"
+  },
+  {
+    "img": "/luke-shay.jpg",
+    "name": "Shayla Goche",
     "role": "Bridesmaid"
   }
 ]

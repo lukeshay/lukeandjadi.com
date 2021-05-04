@@ -21,7 +21,7 @@ function WeddingPartyMember({
           <img src={src} alt="Luke Shay" className="shadow-lg" />
         </div>
       </div>
-      <h2 className="text-2xl font-bold pb-1 text-gray-900">{name}</h2>
+      <h2 className="text-xl font-bold pb-1 text-gray-900">{name}</h2>
       <h3 className="uppercase text-gray-700">{children}</h3>
     </div>
   );
@@ -170,7 +170,7 @@ export default function Home({
       </div>
       <div className="w-full">
         <Header id="wedding-party">Wedding Party</Header>
-        <div className="md:grid grid-cols-4 gap-10">
+        <div className="md:grid grid-cols-5 gap-10">
           {weddingPartyConfig.map((pm, i) => (
             // eslint-disable-next-line react/no-array-index-key
             <WeddingPartyMember key={i} src={pm.img} name={pm.name}>
