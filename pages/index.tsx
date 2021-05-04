@@ -6,13 +6,15 @@ import path from 'path';
 import Layout from '../components/Layout';
 
 function WeddingPartyMember({
-  children,
   src,
   name,
+  role,
+  relation,
 }: {
-  children: React.ReactNode;
   src: string;
   name: string;
+  role: string;
+  relation: string;
 }) {
   return (
     <div className="col-span-1">
@@ -21,8 +23,9 @@ function WeddingPartyMember({
           <img src={src} alt="Luke Shay" className="shadow-lg" />
         </div>
       </div>
-      <h2 className="text-xl font-bold pb-1 text-gray-900">{name}</h2>
-      <h3 className="uppercase text-gray-700">{children}</h3>
+      <h2 className="text-lg font-bold pb-0.5 text-gray-900">{name}</h2>
+      <h3 className="uppercase text-gray-700">{role}</h3>
+      <p className="text-sm text-accent-500">{relation}</p>
     </div>
   );
 }
@@ -50,6 +53,10 @@ function Header({ children, id }: { children: string; id: string }) {
   );
 }
 
+function SubHeader({ children }: { children: string }) {
+  return <h2 className="text-3xl font-bold pb-4 pt-8">{children}</h2>;
+}
+
 function RegistryLink({
   href,
   children,
@@ -64,19 +71,27 @@ function RegistryLink({
   );
 }
 
+interface Member {
+  img: string;
+  name: string;
+  role: string;
+  relation: string;
+}
+
 export async function getStaticProps() {
   const weddingPartyConfigPath = path.join(process.cwd(), 'wedding-party.json');
   const weddingPartyConfigFile = await fs.readFile(weddingPartyConfigPath);
 
   const weddingPartyConfig = JSON.parse(
     weddingPartyConfigFile.toString('utf-8'),
-  ) as [
-    {
-      img: string;
-      name: string;
-      role: string;
-    },
-  ];
+  ) as {
+    groomsmen: Member[];
+    bridesmaids: Member[];
+    others: Member[];
+    parents: Member[];
+    grandparents: Member[];
+    ushers: Member[];
+  };
 
   return {
     props: {
@@ -171,11 +186,68 @@ export default function Home({
       <div className="w-full">
         <Header id="wedding-party">Wedding Party</Header>
         <div className="md:grid grid-cols-5 gap-10">
-          {weddingPartyConfig.map((pm, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <WeddingPartyMember key={i} src={pm.img} name={pm.name}>
-              {pm.role}
-            </WeddingPartyMember>
+          {weddingPartyConfig.groomsmen.map((pm) => (
+            <WeddingPartyMember
+              key={pm.name}
+              src={pm.img}
+              name={pm.name}
+              role={pm.role}
+              relation={pm.relation}
+            />
+          ))}
+          {weddingPartyConfig.bridesmaids.map((pm) => (
+            <WeddingPartyMember
+              key={pm.name}
+              src={pm.img}
+              name={pm.name}
+              role={pm.role}
+              relation={pm.relation}
+            />
+          ))}
+          {weddingPartyConfig.others.map((pm) => (
+            <WeddingPartyMember
+              key={pm.name}
+              src={pm.img}
+              name={pm.name}
+              role={pm.role}
+              relation={pm.relation}
+            />
+          ))}
+        </div>
+        <SubHeader>Parents</SubHeader>
+        <div className="md:grid grid-cols-5 gap-10">
+          {weddingPartyConfig.parents.map((pm) => (
+            <WeddingPartyMember
+              key={pm.name}
+              src={pm.img}
+              name={pm.name}
+              role={pm.role}
+              relation={pm.relation}
+            />
+          ))}
+        </div>
+        <SubHeader>Grandparents</SubHeader>
+        <div className="md:grid grid-cols-5 gap-10">
+          {weddingPartyConfig.grandparents.map((pm) => (
+            <WeddingPartyMember
+              key={pm.name}
+              src={pm.img}
+              name={pm.name}
+              role={pm.role}
+              relation={pm.relation}
+            />
+          ))}
+        </div>
+        <SubHeader>Ushers</SubHeader>
+        <div className="md:grid grid-cols-5 gap-10">
+          {weddingPartyConfig.ushers.map((pm) => (
+            <WeddingPartyMember
+              key={pm.name}
+              src={pm.img}
+              name={pm.name}
+              role={pm.role}
+              relation={pm.relation}
+            />
           ))}
         </div>
       </div>

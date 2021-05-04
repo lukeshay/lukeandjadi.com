@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import UserIconOutline from './icons/UserIconOutline';
+import { useRouter } from 'next/router';
 
 function NavLink({
   children,
@@ -9,11 +10,13 @@ function NavLink({
   children: React.ReactNode;
   href: string;
 }) {
+  const router = useRouter();
+
   return (
     <li className="px-0 md:px-3 lg:px-6 py-1 md:py-0">
       <Link href={href}>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a className="text-gray-700 hover:no-underline hover:opacity-75 text-base md:text-sm lg:text-base">
+        <a className={`text-gray-700 hover:no-underline hover:opacity-75 text-base md:text-sm lg:text-base border-b-2 border-accent-500 p-2`}>
           {children}
         </a>
       </Link>
