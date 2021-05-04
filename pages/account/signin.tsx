@@ -45,7 +45,7 @@ export default function SignIn() {
         />
         <button
           type="submit"
-          className="bg-blue-600 hover:opacity-75 text-white w-full my-2 p-3 rounded-lg shadow"
+          className="bg-accent-500 hover:opacity-75 text-gray-800 w-full my-2 p-3 rounded-lg shadow"
           disabled={loading}
         >
           Sign In

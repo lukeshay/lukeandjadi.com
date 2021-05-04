@@ -187,7 +187,7 @@ export default function Home({
           <div className="py-2">
             <Link href="/rsvp/ceremony">
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a className="text-blue-500">RSVP Here</a>
+              <a>RSVP Here</a>
             </Link>
           </div>
         </div>
@@ -198,7 +198,7 @@ export default function Home({
           <div className="py-2">
             <Link href="/rsvp/reception">
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a className="text-blue-500">RSVP Here</a>
+              <a>RSVP Here</a>
             </Link>
           </div>
         </div>
