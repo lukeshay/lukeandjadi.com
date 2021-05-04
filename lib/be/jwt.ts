@@ -5,5 +5,5 @@ export function generateJWT(email: string): string {
   
   date.setHours(date.getHours() + 12);
 
-  return jwt.sign({ email, expiration: date }, process.env.JWT_SECRET);
+  return jwt.sign({ email, expiration: date }, process.env.JWT_SECRET || "");
 }
