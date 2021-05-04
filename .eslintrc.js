@@ -19,5 +19,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'import/extensions': 'off',
     'no-use-before-define': 'off',
+    'import/prefer-defaul-export': 'off',
   },
 };

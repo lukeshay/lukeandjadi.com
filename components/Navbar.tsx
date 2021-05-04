@@ -37,7 +37,9 @@ function DesktopNavbar({ links }: { links: { href: string; text: string }[] }) {
       <div className="w-40 flex justify-end">
         <div className="hover:text-gray-500 flex cursor-pointer">
           <Link href="/account">
-            <UserIconOutline size={34} />
+            <a className="text-gray-700">
+              <UserIconOutline size={34} />
+            </a>
           </Link>
         </div>
       </div>

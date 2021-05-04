@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import Navbar from '../components/Navbar';
+import { configureAPI } from '../lib/fe/api';
 import '../styles/globals.css';
 
 function FooterLink({
@@ -23,6 +24,8 @@ function FooterLink({
 }
 
 function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
+  configureAPI();
+
   return (
     <>
       <Head>
@@ -58,7 +61,9 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
               </div>
             </div>
           </div>
-          <div className="w-full text-center pt-6 pb-2">&#169;2021 Luke Shay and Jadi Reding</div>
+          <div className="w-full text-center pt-6 pb-2">
+            &#169;2021 Luke Shay and Jadi Reding
+          </div>
           <div className="w-full text-center pb-6">Built by Luke Shay</div>
         </footer>
       </div>
