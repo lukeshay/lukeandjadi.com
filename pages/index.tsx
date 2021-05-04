@@ -25,13 +25,13 @@ function WeddingPartyMember({
       </div>
       <h2 className="text-lg font-bold pb-0.5 text-gray-900">{name}</h2>
       <h3 className="uppercase text-gray-700">{role}</h3>
-      <p className="text-sm text-accent-500">{relation}</p>
+      <p className="text-sm text-gray-500">{relation}</p>
     </div>
   );
 }
 
 function Divider() {
-  return <div className="w-full border-b my-8" />;
+  return <div className="w-full border-b my-8 border-accent-500" />;
 }
 
 function Header({ children, id }: { children: string; id: string }) {
