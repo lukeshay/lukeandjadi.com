@@ -1,9 +1,14 @@
 // Update with your config settings.
 
+require('pg').defaults.ssl = true;
+
 module.exports = {
   local: {
     client: 'postgresql',
-    connection: process.env.DSN,
+    connection: {
+      connectionString: process.env.DSN,
+      ssl: { rejectUnauthorized: false },
+    },
     pool: {
       min: 2,
       max: 10,
@@ -14,7 +19,10 @@ module.exports = {
   },
   development: {
     client: 'postgresql',
-    connection: process.env.DSN,
+    connection: {
+      connectionString: process.env.DSN,
+      ssl: { rejectUnauthorized: false },
+    },
     pool: {
       min: 2,
       max: 10,
@@ -26,7 +34,10 @@ module.exports = {
 
   production: {
     client: 'postgresql',
-    connection: process.env.DSN,
+    connection: {
+      connectionString: process.env.DSN,
+      ssl: { rejectUnauthorized: false },
+    },
     pool: {
       min: 2,
       max: 10,
