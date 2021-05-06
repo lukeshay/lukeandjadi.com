@@ -16,9 +16,11 @@ export default function SignIn() {
 
     try {
       await accountSignInPost(email);
-      router.push('/account/check-email');
+      await router.push('/account/check-email');
     } catch (e) {
-      console.error(e.res);
+      alert(
+        'There was an error signing in. If the problem persists, please email luke@lukeandjadi.com',
+      );
     }
 
     setLoading(false);

@@ -1,8 +1,6 @@
-import { createConnection } from 'typeorm';
-import { User } from './user';
+import knex from 'knex';
 
-export default createConnection({
-  type: 'postgres',
-  url: process.env.DSN,
-  entities: [User],
+export default knex({
+  client: 'pg',
+  connection: process.env.DSN,
 });

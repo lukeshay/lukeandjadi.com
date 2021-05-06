@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: docker.io/library/postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: luke_jadi_wedding
+    ports:
+      - 5432:5432
+    volumes:
+      - /var/lib/postgresql/data:${PWD}/data

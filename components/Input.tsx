@@ -10,16 +10,20 @@ export default function Input({
   required,
   disabled,
   type,
+  loading,
+  checked,
 }: {
   label: string;
   id: string;
   name: string;
   autoComplete: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
-  value: string;
+  value?: string | number;
   required?: boolean;
   disabled?: boolean;
   type?: 'input' | 'checkbox' | 'number';
+  loading?: boolean;
+  checked?: boolean;
 }) {
   return (
     <div>
@@ -27,17 +31,20 @@ export default function Input({
         {label}
         <span className="text-red-500">&nbsp;*</span>
       </label>
-      <input
-        id={id}
-        name={name}
-        autoComplete={autoComplete}
-        className="w-full border rounded p-2 my-2"
-        value={value}
-        onChange={onChange}
-        disabled={disabled}
-        required={required}
-        type={type}
-      />
+      {!loading && (
+        <input
+          id={id}
+          name={name}
+          autoComplete={autoComplete}
+          className="w-full border rounded p-2 my-2"
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
+          required={required}
+          type={type}
+          checked={checked}
+        />
+      )}
     </div>
   );
 }
@@ -46,4 +53,7 @@ Input.defaultProps = {
   required: false,
   disabled: false,
   type: 'input',
+  loading: false,
+  value: undefined,
+  checked: undefined,
 };

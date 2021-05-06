@@ -1,44 +1,134 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  UpdateDateColumn,
-  DeleteDateColumn,
-} from 'typeorm';
+/* eslint-disable camelcase */
+import connection from './connection';
 
-export enum UserRole {
+export enum AccountRole {
   MasterAdmin = 'MASTER_ADMIN',
   Admin = 'ADMIN',
   Basic = 'BASIC',
 }
 
-@Entity()
-export class User {
-  @PrimaryGeneratedColumn('uuid')
-  id!: number;
+export interface Account {
+  id: number;
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  role: AccountRole;
+  reception: boolean;
+  ceremony: boolean;
+  numberOfGuests?: number;
+}
 
-  @Column()
-  firstName!: string;
+interface AccountSnake {
+  id: number;
+  first_name?: string;
+  last_name?: string;
+  email: string;
+  role: AccountRole;
+  reception: boolean;
+  ceremony: boolean;
+  number_of_guests?: number;
+}
 
-  @Column()
-  lastName!: string;
+export const Accounts = () => connection.table<AccountSnake>('accounts');
 
-  @Column({ unique: true })
-  email!: string;
+export async function selectAccountByEmail(
+  e: string,
+): Promise<Readonly<Account>> {
+  const accounts = await Accounts().where('email', e);
+  const {
+    id,
+    email,
+    role,
+    reception,
+    ceremony,
+    first_name: firstName,
+    last_name: lastName,
+    number_of_guests: numberOfGuests,
+  } = accounts[0];
+  return {
+    id,
+    email,
+    role,
+    reception,
+    ceremony,
+    firstName,
+    lastName,
+    numberOfGuests,
+  };
+}
 
-  @Column({
-    type: 'enum',
-    enum: UserRole,
-    default: UserRole.Basic,
-  })
-  role!: UserRole;
+export async function insertAccount({
+  id,
+  email,
+  role,
+  reception,
+  ceremony,
+  firstName: first_name,
+  lastName: last_name,
+  numberOfGuests: number_of_guests,
+}: Account): Promise<Readonly<Account>> {
+  await Accounts().insert({
+    id,
+    email,
+    role,
+    reception,
+    ceremony,
+    first_name,
+    last_name,
+    number_of_guests,
+  });
+  return selectAccountByEmail(email);
+}
 
-  @Column()
-  setup = false;
+export async function updateAccount({
+  id,
+  email,
+  role,
+  reception,
+  ceremony,
+  firstName: first_name,
+  lastName: last_name,
+  numberOfGuests: number_of_guests,
+}: Account): Promise<Readonly<Account>> {
+  await Accounts().update({
+    id,
+    email,
+    role,
+    reception,
+    ceremony,
+    first_name,
+    last_name,
+    number_of_guests,
+  });
+  return selectAccountByEmail(email);
+}
 
-  @UpdateDateColumn()
-  updatedAt!: Date;
+export function mergeAccounts(a1: Account, a2: any): Readonly<Account> {
+  const merged = { ...a1 };
 
-  @DeleteDateColumn()
-  deletedAt!: Date;
+  if (a2.email) {
+    merged.email = a2.email;
+  }
+
+  if (a2.firstName) {
+    merged.firstName = a2.firstName;
+  }
+
+  if (a2.lastName) {
+    merged.lastName = a2.lastName;
+  }
+
+  if (a2.ceremony !== undefined) {
+    merged.ceremony = a2.ceremony;
+  }
+
+  if (a2.reception !== undefined) {
+    merged.reception = a2.reception;
+  }
+
+  if (a2.numberOfGuests) {
+    merged.numberOfGuests = a2.numberOfGuests;
+  }
+
+  return merged;
 }

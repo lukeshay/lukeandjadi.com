@@ -2,14 +2,19 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import { generateJWT } from '../../../lib/be/jwt';
 import { sendJWTEMail } from '../../../lib/be/email';
+import {
+  AccountRole,
+  insertAccount,
+  selectAccountByEmail,
+} from '../../../lib/entities/user';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    return await post(req, res);
-  } else {
-    return res.status(StatusCodes.NOT_FOUND);
+    return post(req, res);
   }
-};
+
+  return res.status(StatusCodes.NOT_FOUND).end();
+}
 
 async function post(req: NextApiRequest, res: NextApiResponse) {
   const { email } = req.body;
@@ -18,6 +23,23 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ email: 'Email is required.' });
+  }
+
+  try {
+    await selectAccountByEmail(email);
+  } catch (_) {
+    try {
+      // @ts-expect-error
+      await insertAccount({
+        email,
+        ceremony: false,
+        reception: false,
+        role: AccountRole.Basic,
+      });
+    } catch (e) {
+      console.error(e.message);
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
+    }
   }
 
   const jwtToken = generateJWT(email);
