@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import axios from 'axios';
 import { generateJWT } from '../../../lib/be/jwt';
-import { getJWTEmailHtml } from '../../../lib/be/email';
+import { sendJWTEMail } from '../../../lib/be/email';
 import {
   AccountRole,
   insertAccount,
@@ -52,15 +51,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     console.log('sending jwt email');
-    const jwtEmail = getJWTEmailHtml(jwtToken);
-
-    await axios.post(`${process.env.REDIRECT_URI}/api/account/sendemail`, {
-      html: jwtEmail,
-      to: email,
-      subject: "Sign in link for Luke & Jadi's wedding",
-      password: process.env.EMAIL_PASS,
-    });
-
+    await sendJWTEMail(email, jwtToken);
     return res
       .status(StatusCodes.OK)
       .json({ message: 'A email with a login link has been sent!' });
