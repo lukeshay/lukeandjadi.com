@@ -26,8 +26,10 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
+    console.log(`selecting account from database: ${email}`);
     await selectAccountByEmail(email);
   } catch (_) {
+    console.log(`adding account to database: ${email}`);
     try {
       // @ts-expect-error
       await insertAccount({
@@ -42,9 +44,11 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
     }
   }
 
+  console.log('generating jwt');
   const jwtToken = generateJWT(email);
 
   try {
+    console.log('sending jwt email');
     await sendJWTEMail(email, jwtToken);
     return res
       .status(StatusCodes.OK)
