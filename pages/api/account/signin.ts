@@ -19,6 +19,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 async function post(req: NextApiRequest, res: NextApiResponse) {
   const { email } = req.body;
 
+  console.log(process.env.DSN);
+
   if (!email) {
     return res
       .status(StatusCodes.BAD_REQUEST)
