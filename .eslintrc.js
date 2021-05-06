@@ -25,4 +25,12 @@ module.exports = {
     'operator-linebreak': 'off',
     'implicit-arrow-linebreak': 'off',
   },
+  overrides: [
+    {
+      files: ['pages/api/**/*'],
+      rules: {
+        'no-console': 'off',
+      },
+    },
+  ],
 };
