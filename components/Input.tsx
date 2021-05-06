@@ -36,7 +36,9 @@ export default function Input({
           id={id}
           name={name}
           autoComplete={autoComplete}
-          className="w-full border rounded p-2 my-2"
+          className={`w-full border rounded p-2 my-2 outline-none focus:ring-2 ring-accent-500 ${
+            disabled && 'cursor-not-allowed bg-gray-300 ring-0'
+          }`}
           value={value}
           onChange={onChange}
           disabled={disabled}

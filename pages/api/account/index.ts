@@ -8,37 +8,11 @@ import {
 } from '../../../lib/entities/user';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'GET') {
-    return get(req, res);
-  }
   if (req.method === 'PUT') {
     return put(req, res);
   }
 
   return res.status(StatusCodes.NOT_FOUND).end();
-}
-
-async function get(req: NextApiRequest, res: NextApiResponse) {
-  console.log('get /account');
-
-  if (!req.cookies.authorization) {
-    return res.status(StatusCodes.UNAUTHORIZED).end();
-  }
-
-  const { authorization } = req.cookies;
-
-  try {
-    const email = await parseJWT(authorization);
-
-    if (!email) {
-      return res.status(StatusCodes.UNAUTHORIZED).end();
-    }
-
-    const account = await selectAccountByEmail(email);
-    return res.status(StatusCodes.OK).json(account);
-  } catch (e) {
-    return res.status(StatusCodes.UNAUTHORIZED).end();
-  }
 }
 
 async function put(req: NextApiRequest, res: NextApiResponse) {

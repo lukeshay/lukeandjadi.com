@@ -1,8 +1,8 @@
 import { serialize, CookieSerializeOptions } from 'cookie';
-import { NextApiResponse } from 'next';
+import { ServerResponse } from 'node:http';
 
 export const setCookie = (
-  res: NextApiResponse,
+  res: ServerResponse,
   name: string,
   value: unknown,
   options: CookieSerializeOptions = {},

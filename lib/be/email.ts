@@ -21,7 +21,7 @@ export async function sendJWTEMail(
         <p><h3>Hello!</h3></p>
         <p>Thank you for coming to our wedding website! <a href="${
           process.env.REDIRECT_URI || 'https://lukeandjadi.com'
-        }/account/auth?token=${jwtToken}">Here is your link to sign in.</a></p>
+        }/account?token=${jwtToken}">Here is your link to sign in.</a></p>
         <p><b>Luke Shay & Jadi Reding</b>
         <br>
         <a href="mailto:${process.env.EMAIL_FROM || 'luke@lukeandjadi.com'}">${

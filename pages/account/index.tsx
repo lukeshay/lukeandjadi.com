@@ -1,26 +1,53 @@
+import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
-import useSWR from 'swr';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
 import Layout from '../../components/Layout';
-import { Account } from '../../lib/entities/user';
+import { setCookie } from '../../lib/be/cookie';
+import { parseJWT } from '../../lib/be/jwt';
+import { selectAccountByEmail } from '../../lib/entities/user';
 import { accountPut } from '../../lib/fe/api';
-import fetcher from '../../lib/fe/fetcher';
 
-export default function AccountPage() {
-  const [values, setValues] = React.useState<any>({});
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  let { token } = ctx.query;
+
+  if (!token) {
+    token = ctx.req.cookies.authorization;
+
+    if (!token) {
+      return { props: {} };
+    }
+  }
+
+  const email = await parseJWT(token as string);
+
+  if (!email) {
+    return { props: {} };
+  }
+
+  try {
+    const account = await selectAccountByEmail(email);
+
+    setCookie(ctx.res, 'authorization', token);
+
+    return { props: account };
+  } catch (e) {
+    console.error(e.message);
+    return { props: {} };
+  }
+}
+
+export default function AccountPage(props: any) {
+  const [values, setValues] = React.useState<any>(props);
   const [loading, setLoading] = React.useState(false);
-  const { data, error } = useSWR<Account>('/account', fetcher);
   const router = useRouter();
 
   React.useEffect(() => {
-    if (error) {
+    if (!props.id) {
       router.push('/account/signin');
-    } else if (data) {
-      setValues(data);
     }
-  }, [data, error]);
+  });
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -64,7 +91,7 @@ export default function AccountPage() {
           autoComplete="email"
           onChange={handleChange}
           value={values.email}
-          disabled={loading || (!data && !error)}
+          disabled
         />
         <Input
           label="First name"
@@ -73,7 +100,7 @@ export default function AccountPage() {
           autoComplete="first-name"
           onChange={handleChange}
           value={values.firstName}
-          disabled={loading || (!data && !error)}
+          disabled={loading}
         />
         <Input
           label="Last name"
@@ -82,7 +109,7 @@ export default function AccountPage() {
           autoComplete="last-name"
           onChange={handleChange}
           value={values.lastName}
-          disabled={loading || (!data && !error)}
+          disabled={loading}
         />
         <Input
           label="Number of guests"
@@ -91,7 +118,7 @@ export default function AccountPage() {
           autoComplete="guests"
           onChange={handleChange}
           value={values.numberOfGuests}
-          disabled={loading || (!data && !error)}
+          disabled={loading}
           type="number"
         />
         <Input
@@ -101,7 +128,7 @@ export default function AccountPage() {
           autoComplete="ceremony"
           onChange={handleBooleanChange}
           checked={values.ceremony}
-          disabled={loading || (!data && !error)}
+          disabled={loading}
           type="checkbox"
         />
         <Input
@@ -111,13 +138,13 @@ export default function AccountPage() {
           autoComplete="reception"
           onChange={handleBooleanChange}
           checked={values.reception}
-          disabled={loading || (!data && !error)}
+          disabled={loading}
           type="checkbox"
         />
         <button
           type="submit"
           className="bg-accent-500 hover:opacity-75 text-gray-800 w-full my-2 p-3 rounded-lg shadow"
-          disabled={loading || (!data && !error)}
+          disabled={loading}
         >
           Update
         </button>

@@ -28,7 +28,7 @@
       "img": "/nick-schiefelbein.jpg",
       "name": "Nick Schiefelbein",
       "role": "Groomsman",
-      "relation": "Friend of the Bride and Groom"
+      "relation": "Friend of the Couple"
     }
   ],
   "bridesmaids": [
@@ -124,6 +124,12 @@
     }
   ],
   "ushers": [
+    {
+      "img": "/dustin-white.jpg",
+      "name": "Dustin White",
+      "role": "Usher",
+      "relation": "Friend of the Bride"
+    },
     {
       "img": "/nick-stein.jpg",
       "name": "Nick Stein",
