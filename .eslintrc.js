@@ -22,5 +22,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/no-unresolved': 'off',
     indent: 'off',
+    'operator-linebreak': 'off',
+    'implicit-arrow-linebreak': 'off',
   },
 };

@@ -37,6 +37,7 @@ function DesktopNavbar({ links }: { links: { href: string; text: string }[] }) {
       <div className="w-40 flex justify-end">
         <div className="hover:text-gray-500 flex cursor-pointer">
           <Link href="/account">
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a className="text-gray-700">
               <UserIconOutline size={34} />
             </a>
