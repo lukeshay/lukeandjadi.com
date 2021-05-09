@@ -1,6 +1,6 @@
 import knex from 'knex';
 
-const connection = knex({
+const config = {
   client: 'pg',
   connection: {
     connectionString: process.env.DSN,
@@ -8,6 +8,13 @@ const connection = knex({
   },
   acquireConnectionTimeout: 4000,
   pool: { min: 0, max: 50 },
-});
+};
+
+if (process.env.NODE_ENV === 'development') {
+  // @ts-expect-error
+  delete config.connection.ssl;
+}
+
+const connection = knex(config);
 
 export default connection;

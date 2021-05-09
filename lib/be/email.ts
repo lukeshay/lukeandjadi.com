@@ -41,3 +41,16 @@ export function getJWTEmailHtml(jwtToken: string) {
   }">${process.env.REDIRECT_URI || 'https://lukeandjadi.com'}</a></p>
 `;
 }
+
+export function getJWTEmailPlain(jwtToken: string) {
+  return `Hello!
+
+  Thank you for coming to our wedding website! ${
+    process.env.REDIRECT_URI || 'https://lukeandjadi.com'
+  }/account?token=${jwtToken}
+
+  Luke Shay & Jadi Reding
+  ${process.env.EMAIL_FROM || 'luke@lukeandjadi.com'}
+  ${process.env.REDIRECT_URI || 'https://lukeandjadi.com'}
+`;
+}

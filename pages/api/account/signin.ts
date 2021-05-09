@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import axios from 'axios';
 import { generateJWT } from '../../../lib/be/jwt';
-import { getJWTEmailHtml } from '../../../lib/be/email';
+import { getJWTEmailHtml, getJWTEmailPlain } from '../../../lib/be/email';
 import {
   AccountRole,
   insertAccount,
@@ -52,13 +52,18 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     console.log('sending jwt email');
-    const jwtEmail = getJWTEmailHtml(jwtToken);
+    const html = getJWTEmailHtml(jwtToken);
+    const text = getJWTEmailPlain(jwtToken);
 
-    await axios.post(`${process.env.REDIRECT_URI}/api/account/sendemail`, {
-      html: jwtEmail,
+    await axios.post(`${process.env.EMAIL_SENDER_URL}/email`, {
+      html,
+      text,
       to: email,
       subject: "Sign in link for Luke & Jadi's wedding",
-      password: process.env.EMAIL_PASS,
+      from: 'Luke & Jadi <luke@lukeandjadi.com>',
+      pass: process.env.EMAIL_PASS,
+      user: process.env.EMAIL_USER,
+      host: process.env.EMAIL_HOST,
     });
 
     return res
@@ -66,6 +71,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       .json({ message: 'A email with a login link has been sent!' });
   } catch (e) {
     console.error(e.message);
+    console.error(e.response.data);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message:
         'Uh oh! It looks like there was an error. Please try again or contact us if the error continues!',

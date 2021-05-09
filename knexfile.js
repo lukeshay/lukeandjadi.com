@@ -1,13 +1,16 @@
 // Update with your config settings.
 
-require('pg').defaults.ssl = true;
+const pg = require('pg');
+
+if (!process.env.DSN.includes('localhost')) {
+  pg.defaults.ssl = true;
+}
 
 module.exports = {
   local: {
     client: 'postgresql',
     connection: {
       connectionString: process.env.DSN,
-      ssl: { rejectUnauthorized: false },
     },
     pool: {
       min: 2,
@@ -31,7 +34,6 @@ module.exports = {
       tableName: 'knex_migrations',
     },
   },
-
   production: {
     client: 'postgresql',
     connection: {
