@@ -86,37 +86,23 @@
             {
               "Effect": "Allow",
               "Principal": {
-                "Service": [
-                  "lambda.amazonaws.com"
-                ]
+                "Service": ["lambda.amazonaws.com"]
               },
-              "Action": [
-                "sts:AssumeRole"
-              ]
+              "Action": ["sts:AssumeRole"]
             }
           ]
         },
         "Policies": [
           {
             "PolicyName": {
-              "Fn::Join": [
-                "-",
-                [
-                  "email",
-                  "development",
-                  "lambda"
-                ]
-              ]
+              "Fn::Join": ["-", ["email", "development", "lambda"]]
             },
             "PolicyDocument": {
               "Version": "2012-10-17",
               "Statement": [
                 {
                   "Effect": "Allow",
-                  "Action": [
-                    "logs:CreateLogStream",
-                    "logs:CreateLogGroup"
-                  ],
+                  "Action": ["logs:CreateLogStream", "logs:CreateLogGroup"],
                   "Resource": [
                     {
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/email-development*:*"
@@ -125,9 +111,7 @@
                 },
                 {
                   "Effect": "Allow",
-                  "Action": [
-                    "logs:PutLogEvents"
-                  ],
+                  "Action": ["logs:PutLogEvents"],
                   "Resource": [
                     {
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/email-development*:*:*"
@@ -182,15 +166,10 @@
               "Statement": [
                 {
                   "Effect": "Allow",
-                  "Action": [
-                    "logs:FilterLogEvents"
-                  ],
+                  "Action": ["logs:FilterLogEvents"],
                   "Resource": [
                     {
-                      "Fn::GetAtt": [
-                        "EmailerLogGroup",
-                        "Arn"
-                      ]
+                      "Fn::GetAtt": ["EmailerLogGroup", "Arn"]
                     }
                   ]
                 }
@@ -222,15 +201,10 @@
           }
         },
         "Role": {
-          "Fn::GetAtt": [
-            "IamRoleLambdaExecution",
-            "Arn"
-          ]
+          "Fn::GetAtt": ["IamRoleLambdaExecution", "Arn"]
         }
       },
-      "DependsOn": [
-        "EmailerLogGroup"
-      ]
+      "DependsOn": ["EmailerLogGroup"]
     },
     "EmailerLambdaVersionmk78xSTNk1GXgeYB0jcPnzdggLeRjRL3Sr9G5Yjxrw": {
       "Type": "AWS::Lambda::Version",
@@ -268,10 +242,7 @@
         },
         "AccessLogSettings": {
           "DestinationArn": {
-            "Fn::GetAtt": [
-              "HttpApiLogGroup",
-              "Arn"
-            ]
+            "Fn::GetAtt": ["HttpApiLogGroup", "Arn"]
           },
           "Format": "{\"requestTime\":\"$context.requestTime\",\"requestId\":\"$context.requestId\",\"apiId\":\"$context.apiId\",\"resourcePath\":\"$context.routeKey\",\"path\":\"$context.path\",\"httpMethod\":\"$context.httpMethod\",\"stage\":\"$context.stage\",\"status\":\"$context.status\",\"integrationStatus\":\"$context.integrationStatus\",\"integrationLatency\":\"$context.integrationLatency\",\"responseLatency\":\"$context.responseLatency\",\"responseLength\":\"$context.responseLength\",\"errorMessage\":\"$context.error.message\",\"format\":\"SLS_HTTP_API_LOG\",\"version\":\"1.0.0\"}"
         }
@@ -282,10 +253,7 @@
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
-          "Fn::GetAtt": [
-            "EmailerLambdaFunction",
-            "Arn"
-          ]
+          "Fn::GetAtt": ["EmailerLambdaFunction", "Arn"]
         },
         "Action": "lambda:InvokeFunction",
         "Principal": "apigateway.amazonaws.com",
@@ -323,10 +291,7 @@
         },
         "IntegrationType": "AWS_PROXY",
         "IntegrationUri": {
-          "Fn::GetAtt": [
-            "EmailerLambdaFunction",
-            "Arn"
-          ]
+          "Fn::GetAtt": ["EmailerLambdaFunction", "Arn"]
         },
         "PayloadFormatVersion": "2.0",
         "TimeoutInMillis": 6500
@@ -385,10 +350,7 @@
     },
     "EnterpriseLogAccessIamRole": {
       "Value": {
-        "Fn::GetAtt": [
-          "EnterpriseLogAccessIamRole",
-          "Arn"
-        ]
+        "Fn::GetAtt": ["EnterpriseLogAccessIamRole", "Arn"]
       },
       "Export": {
         "Name": "sls-email-development-EnterpriseLogAccessIamRole"

@@ -41,12 +41,10 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
       return res.status(StatusCodes.OK).json(saved);
     } catch (e) {
       console.log(e.message);
-      return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({
-          message:
-            'There was an error saving your account. If this problem persists, please email luke@lukeandjadi.com!',
-        });
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message:
+          'There was an error saving your account. If this problem persists, please email luke@lukeandjadi.com!',
+      });
     }
   } catch (e) {
     console.log(e.message);

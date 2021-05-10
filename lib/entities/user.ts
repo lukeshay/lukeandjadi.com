@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import connection from './connection';
 
+// eslint-disable-next-line no-shadow
 export enum AccountRole {
   MasterAdmin = 'MASTER_ADMIN',
   Admin = 'ADMIN',
@@ -13,8 +15,7 @@ export interface Account {
   lastName?: string;
   email: string;
   role: AccountRole;
-  reception?: number;
-  ceremony?: number;
+  guests?: number;
 }
 
 interface AccountSnake {
@@ -23,8 +24,7 @@ interface AccountSnake {
   last_name?: string;
   email: string;
   role: AccountRole;
-  reception?: number;
-  ceremony?: number;
+  guests?: number;
 }
 
 export const Accounts = () => connection.table<AccountSnake>('accounts');
@@ -37,8 +37,7 @@ export async function selectAccountByEmail(
     id,
     email,
     role,
-    reception,
-    ceremony,
+    guests,
     first_name: firstName,
     last_name: lastName,
   } = accounts[0];
@@ -46,8 +45,7 @@ export async function selectAccountByEmail(
     id,
     email,
     role,
-    reception,
-    ceremony,
+    guests,
     firstName,
     lastName,
   };
@@ -57,8 +55,7 @@ export async function insertAccount({
   id,
   email,
   role,
-  reception,
-  ceremony,
+  guests,
   firstName: first_name,
   lastName: last_name,
 }: Account): Promise<Readonly<Account>> {
@@ -66,8 +63,7 @@ export async function insertAccount({
     id,
     email,
     role,
-    reception,
-    ceremony,
+    guests,
     first_name,
     last_name,
   });
@@ -78,8 +74,7 @@ export async function updateAccount({
   id,
   email,
   role,
-  reception,
-  ceremony,
+  guests,
   firstName: first_name,
   lastName: last_name,
 }: Account): Promise<Readonly<Account>> {
@@ -87,8 +82,7 @@ export async function updateAccount({
     .update({
       email,
       role,
-      reception,
-      ceremony,
+      guests,
       first_name,
       last_name,
     })
@@ -111,12 +105,8 @@ export function mergeAccounts(a1: Account, a2: any): Readonly<Account> {
     merged.lastName = a2.lastName;
   }
 
-  if (a2.ceremony) {
-    merged.ceremony = a2.ceremony;
-  }
-
-  if (a2.reception) {
-    merged.reception = a2.reception;
+  if (a2.guests) {
+    merged.guests = a2.guests;
   }
 
   return merged;

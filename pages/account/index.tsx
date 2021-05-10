@@ -15,6 +15,8 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   if (!token) {
     token = ctx.req.cookies.authorization;
 
+    setCookie(ctx.res, 'authorization', token);
+
     if (!token) {
       return { props: {} };
     }
@@ -27,11 +29,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   }
 
   try {
-    const account = await selectAccountByEmail(email);
-
-    setCookie(ctx.res, 'authorization', token);
-
-    return { props: account };
+    return { props: await selectAccountByEmail(email) };
   } catch (e) {
     console.error(e.message);
     return { props: {} };
@@ -108,22 +106,12 @@ export default function AccountPage(props: any) {
           disabled={loading}
         />
         <Input
-          label="Ceremony attendees"
-          id="ceremony"
-          name="ceremony"
-          autoComplete="ceremony"
+          label="Number of guests"
+          id="guests"
+          name="guests"
+          autoComplete="guests"
           onChange={handleChange}
-          checked={values.ceremony}
-          disabled={loading}
-          type="number"
-        />
-        <Input
-          label="Reception attendees"
-          id="reception"
-          name="reception"
-          autoComplete="reception"
-          onChange={handleChange}
-          checked={values.reception}
+          value={values.guests}
           disabled={loading}
           type="number"
         />

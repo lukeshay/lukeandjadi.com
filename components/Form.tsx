@@ -9,6 +9,7 @@ export default function Form({
   children: React.ReactNode;
   title: React.ReactNode;
   subTitle: React.ReactNode;
+  // eslint-disable-next-line no-unused-vars
   onSubmit: (event: FormEvent) => Promise<void> | void;
 }) {
   return (

@@ -17,7 +17,9 @@ export async function parseJWT(jwtToken: string): Promise<string | null> {
     if (decoded.email) {
       return decoded.email;
     }
-  } catch (_) {}
+  } catch (e) {
+    console.error(e.message);
+  }
 
   return null;
 }
