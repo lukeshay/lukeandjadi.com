@@ -1,7 +1,6 @@
 import React from 'react';
 import { InferGetStaticPropsType } from 'next';
 import { promises as fs } from 'fs';
-import Link from 'next/link';
 import path from 'path';
 import Layout from '../components/Layout';
 
@@ -185,7 +184,7 @@ export default function Home({
       </div>
       <div className="w-full">
         <Header id="wedding-party">Wedding Party</Header>
-        <div className="md:grid grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           {weddingPartyConfig.groomsmen.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
@@ -226,18 +225,6 @@ export default function Home({
             />
           ))}
         </div>
-        <SubHeader>Grandparents</SubHeader>
-        <div className="md:grid grid-cols-5 gap-10">
-          {weddingPartyConfig.grandparents.map((pm) => (
-            <WeddingPartyMember
-              key={pm.name}
-              src={pm.img}
-              name={pm.name}
-              role={pm.role}
-              relation={pm.relation}
-            />
-          ))}
-        </div>
         <SubHeader>Ushers</SubHeader>
         <div className="md:grid grid-cols-5 gap-10">
           {weddingPartyConfig.ushers.map((pm) => (
@@ -256,23 +243,11 @@ export default function Home({
           <Header id="ceremony">Ceremony</Header>
           <p>1234 Address Street</p>
           <p>City, State 12345</p>
-          <div className="py-2">
-            <Link href="/rsvp/ceremony">
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a>RSVP Here</a>
-            </Link>
-          </div>
         </div>
         <div className="w-full md:w-1/2">
           <Header id="reception">Reception</Header>
           <p>1234 Address Street</p>
           <p>City, State 12345</p>
-          <div className="py-2">
-            <Link href="/rsvp/reception">
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a>RSVP Here</a>
-            </Link>
-          </div>
         </div>
       </div>
       <div className="w-full">
