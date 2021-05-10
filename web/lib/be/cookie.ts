@@ -1,5 +1,5 @@
 import { serialize, CookieSerializeOptions } from 'cookie';
-import { ServerResponse } from 'node:http';
+import { ServerResponse } from 'http';
 
 export const setCookie = (
   res: ServerResponse,
