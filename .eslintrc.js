@@ -33,5 +33,11 @@ module.exports = {
         'no-console': 'off',
       },
     },
+    {
+      files: ['ui-tests/**/*'],
+      rules: {
+        'class-methods-use-this': 'off',
+      },
+    },
   ],
 };

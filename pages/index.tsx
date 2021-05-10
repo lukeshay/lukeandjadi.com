@@ -108,6 +108,7 @@ export default function Home({
         src="/cover-photo.jpg"
         alt="Cover"
         className="rounded shadow-lg w-full"
+        data-test-id="banner"
       />
       <div className="w-full">
         <Header id="our-story">Our Story</Header>

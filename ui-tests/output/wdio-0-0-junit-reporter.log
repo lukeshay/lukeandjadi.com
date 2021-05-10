@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Home" timestamp="2021-05-10T13:59:18" time="0.648" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="0"/>
+      <property name="suiteName" value="Home"/>
+      <property name="capabilities" value="chrome.90_0_4430_93.darwin"/>
+      <property name="file" value="./test/specs/smoke-test.e2e.js"/>
+    </properties>
+    <testcase classname="chrome.90_0_4430_93.darwin.Home" name="should load" time="0.648">
+      <system-out><![CDATA[
+COMMAND: navigateTo - {"url":"http://localhost:3000/"}
+RESULT: undefined
+COMMAND: findElement - {"using":"css selector","value":"img[data-test-id=\"banner\"]"}
+RESULT: undefined
+COMMAND: findElements - {"using":"css selector","value":"img[data-test-id=\"banner\"]"}
+RESULT: undefined
+COMMAND: deleteSession - {}
+RESULT: undefined
+]]></system-out>
+    </testcase>
+  </testsuite>
+</testsuites>
