@@ -7,7 +7,8 @@
   "private": true,
   "scripts": {
     "test:local": "wdio run ./wdio.conf.js",
-    "test:dev": "wdio run ./wdio.conf.dev.js"
+    "test:dev": "wdio run ./wdio.conf.dev.js",
+    "test:prod": "wdio run ./wdio.conf.prod.js"
   },
   "dependencies": {
     "@wdio/cli": "^7.5.7",
