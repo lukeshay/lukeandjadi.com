@@ -1,7 +1,6 @@
 import React from 'react';
 import { InferGetStaticPropsType } from 'next';
 import { promises as fs } from 'fs';
-import Link from 'next/link';
 import path from 'path';
 import Layout from '../components/Layout';
 
