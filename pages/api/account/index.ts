@@ -19,6 +19,7 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
   console.log('put /account');
 
   if (!req.cookies.authorization) {
+    console.log('no authorization cookie found');
     return res.status(StatusCodes.UNAUTHORIZED).end();
   }
 
@@ -28,15 +29,27 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
     const email = await parseJWT(authorization);
 
     if (!email) {
+      console.log('no email found in authorization cookie');
       return res.status(StatusCodes.UNAUTHORIZED).end();
     }
 
     const account = await selectAccountByEmail(email);
     const merged = { ...mergeAccounts(account, req.body), email };
 
-    const saved = await updateAccount(merged);
-    return res.status(StatusCodes.OK).json(saved);
+    try {
+      const saved = await updateAccount(merged);
+      return res.status(StatusCodes.OK).json(saved);
+    } catch (e) {
+      console.log(e.message);
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({
+          message:
+            'There was an error saving your account. If this problem persists, please email luke@lukeandjadi.com!',
+        });
+    }
   } catch (e) {
+    console.log(e.message);
     return res.status(StatusCodes.UNAUTHORIZED).end();
   }
 }

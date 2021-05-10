@@ -73,15 +73,11 @@ export default function AccountPage(props: any) {
     });
   }
 
-  function handleBooleanChange(event: ChangeEvent<HTMLInputElement>) {
-    setValues({ ...values, [event.target.id]: event.target.checked });
-  }
-
   return (
     <Layout>
       <Form
         title="Account"
-        subTitle="Please fill out all required fields!"
+        subTitle="Please fill out all required fields! This information will help us in planning for our wedding."
         onSubmit={handleSubmit}
       >
         <Input
@@ -112,34 +108,24 @@ export default function AccountPage(props: any) {
           disabled={loading}
         />
         <Input
-          label="Number of guests"
-          id="numberOfGuests"
-          name="guests"
-          autoComplete="guests"
+          label="Ceremony attendees"
+          id="ceremony"
+          name="ceremony"
+          autoComplete="ceremony"
           onChange={handleChange}
-          value={values.numberOfGuests}
+          checked={values.ceremony}
           disabled={loading}
           type="number"
         />
         <Input
-          label="Ceremony"
-          id="ceremony"
-          name="ceremony"
-          autoComplete="ceremony"
-          onChange={handleBooleanChange}
-          checked={values.ceremony}
-          disabled={loading}
-          type="checkbox"
-        />
-        <Input
-          label="Reception"
+          label="Reception attendees"
           id="reception"
           name="reception"
           autoComplete="reception"
-          onChange={handleBooleanChange}
+          onChange={handleChange}
           checked={values.reception}
           disabled={loading}
-          type="checkbox"
+          type="number"
         />
         <button
           type="submit"

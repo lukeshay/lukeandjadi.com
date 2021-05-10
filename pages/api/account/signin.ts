@@ -37,8 +37,6 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       // @ts-expect-error
       await insertAccount({
         email,
-        ceremony: false,
-        reception: false,
         role: AccountRole.Basic,
       });
     } catch (e) {
@@ -55,7 +53,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
     const html = getJWTEmailHtml(jwtToken);
     const text = getJWTEmailPlain(jwtToken);
 
-    await axios.post(`${process.env.EMAIL_SENDER_URL}/email`, {
+    const r = await axios.post(`${process.env.EMAIL_SENDER_URL}/email`, {
       html,
       text,
       to: email,
@@ -65,6 +63,8 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       user: process.env.EMAIL_USER,
       host: process.env.EMAIL_HOST,
     });
+
+    console.log(r.data);
 
     return res
       .status(StatusCodes.OK)

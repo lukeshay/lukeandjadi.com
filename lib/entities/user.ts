@@ -13,9 +13,8 @@ export interface Account {
   lastName?: string;
   email: string;
   role: AccountRole;
-  reception: boolean;
-  ceremony: boolean;
-  numberOfGuests?: number;
+  reception?: number;
+  ceremony?: number;
 }
 
 interface AccountSnake {
@@ -24,9 +23,8 @@ interface AccountSnake {
   last_name?: string;
   email: string;
   role: AccountRole;
-  reception: boolean;
-  ceremony: boolean;
-  number_of_guests?: number;
+  reception?: number;
+  ceremony?: number;
 }
 
 export const Accounts = () => connection.table<AccountSnake>('accounts');
@@ -43,7 +41,6 @@ export async function selectAccountByEmail(
     ceremony,
     first_name: firstName,
     last_name: lastName,
-    number_of_guests: numberOfGuests,
   } = accounts[0];
   return {
     id,
@@ -53,7 +50,6 @@ export async function selectAccountByEmail(
     ceremony,
     firstName,
     lastName,
-    numberOfGuests,
   };
 }
 
@@ -65,7 +61,6 @@ export async function insertAccount({
   ceremony,
   firstName: first_name,
   lastName: last_name,
-  numberOfGuests: number_of_guests,
 }: Account): Promise<Readonly<Account>> {
   await Accounts().insert({
     id,
@@ -75,7 +70,6 @@ export async function insertAccount({
     ceremony,
     first_name,
     last_name,
-    number_of_guests,
   });
   return selectAccountByEmail(email);
 }
@@ -88,18 +82,17 @@ export async function updateAccount({
   ceremony,
   firstName: first_name,
   lastName: last_name,
-  numberOfGuests: number_of_guests,
 }: Account): Promise<Readonly<Account>> {
-  await Accounts().update({
-    id,
-    email,
-    role,
-    reception,
-    ceremony,
-    first_name,
-    last_name,
-    number_of_guests,
-  });
+  await Accounts()
+    .update({
+      email,
+      role,
+      reception,
+      ceremony,
+      first_name,
+      last_name,
+    })
+    .where({ id });
   return selectAccountByEmail(email);
 }
 
@@ -118,16 +111,12 @@ export function mergeAccounts(a1: Account, a2: any): Readonly<Account> {
     merged.lastName = a2.lastName;
   }
 
-  if (a2.ceremony !== undefined) {
+  if (a2.ceremony) {
     merged.ceremony = a2.ceremony;
   }
 
-  if (a2.reception !== undefined) {
+  if (a2.reception) {
     merged.reception = a2.reception;
-  }
-
-  if (a2.numberOfGuests) {
-    merged.numberOfGuests = a2.numberOfGuests;
   }
 
   return merged;
