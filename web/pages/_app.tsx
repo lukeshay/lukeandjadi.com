@@ -38,6 +38,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
         />
       </Head>
       <Navbar />
+      <img src="/flowers.png" alt="flowers" className="sticky top-0 z-0 w-full -mb-96" />
 
       <div className="py-2 w-full font-serif">
         <div className="min-h-screen w-full">

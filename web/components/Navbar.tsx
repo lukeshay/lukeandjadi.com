@@ -22,7 +22,7 @@ function NavLink({
 
 function DesktopNavbar({ links }: { links: { href: string; text: string }[] }) {
   return (
-    <nav className="hidden md:flex justify-between p-4 font-serif shadow-lg items-center text-gray-700 select-none sticky top-0 bg-white opacity-95">
+    <nav className="z-20 hidden md:flex justify-between p-4 font-serif shadow-lg items-center text-gray-700 select-none sticky top-0 bg-white opacity-95">
       <Link href="/">
         <h1 className="text-2xl lg:text-4xl font-bold w-40 lg:w-56 text-black cursor-pointer">
           Luke & Jadi
@@ -52,7 +52,7 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
   }
 
   return (
-    <nav className="p-4 block md:hidden sticky top-0 bg-white shadow-lg font-serif">
+    <nav className="z-20 p-4 block md:hidden sticky top-0 bg-white shadow-lg font-serif">
       <div className="flex justify-between">
         <Link href="/">
           <h1 className="text-xl lg:text-2xl font-bold w-40 text-black cursor-pointer">
