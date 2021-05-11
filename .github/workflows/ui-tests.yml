@@ -1,0 +1,30 @@
+name: UI Test
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run a one-line script
+        run: yarn install
+      - name: Run a multi-line script
+        run: |
+          cd ui-tests
+          yarn test:dev
+  test-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run a one-line script
+        run: yarn install
+      - name: Run a multi-line script
+        run: |
+          cd ui-tests
+          yarn test:prod
