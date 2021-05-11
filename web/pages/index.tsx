@@ -116,24 +116,24 @@ export default function Home({
           <span className="hidden md:inline-block py-4 pl-4 w-80 float-right">
             <img src="/campanile.jpg" alt="campanile" />
           </span>
-          <h2 className="text-3xl font-bold pb-4">How We Met</h2>
           <p>
-            Luke and I met in August 2017 on our second day at Iowa State after
-            moving into Eaton Hall. We lived on the same floor and hung out with
-            the same friends. I started crushing on Luke within a week, even
-            though for the first few days I couldn’t remember his name and
-            referred to him as “the guy who is always smiling.” If you know
-            Luke, you know he is truly always smiling! Luke took a little longer
-            to make up his mind because he said he didn’t know I was interested
-            in him, despite my very obvious hints. ;) I invited Luke to the pool
-            with our friends numerous times and he never did end up coming
-            along… In September, Luke FINALLY asked me on a date, which was the
-            Iowa vs. Iowa State game in Ames. We sat in the end zone together
-            and I remember the kiss cam went on the people in front of us and I
-            was holding my breath thinking we were next. LOL. In October 2017,
-            we started dating and two years later we moved in together. We will
-            forever be grateful for Iowa State bringing us together and being
-            the biggest part of our first four years together.
+            Luke and I met in August 2017 on our second day at Iowa State. We
+            lived on the same floor in Eaton Hall and hung out with the same
+            friends. I started crushing on Luke within a week, even though for
+            the first few days I couldn’t remember his name and referred to him
+            as “the guy who is always smiling.” If you know Luke, you know he is
+            truly always smiling! Luke took a little longer to make up his mind
+            because he said he didn’t know I was interested in him, despite my
+            very obvious hints. ;) Luke will say they were not obvious at all. I
+            invited Luke to the pool with our friends numerous times and he
+            never did end up coming along… In September, Luke FINALLY asked me
+            on a date, which was the Iowa vs. Iowa State game in Ames. We sat in
+            the end zone together, and I remember the kiss cam went on the people
+            in front of us and I was holding my breath thinking we were next.
+            LOL. In October 2017, we started dating and two years later we moved
+            in together. We will forever be grateful for Iowa State bringing us
+            together and being the biggest part of our first four years
+            together.
           </p>
           <SubHeader>The Proposal</SubHeader>
           <p>
