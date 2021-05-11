@@ -1,6 +1,0 @@
-2021-05-10T18:59:16.466Z INFO @wdio/cli:launcher: Run onPrepare hook
-2021-05-10T18:59:16.468Z INFO @wdio/cli:launcher: Run onWorkerStart hook
-2021-05-10T18:59:16.468Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,./wdio.conf.js
-2021-05-10T18:59:19.579Z INFO @wdio/cli:launcher: Run onComplete hook
-2021-05-10T18:59:19.580Z INFO @wdio/local-runner: Shutting down spawned worker
-2021-05-10T18:59:19.831Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully

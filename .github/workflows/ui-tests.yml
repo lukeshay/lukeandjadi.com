@@ -12,15 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: yarn install
-      - run: |
+      - uses: ianwalter/puppeteer-container@afefc4bee7341a77baa94503da684e2895ea5d30
+        run: yarn install
+      - uses: ianwalter/puppeteer-container@afefc4bee7341a77baa94503da684e2895ea5d30
+        run: |
           cd ui-tests
           yarn test:dev
   test-prod:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: yarn install
-      - run: |
+      - uses: ianwalter/puppeteer-container@afefc4bee7341a77baa94503da684e2895ea5d30
+        run: yarn install
+      - uses: ianwalter/puppeteer-container@afefc4bee7341a77baa94503da684e2895ea5d30
+        run: |
           cd ui-tests
           yarn test:prod
