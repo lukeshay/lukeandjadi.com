@@ -31,10 +31,15 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
       <Head>
         <title>Luke & Jadi</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@300;500;700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <Navbar />
 
-      <div className="py-2 w-full">
+      <div className="py-2 w-full font-serif">
         <div className="min-h-screen w-full">
           <Component {...pageProps} />
         </div>

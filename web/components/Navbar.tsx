@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import UserIconOutline from './icons/UserIconOutline';
 
 function NavLink({
   children,
@@ -23,9 +22,9 @@ function NavLink({
 
 function DesktopNavbar({ links }: { links: { href: string; text: string }[] }) {
   return (
-    <nav className="hidden md:flex justify-between uppercase p-4 shadow-lg items-center text-gray-700 select-none sticky top-0 bg-white opacity-95">
+    <nav className="hidden md:flex justify-between p-4 font-serif shadow-lg items-center text-gray-700 select-none sticky top-0 bg-white opacity-95">
       <Link href="/">
-        <h1 className="text-xl lg:text-2xl font-bold w-40 text-black cursor-pointer">
+        <h1 className="text-2xl lg:text-4xl font-bold w-36 lg:w-52 text-black cursor-pointer">
           Luke & Jadi
         </h1>
       </Link>
@@ -34,14 +33,11 @@ function DesktopNavbar({ links }: { links: { href: string; text: string }[] }) {
           <NavLink href={href}>{text}</NavLink>
         ))}
       </ul>
-      <div className="w-40 flex justify-end">
+      <div className="w-36 lg:w-52 flex justify-end">
         <div className="hover:text-gray-500 flex cursor-pointer">
-          <Link href="/account">
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a className="text-gray-700">
-              <UserIconOutline size={34} />
-            </a>
-          </Link>
+          <ul>
+            <NavLink href="/account">RSVP</NavLink>
+          </ul>
         </div>
       </div>
     </nav>
@@ -56,8 +52,8 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
   }
 
   return (
-    <nav className="p-4 block md:hidden sticky top-0 bg-white shadow-lg">
-      <div className="flex justify-between uppercase">
+    <nav className="p-4 block md:hidden sticky top-0 bg-white shadow-lg font-serif">
+      <div className="flex justify-between">
         <Link href="/">
           <h1 className="text-xl lg:text-2xl font-bold w-40 text-black cursor-pointer">
             Luke & Jadi
@@ -71,16 +67,15 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
         <>
           <ul className="py-4 border-b">
             {links.map(({ href, text }) => (
-              <NavLink key={`${href}-${text}`} href={href}>{text}</NavLink>
+              <NavLink key={`${href}-${text}`} href={href}>
+                {text}
+              </NavLink>
             ))}
           </ul>
           <div className="pt-4">
-            <Link href="/account">
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a className="text-black hover:opacity-75 hover:no-underline">
-                <UserIconOutline size={34} />
-              </a>
-            </Link>
+            <ul>
+              <NavLink href="/account">RSVP</NavLink>
+            </ul>
           </div>
         </>
       )}
