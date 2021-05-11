@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import Navbar from '../components/Navbar';
-import { configureAPI } from '../lib/fe/api';
+import { configureAPI } from '../lib/client/api';
 import '../styles/globals.css';
 
 function FooterLink({

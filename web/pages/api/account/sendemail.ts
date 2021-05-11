@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import { sendJWTEMail } from '../../../lib/be/email';
+import { sendJWTEMail } from '../../../lib/server/email';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {

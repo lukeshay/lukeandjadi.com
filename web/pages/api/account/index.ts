@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import { parseJWT } from '../../../lib/be/jwt';
+import { parseJWT } from '../../../lib/server/jwt';
 import {
   mergeAccounts,
   selectAccountByEmail,

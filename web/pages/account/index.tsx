@@ -4,10 +4,10 @@ import React, { ChangeEvent, FormEvent } from 'react';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
 import Layout from '../../components/Layout';
-import { setCookie } from '../../lib/be/cookie';
-import { parseJWT } from '../../lib/be/jwt';
+import { setCookie } from '../../lib/server/cookie';
+import { parseJWT } from '../../lib/server/jwt';
 import { selectAccountByEmail } from '../../lib/entities/user';
-import { accountPut } from '../../lib/fe/api';
+import { accountPut } from '../../lib/client/api';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;

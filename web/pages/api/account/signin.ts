@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import axios from 'axios';
-import { generateJWT } from '../../../lib/be/jwt';
-import { getJWTEmailHtml, getJWTEmailPlain } from '../../../lib/be/email';
+import { generateJWT } from '../../../lib/server/jwt';
+import { getJWTEmailHtml, getJWTEmailPlain } from '../../../lib/server/email';
 import {
   AccountRole,
   insertAccount,

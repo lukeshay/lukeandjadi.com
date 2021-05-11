@@ -71,7 +71,7 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
         <>
           <ul className="py-4 border-b">
             {links.map(({ href, text }) => (
-              <NavLink href={href}>{text}</NavLink>
+              <NavLink key={`${href}-${text}`} href={href}>{text}</NavLink>
             ))}
           </ul>
           <div className="pt-4">
