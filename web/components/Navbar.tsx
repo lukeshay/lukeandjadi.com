@@ -9,7 +9,7 @@ function NavLink({
   href: string;
 }) {
   return (
-    <li className="px-0 md:px-3 lg:px-6 py-1 md:py-0">
+    <li className="px-0 md:px-2 lg:px-4 py-1 md:py-0">
       <Link href={href}>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a className="text-gray-700 hover:no-underline hover:opacity-75 text-base md:text-sm lg:text-base border-b-2 border-accent-500 p-2">
@@ -24,7 +24,7 @@ function DesktopNavbar({ links }: { links: { href: string; text: string }[] }) {
   return (
     <nav className="hidden md:flex justify-between p-4 font-serif shadow-lg items-center text-gray-700 select-none sticky top-0 bg-white opacity-95">
       <Link href="/">
-        <h1 className="text-2xl lg:text-4xl font-bold w-36 lg:w-52 text-black cursor-pointer">
+        <h1 className="text-2xl lg:text-4xl font-bold w-40 lg:w-56 text-black cursor-pointer">
           Luke & Jadi
         </h1>
       </Link>
@@ -33,7 +33,7 @@ function DesktopNavbar({ links }: { links: { href: string; text: string }[] }) {
           <NavLink href={href}>{text}</NavLink>
         ))}
       </ul>
-      <div className="w-36 lg:w-52 flex justify-end">
+      <div className="w-40 lg:w-56 flex justify-end">
         <div className="hover:text-gray-500 flex cursor-pointer">
           <ul>
             <NavLink href="/account">RSVP</NavLink>
