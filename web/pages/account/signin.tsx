@@ -31,9 +31,7 @@ export default function SignIn() {
       <Form
         onSubmit={handleSubmit}
         title="Sign In"
-        subTitle="Please sign in here. If you do not have an account, one will be
-            created. If you do not want to RSVP here, you can contact us
-            directly!"
+        subTitle="Please sign in here. This is only for special people!"
       >
         <Input
           id="email"

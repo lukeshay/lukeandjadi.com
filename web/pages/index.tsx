@@ -112,76 +112,44 @@ export default function Home({
       />
       <div className="w-full">
         <Header id="our-story">Our Story</Header>
-        <p>
+        <div>
           <span className="hidden md:inline-block py-4 pl-4 w-80 float-right">
             <img src="/campanile.jpg" alt="campanile" />
           </span>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          maximus, urna vel vulputate tempor, diam metus rhoncus mauris, viverra
-          volutpat odio leo eu purus. Nullam feugiat nibh posuere vulputate
-          dapibus. Quisque ornare congue leo ac fringilla. Nam non diam
-          ultrices, dapibus enim in, rhoncus erat. Nam nec justo lacinia massa
-          volutpat convallis ut sit amet sapien. Sed at odio facilisis, varius
-          eros ut, gravida nisi. Orci varius natoque penatibus et magnis dis
-          parturient montes, nascetur ridiculus mus. Vestibulum mollis ultricies
-          tortor vitae porta. Class aptent taciti sociosqu ad litora torquent
-          per conubia nostra, per inceptos himenaeos. Donec vehicula, purus
-          porta lacinia lacinia, nibh diam sollicitudin nulla, pellentesque
-          interdum arcu arcu nec erat. Fusce fringilla ullamcorper tellus, in
-          facilisis mauris ultricies non. Donec dui orci, porta eu aliquet in,
-          pharetra eu arcu. Curabitur pharetra quis massa ut sollicitudin. Cras
-          at molestie quam.
-          <br />
-          <br />
-          Cras sagittis ullamcorper diam, sed commodo enim rutrum in. Aliquam
-          convallis eros vitae rhoncus hendrerit. Pellentesque vel dui eget
-          neque ultrices sodales. Vestibulum quis viverra ante. Donec commodo
-          cursus ipsum, sed dapibus dolor venenatis in. Class aptent taciti
-          sociosqu ad litora torquent per conubia nostra, per inceptos
-          himenaeos. Suspendisse volutpat tincidunt lorem quis aliquet. Nulla
-          facilisi.
-          <br />
-          <br />
-          Ut nisl metus, auctor id neque et, mollis pulvinar nibh. Nam in erat
-          luctus, sodales lacus eget, sollicitudin urna. Proin vel cursus nisl.
-          Vestibulum mauris purus, elementum vitae pellentesque in, dictum vel
-          ex. Nullam in arcu ex. Donec varius viverra orci, eu congue ligula
-          efficitur quis. Curabitur et libero vulputate, laoreet mauris eget,
-          semper ante. Curabitur et ipsum a eros convallis maximus nec quis
-          orci. Suspendisse finibus suscipit nulla, id dignissim sapien sagittis
-          non. Vestibulum at risus vitae lacus tincidunt tempus. Aliquam nec
-          felis eros. Maecenas vel leo libero. Nulla in placerat ante.
-          Vestibulum nisi magna, volutpat at molestie in, suscipit quis diam.
-          Aenean vulputate nisl ac purus rutrum efficitur.
-          <br />
-          <br />
-          Aliquam rhoncus hendrerit volutpat. Nullam finibus vitae velit ut
-          rhoncus. In et eleifend arcu, quis rhoncus massa. Morbi ac libero
-          velit. Vestibulum eget nulla eu magna maximus aliquet a in nibh.
-          Curabitur et rutrum urna. In elementum id turpis a condimentum.
-          Aliquam vitae erat pretium, rutrum purus vitae, eleifend est.
-          Curabitur pretium efficitur elementum. Suspendisse libero risus,
-          iaculis ultricies dignissim ut, pellentesque a enim. Nullam faucibus,
-          ligula vitae placerat commodo, arcu elit porttitor nisl, ut fringilla
-          justo sem ac felis. Integer dictum, justo ac eleifend vestibulum,
-          felis massa aliquet elit, a gravida quam ex ut enim.
-          <br />
-          <br />
-          Proin tristique tortor tristique elit tempor, sed gravida risus
-          facilisis. Cras sed iaculis tortor, sit amet faucibus dui. Sed
-          sollicitudin vitae sem vel ullamcorper. Aenean vel hendrerit quam.
-          Duis orci lorem, bibendum ac euismod a, viverra vestibulum velit.
-          Vivamus aliquet purus vel neque blandit, at ultricies odio
-          ullamcorper. Curabitur dignissim et nisi quis ornare. Morbi laoreet
-          lectus nibh, vitae hendrerit nunc dapibus ac. Quisque eget ipsum at
-          tellus tincidunt sodales vel ac justo. Etiam sed lectus in nibh
-          posuere lacinia vitae nec justo. Nullam sodales felis ac urna
-          sollicitudin, eget pharetra diam mollis. Pellentesque in dolor ligula.
-          Quisque iaculis, risus id dignissim luctus, ex lectus vulputate orci,
-          at sagittis massa arcu eget dolor. Aenean ac venenatis mi, et
-          consectetur turpis. Sed vel enim eu dui venenatis dapibus hendrerit
-          eget nulla.
-        </p>
+          <p>
+            Luke and I met in August 2017 on our second day at Iowa State after
+            moving into Eaton Hall. We lived on the same floor and hung out with
+            the same friends. I started crushing on Luke within a week, even
+            though for the first few days I couldn’t remember his name and
+            referred to him as “the guy who is always smiling.” If you know
+            Luke, you know he is truly always smiling! Luke took a little longer
+            to make up his mind because he said he didn’t know I was interested
+            in him, despite my very obvious hints. ;) I invited Luke to the pool
+            with our friends numerous times and he never did end up coming
+            along… In September, Luke FINALLY asked me on a date, which was the
+            Iowa vs. Iowa State game in Ames. We sat in the end zone together
+            and I remember the kiss cam went on the people in front of us and I
+            was holding my breath thinking we were next. LOL. In October 2017,
+            we started dating and two years later we moved in together. We will
+            forever be grateful for Iowa State bringing us together and being
+            the biggest part of our first four years together.
+          </p>
+          <SubHeader>The Proposal</SubHeader>
+          <p>
+            At the end of April 2021, I asked Luke to take graduation pictures
+            with me on campus. He was less than thrilled but agreed because I
+            said his mom would want pictures. (Thanks Natalie!) On May 1st, we
+            got ready to take a few pictures on central campus. My sister,
+            Jaclyn, took pictures of us and at our last spot Luke suggested we
+            take a picture without our caps and gowns on. I said we already had
+            a few without them and we could be done. He suggested just one more
+            with the campanile in the background. Next thing I knew Luke was on
+            a knee and asking me to marry him. I am pretty sure I had my mouth
+            wide open for about 5 minutes! Jaclyn and I were both surprised but
+            luckily she got some great pictures! I am so lucky that I get to
+            marry such an amazing guy and I cannot wait for our future together!
+          </p>
+        </div>
       </div>
       <div className="w-full">
         <Header id="wedding-party">Wedding Party</Header>
