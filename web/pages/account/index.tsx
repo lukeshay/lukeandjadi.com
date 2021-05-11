@@ -87,34 +87,6 @@ export default function AccountPage(props: any) {
           value={values.email}
           disabled
         />
-        <Input
-          label="First name"
-          id="firstName"
-          name="first-name"
-          autoComplete="first-name"
-          onChange={handleChange}
-          value={values.firstName}
-          disabled={loading}
-        />
-        <Input
-          label="Last name"
-          id="lastName"
-          name="last-name"
-          autoComplete="last-name"
-          onChange={handleChange}
-          value={values.lastName}
-          disabled={loading}
-        />
-        <Input
-          label="Number of guests"
-          id="guests"
-          name="guests"
-          autoComplete="guests"
-          onChange={handleChange}
-          value={values.guests}
-          disabled={loading}
-          type="number"
-        />
         <button
           type="submit"
           className="bg-accent-500 hover:opacity-75 text-gray-800 w-full my-2 p-3 rounded-lg shadow"
