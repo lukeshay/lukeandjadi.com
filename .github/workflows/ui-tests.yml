@@ -13,9 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ianwalter/puppeteer-container@afefc4bee7341a77baa94503da684e2895ea5d30
-        run: yarn install
+        with:
+          args: yarn install
       - uses: ianwalter/puppeteer-container@afefc4bee7341a77baa94503da684e2895ea5d30
-        run: |
+        with:
+          args: |
           cd ui-tests
           yarn test:dev
   test-prod:
@@ -23,8 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ianwalter/puppeteer-container@afefc4bee7341a77baa94503da684e2895ea5d30
-        run: yarn install
+        with:
+          args: yarn install
       - uses: ianwalter/puppeteer-container@afefc4bee7341a77baa94503da684e2895ea5d30
-        run: |
+        with:
+          args: |
           cd ui-tests
           yarn test:prod
