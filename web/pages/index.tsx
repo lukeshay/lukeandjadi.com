@@ -214,9 +214,9 @@ export default function Home({
             />
           ))}
         </div>
-        <SubHeader>Parents</SubHeader>
+        <SubHeader>Ushers</SubHeader>
         <div className="md:grid grid-cols-5 gap-10">
-          {weddingPartyConfig.parents.map((pm) => (
+          {weddingPartyConfig.ushers.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
               src={pm.img}
@@ -226,9 +226,9 @@ export default function Home({
             />
           ))}
         </div>
-        <SubHeader>Ushers</SubHeader>
+        <SubHeader>Parents</SubHeader>
         <div className="md:grid grid-cols-5 gap-10">
-          {weddingPartyConfig.ushers.map((pm) => (
+          {weddingPartyConfig.parents.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
               src={pm.img}
