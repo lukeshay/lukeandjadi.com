@@ -116,6 +116,7 @@ export default function Home({
           <span className="hidden md:inline-block py-4 pl-4 w-80 float-right">
             <img src="/campanile.jpg" alt="campanile" />
           </span>
+          <h2 className="text-3xl font-bold pb-4">How We Met</h2>
           <p>
             Luke and I met in August 2017 on our second day at Iowa State after
             moving into Eaton Hall. We lived on the same floor and hung out with
