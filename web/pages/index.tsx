@@ -19,7 +19,11 @@ function WeddingPartyMember({
     <div className="col-span-1">
       <div className="pb-4 flex justify-center w-full">
         <div>
-          <img src={src} alt="Luke Shay" className="shadow-lg rounded border-2 border-accent-500" />
+          <img
+            src={src}
+            alt="Luke Shay"
+            className="shadow-lg rounded border-2 border-accent-500"
+          />
         </div>
       </div>
       <h2 className="text-lg font-bold pb-0.5 text-gray-900">{name}</h2>
@@ -180,12 +184,12 @@ export default function Home({
           data-test-id="banner"
         />
         <div
-          className="absolute top-1/2 left-1/2 text-7xl font-bold text-center select-none"
+          className="absolute top-1/2 left-1/2 text-2xl md:text-4xl lg:text-7xl font-bold text-center select-none"
           style={{ transform: 'translate(-50%, -50%)' }}
         >
           Luke & Jadi
-          <p className="text-4xl">{date}</p>
-          <p className="text-2xl">
+          <p className="text-lg md:text-2xl lg:text-4xl">{date}</p>
+          <p className="text-sm md:text-lg lg:text-2xl">
             {Math.trunc(
               (new Date(`${date} 14:00:00`).getTime() - new Date().getTime()) /
                 (1000 * 60 * 60 * 24),
@@ -311,7 +315,9 @@ export default function Home({
         </div>
       </Section>
       <Section id="registry" title="Registry">
-        <RegistryLink href="https://www.amazon.com/wedding/share/luke-and-jadi">Amazon</RegistryLink>
+        <RegistryLink href="https://www.amazon.com/wedding/share/luke-and-jadi">
+          Amazon
+        </RegistryLink>
         <RegistryLink href="https://target.com">Target</RegistryLink>
         <RegistryLink href="https://bedbathandbeyond.com">
           Bed, Bath & Beyond
