@@ -100,14 +100,16 @@ function SubSection({
   children,
   className,
   subHeaderClassName,
+  wrapperClassName,
 }: {
   title: string;
   children: React.ReactNode;
   className?: string;
   subHeaderClassName?: string;
+  wrapperClassName?: string;
 }) {
   return (
-    <div>
+    <div className={wrapperClassName}>
       <SubHeader className={subHeaderClassName}>{title}</SubHeader>
       <div className={className}>{children}</div>
     </div>
@@ -117,6 +119,7 @@ function SubSection({
 SubSection.defaultProps = {
   className: '',
   subHeaderClassName: '',
+  wrapperClassName: '',
 };
 
 function RegistryLink({
@@ -279,16 +282,22 @@ export default function Home({
       </Section>
       <Section id="our-wedding" title="The Wedding">
         <div className="w-full block md:flex">
-          <div className="w-full md:w-1/2">
-            <SubHeader>Ceremony</SubHeader>
-            <p>1234 Address Street</p>
-            <p>City, State 12345</p>
-          </div>
-          <div className="w-full md:w-1/2">
-            <SubHeader>Reception</SubHeader>
-            <p>1234 Address Street</p>
-            <p>City, State 12345</p>
-          </div>
+          <SubSection wrapperClassName="w-full md:w-1/2" title="Ceremony">
+            <h3 className="text-lg font-bold">Lutheran Church of Hope</h3>
+            <address>
+              925 Jordan Creek Pkwy
+              <br />
+              West Des Moines, IA 50266
+            </address>
+          </SubSection>
+          <SubSection wrapperClassName="w-full md:w-1/2" title="Reception">
+            <h3 className="text-lg font-bold">Deez nuts</h3>
+            <address>
+              1234 Address Street
+              <br />
+              City, State 12345
+            </address>
+          </SubSection>
         </div>
       </Section>
       <Section id="registry" title="Registry">
