@@ -128,12 +128,12 @@ export default function Home({
             invited Luke to the pool with our friends numerous times and he
             never did end up coming along… In September, Luke FINALLY asked me
             on a date, which was the Iowa vs. Iowa State game in Ames. We sat in
-            the end zone together, and I remember the kiss cam went on the people
-            in front of us and I was holding my breath thinking we were next.
-            LOL. In October 2017, we started dating and two years later we moved
-            in together. We will forever be grateful for Iowa State bringing us
-            together and being the biggest part of our first four years
-            together.
+            the end zone together, and I remember the kiss cam went on the
+            people in front of us and I was holding my breath thinking we were
+            next. LOL. In October 2017, we started dating and two years later we
+            moved in together. We will forever be grateful for Iowa State
+            bringing us together and being the biggest part of our first four
+            years together.
           </p>
           <SubHeader>The Proposal</SubHeader>
           <p>
@@ -144,7 +144,7 @@ export default function Home({
             Jaclyn, took pictures of us and at our last spot Luke suggested we
             take a picture without our caps and gowns on. I said we already had
             a few without them and we could be done. He suggested just one more
-            with the campanile in the background. Next thing I knew Luke was on
+            with the campanile in the background. Next thing I knew, Luke was on
             a knee and asking me to marry him. I am pretty sure I had my mouth
             wide open for about 5 minutes! Jaclyn and I were both surprised but
             luckily she got some great pictures! I am so lucky that I get to
