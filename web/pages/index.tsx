@@ -33,7 +33,15 @@ function Divider() {
   return <div className="w-full border-b my-8 border-accent-500" />;
 }
 
-function Header({ children, id }: { children: string; id: string }) {
+function Header({
+  children,
+  id,
+  className,
+}: {
+  children: string;
+  id: string;
+  className?: string;
+}) {
   return (
     <>
       <Divider />
@@ -47,14 +55,69 @@ function Header({ children, id }: { children: string; id: string }) {
           visibility: 'hidden',
         }}
       />
-      <h1 className="text-4xl font-bold pb-4">{children}</h1>
+      <h1 className={`"${className} text-4xl font-bold pb-4`}>{children}</h1>
     </>
   );
 }
 
-function SubHeader({ children }: { children: string }) {
-  return <h2 className="text-3xl font-bold py-4">{children}</h2>;
+Header.defaultProps = {
+  className: '',
+};
+
+function SubHeader({
+  children,
+  className,
+}: {
+  children: string;
+  className?: string;
+}) {
+  return <h2 className={`${className} text-3xl font-bold py-4`}>{children}</h2>;
 }
+
+SubHeader.defaultProps = {
+  className: '',
+};
+
+function Section({
+  title,
+  children,
+  id,
+}: {
+  title: string;
+  children: React.ReactNode;
+  id: string;
+}) {
+  return (
+    <div>
+      <Header id={id}>{title}</Header>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+function SubSection({
+  title,
+  children,
+  className,
+  subHeaderClassName,
+}: {
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+  subHeaderClassName?: string;
+}) {
+  return (
+    <div>
+      <SubHeader className={subHeaderClassName}>{title}</SubHeader>
+      <div className={className}>{children}</div>
+    </div>
+  );
+}
+
+SubSection.defaultProps = {
+  className: '',
+  subHeaderClassName: '',
+};
 
 function RegistryLink({
   href,
@@ -64,7 +127,7 @@ function RegistryLink({
   children: React.ReactNode;
 }) {
   return (
-    <a about="_blank" href={href}>
+    <a about="_blank" href={href} className="block">
       {children}
     </a>
   );
@@ -104,56 +167,56 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout>
-      <img
-        src="/cover-photo.jpg"
-        alt="Cover"
-        className="rounded shadow-lg w-full"
-        data-test-id="banner"
-      />
-      <div>
-        <Header id="our-story">Our Story</Header>
-        <div>
-          <span className="hidden md:inline-block py-4 pl-4 w-80 float-right">
-            <img src="/campanile.jpg" alt="campanile" />
-          </span>
-          <p>
-            Luke and I met in August 2017 on our second day at Iowa State. We
-            lived on the same floor in Eaton Hall and hung out with the same
-            friends. I started crushing on Luke within a week, even though for
-            the first few days I couldn’t remember his name and referred to him
-            as “the guy who is always smiling.” If you know Luke, you know he is
-            truly always smiling! Luke took a little longer to make up his mind
-            because he said he didn’t know I was interested in him, despite my
-            very obvious hints. ;) Luke will say they were not obvious at all. I
-            invited Luke to the pool with our friends numerous times and he
-            never did end up coming along… In September, Luke FINALLY asked me
-            on a date, which was the Iowa vs. Iowa State game in Ames. We sat in
-            the end zone together, and I remember the kiss cam went on the
-            people in front of us and I was holding my breath thinking we were
-            next. LOL. In October 2017, we started dating and two years later we
-            moved in together. We will forever be grateful for Iowa State
-            bringing us together and being the biggest part of our first four
-            years together.
-          </p>
-          <SubHeader>The Proposal</SubHeader>
-          <p>
-            At the end of April 2021, I asked Luke to take graduation pictures
-            with me on campus. He was less than thrilled but agreed because I
-            said his mom would want pictures. (Thanks Natalie!) On May 1st, we
-            got ready to take a few pictures on central campus. My sister,
-            Jaclyn, took pictures of us and at our last spot Luke suggested we
-            take a picture without our caps and gowns on. I said we already had
-            a few without them and we could be done. He suggested just one more
-            with the campanile in the background. Next thing I knew, Luke was on
-            a knee and asking me to marry him. I am pretty sure I had my mouth
-            wide open for about 5 minutes! Jaclyn and I were both surprised but
-            luckily she got some great pictures! I am so lucky that I get to
-            marry such an amazing guy and I cannot wait for our future together!
-          </p>
+      <div className="relative text-center text-white">
+        <img
+          src="/sitting.jpg"
+          alt="Cover"
+          className="rounded shadow-lg w-full"
+          data-test-id="banner"
+        />
+        <div
+          className="absolute top-1/2 left-1/2 text-7xl font-bold text-center select-none"
+          style={{ transform: 'translate(-50%, -50%)' }}
+        >
+          Luke & Jadi
         </div>
       </div>
-      <div>
-        <Header id="wedding-party">Wedding Party</Header>
+      <Section id="our-story" title="Our Story">
+        <span className="hidden md:inline-block py-4 pl-4 w-80 float-right">
+          <img src="/campanile.jpg" alt="campanile" />
+        </span>
+        Luke and I met in August 2017 on our second day at Iowa State. We lived
+        on the same floor in Eaton Hall and hung out with the same friends. I
+        started crushing on Luke within a week, even though for the first few
+        days I couldn’t remember his name and referred to him as “the guy who is
+        always smiling.” If you know Luke, you know he is truly always smiling!
+        Luke took a little longer to make up his mind because he said he didn’t
+        know I was interested in him, despite my very obvious hints. ;) Luke
+        will say they were not obvious at all. I invited Luke to the pool with
+        our friends numerous times and he never did end up coming along… In
+        September, Luke FINALLY asked me on a date, which was the Iowa vs. Iowa
+        State game in Ames. We sat in the end zone together, and I remember the
+        kiss cam went on the people in front of us and I was holding my breath
+        thinking we were next. LOL. In October 2017, we started dating and two
+        years later we moved in together. We will forever be grateful for Iowa
+        State bringing us together and being the biggest part of our first four
+        years together.
+        <SubSection title="The Proposal">
+          At the end of April 2021, I asked Luke to take graduation pictures
+          with me on campus. He was less than thrilled but agreed because I said
+          his mom would want pictures. (Thanks Natalie!) On May 1st, we got
+          ready to take a few pictures on central campus. My sister, Jaclyn,
+          took pictures of us and at our last spot Luke suggested we take a
+          picture without our caps and gowns on. I said we already had a few
+          without them and we could be done. He suggested just one more with the
+          campanile in the background. Next thing I knew, Luke was on a knee and
+          asking me to marry him. I am pretty sure I had my mouth wide open for
+          about 5 minutes! Jaclyn and I were both surprised but luckily she got
+          some great pictures! I am so lucky that I get to marry such an amazing
+          guy and I cannot wait for our future together!
+        </SubSection>
+      </Section>
+      <Section id="wedding-party" title="Wedding Party">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           {weddingPartyConfig.groomsmen.map((pm) => (
             <WeddingPartyMember
@@ -183,8 +246,11 @@ export default function Home({
             />
           ))}
         </div>
-        <SubHeader>Ushers</SubHeader>
-        <div className="md:grid grid-cols-5 gap-10">
+        <SubSection
+          title="Ushers"
+          className="md:grid grid-cols-5 gap-10"
+          subHeaderClassName="pt-8"
+        >
           {weddingPartyConfig.ushers.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
@@ -194,9 +260,12 @@ export default function Home({
               relation={pm.relation}
             />
           ))}
-        </div>
-        <SubHeader>Parents</SubHeader>
-        <div className="md:grid grid-cols-5 gap-10">
+        </SubSection>
+        <SubSection
+          title="Parents"
+          className="md:grid grid-cols-5 gap-10"
+          subHeaderClassName="pt-8"
+        >
           {weddingPartyConfig.parents.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
@@ -206,10 +275,9 @@ export default function Home({
               relation={pm.relation}
             />
           ))}
-        </div>
-      </div>
-      <div>
-        <Header id="our-wedding">Our Wedding</Header>
+        </SubSection>
+      </Section>
+      <Section id="our-wedding" title="Our Wedding">
         <div className="w-full block md:flex">
           <div className="w-full md:w-1/2">
             <SubHeader>Ceremony</SubHeader>
@@ -222,24 +290,17 @@ export default function Home({
             <p>City, State 12345</p>
           </div>
         </div>
-      </div>
-      <div>
-        <Header id="registry">Registry</Header>
-        <div>
-          <RegistryLink href="https://amazon.com">Amazon</RegistryLink>
-        </div>
-        <div>
-          <RegistryLink href="https://target.com">Target</RegistryLink>
-        </div>
-        <div>
-          <RegistryLink href="https://bedbathandbeyond.com">
-            Bed, Bath & Beyond
-          </RegistryLink>
-        </div>
-      </div>
-      <div>
-        <Header id="guest-accommodations">Guest Accommodations</Header>
-      </div>
+      </Section>
+      <Section id="registry" title="Registry">
+        <RegistryLink href="https://amazon.com">Amazon</RegistryLink>
+        <RegistryLink href="https://target.com">Target</RegistryLink>
+        <RegistryLink href="https://bedbathandbeyond.com">
+          Bed, Bath & Beyond
+        </RegistryLink>
+      </Section>
+      <Section id="guest-accommodations" title="Guest Accommodations">
+        We ain&apos;t got none yet
+      </Section>
     </Layout>
   );
 }
