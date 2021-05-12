@@ -53,7 +53,7 @@ function Header({ children, id }: { children: string; id: string }) {
 }
 
 function SubHeader({ children }: { children: string }) {
-  return <h2 className="text-3xl font-bold pb-4 pt-8">{children}</h2>;
+  return <h2 className="text-3xl font-bold py-4">{children}</h2>;
 }
 
 function RegistryLink({
@@ -110,7 +110,7 @@ export default function Home({
         className="rounded shadow-lg w-full"
         data-test-id="banner"
       />
-      <div className="w-full">
+      <div>
         <Header id="our-story">Our Story</Header>
         <div>
           <span className="hidden md:inline-block py-4 pl-4 w-80 float-right">
@@ -152,7 +152,7 @@ export default function Home({
           </p>
         </div>
       </div>
-      <div className="w-full">
+      <div>
         <Header id="wedding-party">Wedding Party</Header>
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           {weddingPartyConfig.groomsmen.map((pm) => (
@@ -208,19 +208,22 @@ export default function Home({
           ))}
         </div>
       </div>
-      <div className="w-full block md:flex">
-        <div className="w-full md:w-1/2">
-          <Header id="ceremony">Ceremony</Header>
-          <p>1234 Address Street</p>
-          <p>City, State 12345</p>
-        </div>
-        <div className="w-full md:w-1/2">
-          <Header id="reception">Reception</Header>
-          <p>1234 Address Street</p>
-          <p>City, State 12345</p>
+      <div>
+        <Header id="our-wedding">Our Wedding</Header>
+        <div className="w-full block md:flex">
+          <div className="w-full md:w-1/2">
+            <SubHeader>Ceremony</SubHeader>
+            <p>1234 Address Street</p>
+            <p>City, State 12345</p>
+          </div>
+          <div className="w-full md:w-1/2">
+            <SubHeader>Reception</SubHeader>
+            <p>1234 Address Street</p>
+            <p>City, State 12345</p>
+          </div>
         </div>
       </div>
-      <div className="w-full">
+      <div>
         <Header id="registry">Registry</Header>
         <div>
           <RegistryLink href="https://amazon.com">Amazon</RegistryLink>
@@ -233,6 +236,9 @@ export default function Home({
             Bed, Bath & Beyond
           </RegistryLink>
         </div>
+      </div>
+      <div>
+        <Header id="guest-accommodations">Guest Accommodations</Header>
       </div>
     </Layout>
   );

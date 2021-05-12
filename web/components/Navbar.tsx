@@ -22,24 +22,12 @@ function NavLink({
 
 function DesktopNavbar({ links }: { links: { href: string; text: string }[] }) {
   return (
-    <nav className="z-20 hidden md:flex justify-between p-4 font-serif shadow-lg items-center text-gray-700 select-none sticky top-0 bg-white opacity-95">
-      <Link href="/">
-        <h1 className="text-2xl lg:text-4xl font-bold w-40 lg:w-56 text-black cursor-pointer">
-          Luke & Jadi
-        </h1>
-      </Link>
-      <ul className="flex">
+    <nav className="z-20 hidden md:flex justify-center p-4 font-serif shadow-lg items-center text-gray-700 select-none sticky top-0 bg-white opacity-95">
+      <ul className="max-w-screen-lg w-full flex justify-between">
         {links.map(({ href, text }) => (
           <NavLink href={href}>{text}</NavLink>
         ))}
       </ul>
-      <div className="w-40 lg:w-56 flex justify-end">
-        <div className="hover:text-gray-500 flex cursor-pointer">
-          <ul>
-            <NavLink href="/account">RSVP</NavLink>
-          </ul>
-        </div>
-      </div>
     </nav>
   );
 }
@@ -85,10 +73,13 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
 
 function Navbar() {
   const links = [
+    { href: '/', text: 'Home' },
+    { href: '/#our-story', text: 'Our story' },
     { href: '/#wedding-party', text: 'Wedding party' },
-    { href: '/#ceremony', text: 'Ceremony' },
-    { href: '/#reception', text: 'Reception' },
+    { href: '/#our-wedding', text: 'Our wedding' },
     { href: '/#registry', text: 'Registry' },
+    { href: '/rsvp', text: 'RSVP' },
+    { href: '/#guest-accommodations', text: 'Guest accommodations' },
   ];
 
   return (
