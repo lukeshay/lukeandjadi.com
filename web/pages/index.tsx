@@ -22,7 +22,7 @@ function WeddingPartyMember({
           <img
             src={src}
             alt="Luke Shay"
-            className="shadow-lg rounded border-2 border-accent-500"
+            className="shadow-lg"
           />
         </div>
       </div>
