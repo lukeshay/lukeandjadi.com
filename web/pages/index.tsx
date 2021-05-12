@@ -165,6 +165,8 @@ export async function getStaticProps() {
   };
 }
 
+const date = 'June 18, 2022';
+
 export default function Home({
   weddingPartyConfig,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -182,6 +184,14 @@ export default function Home({
           style={{ transform: 'translate(-50%, -50%)' }}
         >
           Luke & Jadi
+          <p className="text-4xl">{date}</p>
+          <p className="text-2xl">
+            {Math.trunc(
+              (new Date(`${date} 14:00:00`).getTime() - new Date().getTime()) /
+                (1000 * 60 * 60 * 24),
+            )}{' '}
+            Days
+          </p>
         </div>
       </div>
       <Section id="our-story" title="Our Story">
