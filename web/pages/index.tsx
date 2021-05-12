@@ -311,7 +311,7 @@ export default function Home({
         </div>
       </Section>
       <Section id="registry" title="Registry">
-        <RegistryLink href="https://amazon.com">Amazon</RegistryLink>
+        <RegistryLink href="https://www.amazon.com/wedding/share/luke-and-jadi">Amazon</RegistryLink>
         <RegistryLink href="https://target.com">Target</RegistryLink>
         <RegistryLink href="https://bedbathandbeyond.com">
           Bed, Bath & Beyond
