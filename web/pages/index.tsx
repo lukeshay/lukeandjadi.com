@@ -277,7 +277,7 @@ export default function Home({
           ))}
         </SubSection>
       </Section>
-      <Section id="our-wedding" title="Our Wedding">
+      <Section id="our-wedding" title="The Wedding">
         <div className="w-full block md:flex">
           <div className="w-full md:w-1/2">
             <SubHeader>Ceremony</SubHeader>

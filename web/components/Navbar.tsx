@@ -74,12 +74,12 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
 function Navbar() {
   const links = [
     { href: '/', text: 'Home' },
-    { href: '/#our-story', text: 'Our story' },
-    { href: '/#wedding-party', text: 'Wedding party' },
-    { href: '/#our-wedding', text: 'Our wedding' },
+    { href: '/#our-story', text: 'Our Story' },
+    { href: '/#wedding-party', text: 'Wedding Party' },
+    { href: '/#the-wedding', text: 'The Wedding' },
     { href: '/#registry', text: 'Registry' },
     { href: '/rsvp', text: 'RSVP' },
-    { href: '/#guest-accommodations', text: 'Guest accommodations' },
+    { href: '/#guest-accommodations', text: 'Guest Accommodations' },
   ];
 
   return (
