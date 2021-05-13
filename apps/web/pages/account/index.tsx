@@ -21,7 +21,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     }
   }
 
-  const email = await parseJWT(token as string);
+  const email = await parseJWT<string>(token as string);
 
   if (!email) {
     return { props: {} };

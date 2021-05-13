@@ -19,11 +19,7 @@ function WeddingPartyMember({
     <div className="col-span-1">
       <div className="pb-4 flex justify-center w-full">
         <div>
-          <img
-            src={src}
-            alt="Luke Shay"
-            className="shadow-lg"
-          />
+          <img src={src} alt="Luke Shay" className="shadow-lg" />
         </div>
       </div>
       <h2 className="text-lg font-bold pb-0.5 text-gray-900">{name}</h2>
@@ -294,7 +290,7 @@ export default function Home({
           ))}
         </SubSection>
       </Section>
-      <Section id="our-wedding" title="The Wedding">
+      <Section id="the-wedding" title="The Wedding">
         <div className="w-full block md:flex">
           <SubSection wrapperClassName="w-full md:w-1/2" title="Ceremony">
             <h3 className="text-lg font-bold">Lutheran Church of Hope</h3>
@@ -314,6 +310,9 @@ export default function Home({
           </SubSection>
         </div>
       </Section>
+      <Section id="guest-accommodations" title="Guest Accommodations">
+        We ain&apos;t got none yet
+      </Section>
       <Section id="registry" title="Registry">
         <RegistryLink href="https://www.amazon.com/wedding/share/luke-and-jadi">
           Amazon
@@ -322,9 +321,6 @@ export default function Home({
         <RegistryLink href="https://bedbathandbeyond.com">
           Bed, Bath & Beyond
         </RegistryLink>
-      </Section>
-      <Section id="guest-accommodations" title="Guest Accommodations">
-        We ain&apos;t got none yet
       </Section>
     </Layout>
   );

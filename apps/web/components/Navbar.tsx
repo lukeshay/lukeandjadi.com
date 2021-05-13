@@ -4,15 +4,20 @@ import Link from 'next/link';
 function NavLink({
   children,
   href,
+  onClick,
 }: {
   children: React.ReactNode;
   href: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }) {
   return (
-    <li className="px-0 md:px-2 lg:px-4 py-1 md:py-0">
+    <li className="px-4 md:px-2 lg:px-4 py-2 md:py-0">
       <Link href={href}>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a className="text-gray-700 hover:no-underline hover:opacity-75 text-base md:text-sm lg:text-base border-b-2 border-accent-500 p-2">
+        <a
+          className="text-gray-700 hover:no-underline hover:opacity-75 text-base md:text-sm lg:text-base border-b-2 border-accent-500 py-2 px-0 md:px-2"
+          onClick={onClick}
+        >
           {children}
         </a>
       </Link>
@@ -49,26 +54,31 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
             Luke & Jadi
           </h1>
         </Link>
-        <button type="button" className="px-2" onClick={toggleOpen}>
-          X
+        <button type="button" className="px-2 text-gray-700" onClick={toggleOpen}>
+          <span className={`h-6 w-6 text-xl text-center font-bold font-sans ${open ? 'flex' : 'hidden'}`}>X</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={`h-6 w-6 ${!open ? 'flex' : 'hidden'}`}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
         </button>
       </div>
-      {open && (
-        <>
-          <ul className="py-4 border-b">
-            {links.map(({ href, text }) => (
-              <NavLink key={`${href}-${text}`} href={href}>
-                {text}
-              </NavLink>
-            ))}
-          </ul>
-          <div className="pt-4">
-            <ul>
-              <NavLink href="/account">RSVP</NavLink>
-            </ul>
-          </div>
-        </>
-      )}
+      <ul className={`pt-8 pb-4 ${open ? 'block' : 'hidden'}`}>
+        {links.map(({ href, text }) => (
+          <NavLink key={`${href}-${text}`} href={href} onClick={toggleOpen}>
+            {text}
+          </NavLink>
+        ))}
+      </ul>
     </nav>
   );
 }
@@ -79,9 +89,9 @@ function Navbar() {
     { href: '/#our-story', text: 'Our Story' },
     { href: '/#wedding-party', text: 'Wedding Party' },
     { href: '/#the-wedding', text: 'The Wedding' },
+    { href: '/#guest-accommodations', text: 'Guest Accommodations' },
     { href: '/#registry', text: 'Registry' },
     { href: '/rsvp', text: 'RSVP' },
-    { href: '/#guest-accommodations', text: 'Guest Accommodations' },
   ];
 
   return (
