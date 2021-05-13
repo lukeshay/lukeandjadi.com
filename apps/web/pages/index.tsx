@@ -169,7 +169,7 @@ export async function getStaticProps() {
   };
 }
 
-const date = 'June 18, 2022';
+const date = 'August 20, 2022';
 
 export default function Home({
   weddingPartyConfig,
