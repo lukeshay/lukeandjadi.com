@@ -36,9 +36,16 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
           href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@300;500;700&display=swap"
           rel="stylesheet"
         />
+        <script
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+        />
       </Head>
       <Navbar />
-      <img src="/flowers.png" alt="flowers" className="lg:sticky top-0 z-0 w-full -mb-10 lg:-mb-96" />
+      <img
+        src="/flowers.png"
+        alt="flowers"
+        className="lg:sticky top-0 z-0 w-full -mb-10 lg:-mb-96"
+      />
 
       <div className="py-2 w-full font-serif">
         <div className="min-h-screen w-full">

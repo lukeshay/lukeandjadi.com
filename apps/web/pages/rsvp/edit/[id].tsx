@@ -5,20 +5,17 @@ import Form from '../../../components/Form';
 import Input from '../../../components/Input';
 import Layout from '../../../components/Layout';
 import { rsvpPut } from '../../../lib/client/api';
+import { getRecaptchaToken } from '../../../lib/client/recaptcha';
 import { selectRSVPByID } from '../../../lib/entities/rsvp';
 
 export async function getServerSideProps(
   ctx: GetServerSidePropsContext<{ id?: string }>,
 ) {
-  if (!ctx.params) {
+  if (!ctx.params?.id) {
     return { props: {} };
   }
 
   const { id } = ctx.params;
-
-  if (!id) {
-    return { props: {} };
-  }
 
   try {
     return { props: await selectRSVPByID(id) };
@@ -45,7 +42,8 @@ export default function AccountPage(props: any) {
     setLoading(true);
 
     try {
-      const res = await rsvpPut(values);
+      const token = await getRecaptchaToken();
+      const res = await rsvpPut({ ...values, token });
       setValues(res.data);
     } catch (e) {
       alert(

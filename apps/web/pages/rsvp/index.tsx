@@ -17,14 +17,14 @@ export default function AccountPage() {
 
     try {
       const res = await rsvpSearchGet(values);
+
       await router.push(`/rsvp/edit/${res.data.id}`);
     } catch (e) {
       alert(
         'That RSVP could not be found. If the problem persists, please email luke@lukeandjadi.com',
       );
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
