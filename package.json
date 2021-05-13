@@ -2,8 +2,10 @@
   "private": true,
   "name": "luke-jadi-wedding",
   "workspaces": [
-    "functions",
-    "ui-tests",
-    "web"
-  ]
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "new:package": "cd packages && yarn tsdx"
+  }
 }
