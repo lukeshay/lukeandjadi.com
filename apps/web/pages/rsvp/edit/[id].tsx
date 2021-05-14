@@ -5,6 +5,7 @@ import Form from '../../../components/Form';
 import Input from '../../../components/Input';
 import Layout from '../../../components/Layout';
 import { rsvpPut } from '../../../lib/client/api';
+import config from '../../../lib/client/config';
 import { getRecaptchaToken } from '../../../lib/client/recaptcha';
 import { selectRSVPByID } from '../../../lib/entities/rsvp';
 
@@ -47,7 +48,7 @@ export default function AccountPage(props: any) {
       setValues(res.data);
     } catch (e) {
       alert(
-        'There was an error updating your account. If the problem persists, please email luke@lukeandjadi.com',
+        `There was an error updating your account. If the problem persists, please email ${config.email}.`,
       );
     }
 

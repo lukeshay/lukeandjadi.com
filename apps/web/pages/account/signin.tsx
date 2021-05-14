@@ -4,6 +4,7 @@ import Layout from '../../components/Layout';
 import { accountSignInPost } from '../../lib/client/api';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
+import config from '../../lib/client/config';
 
 export default function SignIn() {
   const [email, setEmail] = React.useState('');
@@ -19,7 +20,7 @@ export default function SignIn() {
       await router.push('/account/check-email');
     } catch (e) {
       alert(
-        'There was an error signing in. If the problem persists, please email luke@lukeandjadi.com',
+        `There was an error signing in. If the problem persists, please email ${config.email}`,
       );
     }
 

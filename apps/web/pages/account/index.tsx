@@ -7,6 +7,8 @@ import Layout from '../../components/Layout';
 import { setCookie, parseJWT } from 'auth';
 import { selectAccountByEmail } from '../../lib/entities/account';
 import { accountPut } from '../../lib/client/api';
+import config from '../../lib/client/config';
+import { emit } from 'process';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;
@@ -56,7 +58,7 @@ export default function AccountPage(props: any) {
       setValues(res.data);
     } catch (e) {
       alert(
-        'There was an error updating your account. If the problem persists, please email luke@lukeandjadi.com',
+        `There was an error updating your account. If the problem persists, please email ${config.email}`,
       );
     }
 

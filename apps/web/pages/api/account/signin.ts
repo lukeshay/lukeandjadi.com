@@ -2,20 +2,24 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import axios from 'axios';
 import { generateJWT } from 'auth';
+import { withSentry, captureException } from '@sentry/nextjs';
 import { getJWTEmailHtml, getJWTEmailPlain } from '../../../lib/server/email';
 import {
   AccountRole,
   insertAccount,
   selectAccountByEmail,
 } from '../../../lib/entities/account';
+import config from '../../../lib/client/config';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     return post(req, res);
   }
 
   return res.status(StatusCodes.NOT_FOUND).end();
 }
+
+export default withSentry(handler);
 
 async function post(req: NextApiRequest, res: NextApiResponse) {
   const { email } = req.body;
@@ -58,7 +62,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       text,
       to: email,
       subject: "Sign in link for Luke & Jadi's wedding",
-      from: 'Luke & Jadi <luke@lukeandjadi.com>',
+      from: `Luke & Jadi <${config.email}>`,
       pass: process.env.EMAIL_PASS,
       user: process.env.EMAIL_USER,
       host: process.env.EMAIL_HOST,
@@ -70,8 +74,8 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       .status(StatusCodes.OK)
       .json({ message: 'A email with a login link has been sent!' });
   } catch (e) {
-    console.error(e.message);
-    console.error(e.response.data);
+    captureException(e);
+
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message:
         'Uh oh! It looks like there was an error. Please try again or contact us if the error continues!',

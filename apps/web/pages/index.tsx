@@ -1,8 +1,6 @@
 import React from 'react';
-import { InferGetStaticPropsType } from 'next';
-import { promises as fs } from 'fs';
-import path from 'path';
 import Layout from '../components/Layout';
+import config from '../lib/client/config';
 
 function WeddingPartyMember({
   src,
@@ -136,40 +134,7 @@ function RegistryLink({
   );
 }
 
-interface Member {
-  img: string;
-  name: string;
-  role: string;
-  relation: string;
-}
-
-export async function getStaticProps() {
-  const weddingPartyConfigPath = path.join(process.cwd(), 'wedding-party.json');
-  const weddingPartyConfigFile = await fs.readFile(weddingPartyConfigPath);
-
-  const weddingPartyConfig = JSON.parse(
-    weddingPartyConfigFile.toString('utf-8'),
-  ) as {
-    groomsmen: Member[];
-    bridesmaids: Member[];
-    others: Member[];
-    parents: Member[];
-    grandparents: Member[];
-    ushers: Member[];
-  };
-
-  return {
-    props: {
-      weddingPartyConfig,
-    }, // will be passed to the page component as props
-  };
-}
-
-const date = 'August 20, 2022';
-
-export default function Home({
-  weddingPartyConfig,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home() {
   return (
     <Layout>
       <div className="relative text-center text-white">
@@ -184,10 +149,11 @@ export default function Home({
           style={{ transform: 'translate(-50%, -50%)' }}
         >
           Luke & Jadi
-          <p className="text-lg md:text-2xl lg:text-4xl">{date}</p>
+          <p className="text-lg md:text-2xl lg:text-4xl">{config.date}</p>
           <p className="text-sm md:text-lg lg:text-2xl">
             {Math.trunc(
-              (new Date(`${date} 14:00:00`).getTime() - new Date().getTime()) /
+              (new Date(`${config.date} 14:00:00`).getTime() -
+                new Date().getTime()) /
                 (1000 * 60 * 60 * 24),
             )}{' '}
             Days
@@ -234,7 +200,7 @@ export default function Home({
       </Section>
       <Section id="wedding-party" title="Wedding Party">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
-          {weddingPartyConfig.groomsmen.map((pm) => (
+          {config.weddingParty.groomsmen.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
               src={pm.img}
@@ -243,7 +209,7 @@ export default function Home({
               relation={pm.relation}
             />
           ))}
-          {weddingPartyConfig.bridesmaids.map((pm) => (
+          {config.weddingParty.bridesmaids.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
               src={pm.img}
@@ -252,7 +218,7 @@ export default function Home({
               relation={pm.relation}
             />
           ))}
-          {weddingPartyConfig.others.map((pm) => (
+          {config.weddingParty.others.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
               src={pm.img}
@@ -267,7 +233,7 @@ export default function Home({
           className="md:grid grid-cols-5 gap-10"
           subHeaderClassName="pt-8"
         >
-          {weddingPartyConfig.ushers.map((pm) => (
+          {config.weddingParty.ushers.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
               src={pm.img}
@@ -282,7 +248,7 @@ export default function Home({
           className="md:grid grid-cols-5 gap-10"
           subHeaderClassName="pt-8"
         >
-          {weddingPartyConfig.parents.map((pm) => (
+          {config.weddingParty.parents.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
               src={pm.img}

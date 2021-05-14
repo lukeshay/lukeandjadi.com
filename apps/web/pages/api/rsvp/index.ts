@@ -1,19 +1,23 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
+import { withSentry, captureException } from '@sentry/nextjs';
 import {
   mergeRSVPs,
   selectRSVPByName,
   updateRSVP,
 } from '../../../lib/entities/rsvp';
 import axios from 'axios';
+import config from '../../../lib/client/config';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'PUT') {
     return put(req, res);
   }
 
   return res.status(StatusCodes.NOT_FOUND).end();
 }
+
+export default withSentry(handler);
 
 async function put(req: NextApiRequest, res: NextApiResponse) {
   console.log('put /rsvp');
@@ -41,7 +45,8 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
         .json({ message: 'recaptcha challenge unsuccessful' });
     }
   } catch (e) {
-    console.error(e.message);
+    captureException(e);
+
     return res
       .status(StatusCodes.UNAUTHORIZED)
       .json({ message: 'recaptcha challenge unsuccessful' });
@@ -58,10 +63,10 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(StatusCodes.OK).json(saved);
   } catch (e) {
-    console.log(e.message);
+    captureException(e);
+
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      message:
-        'There was an error saving your RSVP. If this problem persists, please email luke@lukeandjadi.com!',
+      message: `There was an error saving your RSVP. If this problem persists, please email ${config.email}.`,
     });
   }
 }

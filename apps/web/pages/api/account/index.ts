@@ -1,19 +1,23 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
+import { withSentry, captureException } from '@sentry/nextjs';
 import {
   mergeAccounts,
   selectAccountByEmail,
   updateAccount,
 } from '../../../lib/entities/account';
 import { parseJWT } from 'auth';
+import config from '../../../lib/client/config';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'PUT') {
     return put(req, res);
   }
 
   return res.status(StatusCodes.NOT_FOUND).end();
 }
+
+export default withSentry(handler);
 
 async function put(req: NextApiRequest, res: NextApiResponse) {
   console.log('put /account');
@@ -40,14 +44,15 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
       const saved = await updateAccount(merged);
       return res.status(StatusCodes.OK).json(saved);
     } catch (e) {
-      console.log(e.message);
+      captureException(e);
+
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-        message:
-          'There was an error saving your account. If this problem persists, please email luke@lukeandjadi.com!',
+        message: `There was an error saving your account. If this problem persists, please email ${config.email}.`,
       });
     }
   } catch (e) {
-    console.log(e.message);
+    captureException(e);
+
     return res.status(StatusCodes.UNAUTHORIZED).end();
   }
 }

@@ -4,6 +4,7 @@ import Form from '../../components/Form';
 import Input from '../../components/Input';
 import Layout from '../../components/Layout';
 import { rsvpSearchGet } from '../../lib/client/api';
+import config from '../../lib/client/config';
 
 export default function AccountPage() {
   const [values, setValues] = React.useState<any>({});
@@ -21,7 +22,7 @@ export default function AccountPage() {
       await router.push(`/rsvp/edit/${res.data.id}`);
     } catch (e) {
       alert(
-        'That RSVP could not be found. If the problem persists, please email luke@lukeandjadi.com',
+        `That RSVP could not be found. If the problem persists, please email ${config.email}.`,
       );
       setLoading(false);
     }
@@ -38,7 +39,7 @@ export default function AccountPage() {
     <Layout>
       <Form
         title="RSVP"
-        subTitle="Please search for your name as it appears on your invite! Email luke@lukeandjadi.com if you have any questions."
+        subTitle="Please search for your name as it appears on your invite! Email contact@lukeandjadi.com if you have any questions."
         onSubmit={handleSubmit}
       >
         <Input
