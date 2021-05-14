@@ -26,7 +26,7 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
   const { authorization } = req.cookies;
 
   try {
-    const email = await parseJWT(authorization);
+    const email = await parseJWT<string>(authorization);
 
     if (!email) {
       console.log('no email found in authorization cookie');
