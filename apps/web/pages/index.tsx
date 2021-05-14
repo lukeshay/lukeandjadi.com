@@ -130,7 +130,7 @@ function RegistryLink({
   children: React.ReactNode;
 }) {
   return (
-    <a about="_blank" href={href} className="block">
+    <a target="_blank" href={href} className="block">
       {children}
     </a>
   );
@@ -214,6 +214,9 @@ export default function Home({
         years later we moved in together. We will forever be grateful for Iowa
         State bringing us together and being the biggest part of our first four
         years together.
+        <span className="inline-block md:hidden py-4 w-full">
+          <img src="/campanile.jpg" alt="campanile" />
+        </span>
         <SubSection title="The Proposal">
           At the end of April 2021, I asked Luke to take graduation pictures
           with me on campus. He was less than thrilled but agreed because I said
@@ -313,13 +316,12 @@ export default function Home({
       <Section id="guest-accommodations" title="Guest Accommodations">
         We ain&apos;t got none yet
       </Section>
-      <Section id="registry" title="Registry">
+      <Section id="registries" title="Registries">
         <RegistryLink href="https://www.amazon.com/wedding/share/luke-and-jadi">
           Amazon
         </RegistryLink>
-        <RegistryLink href="https://target.com">Target</RegistryLink>
-        <RegistryLink href="https://bedbathandbeyond.com">
-          Bed, Bath & Beyond
+        <RegistryLink href="https://www.zola.com/registry/lukeandjadi">
+          Cash Funds
         </RegistryLink>
       </Section>
     </Layout>

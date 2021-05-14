@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import config from '../lib/client/config';
 
 function NavLink({
   children,
@@ -84,20 +85,10 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
 }
 
 function Navbar() {
-  const links = [
-    { href: '/', text: 'Home' },
-    { href: '/#our-story', text: 'Our Story' },
-    { href: '/#wedding-party', text: 'Wedding Party' },
-    { href: '/#the-wedding', text: 'The Wedding' },
-    { href: '/#guest-accommodations', text: 'Guest Accommodations' },
-    { href: '/#registry', text: 'Registry' },
-    { href: '/rsvp', text: 'RSVP' },
-  ];
-
   return (
     <>
-      <DesktopNavbar links={links} />
-      <MobileNavbar links={links} />
+      <DesktopNavbar links={config.links} />
+      <MobileNavbar links={config.links} />
     </>
   );
 }

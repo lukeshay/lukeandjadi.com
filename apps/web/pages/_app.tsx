@@ -4,21 +4,30 @@ import Link from 'next/link';
 import React from 'react';
 import Navbar from '../components/Navbar';
 import { configureAPI } from '../lib/client/api';
+import config from '../lib/client/config';
 import '../styles/globals.css';
 
 function FooterLink({
   href,
   children,
+  external,
 }: {
   href: string;
   children: React.ReactNode;
+  external?: boolean;
 }) {
   return (
     <li>
-      <Link href={href}>
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a className="text-gray-500">{children}</a>
-      </Link>
+      {external ? (
+        <a className="text-gray-500" href={href} target="_blank">
+          {children}
+        </a>
+      ) : (
+        <Link href={href}>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+          <a className="text-gray-500">{children}</a>
+        </Link>
+      )}
     </li>
   );
 }
@@ -56,20 +65,23 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
           <div className="flex justify-center w-full">
             <div className="block sm:flex justify-between w-full max-w-screen-lg px-2 lg:px-0">
               <div>
-                <h4 className="font-semibold">The Wedding</h4>
+                <h4 className="font-semibold">Information</h4>
                 <ul>
-                  <FooterLink href="#our-story">Our Story</FooterLink>
-                  <FooterLink href="#wedding-party">Wedding party</FooterLink>
-                  <FooterLink href="#ceremony">Ceremony</FooterLink>
-                  <FooterLink href="#reception">Reception</FooterLink>
-                  <FooterLink href="#registry">Registry</FooterLink>
+                  {config.links.map(({ href, text }) => (
+                    <FooterLink href={href} external>
+                      {text}
+                    </FooterLink>
+                  ))}
                 </ul>
               </div>
               <div className="pt-4 sm:pt-0">
-                <h4 className="font-semibold">RSVP</h4>
+                <h4 className="font-semibold">Registries</h4>
                 <ul>
-                  <FooterLink href="/rsvp/ceremony">Ceremony</FooterLink>
-                  <FooterLink href="/rsvp/reception">Reception</FooterLink>
+                  {config.registries.map(({ href, text }) => (
+                    <FooterLink href={href} external>
+                      {text}
+                    </FooterLink>
+                  ))}
                 </ul>
               </div>
             </div>
