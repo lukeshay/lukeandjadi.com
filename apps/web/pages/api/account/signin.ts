@@ -35,18 +35,10 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
   try {
     console.log(`selecting account from database: ${email}`);
     await selectAccountByEmail(email);
-  } catch (_) {
-    console.log(`adding account to database: ${email}`);
-    try {
-      // @ts-expect-error
-      await insertAccount({
-        email,
-        role: AccountRole.Basic,
-      });
-    } catch (e) {
-      console.error(e.message);
-      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
-    }
+  } catch (e) {
+    console.log(`account with email does not exist: ${email}`);
+    console.error(e.message);
+    return res.status(StatusCodes.UNAUTHORIZED).end();
   }
 
   console.log('generating jwt');

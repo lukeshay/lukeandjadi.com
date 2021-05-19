@@ -4,11 +4,10 @@ import React, { ChangeEvent, FormEvent } from 'react';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
 import Layout from '../../components/Layout';
-import { setCookie, parseJWT } from 'auth';
+import { setCookie, parseJWT } from '@ljw/auth';
 import { selectAccountByEmail } from '../../lib/entities/account';
 import { accountPut } from '../../lib/client/api';
 import config from '../../lib/client/config';
-import { emit } from 'process';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;

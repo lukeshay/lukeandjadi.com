@@ -2,12 +2,12 @@ import { serialize, CookieSerializeOptions } from 'cookie';
 import { ServerResponse } from 'http';
 import jwt from 'jsonwebtoken';
 
-export const setCookie = (
+export function setCookie(
   res: ServerResponse,
   name: string,
   value: unknown,
   options: CookieSerializeOptions = {}
-) => {
+) {
   const stringValue =
     typeof value === 'object' ? `j:${JSON.stringify(value)}` : String(value);
 
@@ -19,21 +19,16 @@ export const setCookie = (
   }
 
   res.setHeader('Set-Cookie', serialize(name, String(stringValue), newOptions));
-};
+}
 
-export function generateJWT(
+export const generateJWT = (
   payload: any,
   secret = process.env.JWT_SECRET || '',
-  expiresIn = '12h'
-): string {
-  const date = new Date();
-
-  date.setHours(date.getHours() + 12);
-
-  return jwt.sign(payload, secret, {
+  expiresIn = '1 day'
+) =>
+  jwt.sign(payload, secret, {
     expiresIn,
   });
-}
 
 export async function parseJWT<T>(
   jwtToken: string,

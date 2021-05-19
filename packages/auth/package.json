@@ -31,7 +31,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "auth",
+  "name": "@ljw/auth",
   "author": "Luke Shay",
   "module": "dist/auth.esm.js",
   "size-limit": [

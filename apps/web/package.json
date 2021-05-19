@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@sentry/nextjs": "^6.3.6",
-    "auth": "^0.0.9",
+    "@ljw/auth": "^0.1.0",
     "axios": "^0.21.1",
     "cookie": "^0.4.1",
     "http-status-codes": "^2.1.4",

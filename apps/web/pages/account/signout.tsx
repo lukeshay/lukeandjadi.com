@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSidePropsContext } from 'next';
-import { setCookie } from 'auth';
+import { setCookie } from '@ljw/auth';
 
 export function getServerSideProps(ctx: GetServerSidePropsContext) {
   setCookie(ctx.res, 'authorization', '');
