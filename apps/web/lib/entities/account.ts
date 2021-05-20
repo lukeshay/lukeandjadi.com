@@ -15,24 +15,22 @@ export interface Account {
 
 export const Accounts = () => connection.table<Account>('accounts');
 
-export async function selectAccountByEmail(
+export const selectAccountByEmail = async (
   e: string,
-): Promise<Readonly<Account>> {
-  return (await Accounts().where('email', e))[0];
-}
+): Promise<Readonly<Account>> => (await Accounts().where('email', e))[0];
 
-export async function insertAccount(
+export const insertAccount = async (
   account: Account,
-): Promise<Readonly<Account>> {
+): Promise<Readonly<Account>> => {
   await Accounts().insert(account);
   return selectAccountByEmail(account.email);
-}
+};
 
-export async function updateAccount({
+export const updateAccount = async ({
   id,
   email,
   role,
-}: Account): Promise<Readonly<Account>> {
+}: Account): Promise<Readonly<Account>> => {
   await Accounts()
     .update({
       email,
@@ -40,9 +38,9 @@ export async function updateAccount({
     })
     .where({ id });
   return selectAccountByEmail(email);
-}
+};
 
-export function mergeAccounts(a1: Account, a2: any): Readonly<Account> {
+export const mergeAccounts = (a1: Account, a2: any): Readonly<Account> => {
   const merged = { ...a1 };
 
   if (a2.email) {
@@ -50,4 +48,4 @@ export function mergeAccounts(a1: Account, a2: any): Readonly<Account> {
   }
 
   return merged;
-}
+};

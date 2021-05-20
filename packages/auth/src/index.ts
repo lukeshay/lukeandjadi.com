@@ -24,11 +24,12 @@ export function setCookie(
 export const generateJWT = (
   payload: any,
   secret = process.env.JWT_SECRET || '',
-  expiresIn = '1 day'
+  expiresIn = 43200 // 12h in seconds
 ) =>
-  jwt.sign(payload, secret, {
-    expiresIn,
-  });
+  jwt.sign(
+    { ...payload, exp: Math.floor(Date.now() / 1000) + expiresIn },
+    secret
+  );
 
 export async function parseJWT<T>(
   jwtToken: string,

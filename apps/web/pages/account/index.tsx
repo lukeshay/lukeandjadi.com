@@ -1,13 +1,14 @@
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
+import { captureException } from '@sentry/nextjs';
+import { setCookie, parseJWT } from '@ljw/auth';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
-import Layout from '../../components/Layout';
-import { setCookie, parseJWT } from '@ljw/auth';
-import { selectAccountByEmail } from '../../lib/entities/account';
+import { AccountRole, selectAccountByEmail } from '../../lib/entities/account';
 import { accountPut } from '../../lib/client/api';
 import config from '../../lib/client/config';
+import AccountLayout from '../../components/AccountLayout';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;
@@ -15,25 +16,28 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   if (!token) {
     token = ctx.req.cookies.authorization;
 
-    setCookie(ctx.res, 'authorization', token);
-
     if (!token) {
       return { props: {} };
     }
   }
 
-  const email = await parseJWT<string>(token as string);
+  setCookie(ctx.res, 'authorization', token);
 
-  if (!email) {
+  const payload = await parseJWT<{ email: string; role: AccountRole }>(
+    token as string,
+  );
+
+  if (!payload) {
     return { props: {} };
   }
 
   try {
-    return { props: await selectAccountByEmail(email) };
+    return { props: await selectAccountByEmail(payload.email) };
   } catch (e) {
-    console.error(e.message);
-    return { props: {} };
+    captureException(e);
   }
+
+  return { props: {} };
 }
 
 export default function AccountPage(props: any) {
@@ -72,7 +76,7 @@ export default function AccountPage(props: any) {
   }
 
   return (
-    <Layout>
+    <AccountLayout>
       <Form
         title="Account"
         subTitle="Please fill out all required fields! This information will help us in planning for our wedding."
@@ -95,6 +99,6 @@ export default function AccountPage(props: any) {
           Update
         </button>
       </Form>
-    </Layout>
+    </AccountLayout>
   );
 }

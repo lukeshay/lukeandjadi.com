@@ -34,43 +34,43 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     console.log(`selecting account from database: ${email}`);
-    await selectAccountByEmail(email);
+    const account = await selectAccountByEmail(email);
+
+    console.log('generating jwt');
+    const jwtToken = generateJWT({ email, role: account.role });
+
+    try {
+      console.log('sending jwt email');
+      const html = getJWTEmailHtml(jwtToken);
+      const text = getJWTEmailPlain(jwtToken);
+
+      const r = await axios.post(`${process.env.EMAIL_SENDER_URL}/email`, {
+        html,
+        text,
+        to: email,
+        subject: "Sign in link for Luke & Jadi's wedding",
+        from: `Luke & Jadi <${config.email}>`,
+        pass: process.env.EMAIL_PASS,
+        user: process.env.EMAIL_USER,
+        host: process.env.EMAIL_HOST,
+      });
+
+      console.log(r.data);
+
+      return res
+        .status(StatusCodes.OK)
+        .json({ message: 'A email with a login link has been sent!' });
+    } catch (e) {
+      captureException(e);
+
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message:
+          'Uh oh! It looks like there was an error. Please try again or contact us if the error continues!',
+      });
+    }
   } catch (e) {
     console.log(`account with email does not exist: ${email}`);
     console.error(e.message);
     return res.status(StatusCodes.UNAUTHORIZED).end();
-  }
-
-  console.log('generating jwt');
-  const jwtToken = generateJWT(email);
-
-  try {
-    console.log('sending jwt email');
-    const html = getJWTEmailHtml(jwtToken);
-    const text = getJWTEmailPlain(jwtToken);
-
-    const r = await axios.post(`${process.env.EMAIL_SENDER_URL}/email`, {
-      html,
-      text,
-      to: email,
-      subject: "Sign in link for Luke & Jadi's wedding",
-      from: `Luke & Jadi <${config.email}>`,
-      pass: process.env.EMAIL_PASS,
-      user: process.env.EMAIL_USER,
-      host: process.env.EMAIL_HOST,
-    });
-
-    console.log(r.data);
-
-    return res
-      .status(StatusCodes.OK)
-      .json({ message: 'A email with a login link has been sent!' });
-  } catch (e) {
-    captureException(e);
-
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      message:
-        'Uh oh! It looks like there was an error. Please try again or contact us if the error continues!',
-    });
   }
 }

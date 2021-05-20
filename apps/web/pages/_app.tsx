@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import Navbar from '../components/Navbar';
 import { configureAPI } from '../lib/client/api';
@@ -35,6 +36,8 @@ function FooterLink({
 function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   configureAPI();
 
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -50,11 +53,13 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
         />
       </Head>
       <Navbar />
-      <img
-        src="/flowers.png"
-        alt="flowers"
-        className="lg:sticky top-0 z-0 w-full -mb-10 lg:-mb-96"
-      />
+      {!router.pathname.includes('/account') && (
+        <img
+          src="/flowers.png"
+          alt="flowers"
+          className="lg:sticky top-0 z-0 w-full -mb-10 lg:-mb-96"
+        />
+      )}
 
       <div className="py-2 w-full font-serif">
         <div className="min-h-screen w-full">
