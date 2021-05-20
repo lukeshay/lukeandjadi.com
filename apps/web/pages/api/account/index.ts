@@ -6,7 +6,7 @@ import {
   selectAccountByEmail,
   updateAccount,
 } from '../../../lib/entities/account';
-import { parseJWT } from 'auth';
+import { parseJWT } from '@ljw/auth';
 import config from '../../../lib/client/config';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {

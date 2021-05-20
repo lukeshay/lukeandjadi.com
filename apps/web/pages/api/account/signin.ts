@@ -4,11 +4,7 @@ import axios from 'axios';
 import { generateJWT } from 'auth';
 import { withSentry, captureException } from '@sentry/nextjs';
 import { getJWTEmailHtml, getJWTEmailPlain } from '../../../lib/server/email';
-import {
-  AccountRole,
-  insertAccount,
-  selectAccountByEmail,
-} from '../../../lib/entities/account';
+import { selectAccountByEmail } from '../../../lib/entities/account';
 import config from '../../../lib/client/config';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
