@@ -15,7 +15,11 @@ export default {
       href: 'https://www.amazon.com/wedding/share/lukeandjadi',
       text: 'Amazon',
     },
-    { href: 'https://www.zola.com/registry/lukeandjadi', text: 'Zola Cash Funds' },
+    { href: 'https://tgt.gifts/jadiandluke', text: 'Target' },
+    {
+      href: 'https://www.zola.com/registry/lukeandjadi',
+      text: 'Zola Cash Funds',
+    },
   ],
   weddingParty: {
     groomsmen: [

@@ -243,21 +243,6 @@ export default function Home() {
             />
           ))}
         </SubSection>
-        <SubSection
-          title="Parents"
-          className="md:grid grid-cols-5 gap-10"
-          subHeaderClassName="pt-8"
-        >
-          {config.weddingParty.parents.map((pm) => (
-            <WeddingPartyMember
-              key={pm.name}
-              src={pm.img}
-              name={pm.name}
-              role={pm.role}
-              relation={pm.relation}
-            />
-          ))}
-        </SubSection>
       </Section>
       <Section id="the-wedding" title="The Wedding">
         <div className="w-full block md:flex">
@@ -268,14 +253,20 @@ export default function Home() {
               <br />
               West Des Moines, IA 50266
             </address>
+            <p className="text-sm text-gray-500 pt-1">
+              Enter through the chapel doors
+            </p>
           </SubSection>
           <SubSection wrapperClassName="w-full md:w-1/2" title="Reception">
-            <h3 className="text-lg font-bold">Deez nuts</h3>
+            <h3 className="text-lg font-bold">The Conservatory</h3>
             <address>
-              1234 Address Street
+              315 E 5th St
               <br />
-              City, State 12345
+              Des Moines, IA 50309
             </address>
+            <p className="text-sm text-gray-500 pt-1">
+              Located above Westrum Optometry and Aviva Salon
+            </p>
           </SubSection>
         </div>
       </Section>
@@ -283,12 +274,11 @@ export default function Home() {
         We ain&apos;t got none yet
       </Section>
       <Section id="registries" title="Registries">
-        <RegistryLink href="https://www.amazon.com/wedding/share/luke-and-jadi">
-          Amazon
-        </RegistryLink>
-        <RegistryLink href="https://www.zola.com/registry/lukeandjadi">
-          Cash Funds
-        </RegistryLink>
+        {config.registries.map((r) => (
+          <RegistryLink key={r.href} href={r.href}>
+            {r.text}
+          </RegistryLink>
+        ))}
       </Section>
     </Layout>
   );
