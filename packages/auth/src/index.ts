@@ -22,15 +22,16 @@ export function setCookie(
 export const getCookie = (req: any, res: any, name: string) =>
   new Cookie(req, res).get(name);
 
-export const generateJWT = (
-  payload: any,
+export function generateJWT<T extends Object>(
+  payload: T,
   secret = process.env.JWT_SECRET || '',
   expiresIn = 43200 // 12h in seconds
-) =>
-  jwt.sign(
+) {
+  return jwt.sign(
     { ...payload, exp: Math.floor(Date.now() / 1000) + expiresIn },
     secret
   );
+}
 
 export async function parseJWT<T>(
   jwtToken: string,

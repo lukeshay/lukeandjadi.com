@@ -25,6 +25,8 @@ module.exports = {
     'operator-linebreak': 'off',
     'implicit-arrow-linebreak': 'off',
     'object-curly-newline': 'off',
+    'react/jsx-no-target-blank': 'off',
+    'react/jsx-one-expression-per-line': 'off',
   },
   overrides: [
     {

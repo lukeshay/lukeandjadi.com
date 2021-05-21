@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import { withSentry, captureException } from '@sentry/nextjs';
+import { parseJWT } from '@ljw/auth';
 import {
   mergeAccounts,
   selectAccountByEmail,
   updateAccount,
 } from '../../../lib/entities/account';
-import { parseJWT } from '@ljw/auth';
 import config from '../../../lib/client/config';
 import { JWTPayload } from '../../../lib/server/jwt';
 

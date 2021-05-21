@@ -33,6 +33,10 @@ function FooterLink({
   );
 }
 
+FooterLink.defaultProps = {
+  external: false,
+};
+
 function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   configureAPI();
 

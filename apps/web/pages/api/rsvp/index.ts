@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import { withSentry, captureException } from '@sentry/nextjs';
+import axios from 'axios';
 import {
   mergeRSVPs,
   selectRSVPByName,
   updateRSVP,
 } from '../../../lib/entities/rsvp';
-import axios from 'axios';
 import config from '../../../lib/client/config';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {

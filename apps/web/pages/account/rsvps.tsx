@@ -12,7 +12,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const token = getCookie(ctx.req, ctx.res, JWT_COOKIE_KEY);
 
   if (typeof token !== 'string') {
-    return { props: {} };
+    return { props: { rsvps: [] } };
   }
 
   console.log(`jwt token: ${token}`);
@@ -32,13 +32,13 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   return { props: { rsvps: [] } };
 }
 
-export default function AccountPage(
-  props: InferGetServerSidePropsType<typeof getServerSideProps>,
-) {
+export default function AccountPage({
+  rsvps,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
 
   React.useEffect(() => {
-    if (props.rsvps.length === 0) {
+    if (rsvps.length === 0) {
       router.push('/account');
     }
   });
@@ -51,11 +51,11 @@ export default function AccountPage(
           <th className="p-2 w-52">Email</th>
           <th className="p-2 w-52 rounded-tr-lg">Guests</th>
         </tr>
-        {props.rsvps.map((e) => (
-          <tr className="p-2 border-t" key={e.id}>
-            <td className="p-2">{e.name}</td>
-            <td className="p-2">{e.email}</td>
-            <td className="p-2">{e.guests || 'Not set'}</td>
+        {rsvps.map(({ id, name, email, guests }) => (
+          <tr className="p-2 border-t" key={id}>
+            <td className="p-2">{name}</td>
+            <td className="p-2">{email}</td>
+            <td className="p-2">{guests || 'Not set'}</td>
           </tr>
         ))}
       </table>

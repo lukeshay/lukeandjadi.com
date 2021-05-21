@@ -46,6 +46,7 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.10.2",
+    "@types/cookies": "^0.7.6",
     "husky": "^6.0.0",
     "size-limit": "^4.10.2",
     "tsdx": "^0.14.1",
@@ -54,6 +55,7 @@
   },
   "dependencies": {
     "cookie": "^0.4.1",
+    "cookies": "^0.8.0",
     "jsonwebtoken": "^8.5.1"
   }
 }

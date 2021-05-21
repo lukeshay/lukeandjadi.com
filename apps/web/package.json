@@ -19,8 +19,6 @@
     "@ljw/auth": "^0.1.0",
     "@sentry/nextjs": "^6.4.1",
     "axios": "^0.21.1",
-    "cookie": "^0.4.1",
-    "cookies": "^0.8.0",
     "http-status-codes": "^2.1.4",
     "knex": "^0.95.6",
     "next": "^10.2.2",
@@ -30,8 +28,6 @@
   },
   "devDependencies": {
     "@tailwindcss/jit": "0.1.18",
-    "@types/cookie": "^0.4.0",
-    "@types/cookies": "^0.7.6",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/node": "^15.6.0",
     "@types/nodemailer": "^6.4.1",
