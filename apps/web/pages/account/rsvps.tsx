@@ -5,8 +5,34 @@ import { captureException } from '@sentry/nextjs';
 import { parseJWT, getCookie } from '@ljw/auth';
 import { AccountRole } from '../../lib/entities/account';
 import AccountLayout from '../../components/AccountLayout';
-import { selectAllRSVPs } from '../../lib/entities/rsvp';
+import { RSVP, selectAllRSVPs } from '../../lib/entities/rsvp';
 import { JWT_COOKIE_KEY, JWTPayload } from '../../lib/server/jwt';
+import PencilIconOutlined from '../../components/icons/PencilIconOutlined';
+import Link from 'next/link';
+
+const TableHeader = () => (
+  <tr className="p-2 bg-gray-200">
+    <th className="p-2 w-52 rounded-tl">Name</th>
+    <th className="p-2 w-52">Email</th>
+    <th className="p-2 w-52">Guests</th>
+    <th className="p-2 w-52 rounded-tr">Edit</th>
+  </tr>
+);
+
+const TableRow = ({ id, name, email, guests }: RSVP) => (
+  <tr className="p-2 border-t" key={id}>
+    <td className="p-2">{name}</td>
+    <td className="p-2">{email}</td>
+    <td className="p-2">{guests || 'Not set'}</td>
+    <td className="p-2 flex justify-center items-center">
+      <Link href={`/rsvp/edit/${id}?redirectURI=/account/rsvps`}>
+        <a className="text-gray-500 cursor-pointer rounded-full p-2 border border-gray-50 hover:ring ring-accent-500 shadow-lg">
+          <PencilIconOutlined size={24} />
+        </a>
+      </Link>
+    </td>
+  </tr>
+);
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const token = getCookie(ctx.req, ctx.res, JWT_COOKIE_KEY);
@@ -45,19 +71,9 @@ export default function AccountPage({
 
   return (
     <AccountLayout>
-      <table className="rounded-lg shadow-lg">
-        <tr className="p-2 bg-gray-400 text-white">
-          <th className="p-2 w-52 rounded-tl-lg">Name</th>
-          <th className="p-2 w-52">Email</th>
-          <th className="p-2 w-52 rounded-tr-lg">Guests</th>
-        </tr>
-        {rsvps.map(({ id, name, email, guests }) => (
-          <tr className="p-2 border-t" key={id}>
-            <td className="p-2">{name}</td>
-            <td className="p-2">{email}</td>
-            <td className="p-2">{guests || 'Not set'}</td>
-          </tr>
-        ))}
+      <table className="rounded shadow-lg border border-gray-50">
+        <TableHeader />
+        {rsvps.map(TableRow)}
       </table>
     </AccountLayout>
   );

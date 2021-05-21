@@ -7,7 +7,7 @@ const AccountLayout = ({ children }: { children: React.ReactNode }) => {
     <Layout fullWidth>
       <div className="w-full min-h-screen h-full flex justify-center">
         <div className="grid grid-cols-10 gap-4 pt-8 h-full w-full max-w-screen-xl">
-          <div className="col-span-2 h-full border rounded-sm bg-white p-4 shadow-lg">
+          <div className="col-span-2 h-full border border-gray-50 rounded bg-white p-4 shadow-lg">
             <ul>
               <li className="py-2">
                 <Link href="/account">

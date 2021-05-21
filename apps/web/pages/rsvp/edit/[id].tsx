@@ -44,12 +44,19 @@ export default function AccountPage(props: any) {
 
     try {
       const token = await getRecaptchaToken();
+
+      console.log(`recaptcha token: ${token}`);
+
       const res = await rsvpPut({ ...values, token });
       setValues(res.data);
     } catch (e) {
       alert(
         `There was an error updating your account. If the problem persists, please email ${config.email}.`,
       );
+    }
+
+    if (typeof router.query.redirectURI === 'string') {
+      await router.push(router.query.redirectURI);
     }
 
     setLoading(false);
