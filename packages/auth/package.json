@@ -54,7 +54,6 @@
   },
   "dependencies": {
     "cookie": "^0.4.1",
-    "http": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1"
   }
 }

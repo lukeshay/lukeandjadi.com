@@ -1,16 +1,14 @@
-import { serialize, CookieSerializeOptions } from 'cookie';
-import { ServerResponse } from 'http';
+import Cookie, { SetOption } from 'cookies';
 import jwt from 'jsonwebtoken';
 
 export function setCookie(
-  res: ServerResponse,
+  req: any,
+  res: any,
   name: string,
-  value: unknown,
-  options: CookieSerializeOptions = {}
+  value?: string,
+  options: SetOption = {}
 ) {
-  const stringValue =
-    typeof value === 'object' ? `j:${JSON.stringify(value)}` : String(value);
-
+  const cookies = new Cookie(req, res);
   const newOptions = options;
 
   if (newOptions.maxAge) {
@@ -18,8 +16,11 @@ export function setCookie(
     newOptions.maxAge /= 1000;
   }
 
-  res.setHeader('Set-Cookie', serialize(name, String(stringValue), newOptions));
+  cookies.set(name, value, options);
 }
+
+export const getCookie = (req: any, res: any, name: string) =>
+  new Cookie(req, res).get(name);
 
 export const generateJWT = (
   payload: any,

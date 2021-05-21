@@ -8,6 +8,7 @@ import {
 } from '../../../lib/entities/account';
 import { parseJWT } from '@ljw/auth';
 import config from '../../../lib/client/config';
+import { JWTPayload } from '../../../lib/server/jwt';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'PUT') {
@@ -30,12 +31,14 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
   const { authorization } = req.cookies;
 
   try {
-    const email = await parseJWT<string>(authorization);
+    const payload = await parseJWT<JWTPayload>(authorization);
 
-    if (!email) {
+    if (!payload) {
       console.log('no email found in authorization cookie');
       return res.status(StatusCodes.UNAUTHORIZED).end();
     }
+
+    const { email } = payload;
 
     const account = await selectAccountByEmail(email);
     const merged = { ...mergeAccounts(account, req.body), email };

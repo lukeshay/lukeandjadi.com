@@ -6,6 +6,7 @@ import { withSentry, captureException } from '@sentry/nextjs';
 import { getJWTEmailHtml, getJWTEmailPlain } from '../../../lib/server/email';
 import { selectAccountByEmail } from '../../../lib/entities/account';
 import config from '../../../lib/client/config';
+import { JWTPayload } from '../../../lib/server/jwt';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
@@ -33,7 +34,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
     const account = await selectAccountByEmail(email);
 
     console.log('generating jwt');
-    const jwtToken = generateJWT({ email, role: account.role });
+    const jwtToken = generateJWT<JWTPayload>({ email, role: account.role });
 
     try {
       console.log('sending jwt email');

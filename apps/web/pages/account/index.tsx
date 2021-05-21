@@ -2,30 +2,41 @@ import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
 import { captureException } from '@sentry/nextjs';
-import { setCookie, parseJWT } from '@ljw/auth';
+import { setCookie, parseJWT, getCookie } from '@ljw/auth';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
-import { AccountRole, selectAccountByEmail } from '../../lib/entities/account';
+import { selectAccountByEmail } from '../../lib/entities/account';
 import { accountPut } from '../../lib/client/api';
 import config from '../../lib/client/config';
 import AccountLayout from '../../components/AccountLayout';
+import { JWT_COOKIE_KEY, JWTPayload } from '../../lib/server/jwt';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;
 
-  if (!token) {
-    token = ctx.req.cookies.authorization;
+  if (typeof token !== 'string') {
+    token = getCookie(ctx.req, ctx.res, JWT_COOKIE_KEY);
 
-    if (!token) {
+    if (typeof token !== 'string') {
       return { props: {} };
     }
   }
 
-  setCookie(ctx.res, 'authorization', token);
+  console.log(`jwt token: ${token}`);
+  console.log('setting the jwt token');
 
-  const payload = await parseJWT<{ email: string; role: AccountRole }>(
-    token as string,
+  setCookie(ctx.req, ctx.res, JWT_COOKIE_KEY, token as string, {
+    sameSite: 'strict',
+    httpOnly: true,
+    overwrite: true,
+    path: '/',
+  });
+
+  console.log(
+    `the jwt token is now: ${getCookie(ctx.req, ctx.res, JWT_COOKIE_KEY)}`,
   );
+
+  const payload = await parseJWT<JWTPayload>(token as string);
 
   if (!payload) {
     return { props: {} };

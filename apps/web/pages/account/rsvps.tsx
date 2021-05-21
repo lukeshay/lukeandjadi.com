@@ -2,27 +2,22 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { captureException } from '@sentry/nextjs';
-import { setCookie, parseJWT } from '@ljw/auth';
+import { parseJWT, getCookie } from '@ljw/auth';
 import { AccountRole } from '../../lib/entities/account';
 import AccountLayout from '../../components/AccountLayout';
 import { selectAllRSVPs } from '../../lib/entities/rsvp';
+import { JWT_COOKIE_KEY, JWTPayload } from '../../lib/server/jwt';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  let { token } = ctx.query;
+  const token = getCookie(ctx.req, ctx.res, JWT_COOKIE_KEY);
 
-  if (!token) {
-    token = ctx.req.cookies.authorization;
-
-    if (!token) {
-      return { props: { rsvps: [] } };
-    }
+  if (typeof token !== 'string') {
+    return { props: {} };
   }
 
-  setCookie(ctx.res, 'authorization', token);
+  console.log(`jwt token: ${token}`);
 
-  const payload = await parseJWT<{ email: string; role: AccountRole }>(
-    token as string,
-  );
+  const payload = await parseJWT<JWTPayload>(token as string);
 
   if (!payload || payload.role === AccountRole.Basic) {
     return { props: { rsvps: [] } };
