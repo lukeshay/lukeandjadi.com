@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
+import { toast } from 'react-toastify';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
 import Layout from '../../components/Layout';
@@ -21,8 +22,9 @@ export default function AccountPage() {
 
       await router.push(`/rsvp/edit/${res.data.id}`);
     } catch (e) {
-      alert(
+      toast(
         `That RSVP could not be found. If the problem persists, please email ${config.email}.`,
+        { type: 'warning' },
       );
       setLoading(false);
     }

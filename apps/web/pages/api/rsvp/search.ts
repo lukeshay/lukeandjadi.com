@@ -22,6 +22,11 @@ async function get(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     const rsvp = await selectRSVPByName(req.query.name as string);
+
+    if (!rsvp.id) {
+      throw new Error(`no rsvp with the name ${req.query.name}`);
+    }
+
     return res.status(StatusCodes.OK).json(rsvp);
   } catch (e) {
     captureException(e);

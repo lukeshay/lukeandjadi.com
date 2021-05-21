@@ -1,5 +1,6 @@
 import React, { FormEvent } from 'react';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 import Layout from '../../components/Layout';
 import { accountSignInPost } from '../../lib/client/api';
 import Form from '../../components/Form';
@@ -19,8 +20,9 @@ export default function SignIn() {
       await accountSignInPost(email);
       await router.push('/account/check-email');
     } catch (e) {
-      alert(
+      toast(
         `There was an error signing in. If the problem persists, please email ${config.email}`,
+        { type: 'error' },
       );
     }
 

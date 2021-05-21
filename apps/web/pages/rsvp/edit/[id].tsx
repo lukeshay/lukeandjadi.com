@@ -8,6 +8,7 @@ import { rsvpPut } from '../../../lib/client/api';
 import config from '../../../lib/client/config';
 import { getRecaptchaToken } from '../../../lib/client/recaptcha';
 import { selectRSVPByID } from '../../../lib/entities/rsvp';
+import { toast } from 'react-toastify';
 
 export async function getServerSideProps(
   ctx: GetServerSidePropsContext<{ id?: string }>,
@@ -49,9 +50,12 @@ export default function AccountPage(props: any) {
 
       const res = await rsvpPut({ ...values, token });
       setValues(res.data);
+
+      toast('Your RSVP has been updated', { type: 'success' });
     } catch (e) {
-      alert(
+      toast(
         `There was an error updating your account. If the problem persists, please email ${config.email}.`,
+        { type: 'error' },
       );
     }
 

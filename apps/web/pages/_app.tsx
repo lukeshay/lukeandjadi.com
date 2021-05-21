@@ -3,10 +3,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { ToastContainer, Slide } from 'react-toastify';
 import Navbar from '../components/Navbar';
 import { configureAPI } from '../lib/client/api';
 import config from '../lib/client/config';
 import '../styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 function FooterLink({
   href,
@@ -100,6 +102,12 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
           </div>
           <div className="w-full text-center pb-6">Built by Luke Shay</div>
         </footer>
+        <ToastContainer
+          hideProgressBar
+          position="bottom-center"
+          transition={Slide}
+          limit={1}
+        />
       </div>
     </>
   );

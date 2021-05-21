@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
 import { captureException } from '@sentry/nextjs';
 import { setCookie, parseJWT, getCookie } from '@ljw/auth';
+import { toast } from 'react-toastify';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
 import { selectAccountByEmail } from '../../lib/entities/account';
@@ -71,8 +72,9 @@ export default function AccountPage(props: any) {
       const res = await accountPut(values);
       setValues(res.data);
     } catch (e) {
-      alert(
+      toast(
         `There was an error updating your account. If the problem persists, please email ${config.email}`,
+        { type: 'error' },
       );
     }
 
