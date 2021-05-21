@@ -50,7 +50,15 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   }
 
   try {
-    return { props: { rsvps: await selectAllRSVPs() } };
+    const rsvps = await selectAllRSVPs();
+
+    const rows = rsvps.map(
+      ({ id, name, email, guests }) => `${id}, ${name}, ${email}, ${guests}`,
+    );
+
+    return {
+      props: { rsvps, csv: `id, name, email, guests\n${rows.join('\n')}` },
+    };
   } catch (e) {
     captureException(e);
   }
@@ -60,6 +68,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 
 export default function AccountPage({
   rsvps,
+  csv,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
 
@@ -69,11 +78,42 @@ export default function AccountPage({
     }
   });
 
+  function handleDownloadClick() {
+    if (!csv) return;
+
+    const csvFile = new Blob([csv], { type: 'text/csv' });
+    const downloadLink = document.createElement('a');
+
+    const date = new Date();
+
+    downloadLink.download = `Wedding Guest List - ${date.getMonth()}.${date.getDate()}.${date.getFullYear()} ${date.getHours()}.${date.getSeconds()}.${date.getMilliseconds()}.csv`;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = 'none';
+    document.body.appendChild(downloadLink);
+
+    downloadLink.click();
+  }
+
   return (
     <AccountLayout>
+      <div className="flex justify-between items-center">
+        <h1 className="text-bold text-3xl py-4 px-2">RSVPs</h1>
+        {csv && (
+          <div>
+            <button
+              onClick={handleDownloadClick}
+              className="py-2 px-6 bg-accent-500 rounded-lg shadow-lg hover:opacity-75"
+            >
+              Download
+            </button>
+          </div>
+        )}
+      </div>
       <table className="rounded shadow-lg border border-gray-50">
-        <TableHeader />
-        {rsvps.map(TableRow)}
+        <thead>
+          <TableHeader />
+        </thead>
+        <tbody>{rsvps.map(TableRow)}</tbody>
       </table>
     </AccountLayout>
   );
