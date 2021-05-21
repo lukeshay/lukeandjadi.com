@@ -47,4 +47,4 @@ export function mergeRSVPs(a1: RSVP, a2: any): Readonly<RSVP> {
   return merged;
 }
 
-export const selectAllRSVPs = (): Promise<ReadonlyArray<RSVP>> => RSVPs();
+export const selectAllRSVPs = (): Promise<Array<Readonly<RSVP>>> => RSVPs();

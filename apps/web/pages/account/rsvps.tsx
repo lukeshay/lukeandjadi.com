@@ -22,7 +22,7 @@ const TableHeader = () => (
 const TableRow = ({ id, name, email, guests }: RSVP) => (
   <tr className="p-2 border-t" key={id}>
     <td className="p-2">{name}</td>
-    <td className="p-2">{email}</td>
+    <td className="p-2">{email || 'Not set'}</td>
     <td className="p-2">{guests || 'Not set'}</td>
     <td className="p-2 flex justify-center items-center">
       <Link href={`/rsvp/edit/${id}?redirectURI=/account/rsvps`}>
@@ -50,7 +50,16 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   }
 
   try {
-    const rsvps = await selectAllRSVPs();
+    const rsvps = (await selectAllRSVPs()).sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+
+      return 0;
+    });
 
     const rows = rsvps.map(
       ({ id, name, email, guests }) => `${id}, ${name}, ${email}, ${guests}`,
