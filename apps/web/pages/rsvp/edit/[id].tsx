@@ -51,7 +51,10 @@ export default function AccountPage(props: any) {
       const res = await rsvpPut({ ...values, token });
       setValues(res.data);
 
-      toast('Your RSVP has been updated', { type: 'success' });
+      toast(router.query.message || 'Your RSVP has been updated!', {
+        type: 'success',
+        autoClose: router.query.autoClose === 'true' ? 5000 : false,
+      });
     } catch (e) {
       toast(
         `There was an error updating your account. If the problem persists, please email ${config.email}.`,
@@ -59,7 +62,10 @@ export default function AccountPage(props: any) {
       );
     }
 
-    if (typeof router.query.redirectURI === 'string') {
+    if (
+      typeof router.query.redirectURI === 'string' &&
+      router.query.redirectURI.startsWith('/')
+    ) {
       await router.push(router.query.redirectURI);
     }
 

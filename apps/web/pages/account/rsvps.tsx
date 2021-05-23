@@ -25,7 +25,7 @@ const TableRow = ({ id, name, email, guests }: RSVP) => (
     <td className="p-2">{email || 'Not set'}</td>
     <td className="p-2">{guests || 'Not set'}</td>
     <td className="p-2 flex justify-center items-center">
-      <Link href={`/rsvp/edit/${id}?redirectURI=/account/rsvps`}>
+      <Link href={`/rsvp/edit/${id}?redirectURI=/account/rsvps&message=${name}'s RSVP has been updated!&autoClose=true`}>
         <a className="text-gray-500 cursor-pointer rounded-full p-2 border border-gray-50 hover:ring ring-accent-500 shadow-lg">
           <PencilIconOutlined size={24} />
         </a>
