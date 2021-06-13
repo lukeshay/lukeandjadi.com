@@ -2,9 +2,10 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSidePropsContext } from 'next';
 import { setCookie } from '@ljw/auth';
+import { JWT_COOKIE_KEY } from '../../lib/server/jwt';
 
 export function getServerSideProps(ctx: GetServerSidePropsContext) {
-  setCookie(ctx.res, 'authorization', '');
+  setCookie(ctx.req, ctx.res, JWT_COOKIE_KEY, '');
 
   return { props: {} };
 }

@@ -17,3 +17,25 @@ a {
 .has-tooltip:hover .tooltip {
   @apply visible z-50;
 }
+
+.Toastify__toast-container {
+  @apply w-full max-w-screen-sm !important;
+}
+
+.Toastify__toast--success, .Toastify__toast--info {
+  @apply text-emerald-600 border border-emerald-600;
+  background: #FFF !important;
+}
+
+.Toastify__close-button--success, .Toastify__close-button--info {
+  @apply text-emerald-600 !important;
+}
+
+.Toastify__toast--error {
+  @apply text-red-500 border border-red-500;
+  background: #FFF !important;
+}
+
+.Toastify__close-button--error {
+  @apply text-red-500 !important;
+}
