@@ -66,19 +66,17 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
           className="lg:sticky top-0 z-0 w-full -mb-10 lg:-mb-96"
         />
       )}
-
       <div className="py-2 w-full font-serif">
         <div className="min-h-screen w-full">
           <Component {...pageProps} />
         </div>
-
         <footer className="w-full h-24 border-t mt-8 py-8">
           <div className="flex justify-center w-full">
             <div className="block sm:flex justify-between w-full max-w-screen-lg px-2 lg:px-0">
               <div>
-                <h4 className="font-semibold">Information</h4>
+                <h4 className="font-semibold text-lg">Wedding Information</h4>
                 <ul>
-                  {config.links.map(({ href, text }) => (
+                  {config.weddingLinks.map(({ href, text }) => (
                     <FooterLink href={href} external>
                       {text}
                     </FooterLink>
@@ -86,7 +84,17 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
                 </ul>
               </div>
               <div className="pt-4 sm:pt-0">
-                <h4 className="font-semibold">Registries</h4>
+                <h4 className="font-semibold text-lg">Guest Information</h4>
+                <ul>
+                  {config.guestLinks.map(({ href, text }) => (
+                    <FooterLink href={href} external>
+                      {text}
+                    </FooterLink>
+                  ))}
+                </ul>
+              </div>
+              <div className="pt-4 sm:pt-0">
+                <h4 className="font-semibold text-lg">Registries</h4>
                 <ul>
                   {config.registries.map(({ href, text }) => (
                     <FooterLink href={href} external>
@@ -97,7 +105,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
               </div>
             </div>
           </div>
-          <div className="w-full text-center pt-6 pb-2">
+          <div className="w-full text-center pt-10 pb-2">
             &#169;2021 Luke Shay and Jadi Reding
           </div>
           <div className="w-full text-center pb-6">Built by Luke Shay</div>

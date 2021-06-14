@@ -22,12 +22,14 @@ a {
   @apply w-full max-w-screen-sm !important;
 }
 
-.Toastify__toast--success, .Toastify__toast--info {
+.Toastify__toast--success,
+.Toastify__toast--info {
   @apply text-emerald-600 border border-emerald-600;
   background: #FFF !important;
 }
 
-.Toastify__close-button--success, .Toastify__close-button--info {
+.Toastify__close-button--success,
+.Toastify__close-button--info {
   @apply text-emerald-600 !important;
 }
 
@@ -38,4 +40,30 @@ a {
 
 .Toastify__close-button--error {
   @apply text-red-500 !important;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 0 1rem 0 0;
+  border-radius: 50%;
+  border: 4px solid #000;
+  border-color: #000 transparent #000 transparent;
+  animation: lds-dual-ring 1s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

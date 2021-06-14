@@ -9,6 +9,7 @@ import config from '../../../lib/client/config';
 import { getRecaptchaToken } from '../../../lib/client/recaptcha';
 import { selectRSVPByID } from '../../../lib/entities/rsvp';
 import { toast } from 'react-toastify';
+import Button from '../../../components/Button';
 
 export async function getServerSideProps(
   ctx: GetServerSidePropsContext<{ id?: string }>,
@@ -114,13 +115,9 @@ export default function AccountPage(props: any) {
           disabled={loading}
           type="number"
         />
-        <button
-          type="submit"
-          className="bg-accent-500 hover:opacity-75 text-gray-800 w-full my-2 p-3 rounded-lg shadow"
-          disabled={loading}
-        >
+        <Button type="submit" className="w-full" loading={loading}>
           Update
-        </button>
+        </Button>
       </Form>
     </Layout>
   );

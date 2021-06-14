@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
+import Button from '../../components/Button';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
 import Layout from '../../components/Layout';
@@ -54,13 +55,9 @@ export default function AccountPage() {
           disabled={loading}
           required
         />
-        <button
-          type="submit"
-          className="bg-accent-500 hover:opacity-75 text-gray-800 w-full my-2 p-3 rounded-lg shadow"
-          disabled={loading}
-        >
+        <Button type="submit" className="w-full" loading={loading}>
           Search
-        </button>
+        </Button>
       </Form>
     </Layout>
   );

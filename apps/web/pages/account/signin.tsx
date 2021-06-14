@@ -6,6 +6,7 @@ import { accountSignInPost } from '../../lib/client/api';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
 import config from '../../lib/client/config';
+import Button from '../../components/Button';
 
 export default function SignIn() {
   const [email, setEmail] = React.useState('');
@@ -46,13 +47,9 @@ export default function SignIn() {
           disabled={loading}
           required
         />
-        <button
-          type="submit"
-          className="bg-accent-500 hover:opacity-75 text-gray-800 w-full my-2 p-3 rounded-lg shadow"
-          disabled={loading}
-        >
+        <Button type="submit" className="w-full" loading={loading}>
           Sign In
-        </button>
+        </Button>
       </Form>
     </Layout>
   );

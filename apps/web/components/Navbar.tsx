@@ -87,8 +87,8 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
 function Navbar() {
   return (
     <>
-      <DesktopNavbar links={config.links} />
-      <MobileNavbar links={config.links} />
+      <DesktopNavbar links={[...config.weddingLinks, ...config.guestLinks]} />
+      <MobileNavbar links={[...config.weddingLinks, ...config.guestLinks]} />
     </>
   );
 }

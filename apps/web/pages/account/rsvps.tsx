@@ -9,6 +9,7 @@ import { RSVP, selectAllRSVPs } from '../../lib/entities/rsvp';
 import { JWT_COOKIE_KEY, JWTPayload } from '../../lib/server/jwt';
 import PencilIconOutlined from '../../components/icons/PencilIconOutlined';
 import Link from 'next/link';
+import Button from '../../components/Button';
 
 const TableHeader = () => (
   <tr className="p-2 bg-gray-200">
@@ -25,7 +26,9 @@ const TableRow = ({ id, name, email, guests }: RSVP) => (
     <td className="p-2">{email || 'Not set'}</td>
     <td className="p-2">{guests || 'Not set'}</td>
     <td className="p-2 flex justify-center items-center">
-      <Link href={`/rsvp/edit/${id}?redirectURI=/account/rsvps&message=${name}'s RSVP has been updated!&autoClose=true`}>
+      <Link
+        href={`/rsvp/edit/${id}?redirectURI=/account/rsvps&message=${name}'s RSVP has been updated!&autoClose=true`}
+      >
         <a className="text-gray-500 cursor-pointer rounded-full p-2 border border-gray-50 hover:ring ring-accent-500 shadow-lg">
           <PencilIconOutlined size={24} />
         </a>
@@ -109,12 +112,7 @@ export default function AccountPage({
         <h1 className="text-bold text-3xl py-4 px-2">RSVPs</h1>
         {csv && (
           <div>
-            <button
-              onClick={handleDownloadClick}
-              className="py-2 px-6 bg-accent-500 rounded-lg shadow-lg hover:opacity-75"
-            >
-              Download
-            </button>
+            <Button onClick={handleDownloadClick}>Download</Button>
           </div>
         )}
       </div>

@@ -11,6 +11,7 @@ import { accountPut } from '../../lib/client/api';
 import config from '../../lib/client/config';
 import AccountLayout from '../../components/AccountLayout';
 import { JWT_COOKIE_KEY, JWTPayload } from '../../lib/server/jwt';
+import Button from '../../components/Button';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;
@@ -104,13 +105,9 @@ export default function AccountPage(props: any) {
           value={values.email}
           disabled
         />
-        <button
-          type="submit"
-          className="bg-accent-500 hover:opacity-75 text-gray-800 w-full my-2 p-3 rounded-lg shadow"
-          disabled={loading}
-        >
+        <Button type="submit" className="w-full" loading={loading}>
           Update
-        </button>
+        </Button>
       </Form>
     </AccountLayout>
   );
