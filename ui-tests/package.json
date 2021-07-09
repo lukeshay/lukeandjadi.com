@@ -1,10 +1,7 @@
 {
   "name": "ui-tests",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Luke Shay",
-  "license": "MIT",
   "private": true,
+  "version": "0.0.1",
   "scripts": {
     "test:local": "wdio run ./wdio.conf.js",
     "test:dev": "wdio run ./wdio.conf.dev.js",

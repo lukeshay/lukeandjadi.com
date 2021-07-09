@@ -2,6 +2,8 @@ config:
   cloudflare:account_id: 0761603e9b3423fc858e07e5392e51e1
   cloudflare:apiToken:
     secure: AAABANfkDOiJngjgLYnbYhgj5cduDU99JKKhx85gcJ1wZOaUGrIni8mQ4bOGy7SgT7+Gr7dTc0UbDunECQUJI5QgyGuHugYT
+  digitalocean:token:
+    secure: AAABAG4qYWjsapy7jp7WaIwdbm2MkGPWBrgcrSkRHa/oaRrmtz3nLGucK5Nd2ZRy2QZJtSfS/6AGYyMMHWRKxeny7w9vD89CuRqzjx4NX4haVMOZkGFOUixcQgw2NvaV
   lukeandjadi.com:email_from: contact@lukeandjadi.com
   lukeandjadi.com:email_host: smtp.zoho.com
   lukeandjadi.com:email_pass:

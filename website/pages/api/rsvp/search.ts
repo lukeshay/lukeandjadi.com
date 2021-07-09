@@ -1,6 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import { withSentry, captureException } from '@sentry/nextjs';
+import {
+  withSentry,
+  captureException,
+  captureMessage,
+  Severity,
+} from '@sentry/nextjs';
 import { selectRSVPByName } from '../../../lib/entities/rsvp';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -29,6 +34,10 @@ async function get(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(StatusCodes.OK).json(rsvp);
   } catch (e) {
+    captureMessage(
+      `there was an error searching for an rsvp with the name ${req.query.name}: ${e.message}`,
+      Severity.Warning,
+    );
     captureException(e);
 
     return res

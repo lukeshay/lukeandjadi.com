@@ -1,7 +1,7 @@
 {
-  "name": "web",
-  "version": "0.0.1",
+  "name": "website",
   "private": true,
+  "version": "0.0.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,9 +10,13 @@
     "format": "prettier --write .",
     "db:migrate:make": "knex migrate:make",
     "db:migrate": "knex migrate:latest",
+    "db:seed": "knex seed:run",
     "db:migrate:local": "dotenv -e .env.local -- yarn db:migrate --env local",
     "db:migrate:dev": "dotenv -e .env.dev -- yarn db:migrate --env development",
-    "db:migrate:prod": "dotenv -e .env.prod -- yarn db:migrate --env production"
+    "db:migrate:prod": "dotenv -e .env.prod -- yarn db:migrate --env production",
+    "db:seed:local": "dotenv -e .env.local -- yarn db:seed --env local",
+    "db:seed:dev": "dotenv -e .env.dev -- yarn db:seed --env development",
+    "db:seed:prod": "dotenv -e .env.prod -- yarn db:seed --env production"
   },
   "dependencies": {
     "@sentry/nextjs": "^6.8.0",

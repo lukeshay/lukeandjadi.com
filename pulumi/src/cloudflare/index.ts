@@ -13,6 +13,8 @@ const zoneId = config.require('zone_id');
 const sendgridKey = config.require('sendgrid_key');
 const url = config.require('url');
 
+const env = url.includes('dev') ? 'dev' : 'prod';
+
 const ttl = 1;
 
 const emailerCode = fs.readFileSync(
@@ -22,8 +24,9 @@ const emailerCode = fs.readFileSync(
   },
 );
 
-const emailerWorkerScript = new cloudflare.WorkerScript('emailer-script', {
-  name: 'emailer-script',
+const emailerScriptName = `emailer-script-${env}`;
+const emailerWorkerScript = new cloudflare.WorkerScript(emailerScriptName, {
+  name: emailerScriptName,
   content: emailerCode,
   secretTextBindings: [
     { name: 'EMAIL_HOST', text: emailHost },
@@ -34,7 +37,8 @@ const emailerWorkerScript = new cloudflare.WorkerScript('emailer-script', {
   ],
 });
 
-const emailerWorkerRoute = new cloudflare.WorkerRoute('emailer-route', {
+const emailerRouterName = `emailer-route-${env}`;
+const emailerWorkerRoute = new cloudflare.WorkerRoute(emailerRouterName, {
   zoneId,
   pattern: `${url}/emailer`,
   scriptName: emailerWorkerScript.name,
