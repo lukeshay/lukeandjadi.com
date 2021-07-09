@@ -1,9 +1,7 @@
 const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
-  future: {
-    webpack5: true,
-  },
+  webpack5: true,
 };
 
 const SentryWebpackPluginOptions = {
