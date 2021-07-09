@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import axios from 'axios';
 import { withSentry, captureException } from '@sentry/nextjs';
-import { generateJWT } from '../../lib/server/auth';
+import { generateJWT } from '../../../lib/server/auth';
 import { getJWTEmailHtml, getJWTEmailPlain } from '../../../lib/server/email';
 import { selectAccountByEmail } from '../../../lib/entities/account';
 import config from '../../../lib/client/config';

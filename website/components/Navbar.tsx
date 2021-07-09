@@ -50,7 +50,7 @@ function MobileNavbar({ links }: { links: { href: string; text: string }[] }) {
   return (
     <nav className="z-20 p-4 block md:hidden sticky top-0 bg-white shadow-lg font-serif border-b border-gray-50">
       <div className="flex justify-between">
-        <Link href="/">
+        <Link href="/" passHref>
           <h1 className="text-xl lg:text-2xl font-bold w-40 text-black cursor-pointer">
             Luke & Jadi
           </h1>
