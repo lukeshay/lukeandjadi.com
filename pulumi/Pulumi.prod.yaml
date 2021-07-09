@@ -1,0 +1,12 @@
+config:
+  cloudflare:account_id: 0761603e9b3423fc858e07e5392e51e1
+  cloudflare:apiToken:
+    secure: AAABANfkDOiJngjgLYnbYhgj5cduDU99JKKhx85gcJ1wZOaUGrIni8mQ4bOGy7SgT7+Gr7dTc0UbDunECQUJI5QgyGuHugYT
+  lukeandjadi.com:email_from: contact@lukeandjadi.com
+  lukeandjadi.com:email_host: smtp.zoho.com
+  lukeandjadi.com:email_pass:
+    secure: AAABAGxxlEJs5MDfIaeCPUXZS3htEOHkoi3C/WQyE6W2M+/625XLD3+bwFV85Ev+
+  lukeandjadi.com:email_user: luke@lukeandjadi.com
+  lukeandjadi.com:sendgrid_key: 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
+  lukeandjadi.com:url: lukeandjadi.com
+  lukeandjadi.com:zone_id: 5839d36ffc98b6089eb9ef6c5bd864da

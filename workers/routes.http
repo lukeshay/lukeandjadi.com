@@ -1,0 +1,13 @@
+POST https://emailer-script.shay-luke17.workers.dev/ HTTP/1.1
+content-type: application/json
+
+{
+    "from": "contact@lukeandjadi.com",
+    "host": "smtp.zoho.com",
+    "html": "<h1>TEST</h1>",
+    "pass": "H4pJnYmy6Js8a2FH",
+    "subject": "Test Email",
+    "text": "TEST",
+    "to": "shay.luke17@gmail.com",
+    "user": "luke@lukeandjadi.com"
+}
