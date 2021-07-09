@@ -1,6 +1,9 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import config from '../lib/client/config';
+import Image from 'next/image';
+import sitting from '../public/sitting.jpg';
+import campanile from '../public/campanile.jpg';
 
 function WeddingPartyMember({
   src,
@@ -8,7 +11,7 @@ function WeddingPartyMember({
   role,
   relation,
 }: {
-  src: string;
+  src: any;
   name: string;
   role: string;
   relation: string;
@@ -17,7 +20,11 @@ function WeddingPartyMember({
     <div className="col-span-1">
       <div className="pb-4 flex justify-center w-full">
         <div>
-          <img src={src} alt="Luke Shay" className="shadow-lg" />
+          <Image
+            src={src}
+            alt="Luke Shay"
+            className="shadow-lg w-full"
+          />
         </div>
       </div>
       <h2 className="text-lg font-bold pb-0.5 text-gray-900">{name}</h2>
@@ -128,7 +135,7 @@ function RegistryLink({
   children: React.ReactNode;
 }) {
   return (
-    <a target="_blank" href={href} className="block">
+    <a target="_blank" href={href} className="block" rel="noreferrer">
       {children}
     </a>
   );
@@ -138,8 +145,8 @@ export default function Home() {
   return (
     <Layout>
       <div className="relative text-center text-white">
-        <img
-          src="/sitting.jpg"
+        <Image
+          src={sitting}
           alt="Cover"
           className="rounded shadow-lg w-full"
           data-test-id="banner"
@@ -162,7 +169,7 @@ export default function Home() {
       </div>
       <Section id="our-story" title="Our Story">
         <span className="hidden md:inline-block py-4 pl-4 w-80 float-right">
-          <img src="/campanile.jpg" alt="campanile" />
+          <Image src={campanile} alt="campanile" />
         </span>
         Luke and I met in August 2017 on our second day at Iowa State. We lived
         on the same floor in Eaton Hall and hung out with the same friends. I
@@ -181,7 +188,7 @@ export default function Home() {
         State bringing us together and being the biggest part of our first four
         years together.
         <span className="inline-block md:hidden py-4 w-full">
-          <img src="/campanile.jpg" alt="campanile" />
+          <Image src={campanile} alt="campanile" />
         </span>
         <SubSection title="The Proposal">
           At the end of April 2021, I asked Luke to take graduation pictures
@@ -203,7 +210,7 @@ export default function Home() {
           {config.weddingParty.groomsmen.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
-              src={pm.img}
+              src={require(`../public${pm.img}`)}
               name={pm.name}
               role={pm.role}
               relation={pm.relation}
@@ -212,7 +219,7 @@ export default function Home() {
           {config.weddingParty.bridesmaids.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
-              src={pm.img}
+              src={require(`../public${pm.img}`)}
               name={pm.name}
               role={pm.role}
               relation={pm.relation}
@@ -221,7 +228,7 @@ export default function Home() {
           {config.weddingParty.others.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
-              src={pm.img}
+              src={require(`../public${pm.img}`)}
               name={pm.name}
               role={pm.role}
               relation={pm.relation}
@@ -236,7 +243,7 @@ export default function Home() {
           {config.weddingParty.ushers.map((pm) => (
             <WeddingPartyMember
               key={pm.name}
-              src={pm.img}
+              src={require(`../public${pm.img}`)}
               name={pm.name}
               role={pm.role}
               relation={pm.relation}

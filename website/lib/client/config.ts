@@ -1,4 +1,4 @@
-export default {
+const def = {
   date: 'August 20, 2022',
   email: 'contact@lukeandjadi.com',
   weddingLinks: [
@@ -32,16 +32,16 @@ export default {
         relation: 'Brother of the Groom',
       },
       {
-        img: '/tyler-krueger.jpg',
-        name: 'Tyler Krueger',
-        role: 'Groomsman',
-        relation: 'Friend of the Groom',
-      },
-      {
         img: '/jonny-behounek.jpg',
         name: 'Jonny Behounek',
         role: 'Groomsman',
         relation: 'Brother-in-law of the Bride',
+      },
+      {
+        img: '/tyler-krueger.jpg',
+        name: 'Tyler Krueger',
+        role: 'Groomsman',
+        relation: 'Friend of the Groom',
       },
       {
         img: '/kaeden-sisler.jpg',
@@ -64,14 +64,14 @@ export default {
         relation: 'Sister of the Bride',
       },
       {
-        img: '/jenna-reding.jpg',
-        name: 'Jenna Reding',
+        img: '/jordan-behounek.jpg',
+        name: 'Jordan Behounek',
         role: 'Bridesmaid',
         relation: 'Sister of the Bride',
       },
       {
-        img: '/jordan-behounek.jpg',
-        name: 'Jordan Behounek',
+        img: '/jenna-reding.jpg',
+        name: 'Jenna Reding',
         role: 'Bridesmaid',
         relation: 'Sister of the Bride',
       },
@@ -173,3 +173,5 @@ export default {
     recaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
   },
 };
+
+export default def;

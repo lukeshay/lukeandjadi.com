@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import { withSentry, captureException } from '@sentry/nextjs';
-import { parseJWT } from '../../lib/server/auth';
+import { parseJWT } from '../../../lib/server/auth';
 import {
   mergeAccounts,
   selectAccountByEmail,

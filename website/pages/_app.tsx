@@ -1,14 +1,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import Head from 'next/head';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
-import { ToastContainer, Slide } from 'react-toastify';
-import Navbar from '../components/Navbar';
-import { configureAPI } from '../lib/client/api';
-import config from '../lib/client/config';
 import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import Navbar from '../components/Navbar';
+import React from 'react';
+import config from '../lib/client/config';
+import flowers from '../public/flowers.png';
+import { ToastContainer, Slide } from 'react-toastify';
+import { configureAPI } from '../lib/client/api';
+import { useRouter } from 'next/router';
 
 function FooterLink({
   href,
@@ -22,7 +24,12 @@ function FooterLink({
   return (
     <li>
       {external ? (
-        <a className="text-gray-500" href={href} target="_blank">
+        <a
+          className="text-gray-500"
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+        >
           {children}
         </a>
       ) : (
@@ -49,22 +56,12 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
       <Head>
         <title>Luke & Jadi</title>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@300;500;700&display=swap"
-          rel="stylesheet"
-        />
-        <script
-          src={`https://www.google.com/recaptcha/api.js?render=${config.env.recaptchaSiteKey}`}
-        />
       </Head>
       <Navbar />
       {!router.pathname.includes('/account') && (
-        <img
-          src="/flowers.png"
-          alt="flowers"
-          className="lg:sticky top-0 z-0 w-full -mb-10 lg:-mb-96"
-        />
+        <div className="lg:sticky top-0 z-0 w-full -mb-10 lg:-mb-96">
+          <Image src={flowers} alt="flowers" layout="responsive" />
+        </div>
       )}
       <div className="py-2 w-full font-serif">
         <div className="min-h-screen w-full">
@@ -77,7 +74,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
                 <h4 className="font-semibold text-lg">Wedding Information</h4>
                 <ul>
                   {config.weddingLinks.map(({ href, text }) => (
-                    <FooterLink href={href} external>
+                    <FooterLink key={`${href}-${text}`} href={href} external>
                       {text}
                     </FooterLink>
                   ))}
@@ -87,7 +84,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
                 <h4 className="font-semibold text-lg">Guest Information</h4>
                 <ul>
                   {config.guestLinks.map(({ href, text }) => (
-                    <FooterLink href={href} external>
+                    <FooterLink key={`${href}-${text}`} href={href} external>
                       {text}
                     </FooterLink>
                   ))}
@@ -97,7 +94,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
                 <h4 className="font-semibold text-lg">Registries</h4>
                 <ul>
                   {config.registries.map(({ href, text }) => (
-                    <FooterLink href={href} external>
+                    <FooterLink key={`${href}-${text}`} href={href} external>
                       {text}
                     </FooterLink>
                   ))}
