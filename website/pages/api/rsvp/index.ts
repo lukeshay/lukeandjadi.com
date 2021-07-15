@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import { withSentry, captureException, captureMessage } from '@sentry/nextjs';
 import axios from 'axios';
 import {
   mergeRSVPs,
@@ -8,6 +7,8 @@ import {
   updateRSVP,
 } from '../../../lib/entities/rsvp';
 import config from '../../../lib/client/config';
+import withLogger from '../../../lib/server/with-logger';
+import logger from '../../../lib/server/logger';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'PUT') {
@@ -17,10 +18,10 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
   return res.status(StatusCodes.NOT_FOUND).end();
 }
 
-export default withSentry(handler);
+export default withLogger(handler);
 
 async function put(req: NextApiRequest, res: NextApiResponse) {
-  captureMessage('put /rsvp');
+  logger.info('put /rsvp');
 
   if (!req.body.token) {
     return res
@@ -37,7 +38,7 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
       { params: { secret: process.env.RECAPTCHA_SECRET_KEY, response: token } },
     );
     if (!resp.data.success) {
-      captureMessage(
+      logger.info(
         `recaptcha challenge unsuccessful: ${resp.data['error-codes']}`,
       );
       return res
@@ -45,7 +46,7 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
         .json({ message: 'recaptcha challenge unsuccessful' });
     }
   } catch (e) {
-    captureException(e);
+    logger.error(e.message, e);
 
     return res
       .status(StatusCodes.UNAUTHORIZED)
@@ -63,7 +64,7 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(StatusCodes.OK).json(saved);
   } catch (e) {
-    captureException(e);
+    logger.error(e.message, e);
 
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: `There was an error saving your RSVP. If this problem persists, please email ${config.email}.`,

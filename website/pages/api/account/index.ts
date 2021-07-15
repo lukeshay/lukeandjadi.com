@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import { withSentry, captureException, captureMessage } from '@sentry/nextjs';
 import { parseJWT } from '../../../lib/server/auth';
 import {
   mergeAccounts,
@@ -9,6 +8,8 @@ import {
 } from '../../../lib/entities/account';
 import config from '../../../lib/client/config';
 import { JWTPayload } from '../../../lib/server/jwt';
+import logger from '../../../lib/server/logger';
+import withLogger from '../../../lib/server/with-logger';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'PUT') {
@@ -18,13 +19,13 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
   return res.status(StatusCodes.NOT_FOUND).end();
 }
 
-export default withSentry(handler);
+export default withLogger(handler);
 
 async function put(req: NextApiRequest, res: NextApiResponse) {
-  captureMessage('put /account');
+  logger.info('put /account');
 
   if (!req.cookies.authorization) {
-    captureMessage('no authorization cookie found');
+    logger.info('no authorization cookie found');
     return res.status(StatusCodes.UNAUTHORIZED).end();
   }
 
@@ -34,7 +35,7 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
     const payload = await parseJWT<JWTPayload>(authorization);
 
     if (!payload) {
-      captureMessage('no email found in authorization cookie');
+      logger.info('no email found in authorization cookie');
       return res.status(StatusCodes.UNAUTHORIZED).end();
     }
 
@@ -47,14 +48,14 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
       const saved = await updateAccount(merged);
       return res.status(StatusCodes.OK).json(saved);
     } catch (e) {
-      captureException(e);
+      logger.error(e.message);
 
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         message: `There was an error saving your account. If this problem persists, please email ${config.email}.`,
       });
     }
   } catch (e) {
-    captureException(e);
+    logger.error(e.message);
 
     return res.status(StatusCodes.UNAUTHORIZED).end();
   }

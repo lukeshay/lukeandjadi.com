@@ -1,12 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import axios from 'axios';
-import { withSentry, captureException, captureMessage } from '@sentry/nextjs';
 import { generateJWT } from '../../../lib/server/auth';
 import { getJWTEmailHtml, getJWTEmailPlain } from '../../../lib/server/email';
 import { selectAccountByEmail } from '../../../lib/entities/account';
 import config from '../../../lib/client/config';
 import { JWTPayload } from '../../../lib/server/jwt';
+import withLogger from '../../../lib/server/with-logger';
+import logger from '../../../lib/server/logger';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
@@ -16,7 +17,7 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
   return res.status(StatusCodes.NOT_FOUND).end();
 }
 
-export default withSentry(handler);
+export default withLogger(handler);
 
 async function post(req: NextApiRequest, res: NextApiResponse) {
   const { email } = req.body;
@@ -28,14 +29,14 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    captureMessage(`selecting account from database: ${email}`);
+    logger.info(`selecting account from database: ${email}`);
     const account = await selectAccountByEmail(email);
 
-    captureMessage('generating jwt');
+    logger.info('generating jwt');
     const jwtToken = generateJWT<JWTPayload>({ email, role: account.role });
 
     try {
-      captureMessage('sending jwt email');
+      logger.info('sending jwt email');
       const html = getJWTEmailHtml(jwtToken);
       const text = getJWTEmailPlain(jwtToken);
 
@@ -50,13 +51,13 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
         host: process.env.EMAIL_HOST,
       });
 
-      captureMessage(r.data);
+      logger.info(r.data);
 
       return res
         .status(StatusCodes.OK)
         .json({ message: 'A email with a login link has been sent!' });
     } catch (e) {
-      captureException(e);
+      logger.error(e.message, e);
 
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         message:
@@ -64,8 +65,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       });
     }
   } catch (e) {
-    captureMessage(`account with email does not exist: ${email}`);
-    console.error(e.message);
+    logger.error(`account with email does not exist: ${email} ${e.message}`, e);
     return res.status(StatusCodes.UNAUTHORIZED).end();
   }
 }

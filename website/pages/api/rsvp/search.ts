@@ -1,12 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import {
-  withSentry,
-  captureException,
-  captureMessage,
-  Severity,
-} from '@sentry/nextjs';
 import { selectRSVPByName } from '../../../lib/entities/rsvp';
+import withLogger from '../../../lib/server/with-logger';
+import logger from '../../../lib/server/logger';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -16,10 +12,10 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
   return res.status(StatusCodes.NOT_FOUND).end();
 }
 
-export default withSentry(handler);
+export default withLogger(handler);
 
 async function get(req: NextApiRequest, res: NextApiResponse) {
-  captureMessage('get /rsvp/search');
+  logger.info('get /rsvp/search');
 
   if (!req.query.name) {
     return res.status(StatusCodes.BAD_REQUEST).json({ name: 'required field' });
@@ -34,11 +30,10 @@ async function get(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(StatusCodes.OK).json(rsvp);
   } catch (e) {
-    captureMessage(
+    logger.error(
       `there was an error searching for an rsvp with the name ${req.query.name}: ${e.message}`,
-      Severity.Warning,
+      e,
     );
-    captureException(e);
 
     return res
       .status(StatusCodes.BAD_REQUEST)
