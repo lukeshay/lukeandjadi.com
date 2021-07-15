@@ -1,4 +1,4 @@
-const def = {
+const config = {
   date: 'August 20, 2022',
   email: 'contact@lukeandjadi.com',
   weddingLinks: [
@@ -174,4 +174,4 @@ const def = {
   },
 };
 
-export default def;
+export default config;

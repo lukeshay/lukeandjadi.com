@@ -22,8 +22,6 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
 export default withLogger(handler);
 
 async function put(req: NextApiRequest, res: NextApiResponse) {
-  logger.info('put /account');
-
   if (!req.cookies.authorization) {
     logger.info('no authorization cookie found');
     return res.status(StatusCodes.UNAUTHORIZED).end();

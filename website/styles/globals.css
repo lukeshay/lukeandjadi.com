@@ -33,6 +33,15 @@ a {
   @apply text-emerald-600 !important;
 }
 
+.Toastify__toast--warning {
+  @apply text-orange-500 border border-orange-500;
+  background: #fff !important;
+}
+
+.Toastify__close-button--warning {
+  @apply text-orange-500 !important;
+}
+
 .Toastify__toast--error {
   @apply text-red-500 border border-red-500;
   background: #fff !important;

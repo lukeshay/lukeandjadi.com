@@ -15,8 +15,6 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
 export default withLogger(handler);
 
 async function get(req: NextApiRequest, res: NextApiResponse) {
-  logger.info('get /rsvp/search');
-
   if (!req.query.name) {
     return res.status(StatusCodes.BAD_REQUEST).json({ name: 'required field' });
   }

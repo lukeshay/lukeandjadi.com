@@ -21,8 +21,6 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
 export default withLogger(handler);
 
 async function put(req: NextApiRequest, res: NextApiResponse) {
-  logger.info('put /rsvp');
-
   if (!req.body.token) {
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -38,7 +36,7 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
       { params: { secret: process.env.RECAPTCHA_SECRET_KEY, response: token } },
     );
     if (!resp.data.success) {
-      logger.info(
+      logger.error(
         `recaptcha challenge unsuccessful: ${resp.data['error-codes']}`,
       );
       return res

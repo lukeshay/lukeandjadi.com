@@ -16,7 +16,7 @@ export default function Form({
 }) {
   return (
     <div
-      className={`${className} m-4 rounded-md shadow-lg p-6 w-full max-w-xl border`}
+      className={`${className} m-4 rounded-md shadow-lg p-6 w-full max-w-xl border bg-white bg-opacity-95`}
     >
       <div>
         <h1 className="text-4xl font-bold pb-4 text-center">{title}</h1>

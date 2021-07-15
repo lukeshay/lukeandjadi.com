@@ -59,7 +59,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
       </Head>
       <Navbar />
       {!router.pathname.includes('/account') && (
-        <div className="lg:sticky top-0 z-0 w-full -mb-10 lg:-mb-96">
+        <div className="lg:sticky top-0 z-0 w-full -mb-10 lg:-mb-72 xl:-mb-96">
           <Image src={flowers} alt="flowers" layout="responsive" />
         </div>
       )}

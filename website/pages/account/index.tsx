@@ -1,7 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
-import { captureException, captureMessage } from '@sentry/nextjs';
 import { toast } from 'react-toastify';
 import { setCookie, parseJWT, getCookie } from '../../lib/server/auth';
 import Form from '../../components/Form';
@@ -12,6 +11,7 @@ import config from '../../lib/client/config';
 import AccountLayout from '../../components/AccountLayout';
 import { JWT_COOKIE_KEY, JWTPayload } from '../../lib/server/jwt';
 import Button from '../../components/Button';
+import logger from '../../lib/server/logger';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;
@@ -24,19 +24,12 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     }
   }
 
-  captureMessage(`jwt token: ${token}`);
-  captureMessage('setting the jwt token');
-
   setCookie(ctx.req, ctx.res, JWT_COOKIE_KEY, token as string, {
     sameSite: 'strict',
     httpOnly: true,
     overwrite: true,
     path: '/',
   });
-
-  captureMessage(
-    `the jwt token is now: ${getCookie(ctx.req, ctx.res, JWT_COOKIE_KEY)}`,
-  );
 
   const payload = await parseJWT<JWTPayload>(token as string);
 
@@ -47,7 +40,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   try {
     return { props: await selectAccountByEmail(payload.email) };
   } catch (e) {
-    captureException(e);
+    logger.error(`error selecting account: ${e.message}`, e);
   }
 
   return { props: {} };

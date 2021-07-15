@@ -52,7 +52,7 @@ export default function AccountPage(props: any) {
 
       toast(router.query.message || 'Your RSVP has been updated!', {
         type: 'success',
-        autoClose: router.query.autoClose === 'true' ? 5000 : false,
+        autoClose: 5000,
       });
     } catch (e) {
       toast(

@@ -18,7 +18,7 @@ export default function Input({
   name: string;
   autoComplete: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
-  value?: string | number;
+  value?: string | null | number;
   required?: boolean;
   disabled?: boolean;
   type?: 'input' | 'checkbox' | 'number';
@@ -39,7 +39,7 @@ export default function Input({
           className={`w-full border rounded p-2 my-2 outline-none focus:ring-2 ring-accent-500 ${
             disabled && 'cursor-not-allowed bg-gray-300 ring-0'
           }`}
-          value={value}
+          value={value === null ? undefined : value}
           onChange={onChange}
           disabled={disabled}
           required={required}

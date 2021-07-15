@@ -10,7 +10,10 @@ const config = {
   pool: { min: 0, max: 50 },
 };
 
-if (process.env.NODE_ENV === 'development') {
+if (
+  process.env.DSN?.includes('localhost') ||
+  process.env.DSN?.includes('127.0.0.1')
+) {
   // @ts-expect-error
   delete config.connection.ssl;
 }

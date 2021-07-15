@@ -1,7 +1,6 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { captureException, captureMessage } from '@sentry/nextjs';
 import Link from 'next/link';
 import { parseJWT, getCookie } from '../../lib/server/auth';
 import { AccountRole } from '../../lib/entities/account';
@@ -10,6 +9,7 @@ import { RSVP, selectAllRSVPs } from '../../lib/entities/rsvp';
 import { JWT_COOKIE_KEY, JWTPayload } from '../../lib/server/jwt';
 import PencilIconOutlined from '../../components/icons/PencilIconOutlined';
 import Button from '../../components/Button';
+import logger from '../../lib/server/logger';
 
 const TableHeader = () => (
   <tr className="p-2 bg-gray-200">
@@ -44,8 +44,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     return { props: { rsvps: [] } };
   }
 
-  captureMessage(`jwt token: ${token}`);
-
   const payload = await parseJWT<JWTPayload>(token as string);
 
   if (!payload || payload.role === AccountRole.Basic) {
@@ -72,7 +70,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       props: { rsvps, csv: `id, name, email, guests\n${rows.join('\n')}` },
     };
   } catch (e) {
-    captureException(e);
+    logger.error(`error getting all rsvps: ${e.message}`, e);
   }
 
   return { props: { rsvps: [] } };

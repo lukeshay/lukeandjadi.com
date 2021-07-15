@@ -7,12 +7,17 @@ const httpTransportOptions = {
 };
 
 const logger = createLogger({
-  level: 'info',
+  level: 'silly',
   exitOnError: false,
   format: format.json(),
-  transports: [new transports.Http(httpTransportOptions)],
+  transports: [
+    new transports.Http(httpTransportOptions),
+    new transports.Console({
+      format: format.simple(),
+    }),
+  ],
   defaultMeta: {
-    environment: process.env.VERCEL_ENV || "local",
+    environment: process.env.VERCEL_ENV || 'local',
     commit: process.env.VERCEL_GIT_COMMIT_SHA,
     region: process.env.VERCEL_REGION,
   },

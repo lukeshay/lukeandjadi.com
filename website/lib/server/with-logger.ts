@@ -1,3 +1,4 @@
+import { StatusCodes } from 'http-status-codes';
 import { NextApiRequest, NextApiResponse } from 'next';
 import logger from './logger';
 
@@ -8,11 +9,18 @@ export default function withLogger(
   ) => Promise<unknown> | unknown,
 ) {
   return async function (req: NextApiRequest, res: NextApiResponse) {
+    let result = null;
+
     try {
-      return await handler(req, res);
+      result = await handler(req, res);
     } catch (e) {
       logger.error(e.message, e);
-      throw e;
+
+      result = res.status(StatusCodes.INTERNAL_SERVER_ERROR);
     }
+
+    logger.debug(`${req.method?.toUpperCase()} ${req.url} ${res.statusCode}`);
+
+    return result;
   };
 }
