@@ -14,7 +14,7 @@ export default function withLogger(
     try {
       result = await handler(req, res);
     } catch (e) {
-      logger.error(e.message, e);
+      logger.error(e.message, { ...e, level: 'error' });
 
       result = res.status(StatusCodes.INTERNAL_SERVER_ERROR);
     }

@@ -57,7 +57,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
         .status(StatusCodes.OK)
         .json({ message: 'A email with a login link has been sent!' });
     } catch (e) {
-      logger.error(e.message, e);
+      logger.error(e.message, { ...e, level: 'error' });
 
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         message:

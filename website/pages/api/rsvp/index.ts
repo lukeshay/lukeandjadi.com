@@ -44,7 +44,7 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
         .json({ message: 'recaptcha challenge unsuccessful' });
     }
   } catch (e) {
-    logger.error(e.message, e);
+    logger.error(e.message, { ...e, level: 'error' });
 
     return res
       .status(StatusCodes.UNAUTHORIZED)
@@ -62,7 +62,7 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(StatusCodes.OK).json(saved);
   } catch (e) {
-    logger.error(e.message, e);
+    logger.error(e.message, { ...e, level: 'error' });
 
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: `There was an error saving your RSVP. If this problem persists, please email ${config.email}.`,
