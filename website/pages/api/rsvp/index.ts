@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import { withSentry, captureException } from '@sentry/nextjs';
+import { withSentry, captureException, captureMessage } from '@sentry/nextjs';
 import axios from 'axios';
 import {
   mergeRSVPs,
@@ -20,7 +20,7 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
 export default withSentry(handler);
 
 async function put(req: NextApiRequest, res: NextApiResponse) {
-  console.log('put /rsvp');
+  captureMessage('put /rsvp');
 
   if (!req.body.token) {
     return res
@@ -37,7 +37,7 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
       { params: { secret: process.env.RECAPTCHA_SECRET_KEY, response: token } },
     );
     if (!resp.data.success) {
-      console.log(
+      captureMessage(
         `recaptcha challenge unsuccessful: ${resp.data['error-codes']}`,
       );
       return res

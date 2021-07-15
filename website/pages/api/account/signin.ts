@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import axios from 'axios';
-import { withSentry, captureException } from '@sentry/nextjs';
+import { withSentry, captureException, captureMessage } from '@sentry/nextjs';
 import { generateJWT } from '../../../lib/server/auth';
 import { getJWTEmailHtml, getJWTEmailPlain } from '../../../lib/server/email';
 import { selectAccountByEmail } from '../../../lib/entities/account';
@@ -21,8 +21,6 @@ export default withSentry(handler);
 async function post(req: NextApiRequest, res: NextApiResponse) {
   const { email } = req.body;
 
-  console.log(process.env.DSN);
-
   if (!email) {
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -30,14 +28,14 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    console.log(`selecting account from database: ${email}`);
+    captureMessage(`selecting account from database: ${email}`);
     const account = await selectAccountByEmail(email);
 
-    console.log('generating jwt');
+    captureMessage('generating jwt');
     const jwtToken = generateJWT<JWTPayload>({ email, role: account.role });
 
     try {
-      console.log('sending jwt email');
+      captureMessage('sending jwt email');
       const html = getJWTEmailHtml(jwtToken);
       const text = getJWTEmailPlain(jwtToken);
 
@@ -52,7 +50,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
         host: process.env.EMAIL_HOST,
       });
 
-      console.log(r.data);
+      captureMessage(r.data);
 
       return res
         .status(StatusCodes.OK)
@@ -66,7 +64,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       });
     }
   } catch (e) {
-    console.log(`account with email does not exist: ${email}`);
+    captureMessage(`account with email does not exist: ${email}`);
     console.error(e.message);
     return res.status(StatusCodes.UNAUTHORIZED).end();
   }

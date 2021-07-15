@@ -2,7 +2,11 @@
 
 const pg = require('pg');
 
-if (process.env.DSN && !process.env.DSN.includes('localhost') && !process.env.DSN.includes('127.0.0.1')) {
+if (
+  process.env.DSN &&
+  !process.env.DSN.includes('localhost') &&
+  !process.env.DSN.includes('127.0.0.1')
+) {
   pg.defaults.ssl = true;
 }
 

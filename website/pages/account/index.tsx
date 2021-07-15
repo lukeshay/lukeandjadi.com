@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
-import { captureException } from '@sentry/nextjs';
+import { captureException, captureMessage } from '@sentry/nextjs';
 import { toast } from 'react-toastify';
 import { setCookie, parseJWT, getCookie } from '../../lib/server/auth';
 import Form from '../../components/Form';
@@ -24,8 +24,8 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     }
   }
 
-  console.log(`jwt token: ${token}`);
-  console.log('setting the jwt token');
+  captureMessage(`jwt token: ${token}`);
+  captureMessage('setting the jwt token');
 
   setCookie(ctx.req, ctx.res, JWT_COOKIE_KEY, token as string, {
     sameSite: 'strict',
@@ -34,7 +34,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     path: '/',
   });
 
-  console.log(
+  captureMessage(
     `the jwt token is now: ${getCookie(ctx.req, ctx.res, JWT_COOKIE_KEY)}`,
   );
 

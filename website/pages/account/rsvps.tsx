@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { captureException } from '@sentry/nextjs';
+import { captureException, captureMessage } from '@sentry/nextjs';
 import Link from 'next/link';
 import { parseJWT, getCookie } from '../../lib/server/auth';
 import { AccountRole } from '../../lib/entities/account';
@@ -44,7 +44,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     return { props: { rsvps: [] } };
   }
 
-  console.log(`jwt token: ${token}`);
+  captureMessage(`jwt token: ${token}`);
 
   const payload = await parseJWT<JWTPayload>(token as string);
 

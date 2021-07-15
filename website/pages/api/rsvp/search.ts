@@ -19,7 +19,7 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
 export default withSentry(handler);
 
 async function get(req: NextApiRequest, res: NextApiResponse) {
-  console.log('get /rsvp/search');
+  captureMessage('get /rsvp/search');
 
   if (!req.query.name) {
     return res.status(StatusCodes.BAD_REQUEST).json({ name: 'required field' });

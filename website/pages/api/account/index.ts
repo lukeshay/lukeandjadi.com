@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import { withSentry, captureException } from '@sentry/nextjs';
+import { withSentry, captureException, captureMessage } from '@sentry/nextjs';
 import { parseJWT } from '../../../lib/server/auth';
 import {
   mergeAccounts,
@@ -21,10 +21,10 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
 export default withSentry(handler);
 
 async function put(req: NextApiRequest, res: NextApiResponse) {
-  console.log('put /account');
+  captureMessage('put /account');
 
   if (!req.cookies.authorization) {
-    console.log('no authorization cookie found');
+    captureMessage('no authorization cookie found');
     return res.status(StatusCodes.UNAUTHORIZED).end();
   }
 
@@ -34,7 +34,7 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
     const payload = await parseJWT<JWTPayload>(authorization);
 
     if (!payload) {
-      console.log('no email found in authorization cookie');
+      captureMessage('no email found in authorization cookie');
       return res.status(StatusCodes.UNAUTHORIZED).end();
     }
 
