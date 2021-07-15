@@ -4,7 +4,7 @@ import axios from 'axios';
 import { generateJWT } from '../../../lib/server/auth';
 import { getJWTEmailHtml, getJWTEmailPlain } from '../../../lib/server/email';
 import { selectAccountByEmail } from '../../../lib/entities/account';
-import config from '../../../lib/client/config';
+import config from '../../../lib/server/config';
 import { JWTPayload } from '../../../lib/server/jwt';
 import withLogger from '../../../lib/server/with-logger';
 import logger from '../../../lib/server/logger';
@@ -45,10 +45,10 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
         text,
         to: email,
         subject: "Sign in link for Luke & Jadi's wedding",
-        from: `Luke & Jadi <${config.email}>`,
-        pass: process.env.EMAIL_PASS,
-        user: process.env.EMAIL_USER,
-        host: process.env.EMAIL_HOST,
+        from: `Luke & Jadi <${config.env.emailFrom}>`,
+        pass: config.env.emailPass,
+        user: config.env.emailUser,
+        host: config.env.emailHost,
       });
 
       logger.info(r.data);
