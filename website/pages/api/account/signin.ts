@@ -40,7 +40,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       const html = getJWTEmailHtml(jwtToken);
       const text = getJWTEmailPlain(jwtToken);
 
-      const r = await axios.post('/emailer', {
+      const r = await axios.post('https://dev.lukeandjadi.com/emailer', {
         html,
         text,
         to: email,
