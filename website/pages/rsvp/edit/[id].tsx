@@ -93,6 +93,7 @@ export default function AccountPage(props: any) {
           onChange={handleChange}
           value={values.name}
           disabled
+          required
         />
         <Input
           label="Email"
@@ -102,6 +103,7 @@ export default function AccountPage(props: any) {
           onChange={handleChange}
           value={values.email}
           disabled={loading}
+          required
         />
         <Input
           label="Guests"
@@ -111,7 +113,10 @@ export default function AccountPage(props: any) {
           onChange={handleChange}
           value={values.guests}
           disabled={loading}
+          required
           type="number"
+          min={0}
+          max={10}
         />
         <Button type="submit" className="w-full" loading={loading}>
           Update

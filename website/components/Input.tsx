@@ -12,6 +12,8 @@ export default function Input({
   type,
   loading,
   checked,
+  max,
+  min,
 }: {
   label: string;
   id: string;
@@ -24,6 +26,8 @@ export default function Input({
   type?: 'input' | 'checkbox' | 'number';
   loading?: boolean;
   checked?: boolean;
+  max?: number;
+  min?: number;
 }) {
   return (
     <div>
@@ -45,6 +49,8 @@ export default function Input({
           required={required}
           type={type}
           checked={checked}
+          max={max}
+          min={min}
         />
       )}
     </div>
