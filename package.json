@@ -1,9 +1,15 @@
 {
   "private": true,
+  "scripts": {
+    "fmt": "prettier --ignore-unknown --no-error-on-unmatched-pattern --write ./**/*"
+  },
   "workspaces": [
     "pulumi",
     "ui-tests",
     "website",
     "workers"
-  ]
+  ],
+  "dependencies": {
+    "prettier": "^2.3.2"
+  }
 }

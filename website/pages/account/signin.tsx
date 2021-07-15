@@ -23,7 +23,7 @@ export default function SignIn() {
     } catch (e) {
       toast(
         `There was an error signing in. If the problem persists, please email ${config.email}`,
-        { type: 'info', autoClose: false },
+        { type: 'error', autoClose: false },
       );
     }
 

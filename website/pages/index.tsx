@@ -20,11 +20,7 @@ function WeddingPartyMember({
     <div className="col-span-1">
       <div className="pb-4 flex justify-center w-full">
         <div>
-          <Image
-            src={src}
-            alt="Luke Shay"
-            className="shadow-lg w-full"
-          />
+          <Image src={src} alt="Luke Shay" className="shadow-lg w-full" />
         </div>
       </div>
       <h2 className="text-lg font-bold pb-0.5 text-gray-900">{name}</h2>
