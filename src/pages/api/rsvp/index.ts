@@ -1,14 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import axios from 'axios';
-import {
-  mergeRSVPs,
-  selectRSVPByName,
-  updateRSVP,
-} from '../../../lib/entities/rsvp';
-import config from '../../../lib/client/config';
-import withLogger from '../../../lib/server/with-logger';
-import logger from '../../../lib/server/logger';
+import { mergeRSVPs, selectRSVPByName, updateRSVP } from '@/lib/entities/rsvp';
+import config from '@/lib/client/config';
+import withLogger from '@/lib/server/with-logger';
+import logger from '@/lib/server/logger';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'PUT') {

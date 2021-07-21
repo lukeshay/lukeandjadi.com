@@ -2,16 +2,16 @@ import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import { setCookie, parseJWT, getCookie } from '../../lib/server/auth';
-import Form from '../../components/Form';
-import Input from '../../components/Input';
-import { selectAccountByEmail } from '../../lib/entities/account';
-import { accountPut } from '../../lib/client/api';
-import config from '../../lib/client/config';
-import AccountLayout from '../../components/AccountLayout';
-import { JWT_COOKIE_KEY, JWTPayload } from '../../lib/server/jwt';
-import Button from '../../components/Button';
-import logger from '../../lib/server/logger';
+import { setCookie, parseJWT, getCookie } from '@/lib/server/auth';
+import Form from '@/components/Form';
+import Input from '@/components/Input';
+import { selectAccountByEmail } from '@/lib/entities/account';
+import { accountPut } from '@/lib/client/api';
+import config from '@/lib/client/config';
+import AccountLayout from '@/components/AccountLayout';
+import { JWT_COOKIE_KEY, JWTPayload } from '@/lib/server/jwt';
+import Button from '@/components/Button';
+import logger from '@/lib/server/logger';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;

@@ -2,14 +2,14 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Link from 'next/link';
-import { parseJWT, getCookie } from '../../lib/server/auth';
-import { AccountRole } from '../../lib/entities/account';
-import AccountLayout from '../../components/AccountLayout';
-import { RSVP, selectAllRSVPs } from '../../lib/entities/rsvp';
-import { JWT_COOKIE_KEY, JWTPayload } from '../../lib/server/jwt';
-import PencilIconOutlined from '../../components/icons/PencilIconOutlined';
-import Button from '../../components/Button';
-import logger from '../../lib/server/logger';
+import { parseJWT, getCookie } from '@/lib/server/auth';
+import { AccountRole } from '@/lib/entities/account';
+import AccountLayout from '@/components/AccountLayout';
+import { RSVP, selectAllRSVPs } from '@/lib/entities/rsvp';
+import { JWT_COOKIE_KEY, JWTPayload } from '@/lib/server/jwt';
+import PencilIconOutlined from '@/components/icons/PencilIconOutlined';
+import Button from '@/components/Button';
+import logger from '@/lib/server/logger';
 
 const TableHeader = () => (
   <tr className="p-2 bg-gray-200">

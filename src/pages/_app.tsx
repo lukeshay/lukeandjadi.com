@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import '../styles/globals.css';
+import '@/styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import Navbar from '../components/Navbar';
+import Navbar from '@/components/Navbar';
 import React from 'react';
-import config from '../lib/client/config';
-import flowers from '../public/flowers.png';
+import config from '@/lib/client/config';
+import flowers from '../../public/flowers.png';
 import { ToastContainer, Slide } from 'react-toastify';
-import { configureAPI } from '../lib/client/api';
+import { configureAPI } from '@/lib/client/api';
 import { useRouter } from 'next/router';
 
 function FooterLink({

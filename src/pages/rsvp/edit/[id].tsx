@@ -2,14 +2,14 @@ import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import Form from '../../../components/Form';
-import Input from '../../../components/Input';
-import Layout from '../../../components/Layout';
-import { rsvpPut } from '../../../lib/client/api';
-import config from '../../../lib/client/config';
-import { getRecaptchaToken } from '../../../lib/client/recaptcha';
-import { selectRSVPByID } from '../../../lib/entities/rsvp';
-import Button from '../../../components/Button';
+import Form from '@/components/Form';
+import Input from '@/components/Input';
+import Layout from '@/components/Layout';
+import { rsvpPut } from '@/lib/client/api';
+import config from '@/lib/client/config';
+import { getRecaptchaToken } from '@/lib/client/recaptcha';
+import { selectRSVPByID } from '@/lib/entities/rsvp';
+import Button from '@/components/Button';
 
 export async function getServerSideProps(
   ctx: GetServerSidePropsContext<{ id?: string }>,

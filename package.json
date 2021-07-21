@@ -1,15 +1,56 @@
 {
+  "name": "website",
   "private": true,
+  "version": "0.0.1",
   "scripts": {
-    "fmt": "prettier --ignore-unknown --no-error-on-unmatched-pattern --write ./**/*"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --pretty --noEmit",
+    "format": "prettier --write .",
+    "db:migrate:make": "knex migrate:make",
+    "db:migrate": "knex migrate:latest",
+    "db:seed": "knex seed:run",
+    "db:migrate:local": "dotenv -e .env.local -- yarn db:migrate --env local",
+    "db:migrate:dev": "dotenv -e .env.dev -- yarn db:migrate --env development",
+    "db:migrate:prod": "dotenv -e .env.prod -- yarn db:migrate --env production",
+    "db:seed:local": "dotenv -e .env.local -- yarn db:seed --env local",
+    "db:seed:dev": "dotenv -e .env.dev -- yarn db:seed --env development",
+    "db:seed:prod": "dotenv -e .env.prod -- yarn db:seed --env production"
   },
-  "workspaces": [
-    "pulumi",
-    "ui-tests",
-    "website",
-    "workers"
-  ],
   "dependencies": {
-    "prettier": "^2.3.2"
+    "@datadog/browser-logs": "^2.18.0",
+    "@sendgrid/mail": "^7.4.5",
+    "axios": "^0.21.1",
+    "cookies": "^0.8.0",
+    "http-status-codes": "^2.1.4",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.7",
+    "next": "^11.0.1",
+    "pg": "^8.6.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-toastify": "^7.0.4",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/jit": "0.1.18",
+    "@types/cookies": "^0.7.7",
+    "@types/jsonwebtoken": "^8.5.4",
+    "@types/node": "^16.4.0",
+    "@types/nodemailer": "^6.4.4",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "autoprefixer": "^10.3.1",
+    "dotenv-cli": "^4.0.0",
+    "eslint": "^7.31.0",
+    "eslint-config-next": "^11.0.1",
+    "postcss": "^8.3.6",
+    "prettier": "^2.3.2",
+    "tailwindcss": "^2.2.6",
+    "typescript": "^4.3.5"
   }
 }
