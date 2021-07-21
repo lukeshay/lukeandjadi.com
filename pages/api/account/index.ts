@@ -1,15 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import { parseJWT } from '@/lib/server/auth';
+import { parseJWT } from '@/server/auth';
 import {
   mergeAccounts,
   selectAccountByEmail,
   updateAccount,
-} from '@/lib/entities/account';
-import config from '@/lib/client/config';
-import { JWTPayload } from '@/lib/server/jwt';
-import logger from '@/lib/server/logger';
-import withLogger from '@/lib/server/with-logger';
+} from '@/entities/account';
+import config from '@/client/config';
+import { JWTPayload } from '@/server/jwt';
+import logger from '@/server/logger';
+import withLogger from '@/server/with-logger';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'PUT') {

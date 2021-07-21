@@ -5,10 +5,10 @@ import { toast } from 'react-toastify';
 import Form from '@/components/Form';
 import Input from '@/components/Input';
 import Layout from '@/components/Layout';
-import { rsvpPut } from '@/lib/client/api';
-import config from '@/lib/client/config';
-import { getRecaptchaToken } from '@/lib/client/recaptcha';
-import { selectRSVPByID } from '@/lib/entities/rsvp';
+import { rsvpPut } from '@/client/api';
+import config from '@/client/config';
+import { getRecaptchaToken } from '@/client/recaptcha';
+import { selectRSVPByID } from '@/entities/rsvp';
 import Button from '@/components/Button';
 
 export async function getServerSideProps(

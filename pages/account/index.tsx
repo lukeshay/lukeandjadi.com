@@ -2,16 +2,16 @@ import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import { setCookie, parseJWT, getCookie } from '@/lib/server/auth';
+import { setCookie, parseJWT, getCookie } from '@/server/auth';
 import Form from '@/components/Form';
 import Input from '@/components/Input';
-import { selectAccountByEmail } from '@/lib/entities/account';
-import { accountPut } from '@/lib/client/api';
-import config from '@/lib/client/config';
+import { selectAccountByEmail } from '@/entities/account';
+import { accountPut } from '@/client/api';
+import config from '@/client/config';
 import AccountLayout from '@/components/AccountLayout';
-import { JWT_COOKIE_KEY, JWTPayload } from '@/lib/server/jwt';
+import { JWT_COOKIE_KEY, JWTPayload } from '@/server/jwt';
 import Button from '@/components/Button';
-import logger from '@/lib/server/logger';
+import logger from '@/server/logger';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;

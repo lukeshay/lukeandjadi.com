@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import { selectRSVPByName } from '@/lib/entities/rsvp';
-import withLogger from '@/lib/server/with-logger';
-import logger from '@/lib/server/logger';
+import { selectRSVPByName } from '@/entities/rsvp';
+import withLogger from '@/server/with-logger';
+import logger from '@/server/logger';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {

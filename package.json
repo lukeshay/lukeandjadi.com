@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@datadog/browser-logs": "^2.18.0",
+    "@hapi/iron": "^6.0.0",
     "@sendgrid/mail": "^7.4.5",
     "axios": "^0.21.1",
     "cookies": "^0.8.0",

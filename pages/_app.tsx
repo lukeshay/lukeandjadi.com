@@ -6,10 +6,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import React from 'react';
-import config from '@/lib/client/config';
-import flowers from '../../public/flowers.png';
+import config from '@/client/config';
+import flowers from '../public/flowers.png';
 import { ToastContainer, Slide } from 'react-toastify';
-import { configureAPI } from '@/lib/client/api';
+import { configureAPI } from '@/client/api';
 import { useRouter } from 'next/router';
 
 function FooterLink({

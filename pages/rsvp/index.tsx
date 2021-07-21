@@ -5,8 +5,8 @@ import Button from '@/components/Button';
 import Form from '@/components/Form';
 import Input from '@/components/Input';
 import Layout from '@/components/Layout';
-import { rsvpSearchGet } from '@/lib/client/api';
-import config from '@/lib/client/config';
+import { rsvpSearchGet } from '@/client/api';
+import config from '@/client/config';
 
 export default function AccountPage() {
   const [values, setValues] = React.useState<any>({});

@@ -1,14 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import axios from 'axios';
-import { generateJWT } from '@/lib/server/auth';
-import { getJWTEmailHtml, getJWTEmailPlain } from '@/lib/server/email';
-import { selectAccountByEmail } from '@/lib/entities/account';
-import config from '@/lib/server/config';
-import { JWTPayload } from '@/lib/server/jwt';
-import withLogger from '@/lib/server/with-logger';
-import logger from '@/lib/server/logger';
-import { sendEmail } from '@/lib/server/smtp';
+import { generateJWT } from '@/server/auth';
+import { getJWTEmailHtml, getJWTEmailPlain } from '@/server/email';
+import { selectAccountByEmail } from '@/entities/account';
+import config from '@/server/config';
+import { JWTPayload } from '@/server/jwt';
+import withLogger from '@/server/with-logger';
+import logger from '@/server/logger';
+import { sendEmail } from '@/server/smtp';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {

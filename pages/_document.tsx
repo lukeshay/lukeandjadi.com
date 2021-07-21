@@ -5,7 +5,7 @@ import Document, {
   NextScript,
   DocumentProps,
 } from 'next/document';
-import config from '@/lib/client/config';
+import config from '@/client/config';
 import { datadogLogs } from '@datadog/browser-logs';
 
 class MyDocument extends Document {
