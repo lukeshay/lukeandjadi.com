@@ -30,3 +30,6 @@ yarn-error.log*
 .serverless
 
 output/
+.vercel
+
+.env

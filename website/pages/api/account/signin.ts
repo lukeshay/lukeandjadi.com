@@ -8,6 +8,7 @@ import config from '../../../lib/server/config';
 import { JWTPayload } from '../../../lib/server/jwt';
 import withLogger from '../../../lib/server/with-logger';
 import logger from '../../../lib/server/logger';
+import { sendEmail } from '../../../lib/server/smtp';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
@@ -40,18 +41,15 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       const html = getJWTEmailHtml(jwtToken);
       const text = getJWTEmailPlain(jwtToken);
 
-      const r = await axios.post('https://dev.lukeandjadi.com/emailer', {
+      const result = await sendEmail({
+        from: `Luke & Jadi <${config.env.emailFrom}>`,
+        subject: "Sign in link for Luke & Jadi's wedding website",
         html,
         text,
         to: email,
-        subject: "Sign in link for Luke & Jadi's wedding",
-        from: `Luke & Jadi <${config.env.emailFrom}>`,
-        pass: config.env.emailPass,
-        user: config.env.emailUser,
-        host: config.env.emailHost,
       });
 
-      logger.info(r.data);
+      logger.info(result[0].toString());
 
       return res
         .status(StatusCodes.OK)

@@ -4,45 +4,12 @@ import * as fs from 'fs';
 
 const config = new pulumi.Config();
 
-const emailHost = config.require('email_host');
-const emailPass = config.require('email_pass');
-const emailUser = config.require('email_user');
-const emailFrom = config.require('email_from');
-
 const zoneId = config.require('zone_id');
-const sendgridKey = config.require('sendgrid_key');
 const url = config.require('url');
 
 const env = url.includes('dev') ? 'dev' : 'prod';
 
 const ttl = 1;
-
-const emailerCode = fs.readFileSync(
-  `${__dirname}/../../../workers/dist/emailer.js`,
-  {
-    encoding: 'utf-8',
-  },
-);
-
-const emailerScriptName = `emailer-script-${env}`;
-const emailerWorkerScript = new cloudflare.WorkerScript(emailerScriptName, {
-  name: emailerScriptName,
-  content: emailerCode,
-  secretTextBindings: [
-    { name: 'EMAIL_HOST', text: emailHost },
-    { name: 'EMAIL_PASS', text: emailPass },
-    { name: 'EMAIL_USER', text: emailUser },
-    { name: 'EMAIL_FROM', text: emailFrom },
-    { name: 'SENDGRID_KEY', text: sendgridKey },
-  ],
-});
-
-const emailerRouterName = `emailer-route-${env}`;
-const emailerWorkerRoute = new cloudflare.WorkerRoute(emailerRouterName, {
-  zoneId,
-  pattern: `${url}/emailer`,
-  scriptName: emailerWorkerScript.name,
-});
 
 const vercel = new cloudflare.Record('vercel', {
   zoneId,
@@ -142,7 +109,6 @@ export default {
   zohoVerification: zohoVerification.id,
   zohoSPF: zohoSPF.id,
   wwwRedirect: wwwRedirect.id,
-  emailerWorkerRoute: emailerWorkerRoute.id,
   sendgridCNAME: sendgridCNAME.id,
   sendgridCNAME1: sendgridCNAME1.id,
   sendgridCNAME2: sendgridCNAME2.id,

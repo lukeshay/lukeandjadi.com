@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "next lint",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
     "db:migrate:make": "knex migrate:make",
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "@datadog/browser-logs": "^2.17.0",
+    "@sendgrid/mail": "^7.4.5",
     "axios": "^0.21.1",
     "cookies": "^0.8.0",
     "http-status-codes": "^2.1.4",
