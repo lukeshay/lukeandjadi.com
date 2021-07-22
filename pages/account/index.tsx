@@ -88,7 +88,7 @@ export default function AccountPage(props: any) {
         title="Account"
         subTitle="Please fill out all required fields! This information will help us in planning for our wedding."
         onSubmit={handleSubmit}
-        
+        notSplit
       >
         <Input
           label="Email"
