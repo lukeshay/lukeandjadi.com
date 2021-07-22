@@ -32,10 +32,12 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
     logger.info(`selecting account from database: ${email}`);
     const account = await selectAccountByEmail(email);
 
-
     try {
       logger.info('generating jwt');
-      const jwtToken = await generateJWT<JWTPayload>({ email, role: account.role });
+      const jwtToken = await generateJWT<JWTPayload>({
+        email,
+        role: account.role,
+      });
 
       logger.info('sending jwt email');
       const html = getJWTEmailHtml(jwtToken);

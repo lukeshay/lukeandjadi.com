@@ -21,8 +21,8 @@ module.exports = {
     fontWeight: {
       light: 400,
       normal: 700,
-      bold: 800
-    }
+      bold: 800,
+    },
   },
   variants: {
     extend: {},
