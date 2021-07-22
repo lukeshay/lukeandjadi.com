@@ -3,12 +3,14 @@ import React from 'react';
 export default function Layout({
   children,
   fullWidth,
+  className,
 }: {
   children: React.ReactNode;
   fullWidth?: boolean;
+  className?: string;
 }) {
   return (
-    <div className="flex justify-center w-full px-2">
+    <div className={`${className} flex justify-center w-full px-2`}>
       <main className={fullWidth ? 'w-full' : 'max-w-screen-lg'}>
         {children}
       </main>

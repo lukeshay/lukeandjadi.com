@@ -82,7 +82,7 @@ export default function AccountPage(props: any) {
     <Layout>
       <Form
         title="RSVP"
-        subTitle="Please fill out all required fields, this information will help us in planning for our wedding! Enter 0 guests if you cannot attend."
+        subTitle="Please fill out all required fields, this information will help us in planning for our wedding! Enter 0 (zero) guests if you cannot attend."
         onSubmit={handleSubmit}
       >
         <Input
@@ -118,7 +118,7 @@ export default function AccountPage(props: any) {
           min={0}
           max={10}
         />
-        <Button type="submit" className="w-full" loading={loading}>
+        <Button type="submit" className="float-right px-6" loading={loading}>
           Update
         </Button>
       </Form>

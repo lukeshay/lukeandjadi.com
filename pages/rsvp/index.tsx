@@ -39,7 +39,7 @@ export default function AccountPage() {
   }
 
   return (
-    <Layout>
+    <Layout className="-mt-8">
       <Form
         title="RSVP"
         subTitle="Please search for your name as it appears on your invite! Email contact@lukeandjadi.com if you have any questions."
@@ -55,7 +55,7 @@ export default function AccountPage() {
           disabled={loading}
           required
         />
-        <Button type="submit" className="w-full" loading={loading}>
+        <Button type="submit" className="float-right px-6" loading={loading}>
           Search
         </Button>
       </Form>

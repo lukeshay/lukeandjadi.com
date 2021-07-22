@@ -28,7 +28,7 @@ function NavLink({
 
 function DesktopNavbar({ links }: { links: { href: string; text: string }[] }) {
   return (
-    <nav className="z-20 hidden md:flex justify-center p-4 font-serif shadow-lg items-center text-gray-700 select-none sticky top-0 bg-white opacity-95 border-b border-gray-50">
+    <nav className="z-20 hidden md:flex justify-center p-4 font-serif items-center text-gray-700 select-none sticky top-0 bg-white opacity-95 border-b border-gray-50">
       <ul className="max-w-screen-lg w-full flex justify-between">
         {links.map(({ href, text }) => (
           <NavLink key={`${href}-${text}`} href={href}>

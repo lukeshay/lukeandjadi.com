@@ -1,5 +1,7 @@
 import Cookie, { SetOption } from 'cookies';
-import jwt from 'jsonwebtoken';
+import Iron from '@hapi/iron';
+
+const salt = { ...Iron.defaults, ttl: 43200000 };
 
 export function setCookie(
   req: any,
@@ -25,12 +27,8 @@ export const getCookie = (req: any, res: any, name: string) =>
 export function generateJWT<T extends Object>(
   payload: T,
   secret = process.env.JWT_SECRET || '',
-  expiresIn = 43200, // 12h in seconds
 ) {
-  return jwt.sign(
-    { ...payload, exp: Math.floor(Date.now() / 1000) + expiresIn },
-    secret,
-  );
+  return Iron.seal(payload, secret, salt);
 }
 
 export async function parseJWT<T>(
@@ -38,7 +36,7 @@ export async function parseJWT<T>(
   secret = process.env.JWT_SECRET || '',
 ): Promise<T | null> {
   try {
-    return jwt.verify(jwtToken, secret) as unknown as T;
+    return (await Iron.unseal(jwtToken, secret, salt)) as unknown as T;
   } catch (e) {
     console.error(e.message);
   }

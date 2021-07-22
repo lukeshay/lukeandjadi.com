@@ -16,13 +16,13 @@ export default function Form({
 }) {
   return (
     <div
-      className={`${className} m-4 rounded-md shadow-lg p-6 w-full max-w-xl border bg-white bg-opacity-95`}
+      className={`${className} block md:flex justify-between w-full max-w-screen-xl`}
     >
-      <div>
-        <h1 className="text-4xl font-bold pb-4 text-center">{title}</h1>
+      <div className="w-full md:w-1/2">
+        <h1 className="text-4xl font-bold my-6">{title}</h1>
         <p className="text-gray-700">{subTitle}</p>
       </div>
-      <form className="pt-4" onSubmit={onSubmit}>
+      <form className="pt-4 w-full md:w-1/2" onSubmit={onSubmit}>
         {children}
       </form>
     </div>

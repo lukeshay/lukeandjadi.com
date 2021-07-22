@@ -47,7 +47,7 @@ export default function SignIn() {
           disabled={loading}
           required
         />
-        <Button type="submit" className="w-full" loading={loading}>
+        <Button type="submit" className="float-right px-6" loading={loading}>
           Sign In
         </Button>
       </Form>
