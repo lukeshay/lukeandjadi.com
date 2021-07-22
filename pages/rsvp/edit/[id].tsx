@@ -10,6 +10,7 @@ import config from '@/client/config';
 import { getRecaptchaToken } from '@/client/recaptcha';
 import { selectRSVPByID } from '@/entities/rsvp';
 import Button from '@/components/Button';
+import Container from '@/components/Container';
 
 export async function getServerSideProps(
   ctx: GetServerSidePropsContext<{ id?: string }>,
@@ -79,49 +80,59 @@ export default function AccountPage(props: any) {
   }
 
   return (
-    <Layout>
-      <Form
-        title="RSVP"
-        subTitle="Please fill out all required fields, this information will help us in planning for our wedding! Enter 0 (zero) guests if you cannot attend."
-        onSubmit={handleSubmit}
-      >
-        <Input
-          label="Name"
-          id="name"
-          name="name"
-          autoComplete="name"
-          onChange={handleChange}
-          value={values.name}
-          disabled
-          required
-        />
-        <Input
-          label="Email"
-          id="email"
-          name="email"
-          autoComplete="email"
-          onChange={handleChange}
-          value={values.email}
-          disabled={loading}
-          required
-        />
-        <Input
-          label="Guests"
-          id="guests"
-          name="guests"
-          autoComplete="guests"
-          onChange={handleChange}
-          value={values.guests}
-          disabled={loading}
-          required
-          type="number"
-          min={0}
-          max={10}
-        />
-        <Button type="submit" className="float-right px-6" loading={loading}>
-          Update
-        </Button>
-      </Form>
-    </Layout>
+    <Container>
+      <Layout className="-mt-12 md:-mt-28 lg:-mt-52">
+        <div className="flex flex-row w-full justify-center">
+          <Form
+            title="RSVP"
+            subTitle="Please fill out all required fields, this information will help us in planning for our wedding! Enter 0 (zero) guests if you cannot attend."
+            onSubmit={handleSubmit}
+            notSplit
+            className="max-w-xl"
+          >
+            <Input
+              label="Name"
+              id="name"
+              name="name"
+              autoComplete="name"
+              onChange={handleChange}
+              value={values.name}
+              disabled
+              required
+            />
+            <Input
+              label="Email"
+              id="email"
+              name="email"
+              autoComplete="email"
+              onChange={handleChange}
+              value={values.email}
+              disabled={loading}
+              required
+            />
+            <Input
+              label="Guests"
+              id="guests"
+              name="guests"
+              autoComplete="guests"
+              onChange={handleChange}
+              value={values.guests}
+              disabled={loading}
+              required
+              type="number"
+              min={0}
+              max={10}
+            />
+            <Button
+              type="submit"
+              className="float-right px-6"
+              loading={loading}
+            >
+              Update
+            </Button>
+          </Form>
+        </div>
+      </Layout>
+    </Container>
   );
 }

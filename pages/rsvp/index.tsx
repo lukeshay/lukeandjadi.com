@@ -7,6 +7,7 @@ import Input from '@/components/Input';
 import Layout from '@/components/Layout';
 import { rsvpSearchGet } from '@/client/api';
 import config from '@/client/config';
+import Container from '@/components/Container';
 
 export default function AccountPage() {
   const [values, setValues] = React.useState<any>({});
@@ -39,26 +40,36 @@ export default function AccountPage() {
   }
 
   return (
-    <Layout className="-mt-8">
-      <Form
-        title="RSVP"
-        subTitle="Please search for your name as it appears on your invite! Email contact@lukeandjadi.com if you have any questions."
-        onSubmit={handleSubmit}
-      >
-        <Input
-          label="Name"
-          id="name"
-          name="name"
-          autoComplete="name"
-          onChange={handleChange}
-          value={values.name}
-          disabled={loading}
-          required
-        />
-        <Button type="submit" className="float-right px-6" loading={loading}>
-          Search
-        </Button>
-      </Form>
-    </Layout>
+    <Container>
+      <Layout className="-mt-12 md:-mt-28 lg:-mt-52">
+        <div className="flex flex-row w-full justify-center">
+          <Form
+            title="RSVP"
+            subTitle="Please search for your name as it appears on your invite! Email contact@lukeandjadi.com if you have any questions."
+            onSubmit={handleSubmit}
+            notSplit
+            className="max-w-xl"
+          >
+            <Input
+              label="Name"
+              id="name"
+              name="name"
+              autoComplete="name"
+              onChange={handleChange}
+              value={values.name}
+              disabled={loading}
+              required
+            />
+            <Button
+              type="submit"
+              className="float-right px-6"
+              loading={loading}
+            >
+              Search
+            </Button>
+          </Form>
+        </div>
+      </Layout>
+    </Container>
   );
 }

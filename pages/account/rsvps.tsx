@@ -10,6 +10,7 @@ import { JWT_COOKIE_KEY, JWTPayload } from '@/server/jwt';
 import PencilIconOutlined from '@/components/icons/PencilIconOutlined';
 import Button from '@/components/Button';
 import logger from '@/server/logger';
+import AccountContainer from '@/components/AccountContainer';
 
 const TableHeader = () => (
   <tr className="p-2 bg-gray-200">
@@ -105,21 +106,23 @@ export default function AccountPage({
   }
 
   return (
-    <AccountLayout>
-      <div className="flex justify-between items-center">
-        <h1 className="text-bold text-3xl py-4 px-2">RSVPs</h1>
-        {csv && (
-          <div>
-            <Button onClick={handleDownloadClick}>Download</Button>
-          </div>
-        )}
-      </div>
-      <table className="rounded shadow-lg border border-gray-50">
-        <thead>
-          <TableHeader />
-        </thead>
-        <tbody>{rsvps.map(TableRow)}</tbody>
-      </table>
-    </AccountLayout>
+    <AccountContainer>
+      <AccountLayout>
+        <div className="flex justify-between items-center">
+          <h1 className="text-bold text-3xl py-4 px-2">RSVPs</h1>
+          {csv && (
+            <div>
+              <Button onClick={handleDownloadClick}>Download</Button>
+            </div>
+          )}
+        </div>
+        <table className="rounded shadow-lg border border-gray-50">
+          <thead>
+            <TableHeader />
+          </thead>
+          <tbody>{rsvps.map(TableRow)}</tbody>
+        </table>
+      </AccountLayout>
+    </AccountContainer>
   );
 }

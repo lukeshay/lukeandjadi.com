@@ -20,6 +20,15 @@ const vercel = new cloudflare.Record('vercel', {
   proxied: true,
 });
 
+const checkly = new cloudflare.Record('checkly', {
+  zoneId,
+  name: `status.${url}`,
+  type: 'CNAME',
+  value: 'dashboards.checklyhq.com',
+  ttl,
+  proxied: false,
+});
+
 const zoho = new cloudflare.Record('zoho', {
   zoneId,
   name: url,
@@ -101,8 +110,9 @@ const sendgridCNAME2 = new cloudflare.Record('sendgrid-cname-2', {
   proxied: false,
 });
 
-export default {
+const con = {
   vercel: vercel.id,
+  checkly: checkly.id,
   zoho: zoho.id,
   zoho2: zoho2.id,
   zoho3: zoho3.id,
@@ -113,3 +123,5 @@ export default {
   sendgridCNAME1: sendgridCNAME1.id,
   sendgridCNAME2: sendgridCNAME2.id,
 };
+
+export default con;

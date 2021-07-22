@@ -12,6 +12,7 @@ import AccountLayout from '@/components/AccountLayout';
 import { JWT_COOKIE_KEY, JWTPayload } from '@/server/jwt';
 import Button from '@/components/Button';
 import logger from '@/server/logger';
+import AccountContainer from '@/components/AccountContainer';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;
@@ -83,26 +84,28 @@ export default function AccountPage(props: any) {
   }
 
   return (
-    <AccountLayout>
-      <Form
-        title="Account"
-        subTitle="Please fill out all required fields! This information will help us in planning for our wedding."
-        onSubmit={handleSubmit}
-        notSplit
-      >
-        <Input
-          label="Email"
-          id="email"
-          name="email"
-          autoComplete="email"
-          onChange={handleChange}
-          value={values.email}
-          disabled
-        />
-        <Button type="submit" className="w-full" loading={loading}>
-          Update
-        </Button>
-      </Form>
-    </AccountLayout>
+    <AccountContainer>
+      <AccountLayout>
+        <Form
+          title="Account"
+          subTitle="Please fill out all required fields! This information will help us in planning for our wedding."
+          onSubmit={handleSubmit}
+          notSplit
+        >
+          <Input
+            label="Email"
+            id="email"
+            name="email"
+            autoComplete="email"
+            onChange={handleChange}
+            value={values.email}
+            disabled
+          />
+          <Button type="submit" className="w-full" loading={loading}>
+            Update
+          </Button>
+        </Form>
+      </AccountLayout>
+    </AccountContainer>
   );
 }

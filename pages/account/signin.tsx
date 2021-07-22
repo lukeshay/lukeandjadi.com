@@ -7,6 +7,7 @@ import Form from '@/components/Form';
 import Input from '@/components/Input';
 import config from '@/client/config';
 import Button from '@/components/Button';
+import AccountContainer from '@/components/AccountContainer';
 
 export default function SignIn() {
   const [email, setEmail] = React.useState('');
@@ -31,26 +32,28 @@ export default function SignIn() {
   }
 
   return (
-    <Layout>
-      <Form
-        onSubmit={handleSubmit}
-        title="Sign In"
-        subTitle="Please sign in here. This is only for special people!"
-      >
-        <Input
-          id="email"
-          label="Email"
-          name="email"
-          autoComplete="email"
-          value={email}
-          onChange={(event) => setEmail(event.currentTarget.value)}
-          disabled={loading}
-          required
-        />
-        <Button type="submit" className="float-right px-6" loading={loading}>
-          Sign In
-        </Button>
-      </Form>
-    </Layout>
+    <AccountContainer>
+      <Layout>
+        <Form
+          onSubmit={handleSubmit}
+          title="Sign In"
+          subTitle="Please sign in here. This is only for special people!"
+        >
+          <Input
+            id="email"
+            label="Email"
+            name="email"
+            autoComplete="email"
+            value={email}
+            onChange={(event) => setEmail(event.currentTarget.value)}
+            disabled={loading}
+            required
+          />
+          <Button type="submit" className="float-right px-6" loading={loading}>
+            Sign In
+          </Button>
+        </Form>
+      </Layout>
+    </AccountContainer>
   );
 }
