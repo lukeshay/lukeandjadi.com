@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import flowers from '../public/flowers.png';
+import flowers from '../public/images/flowers.png';
 import BaseContainer from './BaseContainer';
 
 export interface ContainerProps {

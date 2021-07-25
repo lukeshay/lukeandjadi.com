@@ -2,8 +2,8 @@ import React from 'react';
 import Layout from '@/components/Layout';
 import config from '@/client/config';
 import Image from 'next/image';
-import sitting from '../public/sitting.jpg';
-import campanile from '../public/campanile.jpg';
+import sitting from '../public/images/cover-photo.jpg';
+import campanile from '../public/images/campanile.jpg';
 import Container from '@/components/Container';
 
 function WeddingPartyMember({
@@ -141,11 +141,10 @@ export default function Home() {
     <Container>
       <Layout>
         <div className="relative text-center text-white">
-          <Image
-            src={sitting}
+          <img
+            src="/images/cover-photo.jpg"
             alt="Cover"
             className="rounded shadow-lg w-full"
-            data-test-id="banner"
           />
           <div
             className="absolute top-1/2 left-1/2 text-2xl md:text-4xl lg:text-7xl font-bold text-center select-none"
@@ -206,7 +205,7 @@ export default function Home() {
             {config.weddingParty.groomsmen.map((pm) => (
               <WeddingPartyMember
                 key={pm.name}
-                src={require(`../public${pm.img}`)}
+                src={require(`../public/images/wedding-party${pm.img}`)}
                 name={pm.name}
                 role={pm.role}
                 relation={pm.relation}
@@ -215,7 +214,7 @@ export default function Home() {
             {config.weddingParty.bridesmaids.map((pm) => (
               <WeddingPartyMember
                 key={pm.name}
-                src={require(`../public${pm.img}`)}
+                src={require(`../public/images/wedding-party${pm.img}`)}
                 name={pm.name}
                 role={pm.role}
                 relation={pm.relation}
@@ -224,7 +223,7 @@ export default function Home() {
             {config.weddingParty.others.map((pm) => (
               <WeddingPartyMember
                 key={pm.name}
-                src={require(`../public${pm.img}`)}
+                src={require(`../public/images/wedding-party${pm.img}`)}
                 name={pm.name}
                 role={pm.role}
                 relation={pm.relation}
@@ -239,7 +238,7 @@ export default function Home() {
             {config.weddingParty.ushers.map((pm) => (
               <WeddingPartyMember
                 key={pm.name}
-                src={require(`../public${pm.img}`)}
+                src={require(`../public/images/wedding-party${pm.img}`)}
                 name={pm.name}
                 role={pm.role}
                 relation={pm.relation}
