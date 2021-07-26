@@ -50,7 +50,7 @@ class MyDocument extends Document {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', '${process.env.NEXT_PUBLIC_ANALYTICS_ID}', {
-                  page_path: window.location.pathname,
+                  page_path: window.location.pathname + window.location.search || '',
                 });
               `,
             }}
