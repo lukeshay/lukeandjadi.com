@@ -4,8 +4,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 import { ToastContainer, Slide } from 'react-toastify';
 import { configureAPI } from '@/client/api';
+import { useAppInit, reportWebVitals } from '@lukeshay/next-ga';
 
 function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
+  useAppInit();
   configureAPI();
 
   return (
@@ -20,5 +22,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
     </>
   );
 }
+
+export { reportWebVitals };
 
 export default MyApp;

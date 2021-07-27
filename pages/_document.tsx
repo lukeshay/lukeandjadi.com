@@ -7,6 +7,7 @@ import Document, {
 } from 'next/document';
 import config from '@/client/config';
 import { datadogLogs } from '@datadog/browser-logs';
+import { GoogleAnalytics } from '@lukeshay/next-ga';
 
 class MyDocument extends Document {
   constructor(props: DocumentProps) {
@@ -38,23 +39,7 @@ class MyDocument extends Document {
             src={`https://www.google.com/recaptcha/api.js?render=${config.env.recaptchaSiteKey}`}
             async
           />
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_ANALYTICS_ID}`}
-          />
-          <script
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_ANALYTICS_ID}', {
-                  page_path: window.location.pathname + window.location.search || '',
-                });
-              `,
-            }}
-          />
+          <GoogleAnalytics />
         </Head>
         <body className="font-serif tracking-wide">
           <Main />

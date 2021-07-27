@@ -144,6 +144,7 @@ export default function Home() {
             src="/images/cover-photo.jpg"
             alt="Cover"
             className="rounded shadow-lg w-full"
+            data-test-id="banner"
           />
           <div
             className="absolute top-1/2 left-1/2 text-2xl md:text-4xl lg:text-7xl font-bold text-center select-none"

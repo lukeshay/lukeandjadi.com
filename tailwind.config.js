@@ -15,7 +15,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ['Nanum Myeongjo', ...fontFamily.serif],
+        serif: ['Playfair Display', ...fontFamily.serif],
       },
     },
     fontWeight: {
