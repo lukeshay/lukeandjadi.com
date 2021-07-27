@@ -25,15 +25,12 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="true"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap"
-            rel="stylesheet"
+            rel="preload"
+            href="/fonts/playfair-display.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous"
           />
           <script
             src={`https://www.google.com/recaptcha/api.js?render=${config.env.recaptchaSiteKey}`}

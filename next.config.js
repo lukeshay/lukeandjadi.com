@@ -28,13 +28,13 @@ const nextConfig = {
 // https://securityheaders.com
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.googleapis.com *.gstatic.com *.google.com *.google-analytics.com *.googletagmanager.com;
-  child-src *.googleapis.com *.gstatic.com *.google.com;
-  style-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com *.google.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.googleapis.com *.google.com *.google-analytics.com *.googletagmanager.com;
+  child-src;
+  style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
   media-src 'none';
   connect-src *;
-  font-src 'self' *.gstatic.com *.googleapis.com;
+  font-src 'self';
 `;
 
 const securityHeaders = [
