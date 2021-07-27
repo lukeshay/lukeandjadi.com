@@ -18,11 +18,6 @@ module.exports = {
         serif: ['Playfair Display', ...fontFamily.serif],
       },
     },
-    fontWeight: {
-      light: 400,
-      normal: 700,
-      bold: 800,
-    },
   },
   variants: {
     extend: {},
