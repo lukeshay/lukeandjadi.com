@@ -29,7 +29,7 @@ const nextConfig = {
 const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' *.gstatic.com *.googleapis.com *.google.com *.google-analytics.com *.googletagmanager.com;
-  child-src;
+  child-src 'self' *.google.com;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
   media-src 'none';
