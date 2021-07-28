@@ -2,10 +2,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import { parseJWT } from '@/server/auth';
 import {
+  Account,
   mergeAccounts,
   selectAccountByEmail,
   updateAccount,
-} from '@/entities/account';
+} from '@/entities';
 import config from '@/client/config';
 import { JWTPayload } from '@/server/jwt';
 import logger from '@/server/logger';
@@ -40,10 +41,17 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
     const { email } = payload;
 
     const account = await selectAccountByEmail(email);
+
+    if (!account) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: 'No account with that email.' });
+    }
+
     const merged = { ...mergeAccounts(account, req.body), email };
 
     try {
-      const saved = await updateAccount(merged);
+      const saved = await updateAccount(new Account(merged));
       return res.status(StatusCodes.OK).json(saved);
     } catch (e) {
       logger.error(e.message);

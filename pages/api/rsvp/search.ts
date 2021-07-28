@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import { selectRSVPByName } from '@/entities/rsvp';
+import { selectRSVPByName } from '@/entities';
 import withLogger from '@/server/with-logger';
 import logger from '@/server/logger';
 
@@ -22,7 +22,7 @@ async function get(req: NextApiRequest, res: NextApiResponse) {
   try {
     const rsvp = await selectRSVPByName(req.query.name as string);
 
-    if (!rsvp.id) {
+    if (!rsvp?.id) {
       throw new Error(`no rsvp with the name ${req.query.name}`);
     }
 

@@ -18,3 +18,7 @@ dev:
 
 .PHONY: prod
 prod:
+
+.PHONY: croach
+croach:
+	@cockroach sql --url "postgresql://luke:$(DB_PASS)@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=$(shell pwd)/certs/root.crt&options=--cluster%3Dlukeandjadi-dev-2687"

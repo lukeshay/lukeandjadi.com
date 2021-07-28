@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import axios from 'axios';
-import { mergeRSVPs, selectRSVPByName, updateRSVP } from '@/entities/rsvp';
+import { mergeRSVPs, RSVP, selectRSVPByName, updateRSVP } from '@/entities';
 import config from '@/client/config';
 import withLogger from '@/server/with-logger';
 import logger from '@/server/logger';
@@ -53,8 +53,15 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     const rsvp = await selectRSVPByName(req.body.name);
+
+    if (!rsvp) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: 'There is not an RSVP with that name.' });
+    }
+
     const merged = mergeRSVPs(rsvp, req.body);
-    const saved = await updateRSVP(merged);
+    const saved = await updateRSVP(new RSVP(merged));
 
     return res.status(StatusCodes.OK).json(saved);
   } catch (e) {
