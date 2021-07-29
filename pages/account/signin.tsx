@@ -37,7 +37,9 @@ export default function SignIn() {
         <Form
           onSubmit={handleSubmit}
           title="Sign In"
-          subTitle="Please sign in here. This is only for special people!"
+          subTitle="Please sign in here. This is only for Luke and Jadi! It will not work for anybody else."
+          notSplit
+          className="max-w-xl"
         >
           <Input
             id="email"

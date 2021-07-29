@@ -3,9 +3,8 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Link from 'next/link';
 import { parseJWT, getCookie } from '@/server/auth';
-import { AccountRole } from '@/entities/account';
 import AccountLayout from '@/components/AccountLayout';
-import { RSVP, selectAllRSVPs } from '@/entities/rsvp';
+import { RSVP, RSVPAttributes } from '@/entities';
 import { JWT_COOKIE_KEY, JWTPayload } from '@/server/jwt';
 import PencilIconOutlined from '@/components/icons/PencilIconOutlined';
 import Button from '@/components/Button';
@@ -21,7 +20,7 @@ const TableHeader = () => (
   </tr>
 );
 
-const TableRow = ({ id, name, email, guests }: RSVP) => (
+const TableRow = ({ id, name, email, guests }: RSVPAttributes) => (
   <tr className="p-2 border-t" key={id}>
     <td className="p-2">{name}</td>
     <td className="p-2">{email || 'Not set'}</td>
@@ -47,28 +46,27 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 
   const payload = await parseJWT<JWTPayload>(token as string);
 
-  if (!payload || payload.role === AccountRole.Basic) {
+  if (!payload || payload.role === 'BASIC') {
     return { props: { rsvps: [] } };
   }
 
   try {
-    const rsvps = (await selectAllRSVPs()).sort((a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
+    const rsvps = await RSVP.findAll({ order: [['name', 'ASC']] });
 
-      return 0;
+    const rows = rsvps.map((rsvp) => {
+      const { id, name, email, guests } = rsvp.get();
+      return `${id}, ${name}, ${email}, ${guests}`;
     });
 
-    const rows = rsvps.map(
-      ({ id, name, email, guests }) => `${id}, ${name}, ${email}, ${guests}`,
-    );
-
     return {
-      props: { rsvps, csv: `id, name, email, guests\n${rows.join('\n')}` },
+      props: {
+        rsvps: rsvps.map((rsvp) => ({
+          ...rsvp.get(),
+          createdAt: null,
+          updatedAt: null,
+        })),
+        csv: `id, name, email, guests\n${rows.join('\n')}`,
+      },
     };
   } catch (e) {
     logger.error(`error getting all rsvps: ${e.message}`, e);

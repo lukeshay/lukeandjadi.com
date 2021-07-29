@@ -2,12 +2,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import { generateJWT } from '@/server/auth';
 import { getJWTEmailHtml, getJWTEmailPlain } from '@/server/email';
-import { selectAccountByEmail } from '@/entities';
 import config from '@/server/config';
 import { JWTPayload } from '@/server/jwt';
 import withLogger from '@/server/with-logger';
 import logger from '@/server/logger';
 import { sendEmail } from '@/server/smtp';
+import { Account } from '@/entities';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
@@ -30,7 +30,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     logger.info(`selecting account from database: ${email}`);
-    const account = await selectAccountByEmail(email);
+    const account = await Account.findOne({ where: { email } });
 
     if (!account) {
       return res.status(StatusCodes.UNAUTHORIZED).json({ message: '' });
@@ -40,7 +40,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       logger.info('generating jwt');
       const jwtToken = await generateJWT<JWTPayload>({
         email,
-        role: account.role,
+        role: account.get().role,
       });
 
       logger.info('sending jwt email');

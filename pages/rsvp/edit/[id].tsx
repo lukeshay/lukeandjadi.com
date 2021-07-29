@@ -8,9 +8,9 @@ import Layout from '@/components/Layout';
 import { rsvpPut } from '@/client/api';
 import config from '@/client/config';
 import { getRecaptchaToken } from '@/client/recaptcha';
-import { selectRSVPByID } from '@/entities/rsvp';
 import Button from '@/components/Button';
 import Container from '@/components/Container';
+import { RSVP } from '@/entities';
 
 export async function getServerSideProps(
   ctx: GetServerSidePropsContext<{ id?: string }>,
@@ -22,7 +22,11 @@ export async function getServerSideProps(
   const { id } = ctx.params;
 
   try {
-    return { props: await selectRSVPByID(id) };
+    const res = (await RSVP.findByPk(parseInt(id, 10)))?.get();
+
+    return {
+      props: res ? { ...res, createdAt: null, updatedAt: null } : {},
+    };
   } catch (e) {
     console.error(e.message);
     return { props: {} };

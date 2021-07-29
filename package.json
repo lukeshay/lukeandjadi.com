@@ -8,16 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --pretty --noEmit",
-    "format": "prettier --write .",
-    "db:migrate:make": "knex migrate:make",
-    "db:migrate": "knex migrate:latest",
-    "db:seed": "knex seed:run",
-    "db:migrate:local": "dotenv -e .env.local -- yarn db:migrate --env local",
-    "db:migrate:dev": "dotenv -e .env.dev -- yarn db:migrate --env development",
-    "db:migrate:prod": "dotenv -e .env.prod -- yarn db:migrate --env production",
-    "db:seed:local": "dotenv -e .env.local -- yarn db:seed --env local",
-    "db:seed:dev": "dotenv -e .env.dev -- yarn db:seed --env development",
-    "db:seed:prod": "dotenv -e .env.prod -- yarn db:seed --env production"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@datadog/browser-logs": "^2.18.0",
@@ -34,7 +25,8 @@
     "react-dom": "^17.0.2",
     "react-toastify": "^7.0.4",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.34",
+    "sequelize": "^6.6.5",
+    "sequelize-cockroachdb": "^6.0.1",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -57,7 +49,6 @@
     "postcss": "^8.3.6",
     "prettier": "^2.3.2",
     "tailwindcss": "^2.2.7",
-    "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
   }
 }

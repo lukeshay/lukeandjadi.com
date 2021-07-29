@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { setCookie, parseJWT, getCookie } from '@/server/auth';
 import Form from '@/components/Form';
 import Input from '@/components/Input';
-import { selectAccountByEmail } from '@/entities/account';
 import { accountPut } from '@/client/api';
 import config from '@/client/config';
 import AccountLayout from '@/components/AccountLayout';
@@ -13,6 +12,7 @@ import { JWT_COOKIE_KEY, JWTPayload } from '@/server/jwt';
 import Button from '@/components/Button';
 import logger from '@/server/logger';
 import AccountContainer from '@/components/AccountContainer';
+import { Account } from '@/entities';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;
@@ -39,7 +39,18 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   }
 
   try {
-    return { props: await selectAccountByEmail(payload.email) };
+    const res = (
+      await Account.findOne({ where: { email: payload.email } })
+    )?.get();
+    return {
+      props: res
+        ? {
+            ...res,
+            updatedAt: null,
+            createdAt: null,
+          }
+        : {},
+    };
   } catch (e) {
     logger.error(`error selecting account: ${e.message}`, e);
   }
