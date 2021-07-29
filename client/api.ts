@@ -1,6 +1,5 @@
+import { AccountAttributes, RSVPAttributes } from '@/entities';
 import Axios from 'axios';
-import { Account } from '../entities/account';
-import { RSVP } from '../entities/rsvp';
 
 export function configureAPI() {
   Axios.defaults.baseURL = '/api';
@@ -14,19 +13,19 @@ export function accountSignInPost(email: string) {
 }
 
 export function accountAuthPost(token: string) {
-  return Axios.post<Account>('/account/auth', {
+  return Axios.post<AccountAttributes>('/account/auth', {
     token,
   });
 }
 
 export function accountPut(account: any) {
-  return Axios.put<Account>('/account', account);
+  return Axios.put<AccountAttributes>('/account', account);
 }
 
 export function rsvpSearchGet(rsvp: any) {
-  return Axios.get<RSVP>('/rsvp/search', { params: rsvp });
+  return Axios.get<RSVPAttributes>('/rsvp/search', { params: rsvp });
 }
 
 export function rsvpPut(rsvp: any) {
-  return Axios.put<RSVP>('/rsvp', rsvp);
+  return Axios.put<RSVPAttributes>('/rsvp', rsvp);
 }
