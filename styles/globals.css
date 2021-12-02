@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-ExtraLightItalic.woff2') format('woff2');
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-SemiBold.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-SemiBoldItalic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-Bold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-BoldItalic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-Black.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-BlackItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Oleo Script';
+  src: url('/fonts/OleoScriptSwashCaps-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Oleo Script';
+  src: url('/fonts/OleoScriptSwashCaps-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+a {
+  @apply text-blue-800 cursor-pointer hover:underline;
+}
+
+* {
+  @apply z-10;
+}
+
+.tooltip {
+  @apply absolute invisible;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply z-50 visible;
+}
+
+.Toastify__toast-container {
+  @apply w-full max-w-screen-sm !important;
+}
+
+.Toastify__toast--success,
+.Toastify__toast--info {
+  @apply border text-emerald-600 border-emerald-600;
+  background: #fff !important;
+}
+
+.Toastify__close-button--success,
+.Toastify__close-button--info {
+  @apply text-emerald-600 !important;
+}
+
+.Toastify__toast--warning {
+  @apply text-orange-500 border border-orange-500;
+  background: #fff !important;
+}
+
+.Toastify__close-button--warning {
+  @apply text-orange-500 !important;
+}
+
+.Toastify__toast--error {
+  @apply text-red-500 border border-red-500;
+  background: #fff !important;
+}
+
+.Toastify__close-button--error {
+  @apply text-red-500 !important;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+}
+
+.lds-dual-ring:after {
+  content: ' ';
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 0 1rem 0 0;
+  border-radius: 50%;
+  border: 4px solid #000;
+  border-color: #000 transparent #000 transparent;
+  animation: lds-dual-ring 1s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.prose {
+  @apply font-serif !important;
+}

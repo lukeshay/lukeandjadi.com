@@ -1,0 +1,53 @@
+{
+  "name": "website",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --pretty --noEmit",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@datadog/browser-logs": "^2.18.0",
+    "@hapi/iron": "^6.0.0",
+    "@headlessui/react": "^1.4.0",
+    "@heroicons/react": "^1.0.3",
+    "@lukeshay/logger": "^0.3.0",
+    "@lukeshay/next-ga": "^0.3.0",
+    "@lukeshay/next-middleware": "^0.3.0",
+    "@sendgrid/mail": "^7.4.5",
+    "axios": "^0.21.1",
+    "cookies": "^0.8.0",
+    "fathom-client": "^3.2.0",
+    "next": "^12.0.1",
+    "pg": "^8.7.1",
+    "preact": "^10.5.14",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-toastify": "^7.0.4",
+    "sequelize": "^6.6.5",
+    "sequelize-cockroachdb": "^6.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/jit": "0.1.18",
+    "@tailwindcss/typography": "^0.4.1",
+    "@types/cookies": "^0.7.7",
+    "@types/node": "^16.4.7",
+    "@types/nodemailer": "^6.4.4",
+    "@types/pg": "^8.6.1",
+    "@types/react": "^17.0.15",
+    "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "autoprefixer": "^10.3.1",
+    "eslint": "^7.31.0",
+    "eslint-config-next": "^11.0.1",
+    "postcss": "^8.3.6",
+    "prettier": "^2.3.2",
+    "tailwindcss": "^2.2.7",
+    "typescript": "^4.3.5"
+  }
+}
