@@ -4,14 +4,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 import { ToastContainer, Slide } from 'react-toastify';
 import { configureAPI } from '@/client/api';
-import { useAppInit, reportWebVitals } from '@lukeshay/next-ga';
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import * as Fathom from 'fathom-client';
 
 function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
-  useAppInit();
   configureAPI();
 
   const router = useRouter();
@@ -51,7 +49,5 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
     </>
   );
 }
-
-export { reportWebVitals };
 
 export default MyApp;
