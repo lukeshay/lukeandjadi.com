@@ -7,7 +7,6 @@ import Document, {
 } from 'next/document';
 import config from '@/client/config';
 import { datadogLogs } from '@datadog/browser-logs';
-import { GoogleAnalytics } from '@lukeshay/next-ga';
 
 class MyDocument extends Document {
   constructor(props: DocumentProps) {
@@ -130,7 +129,6 @@ class MyDocument extends Document {
             src={`https://www.google.com/recaptcha/api.js?render=${config.env.recaptchaSiteKey}`}
             async
           />
-          <GoogleAnalytics />
         </Head>
         <body className="font-serif tracking-wide">
           <Main />
