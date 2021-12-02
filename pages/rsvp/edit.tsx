@@ -12,7 +12,7 @@ import Button from '@/components/Button';
 import Container from '@/components/Container';
 import { RSVP } from '@/entities';
 import { AxiosError } from 'axios';
-import { defaultSalt, defaultSecret, getCookie, parseJWT } from '@/server/auth';
+import { defaultSecret, getCookie, parseJWT } from '@/server/auth';
 import { RSVP_JWT_COOKIE_KEY } from '@/server/jwt';
 import serverConfig from '@/server/config';
 
