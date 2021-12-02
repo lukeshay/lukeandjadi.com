@@ -11,7 +11,5 @@ config:
   lukeandjadi.com:email_pass:
     secure: AAABAJKkhDdc2gqLIJ7Pxx0EDCqoRleqjCkmOKTX6U34hX/0JArjlT4QG3fdOQXb
   lukeandjadi.com:email_user: luke@lukeandjadi.com
-  lukeandjadi.com:sendgrid_key:
-    secure: AAABAEKwKHbxrppDVzA0b1AB7bTpIDupxnhrYZA2oyW0Dihieg9ZZlbUq9JEnkxva74W5b27OwoSwwDtudeEOXsIOXG/p+vaMebKRrY64Yc79Rpz3w3PdLCSkOFBMIqxDWuT09w=
   lukeandjadi.com:url: dev.lukeandjadi.com
   lukeandjadi.com:zone_id: 5839d36ffc98b6089eb9ef6c5bd864da

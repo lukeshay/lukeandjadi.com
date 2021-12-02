@@ -15,6 +15,13 @@ import { AxiosError } from 'axios';
 import { defaultSalt, defaultSecret, getCookie, parseJWT } from '@/server/auth';
 import { RSVP_JWT_COOKIE_KEY } from '@/server/jwt';
 
+const REDIRECT = {
+  redirect: {
+    permanent: false,
+    destination: '/rsvp',
+  },
+};
+
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   try {
     const jwt = getCookie(ctx.req, ctx.res, RSVP_JWT_COOKIE_KEY);
@@ -39,11 +46,11 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     console.log('res');
 
     return {
-      props: res ? { ...res, createdAt: null, updatedAt: null } : {},
+      props: res ? { ...res, createdAt: null, updatedAt: null } : REDIRECT,
     };
   } catch (e) {
     console.error((e as Error).message);
-    return { props: {} };
+    return REDIRECT;
   }
 }
 
@@ -51,12 +58,6 @@ export default function AccountPage(props: any) {
   const [values, setValues] = React.useState<any>(props);
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
-
-  React.useEffect(() => {
-    if (!props.id) {
-      router.push('/rsvp');
-    }
-  });
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
