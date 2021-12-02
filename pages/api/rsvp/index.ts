@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { RSVP } from '@/entities';
 import config from '@/client/config';
+import serverConfig from '@/server/config';
 import middleware, { MyContext } from '@/server/middleware';
 import { HttpStatusCodes } from '@lukeshay/next-middleware';
-import { defaultSalt, defaultSecret, getCookie, parseJWT } from '@/server/auth';
+import { defaultSecret, getCookie, parseJWT } from '@/server/auth';
 import { RSVP_JWT_COOKIE_KEY } from '@/server/jwt';
 
 async function put({ req, res, logger }: MyContext) {
@@ -48,10 +49,11 @@ async function put({ req, res, logger }: MyContext) {
         .json({ message: 'token expired' });
     }
 
-    const parsed = await parseJWT<{ id: string }>(jwt, defaultSecret, {
-      ...defaultSalt,
-      ttl: 1800000,
-    });
+    const parsed = await parseJWT<{ id: string }>(
+      jwt,
+      defaultSecret,
+      serverConfig.rsvpJwtSalt,
+    );
 
     if (!parsed) {
       return res

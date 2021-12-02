@@ -1,3 +1,5 @@
+import { defaultSalt } from './auth';
+
 const config = {
   env: {
     domain: process.env.DOMAIN ?? 'https://lukeandjadi.com',
@@ -5,6 +7,10 @@ const config = {
     emailPass: process.env.EMAIL_PASS,
     emailUser: process.env.EMAIL_USER,
     emailHost: process.env.EMAIL_HOST,
+  },
+  rsvpJwtSalt: {
+    ...defaultSalt,
+    ttl: 1800000,
   },
 };
 

@@ -14,6 +14,7 @@ import { RSVP } from '@/entities';
 import { AxiosError } from 'axios';
 import { defaultSalt, defaultSecret, getCookie, parseJWT } from '@/server/auth';
 import { RSVP_JWT_COOKIE_KEY } from '@/server/jwt';
+import serverConfig from '@/server/config';
 
 const REDIRECT = {
   redirect: {
@@ -31,14 +32,15 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       return { props: {} };
     }
 
-    const parsed = await parseJWT<{ id: string }>(jwt, defaultSecret, {
-      ...defaultSalt,
-      ttl: 1800000,
-    });
+    const parsed = await parseJWT<{ id: string }>(
+      jwt,
+      defaultSecret,
+      serverConfig.rsvpJwtSalt,
+    );
 
     if (!parsed?.id) {
       console.log('jwt invalid');
-      return { props: {} };
+      return REDIRECT;
     }
 
     const res = (await RSVP.findByPk(parsed.id))?.get();

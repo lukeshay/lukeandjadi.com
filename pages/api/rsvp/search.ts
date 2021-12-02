@@ -8,6 +8,7 @@ import {
 import { RSVP_JWT_COOKIE_KEY } from '@/server/jwt';
 import middleware, { MyContext } from '@/server/middleware';
 import { HttpStatusCodes } from '@lukeshay/next-middleware';
+import serverConfig from '@/server/config';
 
 async function get({ req, res, logger }: MyContext) {
   if (!req.query.name) {
@@ -23,10 +24,7 @@ async function get({ req, res, logger }: MyContext) {
       throw new Error(`no rsvp with the name ${req.query.name}`);
     }
 
-    const jwt = await generateJWT({ id: rsvp.get().id }, defaultSecret, {
-      ...defaultSalt,
-      ttl: 1800000,
-    });
+    const jwt = await generateJWT({ id: rsvp.get().id }, defaultSecret, serverConfig.rsvpJwtSalt);
 
     setCookie(req, res, RSVP_JWT_COOKIE_KEY, jwt, {
       sameSite: 'strict',
