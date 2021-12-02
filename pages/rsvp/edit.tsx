@@ -43,10 +43,9 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 
     const res = (await RSVP.findByPk(parsed.id))?.get();
 
-    console.log('res');
-
     return {
-      props: res ? { ...res, createdAt: null, updatedAt: null } : REDIRECT,
+      props:
+        res && res.id ? { ...res, createdAt: null, updatedAt: null } : REDIRECT,
     };
   } catch (e) {
     console.error((e as Error).message);
