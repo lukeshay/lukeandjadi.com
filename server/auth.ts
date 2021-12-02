@@ -19,6 +19,8 @@ export function setCookie(
     newOptions.maxAge /= 1000;
   }
 
+  newOptions.overwrite = true;
+
   cookies.set(name, value, options);
 }
 
