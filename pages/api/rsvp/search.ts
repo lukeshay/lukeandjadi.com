@@ -32,9 +32,10 @@ async function get({ req, res, logger }: MyContext) {
     logger.debug('setting jwt cookie');
 
     setCookie(req, res, RSVP_JWT_COOKIE_KEY, jwt, {
-      sameSite: 'lax',
-      httpOnly: false,
+      sameSite: 'strict',
+      httpOnly: true,
       overwrite: true,
+      secure: process.env.NODE_ENV === 'production',
       maxAge: serverConfig.rsvpJwtSalt.ttl * 1000,
     });
 
