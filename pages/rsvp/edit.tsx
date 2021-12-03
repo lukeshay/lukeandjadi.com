@@ -98,7 +98,7 @@ export default function AccountPage(props: any) {
       }
 
       toast(
-        `There was an error updating your account. If the problem persists, please email ${config.email}.`,
+        `There was an error updating your RSVP. If the problem persists, please email ${config.email}.`,
         { type: 'error' },
       );
     }
