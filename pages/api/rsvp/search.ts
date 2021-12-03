@@ -35,7 +35,6 @@ async function get({ req, res, logger }: MyContext) {
       sameSite: 'strict',
       httpOnly: true,
       overwrite: true,
-      secure: process.env.NODE_ENV === 'production',
       maxAge: serverConfig.rsvpJwtSalt.ttl * 1000,
     });
 
