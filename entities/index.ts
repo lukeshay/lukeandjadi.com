@@ -6,6 +6,7 @@ import {
 } from '@/types';
 import { Sequelize, DataTypes, ModelDefined } from 'sequelize-cockroachdb';
 import * as pg from 'pg';
+import logger from '@/server/logger';
 
 const sequelize = new Sequelize(process.env.DSN || '', {
   dialect: 'postgres',
@@ -15,7 +16,9 @@ const sequelize = new Sequelize(process.env.DSN || '', {
     },
   },
   dialectModule: pg,
-  logging: true,
+  logging: (sql, time) => {
+    logger.debug(`${time} - ${sql}`);
+  },
 });
 
 const commonOpts = {

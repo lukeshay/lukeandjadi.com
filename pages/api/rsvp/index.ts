@@ -9,6 +9,8 @@ import { RSVP_JWT_COOKIE_KEY } from '@/server/jwt';
 
 async function put({ req, res, logger }: MyContext) {
   if (!req.body.token) {
+    logger.error('no token provided');
+
     return res
       .status(HttpStatusCodes.BAD_REQUEST)
       .json({ token: 'required field' });
@@ -17,11 +19,14 @@ async function put({ req, res, logger }: MyContext) {
   const { token } = req.body;
 
   try {
+    logger.info('validating token');
+
     const resp = await axios.post(
       'https://www.google.com/recaptcha/api/siteverify',
       undefined,
       { params: { secret: process.env.RECAPTCHA_SECRET_KEY, response: token } },
     );
+
     if (!resp.data.success) {
       logger.error(
         `recaptcha challenge unsuccessful: ${resp.data['error-codes']}`,
@@ -41,13 +46,19 @@ async function put({ req, res, logger }: MyContext) {
   let id: string;
 
   try {
+    logger.info('getting jwt cookie');
+
     const jwt = getCookie(req, res, RSVP_JWT_COOKIE_KEY);
 
     if (!jwt) {
+      logger.error('no jwt cookie found');
+
       return res
         .status(HttpStatusCodes.REQUEST_TIMEOUT)
         .json({ message: 'token expired' });
     }
+
+    logger.error('parsing jwt');
 
     const parsed = await parseJWT<{ id: string }>(
       jwt,
@@ -56,6 +67,8 @@ async function put({ req, res, logger }: MyContext) {
     );
 
     if (!parsed) {
+      logger.error('jwt could not be parsed');
+
       return res
         .status(HttpStatusCodes.REQUEST_TIMEOUT)
         .json({ message: 'token expired' });
@@ -71,20 +84,27 @@ async function put({ req, res, logger }: MyContext) {
   }
 
   if (!req.body.name) {
+    logger.info('required field name is not set');
+
     return res
       .status(HttpStatusCodes.BAD_REQUEST)
       .json({ name: 'required field' });
   }
 
   try {
+    logger.info('finding rsvp by name and id');
+
     const rsvp = await RSVP.findOne({ where: { name: req.body.name, id } });
 
     if (!rsvp) {
+      logger.error(`rsvp not found with name: ${req.body.name} and id: ${id}`);
+
       return res
         .status(HttpStatusCodes.BAD_REQUEST)
         .json({ message: 'There is not an RSVP with that name.' });
     }
 
+    logger.info('updating rsvp');
     const saved = await rsvp.update({ ...req.body, updatedAt: new Date() });
 
     return res.status(HttpStatusCodes.OK).json(saved);

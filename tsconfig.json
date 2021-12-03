@@ -38,5 +38,5 @@
   "include": [
     "./**/*.ts",
     "./**/*.tsx"
-  ]
+, "jest.config.js"  ]
 }

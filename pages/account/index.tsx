@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { FormEvent } from 'react';
-import { setCookie, parseJWT, getCookie } from '@/server/auth';
+import { setCookie, parseJWT, getCookie, defaultSalt } from '@/server/auth';
 import Form from '@/components/Form';
 import Input from '@/components/Input';
 import AccountLayout from '@/components/AccountLayout';
@@ -26,6 +26,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     httpOnly: true,
     overwrite: true,
     path: '/',
+    maxAge: defaultSalt.ttl,
   });
 
   const payload = await parseJWT<JWTPayload>(token as string);

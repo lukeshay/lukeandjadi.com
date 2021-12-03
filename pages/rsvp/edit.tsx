@@ -15,6 +15,7 @@ import { AxiosError } from 'axios';
 import { defaultSecret, getCookie, parseJWT } from '@/server/auth';
 import { RSVP_JWT_COOKIE_KEY } from '@/server/jwt';
 import serverConfig from '@/server/config';
+import logger from '@/server/logger';
 
 const REDIRECT = {
   redirect: {
@@ -25,12 +26,17 @@ const REDIRECT = {
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   try {
+    logger.info('getting rsvp cookie from request');
+
     const jwt = getCookie(ctx.req, ctx.res, RSVP_JWT_COOKIE_KEY);
 
     if (!jwt) {
-      console.log('no cookie');
-      return { props: {} };
+      logger.info('no rsvp cookie found');
+
+      return REDIRECT;
     }
+
+    logger.info('parsing rsvp jwt');
 
     const parsed = await parseJWT<{ id: string }>(
       jwt,
@@ -39,7 +45,8 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     );
 
     if (!parsed?.id) {
-      console.log('jwt invalid');
+      logger.info('rsvp jwt expired');
+
       return REDIRECT;
     }
 
@@ -50,7 +57,8 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
         res && res.id ? { ...res, createdAt: null, updatedAt: null } : REDIRECT,
     };
   } catch (e) {
-    console.error((e as Error).message);
+    logger.error((e as Error).message);
+
     return REDIRECT;
   }
 }

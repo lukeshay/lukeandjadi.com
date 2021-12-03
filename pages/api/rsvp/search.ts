@@ -16,8 +16,12 @@ async function get({ req, res, logger }: MyContext) {
     const rsvp = await RSVP.findOne({ where: { name: req.query.name } });
 
     if (!rsvp?.get().id) {
+      logger.error(`no rsvp with the name ${req.query.name}`);
       throw new Error(`no rsvp with the name ${req.query.name}`);
     }
+
+    logger.debug(`found rsvp with the name ${req.query.name}`);
+    logger.debug('generating jwt');
 
     const jwt = await generateJWT(
       { id: rsvp.get().id },
@@ -25,11 +29,14 @@ async function get({ req, res, logger }: MyContext) {
       serverConfig.rsvpJwtSalt,
     );
 
+    logger.debug('setting jwt cookie');
+
     setCookie(req, res, RSVP_JWT_COOKIE_KEY, jwt, {
       sameSite: 'strict',
       httpOnly: true,
       overwrite: true,
       path: '/',
+      maxAge: serverConfig.rsvpJwtSalt.ttl,
     });
 
     return res.status(HttpStatusCodes.OK).json(rsvp);
