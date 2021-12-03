@@ -36,7 +36,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       return REDIRECT;
     }
 
-    logger.info('parsing rsvp jwt');
+    logger.info('parsing rsvp jwt:', jwt);
 
     const parsed = await parseJWT<{ id: string }>(
       jwt,
