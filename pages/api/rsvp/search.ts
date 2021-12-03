@@ -35,7 +35,7 @@ async function get({ req, res, logger }: MyContext) {
       sameSite: 'lax',
       httpOnly: false,
       overwrite: true,
-      maxAge: serverConfig.rsvpJwtSalt.ttl,
+      maxAge: serverConfig.rsvpJwtSalt.ttl * 1000,
     });
 
     return res.status(HttpStatusCodes.OK).json(rsvp);
