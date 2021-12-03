@@ -8,11 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": [
-      "dom",
-      "es2017",
-      "es6"
-    ],
+    "lib": ["dom", "es2017", "es6"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -25,18 +21,10 @@
     "target": "esnext",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
     "incremental": true
   },
-  "exclude": [
-    "node_modules",
-    "pulumi"
-  ],
-  "include": [
-    "./**/*.ts",
-    "./**/*.tsx"
-, "jest.config.js"  ]
+  "exclude": ["node_modules", "pulumi"],
+  "include": ["./**/*.ts", "./**/*.tsx"]
 }

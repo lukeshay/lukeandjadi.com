@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/test/coverage
 
 # next.js
 /.next/
@@ -38,3 +39,5 @@ yarn-error.log*
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+public/sitemap.xml
