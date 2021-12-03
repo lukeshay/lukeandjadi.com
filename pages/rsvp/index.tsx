@@ -22,10 +22,9 @@ export default function AccountPage() {
     try {
       await rsvpSearchGet(values);
 
-      setLoading(false);
-
       await router.push(`/rsvp/edit`);
 
+      setLoading(false);
       setValues({});
     } catch (e) {
       toast(
