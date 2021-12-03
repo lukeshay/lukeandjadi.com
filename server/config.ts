@@ -10,7 +10,6 @@ const config = {
   },
   rsvpJwtSalt: {
     ...defaultSalt,
-    ttl: 3600000,
   },
 };
 
