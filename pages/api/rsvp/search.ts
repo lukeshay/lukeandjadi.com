@@ -37,6 +37,7 @@ async function get({ req, res, logger }: MyContext) {
       overwrite: true,
       path: '/',
       maxAge: serverConfig.rsvpJwtSalt.ttl,
+      secure: true,
     });
 
     return res.status(HttpStatusCodes.OK).json(rsvp);

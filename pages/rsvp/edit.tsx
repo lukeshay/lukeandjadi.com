@@ -30,7 +30,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 
     const jwt = getCookie(ctx.req, ctx.res, RSVP_JWT_COOKIE_KEY);
 
-    if (!jwt) {
+    if (!jwt || jwt === '') {
       logger.info('no rsvp cookie found');
 
       return REDIRECT;
