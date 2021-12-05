@@ -24,6 +24,7 @@ const nextConfig = {
     return config;
   },
   swcMinify: true,
+  webpack5: true,
 };
 
 // https://securityheaders.com

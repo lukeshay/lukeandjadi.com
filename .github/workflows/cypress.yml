@@ -24,7 +24,7 @@ jobs:
         with:
           # Specify Browser since container image is compile with Firefox
           browser: ${{ matrix.browser }}
-          start: yarn cypres:run --record --key ${{ secrets.CYPRESS_KEY }} --config-file ./cypress/config/${{ matrix.env }}.json
+          start: yarn cypress:run --record --key ${{ secrets.CYPRESS_KEY }} --config-file ./cypress/config/${{ matrix.env }}.json
           spec: cypress/integration/*
           record: true
           parallel: true
