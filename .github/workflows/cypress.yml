@@ -2,7 +2,7 @@ name: Cypress
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: '*/5 * * * *'
 
 jobs:
   cypress:
@@ -12,11 +12,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: ["firefox", "chrome"]
-        env: ["dev", "prod"]
+        browser: ['firefox', 'chrome']
+        env: ['dev', 'prod']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: main
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:

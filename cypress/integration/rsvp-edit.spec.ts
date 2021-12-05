@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('RSVPs', () => {
   it('can be edited', () => {
     cy.visit('/');
