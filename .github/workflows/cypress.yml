@@ -24,7 +24,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           browser: ${{ matrix.browser }}
-          start: yarn cypress:run --record --key ${{ secrets.CYPRESS_KEY }} --config baseUrl="${{ matrix.baseUrl }}"
+          start: yarn cy:run --record --key ${{ secrets.CYPRESS_KEY }} --config baseUrl="${{ matrix.baseUrl }}"
           spec: cypress/integration/*
           record: true
           parallel: true

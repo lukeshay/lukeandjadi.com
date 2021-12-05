@@ -10,8 +10,8 @@
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
     "test": "jest",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "@datadog/browser-logs": "^3.8.0",
