@@ -22,9 +22,12 @@ jobs:
           ref: main
       - name: Cypress run
         uses: cypress-io/github-action@v2
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
         with:
           browser: ${{ matrix.browser }}
-          start: yarn cy:run --record --key ${{ secrets.CYPRESS_KEY }} --config baseUrl="https://${{ matrix.baseUrl }}"
+          start: yarn cy:run
           spec: cypress/integration/*
           record: true
           parallel: true
+          args: --config baseUrl="https://${{ matrix.baseUrl }}"
