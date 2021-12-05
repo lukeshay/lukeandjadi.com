@@ -41,3 +41,7 @@ yarn-error.log*
 .pnp.*
 
 public/sitemap.xml
+cypress/downloads
+cypress/logs
+cypress/videos
+cypress/screenshots

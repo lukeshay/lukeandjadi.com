@@ -1,0 +1,28 @@
+name: Cypress
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  cypress:
+    name: Cypress
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node14.17.0-chrome91-ff89
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: ["firefox", "chrome"]
+        env: ["dev", "prod"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          # Specify Browser since container image is compile with Firefox
+          browser: ${{ matrix.browser }}
+          start: yarn cypres:run --record --key ${{ secrets.CYPRESS_KEY }} --config-file ./cypress/config/${{ matrix.env }}.json
+          spec: cypress/integration/*
+          record: true
+          parallel: true

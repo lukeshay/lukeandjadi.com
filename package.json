@@ -9,7 +9,9 @@
     "lint": "next lint",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
-    "test": "jest"
+    "test": "jest",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@datadog/browser-logs": "^3.8.0",
@@ -47,6 +49,7 @@
     "@typescript-eslint/parser": "^4.28.5",
     "autoprefixer": "^10.3.1",
     "babel-jest": "^27.4.2",
+    "cypress": "^9.1.1",
     "eslint": "^7.31.0",
     "eslint-config-next": "^11.0.1",
     "jest": "^27.4.3",

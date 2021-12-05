@@ -23,7 +23,8 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "incremental": true
+    "incremental": true,
+    "types": ["cypress", "jest", "node"]
   },
   "exclude": ["node_modules", "pulumi"],
   "include": ["./**/*.ts", "./**/*.tsx"]
