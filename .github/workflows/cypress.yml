@@ -2,7 +2,7 @@ name: Cypress
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '* * * * *'
 
 jobs:
   cypress:
