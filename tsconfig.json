@@ -26,6 +26,6 @@
     "incremental": true,
     "types": ["cypress", "jest", "node"]
   },
-  "exclude": ["node_modules", "pulumi"],
+  "exclude": ["node_modules", "pulumi", "cypress", "test"],
   "include": ["./**/*.ts", "./**/*.tsx"]
 }
