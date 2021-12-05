@@ -8,12 +8,13 @@ jobs:
   cypress:
     name: Cypress
     runs-on: ubuntu-latest
-    container: cypress/browsers:node14.17.0-chrome91-ff89
+    container: cypress/browsers:node14.17.0-${{ matrix.version }}
     strategy:
       fail-fast: false
       matrix:
+        version: ['chrome88-ff89', 'chrome91-ff89']
         browser: ['firefox', 'chrome']
-        env: ['dev', 'prod']
+        baseUrl: ['https://dev.lukeandjadi.com', 'https://lukeandjadi.com']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,9 +23,8 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          # Specify Browser since container image is compile with Firefox
           browser: ${{ matrix.browser }}
-          start: yarn cypress:run --record --key ${{ secrets.CYPRESS_KEY }} --config-file ./cypress/config/${{ matrix.env }}.json
+          start: yarn cypress:run --record --key ${{ secrets.CYPRESS_KEY }} --config baseUrl="${{ matrix.baseUrl }}"
           spec: cypress/integration/*
           record: true
           parallel: true
