@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         version: ['chrome88-ff89', 'chrome91-ff89']
-        browser: ['firefox', 'chrome']
+        browser: ['chrome']
         baseUrl: ['dev.lukeandjadi.com', 'lukeandjadi.com']
     steps:
       - name: Checkout
@@ -29,5 +29,4 @@ jobs:
           start: yarn cy:run
           spec: cypress/integration/*
           record: true
-          parallel: true
           args: --config baseUrl="https://${{ matrix.baseUrl }}"
