@@ -2,7 +2,7 @@ name: Cypress
 
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   cypress:
@@ -28,5 +28,5 @@ jobs:
           browser: ${{ matrix.browser }}
           start: yarn cy:run
           spec: cypress/integration/*
-          record: true
+          record: false
           args: --config baseUrl="https://${{ matrix.baseUrl }}"
