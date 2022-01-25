@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import Button from '@/components/Button';
-import Form from '@/components/Form';
-import Input from '@/components/Input';
-import Layout from '@/components/Layout';
-import { rsvpSearchGet } from '@/client/api';
-import config from '@/client/config';
-import Container from '@/components/Container';
+import Button from '../../components/Button';
+import Form from '../../components/Form';
+import Input from '../../components/Input';
+import Layout from '../../components/Layout';
+import { rsvpSearchGet } from '../../client/api';
+import config from '../../client/config';
+import Container from '../../components/Container';
 
 export default function AccountPage() {
   const [values, setValues] = React.useState<any>({});

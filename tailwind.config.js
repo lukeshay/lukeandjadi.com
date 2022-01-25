@@ -1,19 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const colors = require('tailwindcss/colors');
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  mode: 'jit',
-  purge: ['./**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  jit: true,
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
-      colors: {
+      colors: ({ colors }) => ({
         ...colors,
         accent: {
           500: '#efb8b3',
         },
-      },
+      }),
       fontFamily: {
         serif: ['Source Serif Pro', ...fontFamily.serif],
         cursive: ['Oleo Script', ...fontFamily.serif],

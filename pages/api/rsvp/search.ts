@@ -1,56 +1,38 @@
-import { RSVP } from '@/entities';
-import { generateJWT, defaultSecret, setCookie } from '@/server/auth';
-import { RSVP_JWT_COOKIE_KEY } from '@/server/jwt';
-import middleware, { MyContext } from '@/server/middleware';
-import { HttpStatusCodes } from '@lukeshay/next-middleware';
-import serverConfig from '@/server/config';
+import * as yup from 'yup';
+import { StatusCodes } from '@lukeshay/next-router';
 
-async function get({ req, res, logger }: MyContext) {
-  if (!req.query.name) {
-    return res
-      .status(HttpStatusCodes.BAD_REQUEST)
-      .json({ name: 'required field' });
-  }
+import { setCookie } from '../../../server/auth';
+import { RSVP_JWT_COOKIE_KEY } from '../../../server/jwt';
+import middleware, { MyContext } from '../../../server/middleware';
+import serverConfig from '../../../server/config';
+import logger from '../../../server/logger';
+import { validate } from '../../../server/services/schema-service';
+import { getRSVP } from '../../../server/services/rsvp-service';
+import { generateRSVPJWT } from '../../../server/services/jwt-service';
 
-  try {
-    const rsvp = await RSVP.findOne({ where: { name: req.query.name } });
+const querySchema = yup.object().shape({
+  name: yup.string().required(),
+});
 
-    if (!rsvp?.get().id) {
-      logger.error(`no rsvp with the name ${req.query.name}`);
-      throw new Error(`no rsvp with the name ${req.query.name}`);
-    }
+const get = async ({ req, res }: MyContext) => {
+  const { name } = await validate(querySchema, req.query);
 
-    logger.debug(`found rsvp with the name ${req.query.name}`);
-    logger.debug('generating jwt');
+  const rsvp = await getRSVP({ name });
 
-    const jwt = await generateJWT(
-      { id: rsvp.get().id },
-      defaultSecret,
-      serverConfig.rsvpJwtSalt,
-    );
+  logger.debug(`found rsvp with the name ${req.query.name}`);
 
-    logger.debug('setting jwt cookie');
+  const jwt = await generateRSVPJWT({ id: rsvp.get().id });
 
-    setCookie(req, res, RSVP_JWT_COOKIE_KEY, jwt, {
-      sameSite: 'strict',
-      httpOnly: true,
-      overwrite: true,
-      maxAge: serverConfig.rsvpJwtSalt.ttl * 1000,
-    });
+  logger.debug('setting jwt cookie');
 
-    return res.status(HttpStatusCodes.OK).json(rsvp);
-  } catch (e) {
-    logger.error(
-      `there was an error searching for an rsvp with the name ${
-        req.query.name
-      }: ${(e as Error).message}`,
-      e,
-    );
+  setCookie(req, res, RSVP_JWT_COOKIE_KEY, jwt, {
+    sameSite: 'strict',
+    httpOnly: true,
+    overwrite: true,
+    maxAge: serverConfig.rsvpJwtSalt.ttl * 1000,
+  });
 
-    return res
-      .status(HttpStatusCodes.BAD_REQUEST)
-      .json({ message: `no rsvp with the name ${req.query.name}` });
-  }
-}
+  return res.status(StatusCodes.OK).json(rsvp);
+};
 
 export default middleware.get(get).handler();

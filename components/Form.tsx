@@ -1,5 +1,14 @@
 import React from 'react';
 
+export type FormProps = {
+  children: React.ReactNode;
+  title: React.ReactNode;
+  subTitle: React.ReactNode;
+  className?: string;
+  onSubmit: React.FormEventHandler<HTMLFormElement>;
+  notSplit?: boolean;
+};
+
 export default function Form({
   children,
   title,
@@ -7,23 +16,15 @@ export default function Form({
   className,
   onSubmit,
   notSplit,
-}: {
-  children: React.ReactNode;
-  title: React.ReactNode;
-  subTitle: React.ReactNode;
-  className?: string;
-  // eslint-disable-next-line no-unused-vars
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
-  notSplit?: boolean;
-}) {
+}: FormProps) {
   return (
     <div
       className={`${className} block ${
         !notSplit && 'md:flex justify-between'
-      } w-full max-w-screen-xl`}
+      } w-full max-w-xl`}
     >
       <div className={`w-full ${!notSplit && 'md:w-1/2'}`}>
-        <h1 className="text-4xl font-bold my-6">{title}</h1>
+        <h1 className="my-6 text-4xl font-bold">{title}</h1>
         <p className="text-gray-700">{subTitle}</p>
       </div>
       <form

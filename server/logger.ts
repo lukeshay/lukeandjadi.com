@@ -1,19 +1,13 @@
-import { createLogger, format, transports } from 'winston';
+import logger, { configureVercel } from '@lukeshay/logger';
+import correlator from 'correlation-id';
 
-const logger = createLogger({
-  level: 'silly',
-  exitOnError: false,
-  format: format.json(),
-  transports: [
-    new transports.Console({
-      format: format.json(),
-    }),
-  ],
-  defaultMeta: {
-    environment: process.env.VERCEL_ENV || 'local',
-    commit: process.env.VERCEL_GIT_COMMIT_SHA,
-    region: process.env.VERCEL_REGION,
+configureVercel();
+
+logger.defaultMeta = {
+  ...logger.defaultMeta,
+  get correlationId() {
+    return correlator.getId() || '';
   },
-});
+};
 
 export default logger;

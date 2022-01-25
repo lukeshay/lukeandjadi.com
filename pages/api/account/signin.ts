@@ -1,18 +1,19 @@
+import { Account } from '@/entities';
 import { generateJWT } from '@/server/auth';
 import { getJWTEmailHtml, getJWTEmailPlain } from '@/server/email';
-import config from '@/server/config';
 import { JWTPayload } from '@/server/jwt';
 import { sendEmail } from '@/server/smtp';
-import { Account } from '@/entities';
+import { StatusCodes } from '@lukeshay/next-router';
+import config from '@/server/config';
 import middleware, { MyContext } from '@/server/middleware';
-import { HttpStatusCodes } from '@lukeshay/next-middleware';
+import logger from '@/server/logger';
 
-async function post({ req, res, logger }: MyContext) {
+const post = async ({ req, res }: MyContext): Promise<void> => {
   const { email } = req.body;
 
   if (!email) {
     return res
-      .status(HttpStatusCodes.BAD_REQUEST)
+      .status(StatusCodes.BAD_REQUEST)
       .json({ email: 'Email is required.' });
   }
 
@@ -21,7 +22,7 @@ async function post({ req, res, logger }: MyContext) {
     const account = await Account.findOne({ where: { email } });
 
     if (!account) {
-      return res.status(HttpStatusCodes.UNAUTHORIZED).json({ message: '' });
+      return res.status(StatusCodes.UNAUTHORIZED).json({ message: '' });
     }
 
     try {
@@ -46,20 +47,25 @@ async function post({ req, res, logger }: MyContext) {
       logger.info(result[0].toString());
 
       return res
-        .status(HttpStatusCodes.OK)
+        .status(StatusCodes.OK)
         .json({ message: 'A email with a login link has been sent!' });
     } catch (e) {
       logger.error((e as Error).message, { ...(e as Error), level: 'error' });
 
-      return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         message:
           'Uh oh! It looks like there was an error. Please try again or contact us if the error continues!',
       });
     }
   } catch (e) {
-    logger.error(`account with email does not exist: ${email} ${(e as Error).message}`, e);
-    return res.status(HttpStatusCodes.UNAUTHORIZED).end();
+    logger.error(
+      `account with email does not exist: ${email} ${(e as Error).message}`,
+      e,
+    );
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: 'unauthorized' });
   }
-}
+};
 
 export default middleware.post(post).handler();
