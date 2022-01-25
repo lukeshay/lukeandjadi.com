@@ -1,5 +1,5 @@
 import { RSVPAttributes } from '@/types';
-import Axios, {} from 'axios';
+import Axios from 'axios';
 
 export function configureAPI() {
   Axios.defaults.baseURL = '/api';

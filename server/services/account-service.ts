@@ -1,4 +1,4 @@
-import type {  WhereOptions } from 'sequelize';
+import type { WhereOptions } from 'sequelize';
 
 import { Account } from '../entities';
 import type { AccountAttributes } from '../../types';

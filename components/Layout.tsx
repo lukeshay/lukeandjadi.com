@@ -11,9 +11,7 @@ export default function Layout({
 }) {
   return (
     <div className={`${className} flex justify-center w-full px-2`}>
-      <main className={fullWidth ? 'w-full' : 'max-w-4xl'}>
-        {children}
-      </main>
+      <main className={fullWidth ? 'w-full' : 'max-w-4xl'}>{children}</main>
     </div>
   );
 }
