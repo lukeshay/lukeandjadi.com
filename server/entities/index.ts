@@ -4,19 +4,18 @@ import {
   RSVPAttributes,
   RSVPCreationAttributes,
 } from '@/types';
-import {
-  Sequelize,
-  DataTypes,
-  ModelDefined,
-  Options,
-} from 'sequelize-cockroachdb';
+import { Sequelize, DataTypes, ModelDefined } from 'sequelize-cockroachdb';
 import * as pg from 'pg';
 import logger from '@/server/logger';
 import config from 'config';
 
 const sequelize = new Sequelize(config.get('database.url'), {
   dialect: 'postgres',
-  dialectOptions: config.get('database.options') as Options['dialectOptions'],
+  dialectOptions: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
   dialectModule: pg,
   logging: (sql, time) => {
     if (config.get('environment') === 'development') {
