@@ -1,9 +1,7 @@
 import { StatusCodes } from '@lukeshay/next-router';
 import * as yup from 'yup';
 
-import { generateJWT } from '../../../server/auth';
 import { getAccount } from '../../../server/services/account-service';
-import { JWTPayload } from '../../../server/jwt';
 import { sendJWTEmail } from '../../../server/services/email-service';
 import { validate } from '../../../server/services/schema-service';
 import logger from '../../../server/logger';
