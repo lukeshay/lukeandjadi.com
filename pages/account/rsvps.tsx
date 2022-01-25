@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { parseJWT, getCookie } from '@/server/auth';
 import AccountLayout from '@/components/AccountLayout';
-import { RSVP } from '@/entities';
+import { RSVP } from '@/server/entities';
 import { JWT_COOKIE_KEY, JWTPayload } from '@/server/jwt';
 import { PencilIcon } from '@heroicons/react/outline';
 import Button from '@/components/Button';

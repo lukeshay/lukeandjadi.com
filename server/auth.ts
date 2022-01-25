@@ -1,8 +1,12 @@
 import Cookie, { SetOption } from 'cookies';
 import Iron from '@hapi/iron';
+import config from 'config';
 
-export const defaultSalt = { ...Iron.defaults, ttl: 43200000 };
-export const defaultSecret = process.env.JWT_SECRET || '';
+export const defaultSalt = {
+  ...Iron.defaults,
+  ...(config.get('jwt.salt') as Object),
+};
+export const defaultSecret: string = config.get('jwt.secret');
 
 export function setCookie(
   req: any,

@@ -18,7 +18,7 @@ const bodySchema = yup.object().shape({
   guests: yup.number().positive().required(),
 });
 
-async function put({ req, res }: MyContext) {
+const put = async ({ req, res }: MyContext) => {
   const { token, email, guests, name } = await validate(bodySchema, req.body);
 
   logger.info('validating token');
@@ -44,6 +44,6 @@ async function put({ req, res }: MyContext) {
   const saved = await updateRSVP({ email, guests, name }, { name, id });
 
   return res.status(StatusCodes.OK).json(saved);
-}
+};
 
 export default middleware.put(put).handler();

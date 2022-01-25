@@ -23,6 +23,7 @@
     "@lukeshay/next-router": "0.3.4",
     "@sendgrid/mail": "7.6.0",
     "axios": "0.25.0",
+    "config": "^3.3.7",
     "cookies": "0.8.0",
     "correlation-id": "4.0.0",
     "fathom-client": "3.3.1",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@sinonjs/fake-timers": "8.1.0",
     "@tailwindcss/typography": "0.5.0",
+    "@types/config": "^0.0.41",
     "@types/cookies": "0.7.7",
     "@types/correlation-id": "2.1.2",
     "@types/jest": "27.4.0",

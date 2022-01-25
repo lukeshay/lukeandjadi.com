@@ -10,7 +10,7 @@ import config from '@/client/config';
 import { getRecaptchaToken } from '@/client/recaptcha';
 import Button from '@/components/Button';
 import Container from '@/components/Container';
-import { RSVP } from '@/entities';
+import { RSVP } from '@/server/entities';
 import { AxiosError } from 'axios';
 import { defaultSecret, getCookie, parseJWT } from '@/server/auth';
 import { RSVP_JWT_COOKIE_KEY } from '@/server/jwt';

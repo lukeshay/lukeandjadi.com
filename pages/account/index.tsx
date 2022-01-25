@@ -8,7 +8,7 @@ import AccountLayout from '@/components/AccountLayout';
 import { JWT_COOKIE_KEY, JWTPayload } from '@/server/jwt';
 import logger from '@/server/logger';
 import AccountContainer from '@/components/AccountContainer';
-import { Account } from '@/entities';
+import { Account } from '@/server/entities';
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   let { token } = ctx.query;

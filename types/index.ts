@@ -15,5 +15,6 @@ export interface RSVPAttributes {
   maxGuests: number;
   name: string;
 }
+
 export interface RSVPCreationAttributes
   extends Optional<RSVPAttributes, 'id' | 'email' | 'guests' | 'maxGuests'> {}

@@ -1,71 +1,39 @@
-import { Account } from '@/entities';
-import { generateJWT } from '@/server/auth';
-import { getJWTEmailHtml, getJWTEmailPlain } from '@/server/email';
-import { JWTPayload } from '@/server/jwt';
-import { sendEmail } from '@/server/smtp';
 import { StatusCodes } from '@lukeshay/next-router';
-import config from '@/server/config';
-import middleware, { MyContext } from '@/server/middleware';
-import logger from '@/server/logger';
+import * as yup from 'yup';
+
+import { generateJWT } from '../../../server/auth';
+import { getAccount } from '../../../server/services/account-service';
+import { JWTPayload } from '../../../server/jwt';
+import { sendJWTEmail } from '../../../server/services/email-service';
+import { validate } from '../../../server/services/schema-service';
+import logger from '../../../server/logger';
+import middleware, { MyContext } from '../../../server/middleware';
+import { generateAccountJWT } from '@/server/services/jwt-service';
+
+const bodySchema = yup.object().shape({
+  email: yup.string().email().required(),
+});
 
 const post = async ({ req, res }: MyContext): Promise<void> => {
-  const { email } = req.body;
+  const { email } = await validate(bodySchema, req.body);
 
-  if (!email) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ email: 'Email is required.' });
-  }
+  logger.info(`selecting account from database: ${email}`);
 
-  try {
-    logger.info(`selecting account from database: ${email}`);
-    const account = await Account.findOne({ where: { email } });
+  const { role } = await getAccount({ email });
 
-    if (!account) {
-      return res.status(StatusCodes.UNAUTHORIZED).json({ message: '' });
-    }
+  logger.info('generating jwt');
 
-    try {
-      logger.info('generating jwt');
-      const jwtToken = await generateJWT<JWTPayload>({
-        email,
-        role: account.get().role,
-      });
+  const jwtToken = await generateAccountJWT({ email, role });
 
-      logger.info('sending jwt email');
-      const html = getJWTEmailHtml(jwtToken);
-      const text = getJWTEmailPlain(jwtToken);
+  logger.info('sending jwt email');
 
-      const result = await sendEmail({
-        from: `Luke & Jadi <${config.env.emailFrom}>`,
-        subject: "Sign in link for Luke & Jadi's wedding website",
-        html,
-        text,
-        to: email,
-      });
+  const result = await sendJWTEmail(email, jwtToken);
 
-      logger.info(result[0].toString());
+  logger.info(result.toString());
 
-      return res
-        .status(StatusCodes.OK)
-        .json({ message: 'A email with a login link has been sent!' });
-    } catch (e) {
-      logger.error((e as Error).message, { ...(e as Error), level: 'error' });
-
-      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-        message:
-          'Uh oh! It looks like there was an error. Please try again or contact us if the error continues!',
-      });
-    }
-  } catch (e) {
-    logger.error(
-      `account with email does not exist: ${email} ${(e as Error).message}`,
-      e,
-    );
-    return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .json({ message: 'unauthorized' });
-  }
+  return res
+    .status(StatusCodes.OK)
+    .json({ message: 'A email with a login link has been sent!' });
 };
 
 export default middleware.post(post).handler();

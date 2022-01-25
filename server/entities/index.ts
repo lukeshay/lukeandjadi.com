@@ -4,20 +4,24 @@ import {
   RSVPAttributes,
   RSVPCreationAttributes,
 } from '@/types';
-import { Sequelize, DataTypes, ModelDefined } from 'sequelize-cockroachdb';
+import {
+  Sequelize,
+  DataTypes,
+  ModelDefined,
+  Options,
+} from 'sequelize-cockroachdb';
 import * as pg from 'pg';
 import logger from '@/server/logger';
+import config from 'config';
 
-const sequelize = new Sequelize(process.env.DSN || '', {
+const sequelize = new Sequelize(config.get('database.url'), {
   dialect: 'postgres',
-  dialectOptions: {
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
+  dialectOptions: config.get('database.options') as Options['dialectOptions'],
   dialectModule: pg,
   logging: (sql, time) => {
-    logger.debug(`${time} - ${sql}`);
+    if (config.get('environment') === 'development') {
+      logger.debug(`${time} - ${sql}`);
+    }
   },
 });
 
@@ -106,10 +110,5 @@ const RSVP: ModelDefined<RSVPAttributes, RSVPCreationAttributes> =
     },
     commonOpts,
   );
-
-export async function sync() {
-  await Account.sync({ force: true });
-  await RSVP.sync({ force: true });
-}
 
 export { sequelize, Account, RSVP };
