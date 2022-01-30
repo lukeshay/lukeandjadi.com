@@ -14,14 +14,14 @@ const config = {
         ...defaults,
         ttl: 43200000,
       },
-      cookie: 'jwt-token'
+      cookie: 'jwt-token',
     },
     rsvp: {
       salt: {
         ...defaults,
         ttl: 1800000,
       },
-      cookie: 'rsvp-jwt-token'
+      cookie: 'rsvp-jwt-token',
     },
   },
   recaptcha: {

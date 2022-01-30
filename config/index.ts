@@ -31,7 +31,6 @@ const nestedGet = (path: string, fullPath: string, config: any): any => {
 
 const get = (path: string): any => nestedGet(path, path, mergedConfig);
 
-
 const config = {
   get,
 };

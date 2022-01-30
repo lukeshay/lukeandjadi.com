@@ -22,7 +22,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: ['sha256:bbb87d21ebbe8ea8b784e06de66331f5c3b2bb3d5edb6dcf8af2320f19242c98']
+        version:
+          [
+            'sha256:bbb87d21ebbe8ea8b784e06de66331f5c3b2bb3d5edb6dcf8af2320f19242c98',
+          ]
         browser: ['chrome', 'firefox']
         baseUrl: ['dev.lukeandjadi.com']
     steps:

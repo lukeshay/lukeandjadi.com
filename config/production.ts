@@ -1,4 +1,4 @@
-const config =  {
+const config = {
   domain: 'https://lukeandjadi.com',
 };
 
