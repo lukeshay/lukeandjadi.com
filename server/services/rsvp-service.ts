@@ -1,7 +1,7 @@
-import type { Model, WhereOptions } from 'sequelize';
+import type { WhereOptions } from 'sequelize';
 
 import { RSVP } from '../entities';
-import type { RSVPAttributes, RSVPCreationAttributes } from '../../types';
+import type { RSVPAttributes } from '../../types';
 import { BadRequest } from '../errors/bad-request';
 
 const getRSVP = async (

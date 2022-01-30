@@ -7,7 +7,6 @@ import React, { ChangeEvent, FormEvent } from 'react';
 import { config as conf } from '../../config';
 import { getCookie } from '../../server/auth';
 import { getRecaptchaToken } from '../../client/recaptcha';
-import { RSVP } from '../../server/entities';
 import { rsvpPut } from '../../client/api';
 import Button from '../../components/Button';
 import config from '../../client/config';
