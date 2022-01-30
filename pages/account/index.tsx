@@ -1,44 +1,45 @@
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import React, { FormEvent } from 'react';
-import { setCookie, parseJWT, getCookie, defaultSalt } from '@/server/auth';
-import Form from '@/components/Form';
-import Input from '@/components/Input';
-import AccountLayout from '@/components/AccountLayout';
-import { JWT_COOKIE_KEY, JWTPayload } from '@/server/jwt';
-import logger from '@/server/logger';
-import AccountContainer from '@/components/AccountContainer';
-import { Account } from '@/server/entities';
 
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+import { config } from '../../config';
+import { setCookie, getCookie } from '../../server/auth';
+import AccountContainer from '../../components/AccountContainer';
+import AccountLayout from '../../components/AccountLayout';
+import Form from '../../components/Form';
+import Input from '../../components/Input';
+import logger from '../../server/logger';
+import { parseAccountJWT } from 'server/services/jwt-service';
+import { getAccount } from 'server/services/account-service';
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   let { token } = ctx.query;
 
   if (typeof token !== 'string') {
-    token = getCookie(ctx.req, ctx.res, JWT_COOKIE_KEY);
+    token = getCookie(ctx.req, ctx.res, config.get('jwt.signIn.cookie'));
 
     if (typeof token !== 'string') {
       return { props: {} };
     }
   }
 
-  setCookie(ctx.req, ctx.res, JWT_COOKIE_KEY, token as string, {
+  setCookie(ctx.req, ctx.res, config.get('jwt.signIn.cookie'), token, {
     sameSite: 'strict',
     httpOnly: true,
     overwrite: true,
     path: '/',
-    maxAge: defaultSalt.ttl,
+    maxAge: config.get('jwt.signIn.salt.ttl') * 1000,
   });
 
-  const payload = await parseJWT<JWTPayload>(token as string);
+  const payload = await parseAccountJWT(token);
 
   if (!payload) {
     return { props: {} };
   }
 
   try {
-    const res = (
-      await Account.findOne({ where: { email: payload.email } })
-    )?.get();
+    const res = await getAccount({ email: payload.email });
+
     return {
       props: res
         ? {
@@ -53,7 +54,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   }
 
   return { props: {} };
-}
+};
 
 export default function AccountPage(props: any) {
   const [values] = React.useState<any>(props);

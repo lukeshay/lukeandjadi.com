@@ -1,13 +1,13 @@
 import React, { FormEvent } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import Layout from '@/components/Layout';
-import { accountSignInPost } from '@/client/api';
-import Form from '@/components/Form';
-import Input from '@/components/Input';
-import config from '@/client/config';
-import Button from '@/components/Button';
-import AccountContainer from '@/components/AccountContainer';
+import Layout from '../../components/Layout';
+import { accountSignInPost } from '../../client/api';
+import Form from '../../components/Form';
+import Input from '../../components/Input';
+import config from '../../client/config';
+import Button from '../../components/Button';
+import AccountContainer from '../../components/AccountContainer';
 
 export default function SignIn() {
   const [email, setEmail] = React.useState('');

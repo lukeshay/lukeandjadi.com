@@ -1,21 +1,23 @@
+import { AxiosError } from 'axios';
 import { GetServerSidePropsContext } from 'next';
+import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
-import { toast } from 'react-toastify';
-import Form from '@/components/Form';
-import Input from '@/components/Input';
-import Layout from '@/components/Layout';
-import { rsvpPut } from '@/client/api';
-import config from '@/client/config';
-import { getRecaptchaToken } from '@/client/recaptcha';
-import Button from '@/components/Button';
-import Container from '@/components/Container';
-import { RSVP } from '@/server/entities';
-import { AxiosError } from 'axios';
-import { defaultSecret, getCookie, parseJWT } from '@/server/auth';
-import { RSVP_JWT_COOKIE_KEY } from '@/server/jwt';
-import serverConfig from '@/server/config';
-import logger from '@/server/logger';
+
+import { config as conf } from '../../config';
+import { getCookie } from '../../server/auth';
+import { getRecaptchaToken } from '../../client/recaptcha';
+import { RSVP } from '../../server/entities';
+import { rsvpPut } from '../../client/api';
+import Button from '../../components/Button';
+import config from '../../client/config';
+import Container from '../../components/Container';
+import Form from '../../components/Form';
+import Input from '../../components/Input';
+import Layout from '../../components/Layout';
+import logger from '../../server/logger';
+import { parseRSVPJWT } from 'server/services/jwt-service';
+import { getRSVP } from 'server/services/rsvp-service';
 
 const REDIRECT = {
   redirect: {
@@ -28,7 +30,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   try {
     logger.info('getting rsvp cookie from request');
 
-    const jwt = getCookie(ctx.req, ctx.res, RSVP_JWT_COOKIE_KEY);
+    const jwt = getCookie(ctx.req, ctx.res, conf.get('jwt.rsvp.cookie'));
 
     if (!jwt || jwt === '') {
       logger.info('no rsvp cookie found');
@@ -38,19 +40,9 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 
     logger.info('parsing rsvp jwt:', jwt);
 
-    const parsed = await parseJWT<{ id: string }>(
-      jwt,
-      defaultSecret,
-      serverConfig.rsvpJwtSalt,
-    );
+    const parsed = await parseRSVPJWT(jwt);
 
-    if (!parsed?.id) {
-      logger.info('rsvp jwt expired');
-
-      return REDIRECT;
-    }
-
-    const res = (await RSVP.findByPk(parsed.id))?.get();
+    const res = await getRSVP({ id: parsed.id });
 
     return {
       props:

@@ -6,25 +6,27 @@ import { BadRequest } from '../errors/bad-request';
 
 const getRSVP = async (
   properties: WhereOptions<RSVPAttributes>,
-): Promise<Model<RSVPAttributes, RSVPCreationAttributes>> => {
+): Promise<RSVPAttributes> => {
   const rsvp = await RSVP.findOne({ where: properties });
 
   if (!rsvp) {
     throw new BadRequest('RSVP not found');
   }
 
-  return rsvp;
+  return rsvp.get();
 };
 
 const updateRSVP = async (
   model: Parameters<typeof RSVP.update>[0],
   where: WhereOptions<RSVPAttributes>,
-): Promise<Model<RSVPAttributes, RSVPCreationAttributes>> => {
-  const rsvp = await getRSVP(where);
+): Promise<RSVPAttributes> => {
+  const rsvp = await RSVP.update(model, { where });
 
-  const updated = await rsvp.update(model);
+  if (!rsvp) {
+    throw new BadRequest('RSVP not found');
+  }
 
-  return updated;
+  return getRSVP(where);
 };
 
 export { getRSVP, updateRSVP };

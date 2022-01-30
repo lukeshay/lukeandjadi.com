@@ -1,4 +1,4 @@
-import { RSVPAttributes } from '@/types';
+import { RSVPAttributes } from '../types';
 import Axios from 'axios';
 
 export function configureAPI() {

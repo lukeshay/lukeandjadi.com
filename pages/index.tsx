@@ -1,9 +1,9 @@
 import React from 'react';
-import Layout from '@/components/Layout';
-import config from '@/client/config';
+import Layout from '../components/Layout';
+import config from '../client/config';
 import Image from 'next/image';
 import campanile from '../public/images/campanile.jpg';
-import Container from '@/components/Container';
+import Container from '../components/Container';
 import Link from 'next/link';
 
 function WeddingPartyMember({

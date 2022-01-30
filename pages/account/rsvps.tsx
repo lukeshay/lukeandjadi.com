@@ -1,16 +1,18 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import { useRouter } from 'next/router';
-import React from 'react';
-import Link from 'next/link';
-import { parseJWT, getCookie } from '@/server/auth';
-import AccountLayout from '@/components/AccountLayout';
-import { RSVP } from '@/server/entities';
-import { JWT_COOKIE_KEY, JWTPayload } from '@/server/jwt';
 import { PencilIcon } from '@heroicons/react/outline';
-import Button from '@/components/Button';
-import logger from '@/server/logger';
-import AccountContainer from '@/components/AccountContainer';
-import { RSVPAttributes } from '@/types';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import React from 'react';
+
+import { config } from '../../config';
+import { getCookie } from '../../server/auth';
+import { RSVP } from '../../server/entities';
+import { RSVPAttributes } from '../../types';
+import AccountContainer from '../../components/AccountContainer';
+import AccountLayout from '../../components/AccountLayout';
+import Button from '../../components/Button';
+import logger from '../../server/logger';
+import { parseAccountJWT } from 'server/services/jwt-service';
 
 const TableHeader = () => (
   <tr className="p-2 bg-gray-200">
@@ -39,19 +41,19 @@ const TableRow = ({ id, name, email, guests }: RSVPAttributes) => (
 );
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const token = getCookie(ctx.req, ctx.res, JWT_COOKIE_KEY);
+  const token = getCookie(ctx.req, ctx.res, config.get('jwt.rsvp.cookie'));
 
   if (typeof token !== 'string') {
     return { props: { rsvps: [] } };
   }
 
-  const payload = await parseJWT<JWTPayload>(token as string);
-
-  if (!payload || payload.role === 'BASIC') {
-    return { props: { rsvps: [] } };
-  }
-
   try {
+    const payload = await parseAccountJWT(token);
+
+    if (!payload || payload.role === 'BASIC') {
+      return { props: { rsvps: [] } };
+    }
+
     const rsvps = await RSVP.findAll({ order: [['name', 'ASC']] });
 
     const rows = rsvps.map((rsvp) => {

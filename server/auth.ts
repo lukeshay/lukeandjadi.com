@@ -1,12 +1,4 @@
 import Cookie, { SetOption } from 'cookies';
-import Iron from '@hapi/iron';
-import config from 'config';
-
-export const defaultSalt = {
-  ...Iron.defaults,
-  ...(config.get('jwt.salt') as Object),
-};
-export const defaultSecret: string = config.get('jwt.secret');
 
 export function setCookie(
   req: any,
@@ -30,25 +22,3 @@ export function setCookie(
 
 export const getCookie = (req: any, res: any, name: string) =>
   new Cookie(req, res).get(name);
-
-export function generateJWT<T extends Object>(
-  payload: T,
-  secret = defaultSecret,
-  salt = defaultSalt,
-) {
-  return Iron.seal(payload, secret, salt);
-}
-
-export async function parseJWT<T>(
-  jwtToken: string,
-  secret = defaultSecret,
-  salt = defaultSalt,
-): Promise<T | null> {
-  try {
-    return (await Iron.unseal(jwtToken, secret, salt)) as unknown as T;
-  } catch (e) {
-    console.error((e as Error).message);
-  }
-
-  return null;
-}

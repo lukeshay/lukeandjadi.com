@@ -5,7 +5,7 @@ const validate = async <T1, T2, T3, T4, T5>(
   // @ts-expect-error
   schema: yup.ObjectSchema<T1, T2, T3, T4>,
   payload: T5,
-): Promise<T4> => {
+): Promise<yup.InferType<typeof schema>> => {
   try {
     return await schema.validate(payload);
   } catch (error) {

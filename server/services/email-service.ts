@@ -1,5 +1,5 @@
 import sgMail from '@sendgrid/mail';
-import config from 'config';
+import { config } from '../../config';
 
 const domain: string = config.get('domain');
 const from: string = config.get('email.from');

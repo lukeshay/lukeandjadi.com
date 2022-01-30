@@ -3,11 +3,11 @@ import {
   AccountCreationAttributes,
   RSVPAttributes,
   RSVPCreationAttributes,
-} from '@/types';
+} from '../../types';
 import { Sequelize, DataTypes, ModelDefined } from 'sequelize-cockroachdb';
 import * as pg from 'pg';
-import logger from '@/server/logger';
-import config from 'config';
+import logger from '../../server/logger';
+import { config } from '../../config';
 
 const sequelize = new Sequelize(config.get('database.url'), {
   dialect: 'postgres',

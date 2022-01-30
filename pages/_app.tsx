@@ -3,7 +3,7 @@ import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 import { ToastContainer, Slide } from 'react-toastify';
-import { configureAPI } from '@/client/api';
+import { configureAPI } from '../client/api';
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';

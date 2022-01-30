@@ -20,12 +20,8 @@
     "strict": true,
     "target": "esnext",
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    },
-    "incremental": true,
-    "types": ["cypress", "jest", "node"]
+    "incremental": true
   },
-  "exclude": ["node_modules", "pulumi", "cypress", "test"],
+  "exclude": ["node_modules", "pulumi", "cypress"],
   "include": ["./**/*.ts", "./**/*.tsx"]
 }

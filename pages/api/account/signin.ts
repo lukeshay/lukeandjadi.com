@@ -6,7 +6,7 @@ import { sendJWTEmail } from '../../../server/services/email-service';
 import { validate } from '../../../server/services/schema-service';
 import logger from '../../../server/logger';
 import middleware, { MyContext } from '../../../server/middleware';
-import { generateAccountJWT } from '@/server/services/jwt-service';
+import { generateAccountJWT } from '../../../server/services/jwt-service';
 
 const bodySchema = yup.object().shape({
   email: yup.string().email().required(),

@@ -1,10 +1,10 @@
 import * as yup from 'yup';
 import { StatusCodes } from '@lukeshay/next-router';
 
+import { config } from '../../../config';
 import { getCookie } from '../../../server/auth';
 import { parseRSVPJWT } from '../../../server/services/jwt-service';
 import { RequestTimeout } from '../../../server/errors/request-timeout';
-import { RSVP_JWT_COOKIE_KEY } from '../../../server/jwt';
 import { updateRSVP } from '../../../server/services/rsvp-service';
 import { validate } from '../../../server/services/schema-service';
 import { verifyReCaptchaToken } from '../../../server/services/recaptcha-service';
@@ -27,7 +27,7 @@ const put = async ({ req, res }: MyContext) => {
 
   logger.info('getting jwt cookie');
 
-  const jwt = getCookie(req, res, RSVP_JWT_COOKIE_KEY);
+  const jwt = getCookie(req, res, config.get('jwt.rsvp.cookie'));
 
   if (!jwt) {
     logger.error('no jwt cookie found');

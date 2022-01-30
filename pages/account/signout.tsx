@@ -1,11 +1,12 @@
-import React from 'react';
-import { useRouter } from 'next/router';
 import { GetServerSidePropsContext } from 'next';
-import { setCookie } from '@/server/auth';
-import { JWT_COOKIE_KEY } from '@/server/jwt';
+import { useRouter } from 'next/router';
+import React from 'react';
+
+import { config } from '../../config';
+import { setCookie } from '../../server/auth';
 
 export function getServerSideProps(ctx: GetServerSidePropsContext) {
-  setCookie(ctx.req, ctx.res, JWT_COOKIE_KEY, '');
+  setCookie(ctx.req, ctx.res, config.get('jwt.signIn.cookie'), '');
 
   return { props: {} };
 }
