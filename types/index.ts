@@ -17,6 +17,7 @@ export interface RSVPAttributes {
   guests: number;
   maxGuests: number;
   name: string;
+  userAgent?: string;
 }
 
 export interface RSVPCreationAttributes

@@ -1,15 +1,16 @@
+import { requireSession as clerkRequireSession } from '@clerk/nextjs/api';
 import { router, StatusCodes, Wrapper } from '@lukeshay/next-router';
 import correlator from 'correlation-id';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiHandler } from 'next';
 import { v4 } from 'uuid';
 
 import { isAPIError, isError } from './errors/api-error';
 import logger from './logger';
 
-export type Handler = (
-  req: NextApiRequest,
-  res: NextApiResponse,
-) => Promise<void> | void;
+export type Handler = NextApiHandler;
+
+const requireSession = (handler: Handler): Handler =>
+  clerkRequireSession(handler) as unknown as Handler;
 
 const withCorrelationId: Wrapper<Handler> = async (req, res, next) => {
   await correlator.withId(v4(), async () => {
@@ -47,4 +48,5 @@ const wrapper: Wrapper<Handler> = async (req, res, handler) => {
   });
 };
 
+export { requireSession };
 export default router<Handler>(wrapper);

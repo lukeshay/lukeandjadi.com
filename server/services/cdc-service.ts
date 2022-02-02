@@ -1,5 +1,6 @@
 import { diff } from 'deep-diff';
 
+import type { CDCAttributes } from '../../types';
 import { CDC } from '../entities';
 
 const captureChange = async (
@@ -28,4 +29,16 @@ const captureChange = async (
   });
 };
 
-export { captureChange };
+const getAllChangesByResource = async (
+  resource: string,
+): Promise<CDCAttributes[]> =>
+  (
+    await CDC.findAll({
+      where: {
+        resource,
+      },
+      order: [['createdAt', 'DESC']],
+    })
+  ).map((cdc) => cdc.get());
+
+export { captureChange, getAllChangesByResource };

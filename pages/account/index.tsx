@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import React from 'react';
 import { withServerSideAuth } from '@clerk/nextjs/ssr';
+import { toast } from 'react-toastify';
 
 import { RSVP } from '../../server/entities';
 import { RSVPAttributes } from '../../types';
@@ -77,29 +78,57 @@ const AccountPage = ({
     }
   });
 
-  const handleDownloadClick = () => {
-    if (!csv) return;
-
-    const csvFile = new Blob([csv], { type: 'text/csv' });
+  const handleDownloadClick = (
+    content: string,
+    type: string,
+    name: string,
+    ext: string,
+  ) => {
+    const file = new Blob([content], { type });
     const downloadLink = document.createElement('a');
 
     const date = new Date();
 
-    downloadLink.download = `Wedding Guest List - ${date.getMonth()}.${date.getDate()}.${date.getFullYear()} ${date.getHours()}.${date.getMinutes()}.${date.getSeconds()}.${date.getMilliseconds()}.csv`;
-    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.download = `${name} - ${date.getMonth()}.${date.getDate()}.${date.getFullYear()} ${date.getHours()}.${date.getMinutes()}.${date.getSeconds()}.${date.getMilliseconds()}.${ext}`;
+    downloadLink.href = window.URL.createObjectURL(file);
     downloadLink.style.display = 'none';
     document.body.appendChild(downloadLink);
 
     downloadLink.click();
   };
 
+  const handleRSVPsDownloadClick = () => {
+    if (!csv) return;
+
+    handleDownloadClick(csv, 'text/csv', 'RSVPs', 'csv');
+  };
+
+  const handleDownloadChangesClick = async () => {
+    try {
+      const response = await fetch('/api/cdc/rsvps');
+      const body = await response.json();
+
+      handleDownloadClick(
+        JSON.stringify(body, undefined, 2),
+        'application/json',
+        'Changes',
+        'json',
+      );
+    } catch (e) {
+      toast.error(`error downloading changes: ${(e as Error).message}`);
+    }
+  };
+
   return (
     <AccountContainer>
       <div className="flex items-center justify-between">
         <h1 className="px-2 py-4 text-3xl text-bold">RSVPs</h1>
+        <div>
+          <Button onClick={handleDownloadChangesClick}>Download Changes</Button>
+        </div>
         {csv && (
           <div>
-            <Button onClick={handleDownloadClick}>Download</Button>
+            <Button onClick={handleRSVPsDownloadClick}>Download Table</Button>
           </div>
         )}
       </div>

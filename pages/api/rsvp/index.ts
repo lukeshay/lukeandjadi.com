@@ -20,6 +20,7 @@ const bodySchema = yup.object().shape({
 
 const put: Handler = async (req, res) => {
   const { token, email, guests, name } = await validate(bodySchema, req.body);
+  const userAgent = req.headers['user-agent'];
 
   logger.info('validating token');
 
@@ -41,7 +42,7 @@ const put: Handler = async (req, res) => {
 
   logger.info('updating rsvp');
 
-  const saved = await updateRSVP({ email, guests, name }, { name, id });
+  const saved = await updateRSVP({ email, guests, name, userAgent }, { name, id });
 
   res.status(StatusCodes.OK).json(saved);
 };

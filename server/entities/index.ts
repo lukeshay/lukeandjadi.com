@@ -57,6 +57,12 @@ const RSVP: ModelDefined<RSVPAttributes, RSVPCreationAttributes> =
         defaultValue: 2,
         field: 'max_guests',
       },
+      userAgent: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        unique: false,
+        field: 'user_agent',
+      },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: true,
@@ -115,7 +121,5 @@ const CDC: ModelDefined<CDCAttributes, CDCCreationAttributes> =
     },
     commonOpts,
   );
-
-sequelize.sync();
 
 export { sequelize, RSVP, CDC };
