@@ -1,4 +1,4 @@
-name: CD
+name: CI
 
 on:
   pull_request:
@@ -6,9 +6,17 @@ on:
       - main
 
 jobs:
+  optimize-images:
+    name: Optimize images
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: calibreapp/image-actions@main
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
   pulumi:
     name: Pulumi
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
