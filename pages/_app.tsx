@@ -8,11 +8,7 @@ import { useRouter } from 'next/router';
 import * as Fathom from 'fathom-client';
 import { ClerkProvider } from '@clerk/nextjs';
 
-import { configureAPI } from '../client/api';
-
 function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
-  configureAPI();
-
   const router = useRouter();
 
   useEffect(() => {

@@ -66,10 +66,10 @@ export const getServerSideProps: GetServerSideProps = withServerSideAuth(
   },
 );
 
-export default function AccountPage({
+const AccountPage = ({
   rsvps,
   csv,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
   const router = useRouter();
 
   React.useEffect(() => {
@@ -78,7 +78,7 @@ export default function AccountPage({
     }
   });
 
-  function handleDownloadClick() {
+  const handleDownloadClick = () => {
     if (!csv) return;
 
     const csvFile = new Blob([csv], { type: 'text/csv' });
@@ -92,7 +92,7 @@ export default function AccountPage({
     document.body.appendChild(downloadLink);
 
     downloadLink.click();
-  }
+  };
 
   return (
     <AccountContainer>
@@ -112,4 +112,6 @@ export default function AccountPage({
       </table>
     </AccountContainer>
   );
-}
+};
+
+export default AccountPage;

@@ -1,6 +1,6 @@
 import config from './config';
 
-export function getRecaptchaToken() {
+export const getRecaptchaToken = (): Promise<string> => {
   return new Promise((resolve) => {
     // @ts-expect-error
     window.grecaptcha.ready(() => {
@@ -14,4 +14,4 @@ export function getRecaptchaToken() {
         });
     });
   });
-}
+};

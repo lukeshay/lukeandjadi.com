@@ -1,21 +1,17 @@
 import { RSVPAttributes } from '../types';
-import Axios from 'axios';
+import Axios, { AxiosResponse } from 'axios';
 
-export function configureAPI() {
-  Axios.defaults.baseURL = '/api';
-  Axios.defaults.withCredentials = true;
-}
+Axios.defaults.baseURL = '/api';
+Axios.defaults.withCredentials = true;
 
-export function accountSignInPost(email: string) {
-  return Axios.post<{ email?: string; message?: string }>('/account/signin', {
-    email,
-  });
-}
-
-export function rsvpSearchGet(rsvp: any) {
+const rsvpSearchGet = (
+  rsvp: any,
+): Promise<AxiosResponse<RSVPAttributes, any>> => {
   return Axios.get<RSVPAttributes>('/rsvp/search', { params: rsvp });
-}
+};
 
-export function rsvpPut(rsvp: any) {
+const rsvpPut = (rsvp: any): Promise<AxiosResponse<RSVPAttributes, any>> => {
   return Axios.put<RSVPAttributes>('/rsvp', rsvp);
-}
+};
+
+export { rsvpSearchGet, rsvpPut };
