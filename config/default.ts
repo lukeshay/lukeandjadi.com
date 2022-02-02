@@ -27,7 +27,7 @@ const config = {
   recaptcha: {
     url: 'https://www.google.com/recaptcha/api/siteverify',
   },
-  domain: 'http://localhost:8080',
+  domain: 'http://localhost:3000',
   email: {
     from: 'contact@lukeandjadi.com',
   },

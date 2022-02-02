@@ -1,97 +1,115 @@
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { PencilIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
-import React, { FormEvent } from 'react';
+import Link from 'next/link';
+import React from 'react';
+import { withServerSideAuth } from '@clerk/nextjs/ssr';
 
-import { config } from '../../config';
-import { setCookie, getCookie } from '../../server/auth';
+import { RSVP } from '../../server/entities';
+import { RSVPAttributes } from '../../types';
 import AccountContainer from '../../components/AccountContainer';
 import AccountLayout from '../../components/AccountLayout';
-import Form from '../../components/Form';
-import Input from '../../components/Input';
+import Button from '../../components/Button';
 import logger from '../../server/logger';
-import { parseAccountJWT } from 'server/services/jwt-service';
-import { getAccount } from 'server/services/account-service';
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  let { token } = ctx.query;
+const TableHeader = () => (
+  <tr className="p-2 bg-gray-200">
+    <th className="p-2 rounded-tl w-52">Name</th>
+    <th className="p-2 w-52">Email</th>
+    <th className="p-2 w-52">Guests</th>
+    <th className="p-2 rounded-tr w-52">Edit</th>
+  </tr>
+);
 
-  if (typeof token !== 'string') {
-    token = getCookie(ctx.req, ctx.res, config.get('jwt.signIn.cookie'));
+const TableRow = ({ id, name, email, guests }: RSVPAttributes) => (
+  <tr className="p-2 border-t" key={id}>
+    <td className="p-2">{name}</td>
+    <td className="p-2">{email || 'Not set'}</td>
+    <td className="p-2">{guests || 'Not set'}</td>
+    <td className="flex items-center justify-center p-2">
+      <Link
+        href={`/rsvp/edit/${id}?redirectURI=/account/rsvps&message=${name}'s RSVP has been updated!&autoClose=true`}
+      >
+        <a className="p-2 text-gray-500 rounded-full cursor-pointer hover:ring ring-accent-500">
+          <PencilIcon width={20} height={20} />
+        </a>
+      </Link>
+    </td>
+  </tr>
+);
 
-    if (typeof token !== 'string') {
-      return { props: {} };
-    }
-  }
+export const getServerSideProps: GetServerSideProps = withServerSideAuth(
+  async () => {
+    try {
+      const rsvps = await RSVP.findAll({ order: [['name', 'ASC']] });
 
-  setCookie(ctx.req, ctx.res, config.get('jwt.signIn.cookie'), token, {
-    sameSite: 'strict',
-    httpOnly: true,
-    overwrite: true,
-    path: '/',
-    maxAge: config.get('jwt.signIn.salt.ttl') * 1000,
-  });
+      const rows = rsvps.map((rsvp) => {
+        const { id, name, email, guests } = rsvp.get();
+        return `${id}, ${name}, ${email}, ${guests}`;
+      });
 
-  const payload = await parseAccountJWT(token);
-
-  if (!payload) {
-    return { props: {} };
-  }
-
-  try {
-    const res = await getAccount({ email: payload.email });
-
-    return {
-      props: res
-        ? {
-            ...res,
-            updatedAt: null,
+      return {
+        props: {
+          rsvps: rsvps.map((rsvp) => ({
+            ...rsvp.get(),
             createdAt: null,
-          }
-        : {},
-    };
-  } catch (e) {
-    logger.error(`error selecting account: ${(e as Error).message}`, e);
-  }
+            updatedAt: null,
+          })),
+          csv: `id, name, email, guests\n${rows.join('\n')}`,
+        },
+      };
+    } catch (e) {
+      logger.error(`error getting all rsvps: ${(e as Error).message}`, e);
+    }
 
-  return { props: {} };
-};
+    return { props: { rsvps: [] } };
+  },
+);
 
-export default function AccountPage(props: any) {
-  const [values] = React.useState<any>(props);
+export default function AccountPage({
+  rsvps,
+  csv,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
 
   React.useEffect(() => {
-    if (!props.id) {
-      router.push('/account/signin');
+    if (rsvps.length === 0) {
+      router.push('/account');
     }
   });
 
-  async function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-  }
+  function handleDownloadClick() {
+    if (!csv) return;
 
-  function handleChange() {}
+    const csvFile = new Blob([csv], { type: 'text/csv' });
+    const downloadLink = document.createElement('a');
+
+    const date = new Date();
+
+    downloadLink.download = `Wedding Guest List - ${date.getMonth()}.${date.getDate()}.${date.getFullYear()} ${date.getHours()}.${date.getMinutes()}.${date.getSeconds()}.${date.getMilliseconds()}.csv`;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = 'none';
+    document.body.appendChild(downloadLink);
+
+    downloadLink.click();
+  }
 
   return (
     <AccountContainer>
-      <AccountLayout>
-        <Form
-          title="Account"
-          subTitle="Please fill out all required fields! This information will help us in planning for our wedding."
-          onSubmit={handleSubmit}
-          notSplit
-        >
-          <Input
-            label="Email"
-            id="email"
-            name="email"
-            autoComplete="email"
-            onChange={handleChange}
-            value={values.email}
-            disabled
-          />
-        </Form>
-      </AccountLayout>
+      <div className="flex items-center justify-between">
+        <h1 className="px-2 py-4 text-3xl text-bold">RSVPs</h1>
+        {csv && (
+          <div>
+            <Button onClick={handleDownloadClick}>Download</Button>
+          </div>
+        )}
+      </div>
+      <table className="border border-gray-200">
+        <thead>
+          <TableHeader />
+        </thead>
+        <tbody>{rsvps.map(TableRow)}</tbody>
+      </table>
     </AccountContainer>
   );
 }

@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { GetServerSidePropsContext } from 'next';
+import type { GetServerSideProps } from 'next';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
@@ -7,6 +7,8 @@ import React, { ChangeEvent, FormEvent } from 'react';
 import { config as conf } from '../../config';
 import { getCookie } from '../../server/auth';
 import { getRecaptchaToken } from '../../client/recaptcha';
+import { getRSVP } from '../../server/services/rsvp-service';
+import { parseRSVPJWT } from '../../server/services/jwt-service';
 import { rsvpPut } from '../../client/api';
 import Button from '../../components/Button';
 import config from '../../client/config';
@@ -15,8 +17,6 @@ import Form from '../../components/Form';
 import Input from '../../components/Input';
 import Layout from '../../components/Layout';
 import logger from '../../server/logger';
-import { parseRSVPJWT } from 'server/services/jwt-service';
-import { getRSVP } from 'server/services/rsvp-service';
 
 const REDIRECT = {
   redirect: {
@@ -25,7 +25,7 @@ const REDIRECT = {
   },
 };
 
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     logger.info('getting rsvp cookie from request');
 
@@ -52,7 +52,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 
     return REDIRECT;
   }
-}
+};
 
 export default function AccountPage(props: any) {
   const [values, setValues] = React.useState<any>(props);

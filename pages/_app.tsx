@@ -3,11 +3,12 @@ import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 import { ToastContainer, Slide } from 'react-toastify';
-import { configureAPI } from '../client/api';
-
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import * as Fathom from 'fathom-client';
+import { ClerkProvider } from '@clerk/nextjs';
+
+import { configureAPI } from '../client/api';
 
 function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   configureAPI();
@@ -38,7 +39,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   }, []);
 
   return (
-    <>
+    <ClerkProvider>
       <Component {...pageProps} />
       <ToastContainer
         hideProgressBar
@@ -46,7 +47,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
         transition={Slide}
         limit={1}
       />
-    </>
+    </ClerkProvider>
   );
 }
 

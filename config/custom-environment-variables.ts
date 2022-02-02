@@ -8,7 +8,7 @@ const config = {
     secret: process.env.JWT_SECRET,
   },
   recaptcha: {
-    secret: process.env.RECAPTCHA_SECRET,
+    secret: process.env.RECAPTCHA_SECRET_KEY,
   },
   sendgrid: {
     apiKey: process.env.SENDGRID_API_KEY,
