@@ -13,6 +13,7 @@
     "scripts"
   ],
   "scripts": {
+    "postbuild": "node --experimental-json-modules scripts/generate-sitemap.mjs",
     "build": "next build",
     "clean": "rimraf coverage .next",
     "cy:open": "cypress open",
