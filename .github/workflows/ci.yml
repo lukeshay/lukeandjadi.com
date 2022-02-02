@@ -6,6 +6,25 @@ on:
       - main
 
 jobs:
+  pulumi:
+    name: Pulumi
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.18.3
+      - run: npm install
+        working-directory: pulumi
+      - uses: pulumi/actions@v3
+        with:
+          command: preview
+          stack-name: dev
+          comment-on-pr: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          work-dir: pulumi
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   ci:
     name: ${{ matrix.command }}
     runs-on: ubuntu-20.04

@@ -1,13 +1,10 @@
 import * as pulumi from '@pulumi/pulumi';
 import * as cloudflare from '@pulumi/cloudflare';
-import * as fs from 'fs';
 
 const config = new pulumi.Config();
 
 const zoneId = config.require('zone_id');
 const url = config.require('url');
-
-const env = url.includes('dev') ? 'dev' : 'prod';
 
 const ttl = 1;
 
@@ -83,33 +80,6 @@ const wwwRedirect = new cloudflare.PageRule('www-redirect', {
   },
 });
 
-const sendgridCNAME = new cloudflare.Record('sendgrid-cname', {
-  zoneId,
-  type: 'CNAME',
-  name: `em6256.${url}`,
-  value: 'u20293343.wl094.sendgrid.net',
-  ttl,
-  proxied: false,
-});
-
-const sendgridCNAME1 = new cloudflare.Record('sendgrid-cname-1', {
-  zoneId,
-  type: 'CNAME',
-  name: `s1._domainkey.${url}`,
-  value: 's1.domainkey.u20293343.wl094.sendgrid.net',
-  ttl,
-  proxied: false,
-});
-
-const sendgridCNAME2 = new cloudflare.Record('sendgrid-cname-2', {
-  zoneId,
-  type: 'CNAME',
-  name: `s2._domainkey.${url}`,
-  value: 's2.domainkey.u20293343.wl094.sendgrid.net',
-  ttl,
-  proxied: false,
-});
-
 const con = {
   vercel: vercel.id,
   checkly: checkly.id,
@@ -119,9 +89,6 @@ const con = {
   zohoVerification: zohoVerification.id,
   zohoSPF: zohoSPF.id,
   wwwRedirect: wwwRedirect.id,
-  sendgridCNAME: sendgridCNAME.id,
-  sendgridCNAME1: sendgridCNAME1.id,
-  sendgridCNAME2: sendgridCNAME2.id,
 };
 
 export default con;
