@@ -7,13 +7,13 @@ import { getRSVP } from '../../../server/services/rsvp-service';
 import { setCookie } from '../../../server/auth';
 import { validate } from '../../../server/services/schema-service';
 import logger from '../../../server/logger';
-import middleware, { MyContext } from '../../../server/middleware';
+import middleware, { Handler } from '../../../server/middleware';
 
 const querySchema = yup.object().shape({
   name: yup.string().required(),
 });
 
-const get = async ({ req, res }: MyContext) => {
+const get: Handler = async (req, res) => {
   const { name } = await validate(querySchema, req.query);
 
   const rsvp = await getRSVP({ name });
@@ -31,7 +31,7 @@ const get = async ({ req, res }: MyContext) => {
     maxAge: config.get('jwt.rsvp.salt.ttl') * 1000,
   });
 
-  return res.status(StatusCodes.OK).json(rsvp);
+  res.status(StatusCodes.OK).json(rsvp);
 };
 
 export default middleware.get(get).handler();
