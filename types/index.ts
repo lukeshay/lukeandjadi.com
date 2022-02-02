@@ -1,12 +1,15 @@
 import { Optional } from 'sequelize-cockroachdb';
 
-export interface AccountAttributes {
+export interface CDCAttributes {
   id: string;
-  email: string;
-  role: 'BASIC' | 'ADMIN' | 'MASTER_ADMIN';
+  resource: string;
+  resourceId: string;
+  currentValue: any | null;
+  previousValue: any | null;
+  delta: any | null;
 }
-export interface AccountCreationAttributes
-  extends Optional<AccountAttributes, 'id' | 'role'> {}
+
+export interface CDCCreationAttributes extends Optional<CDCAttributes, 'id'> {}
 
 export interface RSVPAttributes {
   id: string;

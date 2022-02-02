@@ -3,6 +3,7 @@ import type { WhereOptions } from 'sequelize';
 import { RSVP } from '../entities';
 import type { RSVPAttributes } from '../../types';
 import { BadRequest } from '../errors/bad-request';
+import { captureChange } from './cdc-service';
 
 const getRSVP = async (
   properties: WhereOptions<RSVPAttributes>,
@@ -26,7 +27,11 @@ const updateRSVP = async (
     throw new BadRequest('RSVP not found');
   }
 
-  return getRSVP(where);
+  const updatedRsvp = await getRSVP(where);
+
+  await captureChange('rsvps', updatedRsvp.id, updatedRsvp);
+
+  return updatedRsvp;
 };
 
 export { getRSVP, updateRSVP };

@@ -1,6 +1,6 @@
 import {
-  AccountAttributes,
-  AccountCreationAttributes,
+  CDCAttributes,
+  CDCCreationAttributes,
   RSVPAttributes,
   RSVPCreationAttributes,
 } from '../../types';
@@ -28,42 +28,6 @@ const commonOpts = {
   timestamps: false,
 };
 
-const Account: ModelDefined<AccountAttributes, AccountCreationAttributes> =
-  sequelize.define(
-    'accounts',
-    {
-      id: {
-        type: DataTypes.UUID,
-        primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      role: {
-        type: DataTypes.ENUM('BASIC', 'ADMIN', 'MASTER_ADMIN'),
-        allowNull: false,
-        defaultValue: 'BASIC',
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: true,
-        defaultValue: Sequelize.fn('NOW'),
-        field: 'created_at',
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.fn('NOW'),
-        field: 'updated_at',
-        onUpdate: 'SET DEFAULT',
-      },
-    },
-    commonOpts,
-  );
-
 const RSVP: ModelDefined<RSVPAttributes, RSVPCreationAttributes> =
   sequelize.define(
     'rsvps',
@@ -90,7 +54,7 @@ const RSVP: ModelDefined<RSVPAttributes, RSVPCreationAttributes> =
       maxGuests: {
         type: DataTypes.SMALLINT,
         allowNull: false,
-        defaultValue: 10,
+        defaultValue: 2,
         field: 'max_guests',
       },
       createdAt: {
@@ -110,4 +74,48 @@ const RSVP: ModelDefined<RSVPAttributes, RSVPCreationAttributes> =
     commonOpts,
   );
 
-export { sequelize, Account, RSVP };
+const CDC: ModelDefined<CDCAttributes, CDCCreationAttributes> =
+  sequelize.define(
+    'cdc',
+    {
+      id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      resource: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      resourceId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        field: 'resource_id',
+      },
+      currentValue: {
+        type: DataTypes.JSON,
+        allowNull: true,
+        field: 'current_value',
+      },
+      previousValue: {
+        type: DataTypes.JSON,
+        allowNull: true,
+        field: 'previous_value',
+      },
+      delta: {
+        type: DataTypes.JSON,
+        allowNull: true,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: Sequelize.fn('NOW'),
+        field: 'created_at',
+      },
+    },
+    commonOpts,
+  );
+
+sequelize.sync();
+
+export { sequelize, RSVP, CDC };
