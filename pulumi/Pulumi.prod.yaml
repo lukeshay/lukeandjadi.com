@@ -1,6 +1,4 @@
 config:
   cloudflare:account_id: 0761603e9b3423fc858e07e5392e51e1
-  cloudflare:apiToken:
-    secure: AAABANfkDOiJngjgLYnbYhgj5cduDU99JKKhx85gcJ1wZOaUGrIni8mQ4bOGy7SgT7+Gr7dTc0UbDunECQUJI5QgyGuHugYT
   lukeandjadi.com:url: lukeandjadi.com
   lukeandjadi.com:zone_id: 5839d36ffc98b6089eb9ef6c5bd864da
