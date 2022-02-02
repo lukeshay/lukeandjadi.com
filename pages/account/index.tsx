@@ -8,7 +8,6 @@ import { withServerSideAuth } from '@clerk/nextjs/ssr';
 import { RSVP } from '../../server/entities';
 import { RSVPAttributes } from '../../types';
 import AccountContainer from '../../components/AccountContainer';
-import AccountLayout from '../../components/AccountLayout';
 import Button from '../../components/Button';
 import logger from '../../server/logger';
 
