@@ -1,4 +1,6 @@
 config:
-  cloudflare:account_id: 0761603e9b3423fc858e07e5392e51e1
+  cloudflare:apiToken:
+    secure: AAABAJaBtv7nSxMCNj7jZSv5uyM3QRNwNKxHBqbXUc7GiLqK5+6RS+HTcv3gtNwilzSc/5Zh1U1EkoPBMg0aRLH6GljZ+oZw
   lukeandjadi.com:url: lukeandjadi.com
-  lukeandjadi.com:zone_id: 5839d36ffc98b6089eb9ef6c5bd864da
+  lukeandjadi.com:zone_id:
+    secure: AAABAFS+kT4U6SGxd1Y7OxFO8nIJqi9Qw9pLoxrJBSbzmLgJbl9pwL9QOrtX3bcaKN+BVArkz7ZJn7yMtd7kxQ==
