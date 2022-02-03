@@ -41,13 +41,19 @@ jobs:
       matrix:
         command: ['build', 'lint', 'prettier:check', 'test']
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: 14.18.3
-      - name: Install
-        run: npm i -g npm@8 && npm ci
-      - name: Run ${{ matrix.command }}
-        run: npm run ${{ matrix.command }}
+      - run: npm i -g npm@8 && npm ci
+      - run: npm run ${{ matrix.command }}
+  acceptance:
+    runs-on: ubuntu-20.04
+    container: cypress/browsers@sha256:bbb87d21ebbe8ea8b784e06de66331f5c3b2bb3d5edb6dcf8af2320f19242c98
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.18.3
+      - run: npm i -g npm@8 && npm ci
+      - run: npm run cy:run:ci
