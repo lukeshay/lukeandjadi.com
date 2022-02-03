@@ -57,3 +57,13 @@ jobs:
           node-version: 14.18.3
       - run: npm i -g npm@8 && npm ci
       - run: npm run cy:run:ci
+        env:
+          CLERK_API_KEY: ${{ secrets.CLERK_API_KEY }}
+          DSN: ${{ secrets.DSN }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          NEXT_PUBLIC_CLERK_FRONTEND_API: ${{ secrets.NEXT_PUBLIC_CLERK_FRONTEND_API }}
+          NEXT_PUBLIC_DATADOG_CLIENT_TOKEN: ${{ secrets.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN }}
+          NEXT_PUBLIC_FATHOM_SITE_ID: ${{ secrets.NEXT_PUBLIC_FATHOM_SITE_ID }}
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+          DOMAIN: http://localhost:3000
