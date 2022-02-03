@@ -1,6 +1,7 @@
 import { diff } from 'deep-diff';
 import { deepEqual } from 'fast-equals';
 import flush from 'just-flush';
+import logger from 'server/logger';
 
 import type { CDCAttributes } from '../../types';
 import { CDC } from '../entities';
@@ -10,31 +11,40 @@ const captureChange = async (
   resourceId: string,
   value: any,
 ): Promise<void> => {
-  const latest = (
-    await CDC.findOne({
-      where: {
+  try {
+    const latest = (
+      await CDC.findOne({
+        where: {
+          resource,
+          resourceId,
+        },
+        order: [['createdAt', 'DESC']],
+      })
+    )?.get();
+
+    const flushedValue = flush({
+      ...value,
+      createdAt: undefined,
+      updatedAt: undefined,
+    });
+
+    const latestValue = latest?.currentValue ?? null;
+
+    if (!deepEqual(latestValue, flushedValue)) {
+      await CDC.create({
         resource,
         resourceId,
-      },
-      order: [['createdAt', 'DESC']],
-    })
-  )?.get();
-
-  const flushedValue = flush({
-    ...value,
-    createdAt: undefined,
-    updatedAt: undefined,
-  });
-
-  const latestValue = latest?.currentValue ?? null;
-
-  if (!deepEqual(latestValue, flushedValue)) {
-    await CDC.create({
+        currentValue: flushedValue,
+        previousValue: latestValue,
+        delta: diff(latestValue, flushedValue),
+      });
+    }
+  } catch (e) {
+    logger.error(`Error capturing change: ${(e as Error).message}`, {
+      ...(e as Error),
       resource,
       resourceId,
-      currentValue: flushedValue,
-      previousValue: latestValue,
-      delta: diff(latestValue, flushedValue),
+      value,
     });
   }
 };
