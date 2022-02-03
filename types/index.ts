@@ -1,6 +1,11 @@
 import { Optional } from 'sequelize-cockroachdb';
 
-export interface CDCAttributes {
+export interface BaseAttributes {
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface CDCAttributes extends BaseAttributes {
   id: string;
   resource: string;
   resourceId: string;
@@ -11,7 +16,7 @@ export interface CDCAttributes {
 
 export interface CDCCreationAttributes extends Optional<CDCAttributes, 'id'> {}
 
-export interface RSVPAttributes {
+export interface RSVPAttributes extends BaseAttributes {
   id: string;
   email?: string;
   guests: number;

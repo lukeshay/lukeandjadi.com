@@ -25,7 +25,15 @@
     "prettier:check": "npm run prettier -- --check",
     "prettier:write": "npm run prettier -- --write",
     "start": "next start",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "setup": "doppler setup --project lukeandjadi-com",
+    "setup:dev": "npm run setup -- --config dev",
+    "setup:preview": "npm run setup -- --config preview",
+    "setup:prd": "npm run setup -- --config prd",
+    "secrets": "doppler secrets download --no-file --format env >> .env.local",
+    "secrets:dev": "npm run setup:dev && npm run secrets",
+    "secrets:preview": "npm run setup:preview && npm run secrets",
+    "secrets:prd": "npm run setup:prd && npm run secrets"
   },
   "dependencies": {
     "@clerk/nextjs": "3.0.0-alpha.3",
@@ -39,7 +47,9 @@
     "cookies": "0.8.0",
     "correlation-id": "4.0.0",
     "deep-diff": "^1.0.2",
+    "fast-equals": "^2.0.4",
     "fathom-client": "3.4.0",
+    "just-flush": "^2.1.0",
     "merge-anything": "5.0.2",
     "next": "12.0.10",
     "pg": "8.7.1",

@@ -1,4 +1,6 @@
 import { diff } from 'deep-diff';
+import { deepEqual } from 'fast-equals';
+import flush from 'just-flush';
 
 import type { CDCAttributes } from '../../types';
 import { CDC } from '../entities';
@@ -18,15 +20,23 @@ const captureChange = async (
     })
   )?.get();
 
+  const flushedValue = flush({
+    ...value,
+    createdAt: undefined,
+    updatedAt: undefined,
+  });
+
   const latestValue = latest?.currentValue ?? null;
 
-  await CDC.create({
-    resource,
-    resourceId,
-    currentValue: value,
-    previousValue: latestValue,
-    delta: diff(latestValue, value),
-  });
+  if (!deepEqual(latestValue, flushedValue)) {
+    await CDC.create({
+      resource,
+      resourceId,
+      currentValue: flushedValue,
+      previousValue: latestValue,
+      delta: diff(latestValue, flushedValue),
+    });
+  }
 };
 
 const getAllChangesByResource = async (
