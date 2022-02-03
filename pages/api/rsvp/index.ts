@@ -42,7 +42,10 @@ const put: Handler = async (req, res) => {
 
   logger.info('updating rsvp');
 
-  const saved = await updateRSVP({ email, guests, name, userAgent }, { name, id });
+  const saved = await updateRSVP(
+    { email, guests, name, userAgent },
+    { name, id },
+  );
 
   res.status(StatusCodes.OK).json(saved);
 };

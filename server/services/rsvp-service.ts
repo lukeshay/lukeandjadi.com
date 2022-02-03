@@ -29,11 +29,7 @@ const updateRSVP = async (
 
   const updatedRsvp = await getRSVP(where);
 
-  await captureChange(
-    'rsvps',
-    updatedRsvp.id,
-    updatedRsvp,
-  );
+  await captureChange('rsvps', updatedRsvp.id, updatedRsvp);
 
   return updatedRsvp;
 };
