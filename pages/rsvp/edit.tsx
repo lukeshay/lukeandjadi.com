@@ -157,7 +157,7 @@ export default function AccountPage(props: any) {
             />
             <Button
               type="submit"
-              className="float-right px-6"
+              className="w-full md:w-auto md:float-right px-6 my-6"
               loading={loading}
             >
               Update

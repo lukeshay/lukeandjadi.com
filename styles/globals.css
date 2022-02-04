@@ -176,5 +176,5 @@ a {
 }
 
 .prose {
-  @apply font-serif !important;
+  @apply font-serif text-lg leading-8 !important;
 }
