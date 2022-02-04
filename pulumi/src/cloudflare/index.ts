@@ -1,10 +1,10 @@
 import * as pulumi from '@pulumi/pulumi';
 import * as cloudflare from '@pulumi/cloudflare';
 
-const config = new pulumi.Config();
+const pulumiConfig = new pulumi.Config();
 
-const zoneId = config.require('zone_id');
-const url = config.require('url');
+const zoneId = pulumiConfig.require('zone_id');
+const url = pulumiConfig.require('url');
 
 const ttl = 1;
 
@@ -80,7 +80,52 @@ const wwwRedirect = new cloudflare.PageRule('www-redirect', {
   },
 });
 
-const con = {
+const clerkAccounts = new cloudflare.Record('clerk-accounts', {
+  zoneId,
+  name: 'accounts',
+  type: 'CNAME',
+  value: 'accounts.clerk.services',
+  ttl,
+  proxied: true,
+});
+
+const clerkFrontendApi = new cloudflare.Record('clerk-frontend-api', {
+  zoneId,
+  name: 'clerk',
+  type: 'CNAME',
+  value: 'frontend-api.clerk.services',
+  ttl,
+  proxied: true,
+});
+
+const clerkDomainKeyOne = new cloudflare.Record('clerk-domain-key-one', {
+  zoneId,
+  name: 'clk._domainkey',
+  type: 'CNAME',
+  value: 'dkim1.x6h252afudo0.clerk.services',
+  ttl,
+  proxied: true,
+});
+
+const clerkDomainKeyTwo = new cloudflare.Record('clerk-domain-key-two', {
+  zoneId,
+  name: 'clk2._domainkey',
+  type: 'CNAME',
+  value: 'dkim2.x6h252afudo0.clerk.services',
+  ttl,
+  proxied: true,
+});
+
+const clerkMail = new cloudflare.Record('clerk-mail', {
+  zoneId,
+  name: 'clkmail',
+  type: 'CNAME',
+  value: 'mail.x6h252afudo0.clerk.services',
+  ttl,
+  proxied: true,
+});
+
+const config = {
   vercel: vercel.id,
   checkly: checkly.id,
   zoho: zoho.id,
@@ -89,6 +134,11 @@ const con = {
   zohoVerification: zohoVerification.id,
   zohoSPF: zohoSPF.id,
   wwwRedirect: wwwRedirect.id,
+  clerkAccounts: clerkAccounts.id,
+  clerkFrontendApi: clerkFrontendApi.id,
+  clerkDomainKeyOne: clerkDomainKeyOne.id,
+  clerkDomainKeyTwo: clerkDomainKeyTwo.id,
+  clerkMail: clerkMail.id,
 };
 
-export default con;
+export default config;

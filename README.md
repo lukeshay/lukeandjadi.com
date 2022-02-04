@@ -10,7 +10,7 @@ I know there are many wedding website builders out there, but I wanted to build 
 - CockroachDB
 - Pulumi
 - Cloudflare
-- Sendgrid
+- Clerk
 - TailwindCSS
 
 This is not intended to be reused by others but it certainly can with some modification.
