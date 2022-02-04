@@ -1,16 +1,20 @@
 /// <reference types="cypress" />
 
+import { Chance } from 'chance';
+
+const chance = new Chance();
+
 describe('RSVPs', () => {
   it('can be edited', () => {
     cy.visit('/');
-    cy.contains('a', 'RSVP').click();
+    cy.contains('button', 'RSVP').click();
 
     cy.url().should('include', '/rsvp');
 
     cy.get('input[id="name"]').type('Luke Shay');
     cy.contains('button', 'Search').click({ waitForAnimations: true });
 
-    cy.wait(5000);
+    cy.wait(3000)
 
     cy.url().should('include', '/rsvp/edit');
 
@@ -18,13 +22,16 @@ describe('RSVPs', () => {
 
     cy.get('input[id="name"]');
     cy.get('input[id="email"]').clear().type(`shay.luke17+${Date.now()}@gmail.com`);
-    cy.get('input[id="guests"]')
-      .clear()
-      .type(`${(Math.random() * 5 + 1).toFixed()}`);
+    cy.get('select[id="guests"]').select(
+      chance.natural({
+        max: 2,
+        min: 0,
+      }),
+    );
 
     cy.contains('button', 'Update').click({ waitForAnimations: true });
 
-    cy.wait(5000);
+    cy.wait(3000)
 
     cy.contains('Your RSVP has been updated!');
   });

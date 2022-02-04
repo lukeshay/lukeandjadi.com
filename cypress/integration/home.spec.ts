@@ -5,7 +5,7 @@ describe('The Home Page', () => {
     cy.visit('/');
 
     cy.get('nav');
-    cy.contains('a', 'RSVP');
+    cy.contains('button', 'RSVP');
     cy.get('img[data-test-id="banner"]');
     cy.contains('h1', 'Our Story');
     cy.contains('h1', 'The Wedding');

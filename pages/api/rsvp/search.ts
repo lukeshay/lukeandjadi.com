@@ -9,7 +9,7 @@ import { generateRSVPJWT } from '../../../server/services/jwt-service';
 import { getRSVP } from '../../../server/services/rsvp-service';
 import { setCookie } from '../../../server/auth';
 import { validate } from '../../../server/services/schema-service';
-import {verifyReCaptchaToken} from "../../../server/services/recaptcha-service";
+import { verifyReCaptchaToken } from '../../../server/services/recaptcha-service';
 
 const querySchema = yup.object().shape({
   name: yup.string().required(),
