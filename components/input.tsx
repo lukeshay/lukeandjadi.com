@@ -33,14 +33,14 @@ const Input = ({
   <div className="my-4 md:my-2">
     <label className="font-medium text-gray-700" htmlFor={id}>
       {label}
-      {required && <span className="text-red-500">{'&nbsp;*'}</span>}
+      {required && <span className="text-red-500">{' *'}</span>}
     </label>
     {!loading && (
       <input
         autoComplete={autoComplete}
         checked={checked}
         className={classNames(
-          'my-1 w-full rounded border p-2 outline-none ring-accent-500 focus:ring-2',
+          'my-1 w-full rounded border p-2 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500',
           disabled && 'cursor-not-allowed bg-gray-300 ring-0',
         )}
         disabled={disabled}

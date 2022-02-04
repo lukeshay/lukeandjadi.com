@@ -1,7 +1,7 @@
 import React from 'react';
 import type { AxiosError } from 'axios';
-import type { ChangeEvent, FormEvent } from 'react';
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import type { FormEvent, ChangeEventHandler } from 'react';
+import type { GetServerSideProps } from 'next';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
@@ -11,6 +11,9 @@ import Container from '../../components/containers/container';
 import Form from '../../components/form';
 import Input from '../../components/input';
 import logger from '../../server/logger';
+import Select from '../../components/select';
+import type { Option } from '../../components/select';
+import type { RSVPAttributes } from '../../types';
 import { config as conf } from '../../config';
 import { getCookie } from '../../server/auth';
 import { getRecaptchaToken } from '../../client/recaptcha';
@@ -57,8 +60,19 @@ const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 };
 
-const AccountPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
-  const [values, setValues] = React.useState<{ name?: string; email?: string; guests?: number }>(props);
+const AccountPage = (props: RSVPAttributes): JSX.Element => {
+  const guestOptions: Option[] = [];
+
+  for (let i = 0; i <= props.maxGuests; i++) {
+    guestOptions.push({
+      key: String(i),
+      value: String(i),
+    });
+  }
+
+  const [values, setValues] = React.useState<RSVPAttributes>({
+    ...props,
+  });
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
 
@@ -75,7 +89,9 @@ const AccountPage = (props: InferGetServerSidePropsType<typeof getServerSideProp
         token,
       });
 
-      setValues(res.data);
+      setValues({
+        ...res.data,
+      });
 
       toast(router.query.message ?? 'Your RSVP has been updated!', {
         type: 'success',
@@ -100,17 +116,20 @@ const AccountPage = (props: InferGetServerSidePropsType<typeof getServerSideProp
       });
     }
 
-    if (typeof router.query.redirectURI === 'string' && router.query.redirectURI.startsWith('/')) {
-      await router.push(router.query.redirectURI);
-    }
-
     setLoading(false);
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setValues({
       ...values,
       [event.target.id]: event.target.value,
+    });
+  };
+
+  const handleGuestsChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
+    setValues({
+      ...values,
+      guests: Number(event.target.value),
     });
   };
 
@@ -144,18 +163,16 @@ const AccountPage = (props: InferGetServerSidePropsType<typeof getServerSideProp
             required
             value={values.email}
           />
-          <Input
+          <Select
             autoComplete="guests"
             disabled={loading}
             id="guests"
             label="Guests"
-            max={10}
-            min={0}
             name="guests"
-            onChange={handleChange}
+            onChange={handleGuestsChange}
             required
-            type="number"
-            value={values.guests}
+            options={guestOptions}
+            selected={values.guests}
           />
           <Button className="my-6 w-full px-6 md:float-right md:w-auto" loading={loading} type="submit">
             {'Update'}

@@ -9,6 +9,7 @@ import Input from '../../components/input';
 import { rsvpSearchGet } from '../../client/api';
 import config from '../../client/config';
 import Container from '../../components/containers/container';
+import { getRecaptchaToken } from '../../client/recaptcha';
 
 const RSVPPage = (): JSX.Element => {
   const [values, setValues] = React.useState<{ name?: string }>({});
@@ -21,7 +22,12 @@ const RSVPPage = (): JSX.Element => {
     setLoading(true);
 
     try {
-      await rsvpSearchGet(values);
+      const token = await getRecaptchaToken();
+
+      await rsvpSearchGet({
+        ...values,
+        token,
+      });
 
       await router.push(`/rsvp/edit`);
 
