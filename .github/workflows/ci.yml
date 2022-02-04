@@ -74,6 +74,7 @@ jobs:
           spec: cypress/integration/*
           record: false
           args: --config baseUrl="http://localhost:3000"
+          wait-on: 'http://localhost:3000'
         env:
           CLERK_API_KEY: ${{ secrets.CLERK_API_KEY }}
           DSN: ${{ secrets.DSN }}
