@@ -101,7 +101,7 @@
 }
 
 a {
-  @apply text-blue-800 cursor-pointer hover:underline;
+  @apply cursor-pointer text-blue-800 hover:underline;
 }
 
 * {
@@ -109,11 +109,11 @@ a {
 }
 
 .tooltip {
-  @apply absolute invisible;
+  @apply invisible absolute;
 }
 
 .has-tooltip:hover .tooltip {
-  @apply z-50 visible;
+  @apply visible z-50;
 }
 
 .Toastify__toast-container {
@@ -122,7 +122,7 @@ a {
 
 .Toastify__toast--success,
 .Toastify__toast--info {
-  @apply border text-emerald-600 border-emerald-600;
+  @apply border border-emerald-600 text-emerald-600;
   background: #fff !important;
 }
 
@@ -132,7 +132,7 @@ a {
 }
 
 .Toastify__toast--warning {
-  @apply text-orange-500 border border-orange-500;
+  @apply border border-orange-500 text-orange-500;
   background: #fff !important;
 }
 
@@ -141,7 +141,7 @@ a {
 }
 
 .Toastify__toast--error {
-  @apply text-red-500 border border-red-500;
+  @apply border border-red-500 text-red-500;
   background: #fff !important;
 }
 

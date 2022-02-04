@@ -40,7 +40,7 @@ const Input = ({
         autoComplete={autoComplete}
         checked={checked}
         className={classNames(
-          'w-full border rounded p-2 my-1 outline-none focus:ring-2 ring-accent-500',
+          'my-1 w-full rounded border p-2 outline-none ring-accent-500 focus:ring-2',
           disabled && 'cursor-not-allowed bg-gray-300 ring-0',
         )}
         disabled={disabled}

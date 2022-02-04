@@ -8,11 +8,11 @@ type ContainerProps = {
 
 const Container = ({ children }: ContainerProps): JSX.Element => (
   <BaseContainer>
-    <div className="z-0 -mb-40 top-14 md:-mb-48 lg:-mb-60 xl:-mb-96 md:sticky">
+    <div className="top-14 z-0 -mb-40 md:sticky md:-mb-48 lg:-mb-60 xl:-mb-96">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="flowers" className="object-cover w-full" src="/images/flowers-1.png" />
+      <img alt="flowers" className="w-full object-cover" src="/images/flowers-1.png" />
     </div>
-    <main className="w-full min-h-screen">{children}</main>
+    <main className="min-h-screen w-full">{children}</main>
   </BaseContainer>
 );
 

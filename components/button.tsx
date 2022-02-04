@@ -16,7 +16,7 @@ const Button = ({
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }): JSX.Element => (
   <button
-    className={`${className} bg-accent-500 hover:opacity-75 text-gray-800 my-2 px-4 py-2.5 rounded shadow-sn flex justify-center text-center items-center ease-in-out duration-200`}
+    className={`${className} shadow-sn my-2 flex items-center justify-center rounded bg-accent-500 px-4 py-2.5 text-center text-gray-800 duration-200 ease-in-out hover:opacity-75`}
     disabled={loading ?? disabled}
     onClick={onClick}
     type={type} // eslint-disable-line react/button-has-type

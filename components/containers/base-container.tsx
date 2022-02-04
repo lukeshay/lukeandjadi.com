@@ -35,7 +35,7 @@ const BaseContainer = ({ children, title }: BaseContainerProps): JSX.Element => 
       <title>{title ?? 'Luke & Jadi'}</title>
     </Head>
     <Navbar />
-    <div className="flex justify-center w-full px-2">
+    <div className="flex w-full justify-center px-2">
       <main className="max-w-4xl">{children}</main>
     </div>
     <Footer />

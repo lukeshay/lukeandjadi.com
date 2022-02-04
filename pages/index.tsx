@@ -23,16 +23,16 @@ const WeddingPartyMember = ({
   relation: string;
 }): JSX.Element => (
   <div className="col-span-1">
-    <div className="flex justify-center w-full pb-4">
+    <div className="flex w-full justify-center pb-4">
       <Image alt={name} className="w-full shadow-lg" src={src} />
     </div>
-    <h2 className="text-lg font-semibold pb-0.5 text-gray-900">{name}</h2>
-    <h3 className="text-gray-700 uppercase">{role}</h3>
+    <h2 className="pb-0.5 text-lg font-semibold text-gray-900">{name}</h2>
+    <h3 className="uppercase text-gray-700">{role}</h3>
     <p className="text-sm text-gray-500">{relation}</p>
   </div>
 );
 
-const Divider = (): JSX.Element => <div className="w-full my-8 border-b border-accent-500" />;
+const Divider = (): JSX.Element => <div className="my-8 w-full border-b border-accent-500" />;
 
 const Header = ({
   children,
@@ -55,12 +55,12 @@ const Header = ({
         visibility: 'hidden',
       }}
     />
-    <h1 className={`"${className} text-2xl md:text-4xl font-bold pb-2 md:pb-4`}>{children}</h1>
+    <h1 className={`"${className} pb-2 text-2xl font-bold md:pb-4 md:text-4xl`}>{children}</h1>
   </>
 );
 
 const SubHeader = ({ children, className = '' }: { children: string; className?: string }): JSX.Element => (
-  <h2 className={`${className} text-xl md:text-3xl font-bold py-2 md:py-4`}>{children}</h2>
+  <h2 className={`${className} py-2 text-xl font-bold md:py-4 md:text-3xl`}>{children}</h2>
 );
 
 const Section = ({ title, children, id }: { title: string; children: React.ReactNode; id: string }): JSX.Element => (
@@ -98,10 +98,10 @@ const RegistryLink = ({ href, children }: { href: string; children: React.ReactN
 /* eslint-disable @typescript-eslint/no-require-imports,@typescript-eslint/no-unsafe-assignment */
 const Home = (): JSX.Element => (
   <Container>
-    <div className="relative mt-6 md:-mt-8 text-center text-gray-100">
+    <div className="relative mt-6 text-center text-gray-100 md:-mt-8">
       <Image alt="Cover" className="w-full" data-test-id="banner" src={cover} />
       <div
-        className="absolute text-4xl text-center select-none font-cursive top-1/2 left-1/2 md:text-6xl lg:text-7xl"
+        className="absolute top-1/2 left-1/2 select-none text-center font-cursive text-4xl md:text-6xl lg:text-7xl"
         style={{ transform: 'translate(-50%, -50%)' }}
       >
         {'Luke & Jadi'}
@@ -112,7 +112,7 @@ const Home = (): JSX.Element => (
         <Link href="/rsvp" prefetch passHref>
           <button
             type="button"
-            className="px-4 py-2 font-serif text-base font-bold text-white rounded shadow hover:no-underline md:text-lg lg:text-2xl bg-accent-500"
+            className="rounded bg-accent-500 px-4 py-2 font-serif text-base font-bold text-white shadow hover:no-underline md:text-lg lg:text-2xl"
           >
             {'RSVP'}
           </button>
@@ -120,7 +120,7 @@ const Home = (): JSX.Element => (
       </div>
     </div>
     <Section id="our-story" title="Our Story">
-      <span className="hidden float-right py-4 pl-4 md:inline-block w-80">
+      <span className="float-right hidden w-80 py-4 pl-4 md:inline-block">
         <Image alt="campanile" src={campanile} />
       </span>
       <p className="prose">
@@ -233,7 +233,7 @@ const Home = (): JSX.Element => (
           {'This would be a great time to check in to your hotel or check out East'}
           {'Village. Some bars we recommend are:'}
         </p>
-        <ul className="ml-4 text-gray-600 list-disc list-inside">
+        <ul className="ml-4 list-inside list-disc text-gray-600">
           <li>{'Iowa Taproom'}</li>
           <li>{'The Republic on Grand'}</li>
           <li>{'Beechwood Lounge'}</li>

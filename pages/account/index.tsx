@@ -13,16 +13,16 @@ import Button from '../../components/button';
 import logger from '../../server/logger';
 
 const TableHeader = (): JSX.Element => (
-  <tr className="p-2 bg-gray-200">
-    <th className="p-2 rounded-tl w-52">{'Name'}</th>
-    <th className="p-2 w-52">{'Email'}</th>
-    <th className="p-2 w-52">{'Guests'}</th>
-    <th className="p-2 rounded-tr w-52">{'Edit'}</th>
+  <tr className="bg-gray-200 p-2">
+    <th className="w-52 rounded-tl p-2">{'Name'}</th>
+    <th className="w-52 p-2">{'Email'}</th>
+    <th className="w-52 p-2">{'Guests'}</th>
+    <th className="w-52 rounded-tr p-2">{'Edit'}</th>
   </tr>
 );
 
 const TableRow = ({ id, name, email, guests }: RSVPAttributes): JSX.Element => (
-  <tr className="p-2 border-t" key={id}>
+  <tr className="border-t p-2" key={id}>
     <td className="p-2">{name}</td>
     <td className="p-2">{email ?? 'Not set'}</td>
     <td className="p-2">{guests}</td>
@@ -32,7 +32,7 @@ const TableRow = ({ id, name, email, guests }: RSVPAttributes): JSX.Element => (
         passHref
         prefetch
       >
-        <button type="button" className="p-2 text-gray-500 rounded-full cursor-pointer hover:ring ring-accent-500">
+        <button type="button" className="cursor-pointer rounded-full p-2 text-gray-500 ring-accent-500 hover:ring">
           <PencilIcon height={20} width={20} />
         </button>
       </Link>
@@ -113,7 +113,7 @@ const AccountPage = ({ rsvps, csv }: InferGetServerSidePropsType<typeof getServe
   return (
     <AccountContainer>
       <div className="flex items-center justify-between">
-        <h1 className="px-2 py-4 text-3xl text-bold">{'RSVPs'}</h1>
+        <h1 className="text-bold px-2 py-4 text-3xl">{'RSVPs'}</h1>
         <div>
           <Button onClick={handleDownloadChangesClick}>{'Download Changes'}</Button>
         </div>

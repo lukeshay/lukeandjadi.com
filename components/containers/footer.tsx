@@ -27,9 +27,9 @@ const FooterLink = ({
 );
 
 const Footer = (): JSX.Element => (
-  <footer className="w-full h-24 py-8 mt-8 border-t">
-    <div className="flex justify-center w-full">
-      <div className="justify-between block w-full max-w-screen-lg px-2 sm:flex lg:px-0">
+  <footer className="mt-8 h-24 w-full border-t py-8">
+    <div className="flex w-full justify-center">
+      <div className="block w-full max-w-screen-lg justify-between px-2 sm:flex lg:px-0">
         <div>
           <h4 className="text-lg font-semibold">{'Wedding Information'}</h4>
           <ul>

@@ -116,7 +116,7 @@ const AccountPage = (props: InferGetServerSidePropsType<typeof getServerSideProp
 
   return (
     <Container>
-      <div className="flex flex-row justify-center w-full mt-6 md:-mt-8">
+      <div className="mt-6 flex w-full flex-row justify-center md:-mt-8">
         <Form
           className="max-w-xl"
           notSplit
@@ -157,7 +157,7 @@ const AccountPage = (props: InferGetServerSidePropsType<typeof getServerSideProp
             type="number"
             value={values.guests}
           />
-          <Button className="w-full md:w-auto md:float-right px-6 my-6" loading={loading} type="submit">
+          <Button className="my-6 w-full px-6 md:float-right md:w-auto" loading={loading} type="submit">
             {'Update'}
           </Button>
         </Form>
