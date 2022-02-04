@@ -14,7 +14,7 @@ describe('RSVPs', () => {
     cy.get('input[id="name"]').type('Luke Shay');
     cy.contains('button', 'Search').click({ waitForAnimations: true });
 
-    cy.wait(3000)
+    cy.wait(3000);
 
     cy.url().should('include', '/rsvp/edit');
 
@@ -31,7 +31,7 @@ describe('RSVPs', () => {
 
     cy.contains('button', 'Update').click({ waitForAnimations: true });
 
-    cy.wait(3000)
+    cy.wait(3000);
 
     cy.contains('Your RSVP has been updated!');
   });
