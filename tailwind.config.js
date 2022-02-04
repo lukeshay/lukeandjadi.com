@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {

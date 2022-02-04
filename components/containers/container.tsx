@@ -12,7 +12,9 @@ const Container = ({ children }: ContainerProps): JSX.Element => (
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img alt="flowers" className="w-full object-cover" src="/images/flowers-1.png" />
     </div>
-    <main className="min-h-screen w-full">{children}</main>
+    <div className="flex w-full justify-center px-2">
+      <main className="min-h-screen max-w-4xl">{children}</main>
+    </div>
   </BaseContainer>
 );
 

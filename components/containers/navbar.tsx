@@ -18,7 +18,7 @@ const NavLink = ({
   <li className="px-4 py-2 md:px-2 md:py-0 lg:px-4">
     <Link href={href} passHref>
       <button
-        className="select-none border-b-2 border-accent-500 px-0 py-2 text-base text-gray-700 outline-none hover:no-underline hover:opacity-75 md:px-2 md:text-sm lg:text-base"
+        className="select-none border-b-2 border-accent-500 px-0 py-0.5 text-base text-gray-700 outline-none hover:no-underline hover:opacity-75 md:px-2 md:text-sm lg:text-base"
         onClick={onClick}
         type="button"
       >
