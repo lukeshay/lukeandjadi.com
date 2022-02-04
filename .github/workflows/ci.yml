@@ -61,7 +61,7 @@ jobs:
           DOMAIN: http://localhost:3000
   acceptance:
     runs-on: ubuntu-20.04
-    container: browserless/chrome:latest
+    container: kasmweb/chrome:1.10.0-rolling
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
