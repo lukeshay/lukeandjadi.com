@@ -41,36 +41,3 @@ jobs:
           work-dir: pulumi
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Deploy main
-        run: curl -X POST ${{ secrets.VERCEL_DEPLOY_MAIN_URL }}
-  cypress:
-    name: Cypress
-    needs: [deploy]
-    runs-on: ubuntu-20.04
-    container: cypress/browsers@${{ matrix.version }}
-    strategy:
-      fail-fast: false
-      matrix:
-        version:
-          [
-            'sha256:bbb87d21ebbe8ea8b784e06de66331f5c3b2bb3d5edb6dcf8af2320f19242c98',
-          ]
-        browser: ['chrome']
-        baseUrl: ['dev.lukeandjadi.com']
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          browser: ${{ matrix.browser }}
-          start: npm run cy:run
-          spec: cypress/integration/*
-          record: false
-          args: --config baseUrl="https://${{ matrix.baseUrl }}"

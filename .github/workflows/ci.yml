@@ -72,7 +72,6 @@ jobs:
           install-command: npm ci
           start: npm run dev
           spec: cypress/integration/*
-          parallel: true
           config: baseUrl=http://localhost:3000
           wait-on: 'http://localhost:3000'
         env:
