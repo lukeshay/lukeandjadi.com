@@ -30,8 +30,8 @@ export default function Input({
   min?: number;
 }) {
   return (
-    <div>
-      <label htmlFor={id} className="font-semibold text-lg">
+    <div className="my-4 md:my-2">
+      <label htmlFor={id} className="font-medium text-gray-700">
         {label}
         {required && <span className="text-red-500">&nbsp;*</span>}
       </label>
@@ -40,7 +40,7 @@ export default function Input({
           id={id}
           name={name}
           autoComplete={autoComplete}
-          className={`w-full border rounded p-2 my-2 outline-none focus:ring-2 ring-accent-500 ${
+          className={`w-full border rounded p-2 my-1 outline-none focus:ring-2 ring-accent-500 ${
             disabled && 'cursor-not-allowed bg-gray-300 ring-0'
           }`}
           value={value === null ? undefined : value}

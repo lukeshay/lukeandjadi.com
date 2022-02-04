@@ -1,10 +1,12 @@
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+
 import Layout from '../components/Layout';
 import config from '../client/config';
-import Image from 'next/image';
 import campanile from '../public/images/campanile.jpg';
+import cover from '../public/images/cover-photo.jpg';
 import Container from '../components/Container';
-import Link from 'next/link';
 
 function WeddingPartyMember({
   src,
@@ -149,8 +151,8 @@ export default function Home() {
     <Container>
       <Layout>
         <div className="relative mt-16 text-center text-gray-100 md:mt-16">
-          <img
-            src="/images/cover-photo.jpg"
+          <Image
+            src={cover}
             alt="Cover"
             className="w-full"
             data-test-id="banner"
@@ -168,7 +170,7 @@ export default function Home() {
               ) + 1}{' '}
               Days
             </p>
-            <Link href="/rsvp">
+            <Link prefetch href="/rsvp">
               <a className="px-4 py-2 font-serif text-base font-bold text-white rounded shadow hover:no-underline md:text-lg lg:text-2xl bg-accent-500">
                 RSVP
               </a>
@@ -183,10 +185,10 @@ export default function Home() {
             Luke and I met in August 2017 on our second day at Iowa State. We
             lived on the same floor in Eaton Hall and hung out with the same
             friends. I started crushing on Luke within a week, even though for
-            the first few days I couldn’t remember his name and referred to him
+            the first few days I could not remember his name and referred to him
             as “the guy who is always smiling.” If you know Luke, you know he is
             truly always smiling! Luke took a little longer to make up his mind
-            because he said he didn’t know I was interested in him, despite my
+            because he said he did not know I was interested in him, despite my
             very obvious hints. ;) Luke will say they were not obvious at all. I
             invited Luke to the pool with our friends numerous times and he
             never did end up coming along… In September, Luke FINALLY asked me
