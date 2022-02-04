@@ -61,7 +61,7 @@ jobs:
           DOMAIN: http://localhost:3000
   acceptance:
     runs-on: ubuntu-20.04
-    container: kasmweb/chrome:1.10.0-rolling
+    container: cypress/browsers:node16.5.0-chrome97-ff96
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
