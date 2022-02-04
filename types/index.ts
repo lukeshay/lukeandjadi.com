@@ -25,5 +25,4 @@ export interface RSVPAttributes extends BaseAttributes {
   userAgent?: string;
 }
 
-export interface RSVPCreationAttributes
-  extends Optional<RSVPAttributes, 'id' | 'email' | 'guests' | 'maxGuests'> {}
+export interface RSVPCreationAttributes extends Optional<RSVPAttributes, 'id' | 'email' | 'guests' | 'maxGuests'> {}

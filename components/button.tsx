@@ -10,16 +10,16 @@ const Button = ({
 }: {
   disabled?: boolean;
   loading?: boolean;
-  type?: 'submit' | 'button' | 'reset';
+  type?: 'button' | 'reset' | 'submit';
   className?: string;
   children: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}) => (
+}): JSX.Element => (
   <button
-    type={type}
     className={`${className} bg-accent-500 hover:opacity-75 text-gray-800 my-2 px-4 py-2.5 rounded shadow-sn flex justify-center text-center items-center ease-in-out duration-200`}
-    disabled={loading || disabled}
+    disabled={loading ?? disabled}
     onClick={onClick}
+    type={type} // eslint-disable-line react/button-has-type
   >
     {loading && <div className="lds-dual-ring" />}
     {children}

@@ -5,17 +5,16 @@ import { NextSeo } from 'next-seo';
 import Navbar from './navbar';
 import Footer from './footer';
 
-export interface ContainerProps {
+type BaseContainerProps = {
   children: React.ReactNode;
   title?: string;
-}
+};
 
-const BaseContainer = ({ children, title }: ContainerProps) => (
+const BaseContainer = ({ children, title }: BaseContainerProps): JSX.Element => (
   <div className="font-serif">
     <NextSeo
-      title={title || 'Luke & Jadi'}
-      description={"Luke & Jadi's wedding website!"}
       canonical="https://lukeandjadi.com/"
+      description={"Luke & Jadi's wedding website!"}
       openGraph={{
         url: 'https://lukeandjadi.com/',
         title: "Luke & Jadi's Wedding Website",
@@ -26,19 +25,22 @@ const BaseContainer = ({ children, title }: ContainerProps) => (
             alt: 'Cover Photo',
           },
         ],
+        // eslint-disable-next-line camelcase
         site_name: 'Luke & Jadi',
       }}
+      title={title ?? 'Luke & Jadi'}
     />
     <Head>
-      <link rel="icon" href="/favicon.ico" />
-      <title>{title || 'Luke & Jadi'}</title>
+      <link href="/favicon.ico" rel="icon" />
+      <title>{title ?? 'Luke & Jadi'}</title>
     </Head>
     <Navbar />
-    <div className={`flex justify-center w-full px-2`}>
-      <main className={'max-w-4xl'}>{children}</main>
+    <div className="flex justify-center w-full px-2">
+      <main className="max-w-4xl">{children}</main>
     </div>
     <Footer />
   </div>
 );
 
+export type { BaseContainerProps };
 export default BaseContainer;

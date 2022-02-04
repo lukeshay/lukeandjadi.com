@@ -1,16 +1,17 @@
-import { ChangeEventHandler } from 'react';
+import type { ChangeEventHandler } from 'react';
+import classNames from 'classnames';
 
-export default function Input({
+const Input = ({
   label,
   id,
   name,
   autoComplete,
   onChange,
   value,
-  required,
-  disabled,
-  type,
-  loading,
+  required = false,
+  disabled = false,
+  type = 'input',
+  loading = false,
   checked,
   max,
   min,
@@ -20,48 +21,40 @@ export default function Input({
   name: string;
   autoComplete: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
-  value?: string | null | number;
+  value?: number | string | null;
   required?: boolean;
   disabled?: boolean;
-  type?: 'input' | 'checkbox' | 'number';
+  type?: 'checkbox' | 'input' | 'number';
   loading?: boolean;
   checked?: boolean;
   max?: number;
   min?: number;
-}) {
-  return (
-    <div className="my-4 md:my-2">
-      <label htmlFor={id} className="font-medium text-gray-700">
-        {label}
-        {required && <span className="text-red-500">&nbsp;*</span>}
-      </label>
-      {!loading && (
-        <input
-          id={id}
-          name={name}
-          autoComplete={autoComplete}
-          className={`w-full border rounded p-2 my-1 outline-none focus:ring-2 ring-accent-500 ${
-            disabled && 'cursor-not-allowed bg-gray-300 ring-0'
-          }`}
-          value={value === null ? undefined : value}
-          onChange={onChange}
-          disabled={disabled}
-          required={required}
-          type={type}
-          checked={checked}
-          max={max}
-          min={min}
-        />
-      )}
-    </div>
-  );
-}
+}): JSX.Element => (
+  <div className="my-4 md:my-2">
+    <label className="font-medium text-gray-700" htmlFor={id}>
+      {label}
+      {required && <span className="text-red-500">{'&nbsp;*'}</span>}
+    </label>
+    {!loading && (
+      <input
+        autoComplete={autoComplete}
+        checked={checked}
+        className={classNames(
+          'w-full border rounded p-2 my-1 outline-none focus:ring-2 ring-accent-500',
+          disabled && 'cursor-not-allowed bg-gray-300 ring-0',
+        )}
+        disabled={disabled}
+        id={id}
+        max={max}
+        min={min}
+        name={name}
+        onChange={onChange}
+        required={required}
+        type={type}
+        value={value === null ? undefined : value}
+      />
+    )}
+  </div>
+);
 
-Input.defaultProps = {
-  required: false,
-  disabled: false,
-  type: 'input',
-  loading: false,
-  value: undefined,
-  checked: undefined,
-};
+export default Input;

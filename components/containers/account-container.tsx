@@ -1,14 +1,14 @@
 import { SignedIn, SignedOut } from '@clerk/nextjs';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 import BaseContainer from './base-container';
-import React from 'react';
 
-export interface ContainerProps {
-  children: React.ReactNode;
-}
+type ContainerProps = {
+  children: ReactNode;
+};
 
-const AccountContainer = ({ children }: ContainerProps) => (
+const AccountContainer = ({ children }: ContainerProps): JSX.Element => (
   <BaseContainer title="Luke & Jadi | Admin">
     <SignedIn>
       <main className="min-h-screen">
@@ -20,15 +20,16 @@ const AccountContainer = ({ children }: ContainerProps) => (
     <SignedOut>
       <main>
         <p>
-          Please{' '}
-          <Link href="/account/sign-in">
-            <a>sign in</a>
+          {'Please '}
+          <Link href="/account/sign-in" passHref>
+            <button type="button">{'sign in'}</button>
           </Link>{' '}
-          to access this page.
+          {' to access this page.'}
         </p>
       </main>
     </SignedOut>
   </BaseContainer>
 );
 
+export type { ContainerProps };
 export default AccountContainer;

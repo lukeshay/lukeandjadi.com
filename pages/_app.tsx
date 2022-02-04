@@ -1,24 +1,28 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import '../styles/globals.css';
+import process from 'node:process';
+
 import 'react-toastify/dist/ReactToastify.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ToastContainer, Slide } from 'react-toastify';
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import * as Fathom from 'fathom-client';
 import { ClerkProvider } from '@clerk/nextjs';
+import type { AppProps } from 'next/app';
 
-const MyApp = ({ Component, pageProps }: { Component: any; pageProps: any }) => {
+// eslint-disable-next-line node/no-unpublished-import
+import '../styles/globals.css';
+
+const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   const router = useRouter();
 
   useEffect(() => {
-    Fathom.load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID || '', {
+    Fathom.load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID ?? '', {
       includedDomains: ['lukeandjadi.com'],
     });
 
-    const onRouteChangeComplete = () => {
+    const onRouteChangeComplete = (): void => {
       Fathom.trackPageview();
-    }
+    };
+
     router.events.on('routeChangeComplete', onRouteChangeComplete);
 
     return () => {
@@ -29,14 +33,9 @@ const MyApp = ({ Component, pageProps }: { Component: any; pageProps: any }) => 
   return (
     <ClerkProvider>
       <Component {...pageProps} />
-      <ToastContainer
-        hideProgressBar
-        position="bottom-center"
-        transition={Slide}
-        limit={1}
-      />
+      <ToastContainer hideProgressBar limit={1} position="bottom-center" transition={Slide} />
     </ClerkProvider>
   );
-}
+};
 
 export default MyApp;

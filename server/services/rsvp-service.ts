@@ -5,9 +5,7 @@ import type { RSVPAttributes } from '../../types';
 import { BadRequest } from '../errors/bad-request';
 import { captureChange } from './cdc-service';
 
-const getRSVP = async (
-  properties: WhereOptions<RSVPAttributes>,
-): Promise<RSVPAttributes> => {
+const getRSVP = async (properties: WhereOptions<RSVPAttributes>): Promise<RSVPAttributes> => {
   const rsvp = await RSVP.findOne({ where: properties });
 
   if (!rsvp) {

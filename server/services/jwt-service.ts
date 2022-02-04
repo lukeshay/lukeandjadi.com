@@ -5,14 +5,9 @@ import { Unauthorized } from '../errors/unauthorized';
 
 type RSVPJWTPayload = { id: string };
 
-const generateJWT = <T>(payload: T, secret: string, salt: Iron.SealOptions) =>
-  Iron.seal(payload, secret, salt);
+const generateJWT = <T>(payload: T, secret: string, salt: Iron.SealOptions) => Iron.seal(payload, secret, salt);
 
-const parseJWT = async <T>(
-  jwtToken: string,
-  secret: string,
-  salt: Iron.SealOptions,
-): Promise<T | null> => {
+const parseJWT = async <T>(jwtToken: string, secret: string, salt: Iron.SealOptions): Promise<T | null> => {
   try {
     return (await Iron.unseal(jwtToken, secret, salt)) as unknown as T;
   } catch (e) {

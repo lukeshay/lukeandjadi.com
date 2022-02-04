@@ -9,8 +9,7 @@ import logger from './logger';
 
 export type Handler = NextApiHandler;
 
-const requireSession = (handler: Handler): Handler =>
-  clerkRequireSession(handler) as unknown as Handler;
+const requireSession = (handler: Handler): Handler => clerkRequireSession(handler) as unknown as Handler;
 
 const withCorrelationId: Wrapper<Handler> = async (req, res, next) => {
   await correlator.withId(v4(), async () => {
@@ -35,9 +34,7 @@ const withErrorHandler: Wrapper<Handler> = async (req, res, next) => {
     } else {
       logger.info(`an unknown error has ocurred: ${error}`, { error });
 
-      res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: 'an unknown error occurred' });
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'an unknown error occurred' });
     }
   }
 };

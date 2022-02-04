@@ -1,12 +1,6 @@
 import Cookie, { SetOption } from 'cookies';
 
-export function setCookie(
-  req: any,
-  res: any,
-  name: string,
-  value?: string,
-  options: SetOption = {},
-) {
+const setCookie = (req: any, res: any, name: string, value?: string, options: SetOption = {}) => {
   const cookies = new Cookie(req, res);
   const newOptions = options;
 
@@ -18,7 +12,8 @@ export function setCookie(
   newOptions.overwrite = true;
 
   cookies.set(name, value, options);
-}
+};
 
-export const getCookie = (req: any, res: any, name: string) =>
-  new Cookie(req, res).get(name);
+const getCookie = (req: any, res: any, name: string) => new Cookie(req, res).get(name);
+
+export { setCookie, getCookie };

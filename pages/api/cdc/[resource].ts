@@ -2,10 +2,8 @@ import * as yup from 'yup';
 import { StatusCodes } from '@lukeshay/next-router';
 
 import { validate } from '../../../server/services/schema-service';
-import middleware, {
-  Handler,
-  requireSession,
-} from '../../../server/middleware';
+import type { Handler } from '../../../server/middleware';
+import middleware, { requireSession } from '../../../server/middleware';
 import { getAllChangesByResource } from '../../../server/services/cdc-service';
 
 const querySchema = yup.object().shape({

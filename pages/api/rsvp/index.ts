@@ -1,6 +1,9 @@
 import * as yup from 'yup';
 import { StatusCodes } from '@lukeshay/next-router';
 
+import logger from '../../../server/logger';
+import middleware from '../../../server/middleware';
+import type { Handler } from '../../../server/middleware';
 import { config } from '../../../config';
 import { getCookie } from '../../../server/auth';
 import { parseRSVPJWT } from '../../../server/services/jwt-service';
@@ -8,14 +11,12 @@ import { RequestTimeout } from '../../../server/errors/request-timeout';
 import { updateRSVP } from '../../../server/services/rsvp-service';
 import { validate } from '../../../server/services/schema-service';
 import { verifyReCaptchaToken } from '../../../server/services/recaptcha-service';
-import logger from '../../../server/logger';
-import middleware, { Handler } from '../../../server/middleware';
 
 const bodySchema = yup.object().shape({
-  token: yup.string().required(),
-  name: yup.string().required(),
   email: yup.string().email().required(),
   guests: yup.number().positive().required(),
+  name: yup.string().required(),
+  token: yup.string().required(),
 });
 
 const put: Handler = async (req, res) => {
@@ -28,7 +29,7 @@ const put: Handler = async (req, res) => {
 
   logger.info('getting jwt cookie');
 
-  const jwt = getCookie(req, res, config.get('jwt.rsvp.cookie'));
+  const jwt = getCookie(req, res, config.get('jwt.rsvp.cookie') as string);
 
   if (!jwt) {
     logger.error('no jwt cookie found');
@@ -43,8 +44,16 @@ const put: Handler = async (req, res) => {
   logger.info('updating rsvp');
 
   const saved = await updateRSVP(
-    { email, guests, name, userAgent },
-    { name, id },
+    {
+      email,
+      guests,
+      name,
+      userAgent,
+    },
+    {
+      name,
+      id,
+    },
   );
 
   res.status(StatusCodes.OK).json(saved);

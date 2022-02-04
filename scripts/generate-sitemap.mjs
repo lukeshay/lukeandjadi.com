@@ -2,8 +2,8 @@ import { writeFileSync } from 'fs';
 import globby from 'globby';
 import prettier from 'prettier';
 
-async function generate() {
-  const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
+const generate = async () => {
+  const prettierConfig = await prettier.resolveConfig('./.prettierrc.json');
   const pages = await globby([
     'pages/**/*.tsx',
     '!pages/_*.tsx',
@@ -17,10 +17,7 @@ async function generate() {
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         ${pages
           .map((page) => {
-            const path = page
-              .replace('pages', '')
-              .replace('.tsx', '')
-              .replace('/index', '');
+            const path = page.replace('pages', '').replace('.tsx', '').replace('/index', '');
 
             return `
               <url>
@@ -39,6 +36,6 @@ async function generate() {
 
   // eslint-disable-next-line no-sync
   writeFileSync('public/sitemap.xml', formatted);
-}
+};
 
 generate();
