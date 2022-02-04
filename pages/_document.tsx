@@ -1,5 +1,3 @@
-import process from 'node:process';
-
 import type { DocumentProps } from 'next/document';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { datadogLogs } from '@datadog/browser-logs';

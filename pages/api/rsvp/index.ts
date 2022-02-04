@@ -29,7 +29,7 @@ const put: Handler = async (req, res) => {
 
   logger.info('getting jwt cookie');
 
-  const jwt = getCookie(req, res, config.get('jwt.rsvp.cookie') as string);
+  const jwt = getCookie(req, res, config.get('jwt.rsvp.cookie'));
 
   if (!jwt) {
     logger.error('no jwt cookie found');

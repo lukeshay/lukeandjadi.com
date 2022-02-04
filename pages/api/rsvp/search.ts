@@ -25,11 +25,11 @@ const get: Handler = async (req, res) => {
 
   logger.debug('setting jwt cookie');
 
-  setCookie(req, res, config.get('jwt.rsvp.cookie') as string, jwt, {
+  setCookie(req, res, config.get('jwt.rsvp.cookie'), jwt, {
     sameSite: 'strict',
     httpOnly: true,
     overwrite: true,
-    maxAge: (config.get('jwt.rsvp.salt.ttl') as number) * 1000,
+    maxAge: config.get<number>('jwt.rsvp.salt.ttl') * 1000,
   });
 
   res.status(StatusCodes.OK).json(rsvp);

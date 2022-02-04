@@ -1,5 +1,3 @@
-import process from 'node:process';
-
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect } from 'react';
 import { ToastContainer, Slide } from 'react-toastify';

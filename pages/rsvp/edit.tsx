@@ -29,7 +29,7 @@ const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     logger.info('getting rsvp cookie from request');
 
-    const jwt = getCookie(ctx.req, ctx.res, conf.get('jwt.rsvp.cookie') as string);
+    const jwt = getCookie(ctx.req, ctx.res, conf.get('jwt.rsvp.cookie'));
 
     if (!jwt || jwt === '') {
       logger.info('no rsvp cookie found');

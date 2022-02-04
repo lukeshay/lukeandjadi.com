@@ -1,10 +1,12 @@
-import { CDCAttributes, CDCCreationAttributes, RSVPAttributes, RSVPCreationAttributes } from '../../types';
-import { Sequelize, DataTypes, ModelDefined } from 'sequelize-cockroachdb';
+import type { ModelDefined } from 'sequelize-cockroachdb';
+import { Sequelize, DataTypes } from 'sequelize-cockroachdb';
 import * as pg from 'pg';
-import logger from '../../server/logger';
+
+import type { CDCAttributes, CDCCreationAttributes, RSVPAttributes, RSVPCreationAttributes } from '../../types';
+import logger from '../logger';
 import { config } from '../../config';
 
-const sequelize = new Sequelize(config.get('database.url'), {
+const sequelize = new Sequelize(config.get('database.url') as string, {
   dialect: 'postgres',
   dialectOptions: {
     ssl: {
