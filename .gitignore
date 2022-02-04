@@ -45,3 +45,5 @@ cypress/downloads
 cypress/logs
 cypress/videos
 cypress/screenshots
+
+.idea/

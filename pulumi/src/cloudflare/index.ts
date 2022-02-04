@@ -86,7 +86,7 @@ const clerkAccounts = new cloudflare.Record('clerk-accounts', {
   type: 'CNAME',
   value: 'accounts.clerk.services',
   ttl,
-  proxied: true,
+  proxied: false,
 });
 
 const clerkFrontendApi = new cloudflare.Record('clerk-frontend-api', {
@@ -95,7 +95,7 @@ const clerkFrontendApi = new cloudflare.Record('clerk-frontend-api', {
   type: 'CNAME',
   value: 'frontend-api.clerk.services',
   ttl,
-  proxied: true,
+  proxied: false,
 });
 
 const clerkDomainKeyOne = new cloudflare.Record('clerk-domain-key-one', {
@@ -104,7 +104,7 @@ const clerkDomainKeyOne = new cloudflare.Record('clerk-domain-key-one', {
   type: 'CNAME',
   value: 'dkim1.x6h252afudo0.clerk.services',
   ttl,
-  proxied: true,
+  proxied: false,
 });
 
 const clerkDomainKeyTwo = new cloudflare.Record('clerk-domain-key-two', {
@@ -113,7 +113,7 @@ const clerkDomainKeyTwo = new cloudflare.Record('clerk-domain-key-two', {
   type: 'CNAME',
   value: 'dkim2.x6h252afudo0.clerk.services',
   ttl,
-  proxied: true,
+  proxied: false,
 });
 
 const clerkMail = new cloudflare.Record('clerk-mail', {
@@ -122,7 +122,7 @@ const clerkMail = new cloudflare.Record('clerk-mail', {
   type: 'CNAME',
   value: 'mail.x6h252afudo0.clerk.services',
   ttl,
-  proxied: true,
+  proxied: false,
 });
 
 const config = {
