@@ -12,11 +12,7 @@ const mergedConfig = merge(
   process.env.NODE_ENV === 'production' ? productionConfig : developmentConfig,
 );
 
-const nestedGet = <T>(
-  path: string,
-  fullPath: string,
-  config: Record<string, unknown>,
-): T => {
+const nestedGet = <T>(path: string, fullPath: string, config: Record<string, unknown>): T => {
   const i = path.indexOf('.');
 
   if (i === -1) {
@@ -35,8 +31,7 @@ const nestedGet = <T>(
   return nestedGet(newPath, fullPath, config[key] as Record<string, unknown>);
 };
 
-const get = <T>(path: string): T =>
-  nestedGet<T>(path, path, mergedConfig);
+const get = <T>(path: string): T => nestedGet<T>(path, path, mergedConfig);
 
 const config = {
   get,
