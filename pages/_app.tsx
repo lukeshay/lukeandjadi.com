@@ -8,31 +8,23 @@ import { useRouter } from 'next/router';
 import * as Fathom from 'fathom-client';
 import { ClerkProvider } from '@clerk/nextjs';
 
-function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
+const MyApp = ({ Component, pageProps }: { Component: any; pageProps: any }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // Initialize Fathom when the app loads
-    // Example: yourdomain.com
-    //  - Do not include https://
-    //  - This must be an exact match of your domain.
-    //  - If you're using www. for your domain, make sure you include that here.
     Fathom.load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID || '', {
       includedDomains: ['lukeandjadi.com'],
     });
 
-    function onRouteChangeComplete() {
+    const onRouteChangeComplete = () => {
       Fathom.trackPageview();
     }
-    // Record a pageview when route changes
     router.events.on('routeChangeComplete', onRouteChangeComplete);
 
-    // Unassign event listener
     return () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [router]);
 
   return (
     <ClerkProvider>

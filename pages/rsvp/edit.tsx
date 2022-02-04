@@ -10,12 +10,11 @@ import { getRecaptchaToken } from '../../client/recaptcha';
 import { getRSVP } from '../../server/services/rsvp-service';
 import { parseRSVPJWT } from '../../server/services/jwt-service';
 import { rsvpPut } from '../../client/api';
-import Button from '../../components/Button';
+import Button from '../../components/button';
 import config from '../../client/config';
-import Container from '../../components/Container';
-import Form from '../../components/Form';
-import Input from '../../components/Input';
-import Layout from '../../components/Layout';
+import Container from '../../components/containers/container';
+import Form from '../../components/form';
+import Input from '../../components/input';
 import logger from '../../server/logger';
 
 const REDIRECT = {
@@ -113,8 +112,7 @@ export default function AccountPage(props: any) {
 
   return (
     <Container>
-      <Layout>
-        <div className="flex flex-row justify-center w-full mt-12 lg:mt-0">
+        <div className="flex flex-row justify-center w-full mt-6 md:-mt-8">
           <Form
             title="RSVP"
             subTitle="Please fill out all required fields, this information will help us in planning for our wedding! Enter 0 (zero) guests if you cannot attend."
@@ -164,7 +162,6 @@ export default function AccountPage(props: any) {
             </Button>
           </Form>
         </div>
-      </Layout>
     </Container>
   );
 }

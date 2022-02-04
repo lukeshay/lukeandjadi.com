@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link';
-import config from '../client/config';
+import config from '../../client/config';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import { Transition, Dialog } from '@headlessui/react';
 

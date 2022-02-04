@@ -1,4 +1,4 @@
-import config from '../client/config';
+import config from '../../client/config';
 import Link from 'next/link';
 
 function FooterLink({

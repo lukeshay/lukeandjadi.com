@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 
 import { RSVP } from '../../server/entities';
 import { RSVPAttributes } from '../../types';
-import AccountContainer from '../../components/AccountContainer';
-import Button from '../../components/Button';
+import AccountContainer from '../../components/containers/account-container';
+import Button from '../../components/button';
 import logger from '../../server/logger';
 
 const TableHeader = () => (

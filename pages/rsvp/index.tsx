@@ -1,13 +1,12 @@
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import Button from '../../components/Button';
-import Form from '../../components/Form';
-import Input from '../../components/Input';
-import Layout from '../../components/Layout';
+import Button from '../../components/button';
+import Form from '../../components/form';
+import Input from '../../components/input';
 import { rsvpSearchGet } from '../../client/api';
 import config from '../../client/config';
-import Container from '../../components/Container';
+import Container from '../../components/containers/container';
 
 export default function AccountPage() {
   const [values, setValues] = React.useState<any>({});
@@ -44,8 +43,7 @@ export default function AccountPage() {
 
   return (
     <Container>
-      <Layout>
-        <div className="flex flex-row justify-center w-full mt-12 lg:mt-0">
+        <div className="flex flex-row justify-center w-full mt-6 md:-mt-8">
           <Form
             title="RSVP"
             subTitle="Please search for your name as it appears on your invite! Email contact@lukeandjadi.com if you have any questions."
@@ -72,7 +70,6 @@ export default function AccountPage() {
             </Button>
           </Form>
         </div>
-      </Layout>
     </Container>
   );
 }

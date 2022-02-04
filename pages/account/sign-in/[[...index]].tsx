@@ -1,6 +1,6 @@
 import { SignIn } from '@clerk/nextjs';
 
-import Container from '../../../components/Container';
+import Container from '../../../components/containers/container';
 
 const SignInPage = () => (
   <Container>

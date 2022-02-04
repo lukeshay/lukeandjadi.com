@@ -2,11 +2,10 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Layout from '../components/Layout';
 import config from '../client/config';
 import campanile from '../public/images/campanile.jpg';
 import cover from '../public/images/cover-photo.jpg';
-import Container from '../components/Container';
+import Container from '../components/containers/container';
 
 function WeddingPartyMember({
   src,
@@ -149,8 +148,7 @@ function RegistryLink({
 export default function Home() {
   return (
     <Container>
-      <Layout>
-        <div className="relative mt-16 text-center text-gray-100 md:mt-16">
+        <div className="relative mt-6 md:-mt-8 text-center text-gray-100">
           <Image
             src={cover}
             alt="Cover"
@@ -373,7 +371,6 @@ export default function Home() {
             ))}
           </SubSection>
         </Section>
-      </Layout>
     </Container>
   );
 }
