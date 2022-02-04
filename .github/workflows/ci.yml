@@ -7,7 +7,6 @@ on:
 
 jobs:
   optimize-images:
-    name: Optimize images
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -15,7 +14,6 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
   pulumi:
-    name: Pulumi
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -69,11 +67,13 @@ jobs:
           node-version: '14.18.3'
           cache: 'npm'
       - run: npm i -g npm@8 && npm ci
-      - run: |
-          mkdir cypress/videos || exit 0
-          mkdir cypress/downloads || exit 0
-          mkdir cypress/screenshots || exit 0
-          npm run cy:run:ci
+      - uses: cypress-io/github-action@v2
+        with:
+          browser: chrome
+          start: npm run dev
+          spec: cypress/integration/*
+          record: false
+          args: --config baseUrl="http://localhost:3000"
         env:
           CLERK_API_KEY: ${{ secrets.CLERK_API_KEY }}
           DSN: ${{ secrets.DSN }}
