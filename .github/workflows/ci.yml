@@ -80,7 +80,7 @@ jobs:
           install-command: npm ci
           start: npm run dev
           spec: cypress/integration/*
-          config: baseUrl=http://localhost:3000
+          config: baseUrl=http://localhost:3000,port=4000
           wait-on: 'http://localhost:3000'
         env:
           CLERK_API_KEY: ${{ secrets.CLERK_API_KEY }}

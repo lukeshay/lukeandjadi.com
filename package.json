@@ -17,7 +17,7 @@
     "postbuild": "node --experimental-json-modules scripts/generate-sitemap.mjs",
     "clean": "rimraf coverage .next",
     "cy:open": "cypress open",
-    "cy:run": "cypress run --browser chrome",
+    "cy:run": "cypress run",
     "cy:run:ci": "start-server-and-test dev http://localhost:3000 cy:run:lcl",
     "cy:run:dev": "npm run cy:run -- --config baseUrl=\"https://dev.lukeandjadi.com\"",
     "cy:run:lcl": "npm run cy:run -- --config baseUrl=\"http://localhost:3000\"",
