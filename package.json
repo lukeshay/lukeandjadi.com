@@ -35,7 +35,7 @@
     "setup:dev": "npm run setup -- --config dev",
     "setup:stg": "npm run setup -- --config stg",
     "setup:prd": "npm run setup -- --config prd",
-    "postinstall": "husky install"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@clerk/nextjs": "3.0.0-alpha.3",
@@ -85,6 +85,7 @@
     "eslint-config-get-off-my-lawn": "7.0.0",
     "husky": "^7.0.4",
     "jest": "27.4.7",
+    "lint-staged": "^12.3.3",
     "postcss": "8.4.6",
     "prettier": "2.5.1",
     "prettier-plugin-tailwindcss": "0.1.5",
@@ -97,9 +98,8 @@
     "node": "14.18.3",
     "npm": ">=8"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run prettier:write"
-    }
+  "lint-staged": {
+    "*.{ts,tsx,json}": "eslint --cache --fix",
+    "*.{ts,tsx,json,css,md}": "prettier --write"
   }
 }
