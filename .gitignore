@@ -49,3 +49,4 @@ cypress/screenshots
 .idea/
 
 db/certs/
+.eslintcache
