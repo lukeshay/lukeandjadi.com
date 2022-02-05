@@ -99,7 +99,7 @@
     "npm": ">=8"
   },
   "lint-staged": {
-    "*.{ts,tsx,json}": "eslint --cache --fix",
+    "*.{ts,tsx,js,cjs,json}": "eslint --cache --fix",
     "*": "prettier --ignore-unknown --no-error-on-unmatched-pattern --ignore-path .gitignore"
   }
 }
