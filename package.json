@@ -31,6 +31,7 @@
     "start": "next start",
     "test": "jest --passWithNoTests",
     "setup": "doppler setup --project lukeandjadi-com",
+    "setup:ci": "npm run setup -- --config ci",
     "setup:dev": "npm run setup -- --config dev",
     "setup:stg": "npm run setup -- --config stg",
     "setup:prd": "npm run setup -- --config prd"
