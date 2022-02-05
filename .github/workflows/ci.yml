@@ -64,7 +64,7 @@ jobs:
       - run: docker run -d --name=roach -p 26257:26257 cockroachdb/cockroach:v21.2.4 start-single-node --insecure
       - run: make db-up
         env:
-          MIGRATION_DSN: postgresql://root@localhost:26257?sslmode=disable
+          MIGRATION_DSN: postgresql://root@localhost:26257/defaultdb?sslmode=disable
   acceptance:
     runs-on: ubuntu-20.04
     steps:
@@ -74,9 +74,6 @@ jobs:
           node-version: '14.18.3'
           cache: 'npm'
       - run: npm i -g npm@8
-      - run: make db-up
-        env:
-          MIGRATION_DSN: postgresql://root@roach:26257?sslmode=disable
       - uses: cypress-io/github-action@v2
         with:
           browser: chrome
