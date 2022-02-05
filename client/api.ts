@@ -7,10 +7,11 @@ import type { RSVPAttributes } from '../types';
 Axios.defaults.baseURL = '/api';
 Axios.defaults.withCredentials = true;
 
-const rsvpSearchGet = async (rsvp: Pick<RSVPAttributes, 'name'>): Promise<AxiosResponse<RSVPAttributes>> =>
-  Axios.get<RSVPAttributes>('/rsvp/search', { params: rsvp });
+const rsvpSearchGet = async (
+  rsvp: Pick<RSVPAttributes, 'name'> & { token: string },
+): Promise<AxiosResponse<RSVPAttributes>> => Axios.get<RSVPAttributes>('/rsvp/search', { params: rsvp });
 
-const rsvpPut = async (rsvp: RSVPAttributes): Promise<AxiosResponse<RSVPAttributes>> =>
+const rsvpPut = async (rsvp: RSVPAttributes & { token: string }): Promise<AxiosResponse<RSVPAttributes>> =>
   Axios.put<RSVPAttributes>('/rsvp', rsvp);
 
 export { rsvpSearchGet, rsvpPut };
