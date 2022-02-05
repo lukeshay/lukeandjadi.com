@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
 
-const config = (): undefined => undefined;
-
-export default config;
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export default (): void => {};
