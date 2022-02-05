@@ -45,12 +45,8 @@ const Select = ({
         name={name}
         onChange={onChange}
         required={required}
-        defaultValue="select"
         value={selected}
       >
-        <option value="select" disabled>
-          {'Select'}
-        </option>
         {options.map(({ key, value }) => (
           <option value={key} key={key}>
             {value}
