@@ -57,16 +57,6 @@ jobs:
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
           RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
           DOMAIN: http://localhost:3000
-  migrate:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - run: |
-          docker run -d --name=roach -p 26257:26257 cockroachdb/cockroach:v21.2.4 start-single-node --insecure
-          docker exec roach ./cockroach sql --insecure --execute "create role lukeandjadi_com"
-      - run: make db-up
-        env:
-          MIGRATION_DSN: postgresql://root@localhost:26257/defaultdb?sslmode=disable
   acceptance:
     runs-on: ubuntu-20.04
     steps:
@@ -76,6 +66,12 @@ jobs:
           node-version: '14.18.3'
           cache: 'npm'
       - run: npm i -g npm@8
+      - run: |
+          docker run -d --name=roach -p 26257:26257 cockroachdb/cockroach:v21.2.4 start-single-node --insecure
+          docker exec roach ./cockroach sql --insecure --execute "create role lukeandjadi_com"
+      - run: make db-up
+        env:
+          MIGRATION_DSN: postgresql://root@localhost:26257/defaultdb?sslmode=disable
       - uses: cypress-io/github-action@v2
         with:
           browser: chrome
