@@ -69,7 +69,9 @@ jobs:
       - run: |
           docker run -d --name=roach -p 26257:26257 cockroachdb/cockroach:v21.2.4 start-single-node --insecure
           docker exec roach ./cockroach sql --insecure --execute "create role lukeandjadi_com"
-      - run: make db-up
+      - run: |
+          make db-up
+          make seed-up
         env:
           MIGRATION_DSN: postgresql://root@localhost:26257/defaultdb?sslmode=disable
       - uses: cypress-io/github-action@v2
@@ -82,7 +84,7 @@ jobs:
           wait-on: 'http://localhost:3000'
         env:
           CLERK_API_KEY: ${{ secrets.CLERK_API_KEY }}
-          DSN: postgresql://root@localhost:26257/defaultdb
+          DSN: postgresql://root@localhost:26257/defaultdb?sslmode=disable
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           NEXT_PUBLIC_CLERK_FRONTEND_API: ${{ secrets.NEXT_PUBLIC_CLERK_FRONTEND_API }}
           NEXT_PUBLIC_DATADOG_CLIENT_TOKEN: ${{ secrets.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN }}

@@ -34,8 +34,6 @@ create index idx_cdcs_resource_resource_id on lukeandjadi_com.cdcs(resource, res
 
 grant select, insert on table lukeandjadi_com.cdcs to lukeandjadi_com;
 
-insert into lukeandjadi_com.rsvps (id, name, guests, max_guests) VALUES ('f91e2ab8-f923-4058-b1ac-777e6440787f', 'Luke Shay', 2, 2);
-
 -- migrate:down
 
 drop schema lukeandjadi_com cascade;
