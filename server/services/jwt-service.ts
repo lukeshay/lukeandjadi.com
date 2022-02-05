@@ -2,21 +2,17 @@ import * as Iron from '@hapi/iron';
 
 import { config } from '../../config';
 import { Unauthorized } from '../errors/unauthorized';
+import logger from '../logger';
 
 type RSVPJWTPayload = { id: string };
 
-const generateJWT = <T>(payload: T, secret: string, salt: Iron.SealOptions) =>
-  Iron.seal(payload, secret, salt);
+const generateJWT = <T>(payload: T, secret: string, salt: Iron.SealOptions) => Iron.seal(payload, secret, salt);
 
-const parseJWT = async <T>(
-  jwtToken: string,
-  secret: string,
-  salt: Iron.SealOptions,
-): Promise<T | null> => {
+const parseJWT = async <T>(jwtToken: string, secret: string, salt: Iron.SealOptions): Promise<T | null> => {
   try {
     return (await Iron.unseal(jwtToken, secret, salt)) as unknown as T;
-  } catch (e) {
-    console.error((e as Error).message);
+  } catch (error) {
+    logger.error((error as Error).message, error);
   }
 
   return null;

@@ -1,10 +1,10 @@
 import { SignIn } from '@clerk/nextjs';
 
-import Container from '../../../components/Container';
+import Container from '../../../components/containers/container';
 
-const SignInPage = () => (
+const SignInPage = (): JSX.Element => (
   <Container>
-    <SignIn path="/account/sign-in" routing="path" redirectUrl="/account" />
+    <SignIn path="/account/sign-in" redirectUrl="/account" routing="path" />
   </Container>
 );
 

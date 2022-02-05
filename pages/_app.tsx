@@ -1,50 +1,39 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ToastContainer, Slide } from 'react-toastify';
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import * as Fathom from 'fathom-client';
 import { ClerkProvider } from '@clerk/nextjs';
+import type { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
+// eslint-disable-next-line node/no-unpublished-import
+import '../styles/globals.css';
+
+const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   const router = useRouter();
 
   useEffect(() => {
-    // Initialize Fathom when the app loads
-    // Example: yourdomain.com
-    //  - Do not include https://
-    //  - This must be an exact match of your domain.
-    //  - If you're using www. for your domain, make sure you include that here.
-    Fathom.load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID || '', {
+    Fathom.load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID ?? '', {
       includedDomains: ['lukeandjadi.com'],
     });
 
-    function onRouteChangeComplete() {
+    const onRouteChangeComplete = (): void => {
       Fathom.trackPageview();
-    }
-    // Record a pageview when route changes
+    };
+
     router.events.on('routeChangeComplete', onRouteChangeComplete);
 
-    // Unassign event listener
     return () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [router]);
 
   return (
     <ClerkProvider>
       <Component {...pageProps} />
-      <ToastContainer
-        hideProgressBar
-        position="bottom-center"
-        transition={Slide}
-        limit={1}
-      />
+      <ToastContainer hideProgressBar limit={1} position="bottom-center" transition={Slide} />
     </ClerkProvider>
   );
-}
+};
 
 export default MyApp;

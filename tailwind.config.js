@@ -1,12 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
   jit: true,
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: ({ colors }) => ({

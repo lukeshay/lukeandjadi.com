@@ -6,11 +6,7 @@ import logger from 'server/logger';
 import type { CDCAttributes } from '../../types';
 import { CDC } from '../entities';
 
-const captureChange = async (
-  resource: string,
-  resourceId: string,
-  value: any,
-): Promise<void> => {
+const captureChange = async (resource: string, resourceId: string, value: any): Promise<void> => {
   try {
     const latest = (
       await CDC.findOne({
@@ -49,9 +45,7 @@ const captureChange = async (
   }
 };
 
-const getAllChangesByResource = async (
-  resource: string,
-): Promise<CDCAttributes[]> =>
+const getAllChangesByResource = async (resource: string): Promise<CDCAttributes[]> =>
   (
     await CDC.findAll({
       where: {

@@ -1,0 +1,16 @@
+{
+  "extends": "get-off-my-lawn",
+  "rules": {
+    "react/jsx-sort-props": "off",
+    "sort-keys": "off",
+    "unicorn/no-null": "off"
+  },
+  "overrides": [
+    {
+      "files": ["pages/**/*", "client/**/*"],
+      "rules": {
+        "node/prefer-global/process": "off"
+      }
+    }
+  ]
+}
