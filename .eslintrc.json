@@ -1,24 +1,20 @@
 {
-  "extends": "get-off-my-lawn",
-  "ignorePatterns": ["pulumi"],
-  "rules": {
-    "react/jsx-sort-props": "off",
-    "sort-keys": "off",
-    "unicorn/no-null": "off"
-  },
+  "extends": ["get-off-my-lawn"],
+  "ignorePatterns": ["pulumi", "cypress"],
   "overrides": [
     {
       "files": ["pages/**/*", "client/**/*"],
       "rules": {
         "node/prefer-global/process": "off"
       }
-    },
-    {
-      "files": ["cypress/**/*"],
-      "rules": {
-        "node/no-unpublished-import": "off",
-        "jest/expect-expect": "off"
-      }
     }
-  ]
+  ],
+  "parserOptions": {
+    "project": ["tsconfig.json"]
+  },
+  "rules": {
+    "react/jsx-sort-props": "off",
+    "sort-keys": "off",
+    "unicorn/no-null": "off"
+  }
 }

@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('The Home Page', () => {
-  test('successfully loads', () => {
+  it('successfully loads', () => {
     cy.visit('/');
 
     cy.get('nav');
