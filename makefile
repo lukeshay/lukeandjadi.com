@@ -21,11 +21,11 @@ prod:
 
 .PHONY: db-up
 db-up:
-	@docker run --rm -it --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) up
+	@docker run --rm --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) up
 
 .PHONY: db-down
 db-down:
-	@docker run --rm -it --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) down
+	@docker run --rm --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) down
 
 .PHONY: croach
 croach:
