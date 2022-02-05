@@ -1,33 +1,46 @@
-export abstract class APIError extends Error {
-  isAPIError = true;
+abstract class APIError extends Error {
+  public readonly isAPIError = true;
+  public readonly type: string;
+  public readonly statusCode: number;
+  public readonly errors?: Record<string, string>;
+  public readonly stack?: string | undefined;
 
-  constructor(
-    public name: string,
-    public statusCode: number,
-    public message: string,
-    public errors?: Record<string, string>,
-    public stack?: string | undefined,
+  protected constructor(
+    type: string,
+    statusCode: number,
+    message: string,
+    errors?: Record<string, string>,
+    stack?: string | undefined,
   ) {
     super(message);
+
+    this.stack = stack;
+    this.errors = errors;
+    this.statusCode = statusCode;
+    this.type = type;
+
+    this.name = 'APIError';
   }
 
-  toJSON() {
+  public toJSON(): Record<string, unknown> {
     return {
-      message: this.message,
       errors: this.errors,
-      stack: this.stack,
+      message: this.message,
       name: this.name,
+      stack: this.stack,
       statusCode: this.statusCode,
+      type: this.type,
     };
   }
 }
 
-export const isAPIError = (error: any): error is APIError =>
-  error.hasOwnProperty('isAPIError') &&
-  error.hasOwnProperty('statusCode') &&
-  error.isAPIError === true &&
-  isError(error);
+/* eslint-disable @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/explicit-module-boundary-types,@typescript-eslint/no-explicit-any */
 
-export const isError = (error: any): error is Error => {
-  return error.hasOwnProperty('name') && error.hasOwnProperty('message');
-};
+const isError = (error: any): error is Error => error.hasOwnProperty('name') && error.hasOwnProperty('message');
+
+const isAPIError = (error: any): error is APIError =>
+  error.hasOwnProperty('statusCode') && error.hasOwnProperty('isAPIError') && error.isAPIError;
+
+/* eslint-enable */
+
+export { APIError, isAPIError, isError };

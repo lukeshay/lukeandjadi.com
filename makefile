@@ -19,6 +19,22 @@ dev:
 .PHONY: prod
 prod:
 
+.PHONY: db-up
+db-up:
+	@docker run --rm --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) up
+
+.PHONY: db-down
+db-down:
+	@docker run --rm --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) down
+
+.PHONY: seed-up
+seed-up:
+	@docker run --rm --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) --migrations-dir db/seeds up
+
+.PHONY: seed-down
+seed-down:
+	@docker run --rm --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) --migrations-dir db/seeds down
+
 .PHONY: croach
 croach:
 	@cockroach sql --url "postgresql://luke:$(DB_PASS)@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=$(HOME)/.postgresql/root.crt&options=--cluster%3Dlukeandjadi-dev-2687"

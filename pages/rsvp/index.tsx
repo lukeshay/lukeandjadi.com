@@ -12,7 +12,7 @@ import Container from '../../components/containers/container';
 import { getRecaptchaToken } from '../../client/recaptcha';
 
 const RSVPPage = (): JSX.Element => {
-  const [values, setValues] = React.useState<{ name?: string }>({});
+  const [values, setValues] = React.useState<{ name: string }>({ name: '' });
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
 
@@ -32,7 +32,7 @@ const RSVPPage = (): JSX.Element => {
       await router.push(`/rsvp/edit`);
 
       setLoading(false);
-      setValues({});
+      setValues({ name: '' });
     } catch {
       toast(`That RSVP could not be found. If the problem persists, please email ${config.email}.`, {
         type: 'warning',

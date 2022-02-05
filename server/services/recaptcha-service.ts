@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { config } from '../../config';
-import { Unauthorized } from '../errors/unauthorized';
+import { UnauthorizedError } from '../errors/unauthorized-error';
 import logger from '../logger';
 
 const RECAPTCHA_URL: string = config.get('recaptcha.url');
@@ -18,7 +18,7 @@ const verifyReCaptchaToken = async (token: string): Promise<void> => {
   logger.info('send token to recaptcha', res.data);
 
   if (!res.data.success) {
-    throw new Unauthorized('recaptcha challenge unsuccessful');
+    throw new UnauthorizedError('recaptcha challenge unsuccessful');
   }
 };
 

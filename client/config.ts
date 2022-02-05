@@ -2,31 +2,76 @@ const config = {
   date: 'August 20, 2022',
   email: 'contact@lukeandjadi.com',
   weddingLinks: [
-    { href: '/', text: 'Home' },
-    { href: '/#our-story', text: 'Our Story' },
-    { href: '/#wedding-party', text: 'Wedding Party' },
-    { href: '/#the-wedding', text: 'The Wedding' },
+    {
+      href: '/',
+      text: 'Home',
+    },
+    {
+      href: '/#our-story',
+      text: 'Our Story',
+    },
+    {
+      href: '/#wedding-party',
+      text: 'Wedding Party',
+    },
+    {
+      href: '/#the-wedding',
+      text: 'The Wedding',
+    },
   ],
   guestLinks: [
-    { href: '/#guest-accommodations', text: 'Guest Accommodations' },
-    { href: '/#registries', text: 'Registries' },
-    { href: '/rsvp', text: 'RSVP' },
+    {
+      href: '/#guest-accommodations',
+      text: 'Guest Accommodations',
+    },
+    {
+      href: '/#registries',
+      text: 'Registries',
+    },
+    {
+      href: '/rsvp',
+      text: 'RSVP',
+    },
   ],
   links: [
-    { href: '/', text: 'Home' },
-    { href: '/#our-story', text: 'Our Story' },
-    { href: '/#the-wedding', text: 'The Wedding' },
-    { href: '/#guest-accommodations', text: 'Guest Accommodations' },
-    { href: '/#registries', text: 'Registries' },
-    { href: '/#wedding-party', text: 'Wedding Party' },
-    { href: '/rsvp', text: 'RSVP' },
+    {
+      href: '/',
+      text: 'Home',
+    },
+    {
+      href: '/#our-story',
+      text: 'Our Story',
+    },
+    {
+      href: '/#the-wedding',
+      text: 'The Wedding',
+    },
+    {
+      href: '/#guest-accommodations',
+      text: 'Guest Accommodations',
+    },
+    {
+      href: '/#registries',
+      text: 'Registries',
+    },
+    {
+      href: '/#wedding-party',
+      text: 'Wedding Party',
+    },
+    {
+      href: '/rsvp',
+      text: 'RSVP',
+    },
   ],
   registries: [
     {
       href: 'https://www.amazon.com/wedding/share/lukeandjadi',
       text: 'Amazon',
     },
-    { href: 'https://tgt.gifts/jadiandluke', text: 'Target' },
+    {
+      href: 'https://tgt.gifts/jadiandluke',
+      text: 'Target',
+    },
     {
       href: 'https://www.zola.com/registry/lukeandjadi',
       text: 'Zola Cash Funds',
@@ -167,7 +212,7 @@ const config = {
     ],
   },
   env: {
-    recaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
+    recaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '',
   },
 };
 

@@ -1,7 +1,9 @@
 import * as yup from 'yup';
-import { BadRequest } from '../errors/bad-request';
+
+import { BadRequestError } from '../errors/bad-request-error';
 
 const validate = async <T1, T2, T3, T4, T5>(
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   schema: yup.ObjectSchema<T1, T2, T3, T4>,
   payload: T5,
@@ -10,8 +12,9 @@ const validate = async <T1, T2, T3, T4, T5>(
     return await schema.validate(payload);
   } catch (error) {
     if (yup.ValidationError.isError(error)) {
-      throw new BadRequest(
+      throw new BadRequestError(
         'error validating schema',
+        // eslint-disable-next-line unicorn/no-array-reduce, unicorn/prefer-object-from-entries
         error.errors.reduce(
           (previousValue, currentValue) => ({
             ...previousValue,
@@ -22,7 +25,7 @@ const validate = async <T1, T2, T3, T4, T5>(
       );
     }
 
-    throw new BadRequest('error validating schema');
+    throw new BadRequestError('error validating schema');
   }
 };
 

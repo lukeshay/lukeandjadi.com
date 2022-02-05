@@ -1,7 +1,16 @@
-import Cookie, { SetOption } from 'cookies';
+import type { IncomingMessage, ServerResponse } from 'http';
 
-const setCookie = (req: any, res: any, name: string, value?: string, options: SetOption = {}) => {
-  const cookies = new Cookie(req, res);
+import type { SetOption } from 'cookies';
+import Cookies from 'cookies';
+
+const setCookie = (
+  req: IncomingMessage,
+  res: ServerResponse,
+  name: string,
+  value?: string,
+  options: SetOption = {},
+): void => {
+  const cookies = new Cookies(req, res);
   const newOptions = options;
 
   if (newOptions.maxAge) {
@@ -14,6 +23,7 @@ const setCookie = (req: any, res: any, name: string, value?: string, options: Se
   cookies.set(name, value, options);
 };
 
-const getCookie = (req: any, res: any, name: string) => new Cookie(req, res).get(name);
+const getCookie = (req: IncomingMessage, res: ServerResponse, name: string): string | undefined =>
+  new Cookies(req, res).get(name);
 
 export { setCookie, getCookie };

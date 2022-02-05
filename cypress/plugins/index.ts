@@ -1,3 +1,4 @@
 /// <reference types="cypress" />
 
-export default (on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions) => {};
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export default (): void => {};

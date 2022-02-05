@@ -1,10 +1,6 @@
 {
-  "extends": "get-off-my-lawn",
-  "rules": {
-    "react/jsx-sort-props": "off",
-    "sort-keys": "off",
-    "unicorn/no-null": "off"
-  },
+  "extends": ["get-off-my-lawn"],
+  "ignorePatterns": ["pulumi", "cypress"],
   "overrides": [
     {
       "files": ["pages/**/*", "client/**/*"],
@@ -12,5 +8,13 @@
         "node/prefer-global/process": "off"
       }
     }
-  ]
+  ],
+  "parserOptions": {
+    "project": ["tsconfig.json"]
+  },
+  "rules": {
+    "react/jsx-sort-props": "off",
+    "sort-keys": "off",
+    "unicorn/no-null": "off"
+  }
 }

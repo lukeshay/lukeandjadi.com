@@ -47,3 +47,6 @@ cypress/videos
 cypress/screenshots
 
 .idea/
+
+db/certs/
+.eslintcache
