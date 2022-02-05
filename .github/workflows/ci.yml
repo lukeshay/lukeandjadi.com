@@ -61,7 +61,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: docker run -d --name=roach -p 26257:26257 cockroachdb/cockroach:v21.2.4 start-single-node --insecure
+      - run: |
+          docker run -d --name=roach -p 26257:26257 cockroachdb/cockroach:v21.2.4 start-single-node --insecure
+          docker exec roach ./cockroach sql --insecure --execute "create role lukeandjadi_com"
       - run: make db-up
         env:
           MIGRATION_DSN: postgresql://root@localhost:26257/defaultdb?sslmode=disable
