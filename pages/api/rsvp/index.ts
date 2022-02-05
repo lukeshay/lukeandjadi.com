@@ -8,7 +8,7 @@ import { config } from '../../../config';
 import { getCookie } from '../../../server/auth';
 import { getRSVP, updateRSVP } from '../../../server/services/rsvp-service';
 import { parseRSVPJWT } from '../../../server/services/jwt-service';
-import { RequestTimeout } from '../../../server/errors/request-timeout';
+import { RequestTimeoutError } from '../../../server/errors/request-timeout-error';
 import { validate } from '../../../server/services/schema-service';
 import { verifyReCaptchaToken } from '../../../server/services/recaptcha-service';
 
@@ -26,7 +26,7 @@ const put: Handler = async (req, res) => {
   if (!jwt) {
     logger.error('no jwt cookie found');
 
-    throw new RequestTimeout('no jwt cookie found');
+    throw new RequestTimeoutError('no jwt cookie found');
   }
 
   logger.error('parsing jwt');

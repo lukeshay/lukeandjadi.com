@@ -1,3 +1,5 @@
+import process from 'node:process';
+
 const config = {
   database: {
     url: process.env.DSN,

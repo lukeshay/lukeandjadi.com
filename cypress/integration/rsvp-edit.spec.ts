@@ -5,7 +5,7 @@ import { Chance } from 'chance';
 const chance = new Chance();
 
 describe('RSVPs', () => {
-  it('can be edited', () => {
+  test('can be edited', () => {
     cy.visit('/');
     cy.contains('button', 'RSVP').click();
 

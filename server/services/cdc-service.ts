@@ -1,30 +1,43 @@
 import { diff } from 'deep-diff';
 import { deepEqual } from 'fast-equals';
 import flush from 'just-flush';
-import logger from 'server/logger';
+import type { WhereOptions } from 'sequelize';
 
+import logger from '../logger';
 import type { CDCAttributes } from '../../types';
 import { CDC } from '../entities';
+import { BadRequestError } from '../errors/bad-request-error';
 
-const captureChange = async (resource: string, resourceId: string, value: any): Promise<void> => {
+const getCDC = async (properties: WhereOptions<CDCAttributes>): Promise<CDCAttributes> => {
+  const cdc = await CDC.findOne({ where: properties });
+
+  if (!cdc) {
+    throw new BadRequestError('CDC not found');
+  }
+
+  return cdc.get();
+};
+
+const scrubSensitiveData = <T>(value?: T): Partial<T | undefined> =>
+  value
+    ? (flush({
+        ...value,
+        createdAt: undefined,
+        updatedAt: undefined,
+        deletedAt: undefined,
+        password: undefined,
+      }) as Partial<T>)
+    : undefined;
+
+const captureChange = async <T>(resource: string, resourceId: string, value?: T): Promise<void> => {
   try {
-    const latest = (
-      await CDC.findOne({
-        where: {
-          resource,
-          resourceId,
-        },
-        order: [['createdAt', 'DESC']],
-      })
-    )?.get();
-
-    const flushedValue = flush({
-      ...value,
-      createdAt: undefined,
-      updatedAt: undefined,
+    const cdc = await getCDC({
+      resource,
+      resourceId,
     });
 
-    const latestValue = latest?.currentValue ?? null;
+    const latestValue = cdc.currentValue ?? undefined;
+    const flushedValue = scrubSensitiveData(value);
 
     if (!deepEqual(latestValue, flushedValue)) {
       await CDC.create({
@@ -35,9 +48,9 @@ const captureChange = async (resource: string, resourceId: string, value: any): 
         delta: diff(latestValue, flushedValue),
       });
     }
-  } catch (e) {
-    logger.error(`Error capturing change: ${(e as Error).message}`, {
-      ...(e as Error),
+  } catch (error) {
+    logger.error(`Error capturing change: ${(error as Error).message}`, {
+      ...(error as Error),
       resource,
       resourceId,
       value,
@@ -45,14 +58,15 @@ const captureChange = async (resource: string, resourceId: string, value: any): 
   }
 };
 
-const getAllChangesByResource = async (resource: string): Promise<CDCAttributes[]> =>
-  (
-    await CDC.findAll({
-      where: {
-        resource,
-      },
-      order: [['createdAt', 'DESC']],
-    })
-  ).map((cdc) => cdc.get());
+const getAllChangesByResource = async (resource: string): Promise<CDCAttributes[]> => {
+  const cdcs = await CDC.findAll({
+    where: {
+      resource,
+    },
+    order: [['createdAt', 'DESC']],
+  });
+
+  return cdcs.map((cdc) => cdc.get());
+};
 
 export { captureChange, getAllChangesByResource };

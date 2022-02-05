@@ -1,24 +1,23 @@
 import type { ModelDefined } from 'sequelize-cockroachdb';
 import { Sequelize, DataTypes } from 'sequelize-cockroachdb';
 import * as pg from 'pg';
+import type { PoolOptions } from 'sequelize';
 
 import type { CDCAttributes, CDCCreationAttributes, RSVPAttributes, RSVPCreationAttributes } from '../../types';
 import logger from '../logger';
 import { config } from '../../config';
 
-const sequelize = new Sequelize(config.get('database.url') as string, {
+const sequelize = new Sequelize(config.get('database.url'), {
   dialect: 'postgres',
-  dialectOptions: {
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
+  dialectOptions: config.get<object>('database.options'),
   dialectModule: pg,
-  logging: (sql, time) => {
+  logging: (sql, time): void => {
     if (config.get('environment') === 'development') {
-      logger.debug(`${time} - ${sql}`);
+      logger.debug(`${time ?? ''} - ${sql}`);
     }
   },
+  pool: config.get<PoolOptions>('database.pool'),
+  schema: config.get<string>('database.schema'),
 });
 
 const commonOpts = {

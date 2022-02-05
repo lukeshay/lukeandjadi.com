@@ -1,28 +1,31 @@
-import { Optional } from 'sequelize-cockroachdb';
+import type { Optional } from 'sequelize-cockroachdb';
+import type { Diff } from 'deep-diff';
 
-export interface BaseAttributes {
+type BaseAttributes = {
   createdAt?: Date;
   updatedAt?: Date;
-}
+};
 
-export interface CDCAttributes extends BaseAttributes {
+type CDCAttributes = BaseAttributes & {
   id: string;
   resource: string;
   resourceId: string;
-  currentValue: any | null;
-  previousValue: any | null;
-  delta: any | null;
-}
+  currentValue?: Record<string, unknown>;
+  previousValue?: Record<string, unknown>;
+  delta?: Diff<unknown, unknown>[];
+};
 
-export interface CDCCreationAttributes extends Optional<CDCAttributes, 'id'> {}
+type CDCCreationAttributes = Optional<CDCAttributes, 'id'> & {};
 
-export interface RSVPAttributes extends BaseAttributes {
+type RSVPAttributes = BaseAttributes & {
   id: string;
   email?: string;
   guests: number;
   maxGuests: number;
   name: string;
   userAgent?: string;
-}
+};
 
-export interface RSVPCreationAttributes extends Optional<RSVPAttributes, 'id' | 'email' | 'guests' | 'maxGuests'> {}
+type RSVPCreationAttributes = Optional<RSVPAttributes, 'email' | 'guests' | 'id' | 'maxGuests'> & {};
+
+export type { BaseAttributes, CDCAttributes, CDCCreationAttributes, RSVPAttributes, RSVPCreationAttributes };

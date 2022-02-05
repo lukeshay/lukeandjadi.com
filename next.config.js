@@ -3,7 +3,7 @@
  */
 const nextConfig = {
   reactStrictMode: true,
-  webpack(config, { dev, isServer }) {
+  webpack: (config, { dev, isServer }) => {
     // Replace React with Preact only in client production build
     if (!dev && !isServer) {
       Object.assign(config.resolve.alias, {
@@ -16,7 +16,9 @@ const nextConfig = {
     return config;
   },
   swcMinify: true,
-  webpack5: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig;

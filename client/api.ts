@@ -1,15 +1,16 @@
-import { RSVPAttributes } from '../types';
-import Axios, { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
+// eslint-disable-next-line import/no-named-as-default
+import Axios from 'axios';
+
+import type { RSVPAttributes } from '../types';
 
 Axios.defaults.baseURL = '/api';
 Axios.defaults.withCredentials = true;
 
-const rsvpSearchGet = (rsvp: any): Promise<AxiosResponse<RSVPAttributes, any>> => {
-  return Axios.get<RSVPAttributes>('/rsvp/search', { params: rsvp });
-};
+const rsvpSearchGet = async (rsvp: Pick<RSVPAttributes, 'name'>): Promise<AxiosResponse<RSVPAttributes>> =>
+  Axios.get<RSVPAttributes>('/rsvp/search', { params: rsvp });
 
-const rsvpPut = (rsvp: any): Promise<AxiosResponse<RSVPAttributes, any>> => {
-  return Axios.put<RSVPAttributes>('/rsvp', rsvp);
-};
+const rsvpPut = async (rsvp: RSVPAttributes): Promise<AxiosResponse<RSVPAttributes>> =>
+  Axios.put<RSVPAttributes>('/rsvp', rsvp);
 
 export { rsvpSearchGet, rsvpPut };

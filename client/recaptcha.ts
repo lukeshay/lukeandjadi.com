@@ -1,7 +1,8 @@
 import config from './config';
 
-export const getRecaptchaToken = (): Promise<string> => {
-  return new Promise((resolve) => {
+/* eslint-disable @typescript-eslint/ban-ts-comment,@typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access */
+export const getRecaptchaToken = async (): Promise<string> =>
+  new Promise((resolve) => {
     // @ts-expect-error
     window.grecaptcha.ready(() => {
       // @ts-expect-error
@@ -14,4 +15,4 @@ export const getRecaptchaToken = (): Promise<string> => {
         });
     });
   });
-};
+/* eslint-enable */

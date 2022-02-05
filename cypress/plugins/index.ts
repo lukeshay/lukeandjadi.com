@@ -1,3 +1,5 @@
 /// <reference types="cypress" />
 
-export default (on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions) => {};
+const config = (): undefined => undefined;
+
+export default config;

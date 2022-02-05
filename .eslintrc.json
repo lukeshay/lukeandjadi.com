@@ -1,5 +1,6 @@
 {
   "extends": "get-off-my-lawn",
+  "ignorePatterns": ["pulumi"],
   "rules": {
     "react/jsx-sort-props": "off",
     "sort-keys": "off",
@@ -10,6 +11,13 @@
       "files": ["pages/**/*", "client/**/*"],
       "rules": {
         "node/prefer-global/process": "off"
+      }
+    },
+    {
+      "files": ["cypress/**/*"],
+      "rules": {
+        "node/no-unpublished-import": "off",
+        "jest/expect-expect": "off"
       }
     }
   ]

@@ -7,19 +7,23 @@ const config = {
         rejectUnauthorized: false,
       },
     },
+    pool: {
+      max: 40,
+    },
+    schema: 'lukeandjadi_com',
   },
   jwt: {
     signIn: {
       salt: {
         ...defaults,
-        ttl: 43200000,
+        ttl: 43_200_000,
       },
       cookie: 'jwt-token',
     },
     rsvp: {
       salt: {
         ...defaults,
-        ttl: 1800000,
+        ttl: 1_800_000,
       },
       cookie: 'rsvp-jwt-token',
     },
