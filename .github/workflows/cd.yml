@@ -7,56 +7,26 @@ on:
 
 jobs:
   pulumi-dev:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14.18.3'
-      - run: npm install
-        working-directory: pulumi
-      - uses: pulumi/actions@v3
-        with:
-          command: up
-          stack-name: dev
-          work-dir: pulumi
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+    uses: .github/workflows/pulumi.yml@main
+    with:
+      stack: dev
+    secrets:
+      access_token: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   migrate-dev:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - run: ./scripts/fetch-crdb-cert.sh
-        env:
-          CLUSTER_ID: ${{ secrets.CRDB_CLUSTER_ID_DEV }}
-      - run: make db-up
-        env:
-          MIGRATION_DSN: '${{ secrets.MIGRATION_DSN_DEV }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt'
+    uses: .github/workflows/migrate.yml@main
+    secrets:
+      migration_dsn: ${{ secrets.MIGRATION_DSN_DEV }}
+      cluster_id: ${{ secrets.CRDB_CLUSTER_ID_DEV }}
   pulumi-prd:
-    runs-on: ubuntu-20.04
     needs: [pulumi-dev, migrate-dev]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 14.18.3
-      - run: npm install
-        working-directory: pulumi
-      - uses: pulumi/actions@v3
-        with:
-          command: up
-          stack-name: prod
-          work-dir: pulumi
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+    uses: .github/workflows/pulumi.yml@main
+    with:
+      stack: prod
+    secrets:
+      access_token: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   migrate-prd:
-    runs-on: ubuntu-20.04
     needs: [pulumi-dev, migrate-dev]
-    steps:
-      - uses: actions/checkout@v2Ï
-      - run: ./scripts/fetch-crdb-cert.sh
-        env:
-          CLUSTER_ID: ${{ secrets.CRDB_CLUSTER_ID_PRD }}
-      - run: make db-up
-        env:
-          MIGRATION_DSN: '${{ secrets.MIGRATION_DSN_PRD }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt'
+    uses: .github/workflows/migrate.yml@main
+    secrets:
+      migration_dsn: ${{ secrets.MIGRATION_DSN_PRD }}
+      cluster_id: ${{ secrets.CRDB_CLUSTER_ID_PRD }}

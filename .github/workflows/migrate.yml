@@ -1,0 +1,15 @@
+on:
+  workflow_call:
+    secrets:
+      migration_dsn:
+        required: true
+      cluster_id:
+        required: true
+
+jobs:
+  migrate:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./scripts/fetch-crdb-cert.sh ${{ secrets.cluster_id }}
+      - run: ./scripts/dbmate.sh --url "${{ secrets.cluster_id }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt" up
