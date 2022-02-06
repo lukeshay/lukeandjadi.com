@@ -78,7 +78,8 @@ jobs:
         with:
           browser: chrome
           install-command: npm ci
-          start: npm run dev
+          build: npm run build
+          start: npm run start
           spec: cypress/integration/*
           config: baseUrl=http://localhost:3000,port=4000
           wait-on: 'http://localhost:3000'
