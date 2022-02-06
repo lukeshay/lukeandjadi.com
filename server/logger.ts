@@ -5,14 +5,14 @@ import correlator from 'correlation-id';
 
 const logger = createLogger({
   defaultMeta: {
-    commit: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
-    environment: process.env.NEXT_PUBLIC_VERCEL_ENV,
-    region: process.env.VERCEL_REGION,
     author: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_AUTHOR_LOGIN,
+    commit: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
     // eslint-disable-next-line accessor-pairs,get-off-my-lawn/prefer-arrow-functions
     get correlationId() {
       return correlator.getId();
     },
+    environment: process.env.NEXT_PUBLIC_VERCEL_ENV,
+    region: process.env.VERCEL_REGION,
   },
   exitOnError: false,
   format: format.json(),

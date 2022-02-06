@@ -16,17 +16,17 @@ const BaseContainer = ({ children, title }: BaseContainerProps): JSX.Element => 
       canonical="https://lukeandjadi.com/"
       description={"Luke & Jadi's wedding website!"}
       openGraph={{
-        url: 'https://lukeandjadi.com/',
-        title: "Luke & Jadi's Wedding Website",
         description: "Luke & Jadi's wedding website!",
         images: [
           {
-            url: 'https://lukeandjadi.com/images/cover-photo.jpg',
             alt: 'Cover Photo',
+            url: 'https://lukeandjadi.com/images/cover-photo.jpg',
           },
         ],
         // eslint-disable-next-line camelcase
         site_name: 'Luke & Jadi',
+        title: "Luke & Jadi's Wedding Website",
+        url: 'https://lukeandjadi.com/',
       }}
       title={title ?? 'Luke & Jadi'}
     />

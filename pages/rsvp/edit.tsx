@@ -23,8 +23,8 @@ import { rsvpPut } from '../../client/api';
 
 const REDIRECT = {
   redirect: {
-    permanent: false,
     destination: '/rsvp',
+    permanent: false,
   },
 };
 
@@ -94,8 +94,8 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
       });
 
       toast(router.query.message ?? 'Your RSVP has been updated!', {
-        type: 'success',
         autoClose: 5000,
+        type: 'success',
       });
     } catch (error) {
       if (
@@ -170,8 +170,8 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
             label="Guests"
             name="guests"
             onChange={handleGuestsChange}
-            required
             options={guestOptions}
+            required
             selected={values.guests}
           />
           <Button className="my-6 w-full px-6 md:float-right md:w-auto" loading={loading} type="submit">

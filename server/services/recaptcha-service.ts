@@ -10,8 +10,8 @@ const RECAPTCHA_SECRET_KEY: string = config.get('recaptcha.secret');
 const verifyReCaptchaToken = async (token: string): Promise<void> => {
   const res = await axios.post<{ success: boolean }>(RECAPTCHA_URL, undefined, {
     params: {
-      secret: RECAPTCHA_SECRET_KEY,
       response: token,
+      secret: RECAPTCHA_SECRET_KEY,
     },
   });
 

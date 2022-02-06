@@ -1,8 +1,9 @@
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  jit: true,
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  jit: true,
+  plugins: [require('@tailwindcss/typography')],
   theme: {
     extend: {
       colors: ({ colors }) => ({
@@ -12,13 +13,12 @@ module.exports = {
         },
       }),
       fontFamily: {
-        serif: ['Source Serif Pro', ...fontFamily.serif],
         cursive: ['Oleo Script', ...fontFamily.serif],
+        serif: ['Source Serif Pro', ...fontFamily.serif],
       },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/typography')],
 };

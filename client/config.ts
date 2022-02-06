@@ -1,24 +1,9 @@
 const config = {
   date: 'August 20, 2022',
   email: 'contact@lukeandjadi.com',
-  weddingLinks: [
-    {
-      href: '/',
-      text: 'Home',
-    },
-    {
-      href: '/#our-story',
-      text: 'Our Story',
-    },
-    {
-      href: '/#wedding-party',
-      text: 'Wedding Party',
-    },
-    {
-      href: '/#the-wedding',
-      text: 'The Wedding',
-    },
-  ],
+  env: {
+    recaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '',
+  },
   guestLinks: [
     {
       href: '/#guest-accommodations',
@@ -77,142 +62,157 @@ const config = {
       text: 'Zola Cash Funds',
     },
   ],
+  weddingLinks: [
+    {
+      href: '/',
+      text: 'Home',
+    },
+    {
+      href: '/#our-story',
+      text: 'Our Story',
+    },
+    {
+      href: '/#wedding-party',
+      text: 'Wedding Party',
+    },
+    {
+      href: '/#the-wedding',
+      text: 'The Wedding',
+    },
+  ],
   weddingParty: {
-    groomsmen: [
-      {
-        img: '/brady-shay.jpg',
-        name: 'Brady Shay',
-        role: 'Best Man',
-        relation: 'Brother of the Groom',
-      },
-      {
-        img: '/jonny-behounek.jpg',
-        name: 'Jonny Behounek',
-        role: 'Groomsman',
-        relation: 'Brother-in-law of the Bride',
-      },
-      {
-        img: '/tyler-krueger.jpg',
-        name: 'Tyler Krueger',
-        role: 'Groomsman',
-        relation: 'Friend of the Groom',
-      },
-      {
-        img: '/nick-schiefelbein.jpg',
-        name: 'Nick Schiefelbein',
-        role: 'Groomsman',
-        relation: 'Friend of the Couple',
-      },
-    ],
     bridesmaids: [
       {
         img: '/jaclyn-reding.jpg',
         name: 'Jaclyn Reding',
-        role: 'Maid of Honor',
         relation: 'Sister of the Bride',
+        role: 'Maid of Honor',
       },
       {
         img: '/jordan-behounek.jpg',
         name: 'Jordan Behounek',
-        role: 'Bridesmaid',
         relation: 'Sister of the Bride',
+        role: 'Bridesmaid',
       },
       {
         img: '/jenna-reding.jpg',
         name: 'Jenna Reding',
-        role: 'Bridesmaid',
         relation: 'Sister of the Bride',
+        role: 'Bridesmaid',
       },
       {
         img: '/shayla-goche.jpg',
         name: 'Shayla Goche',
-        role: 'Bridesmaid',
         relation: 'Friend of the Bride',
-      },
-    ],
-    others: [
-      {
-        img: '/hayes-behounek.jpg',
-        name: 'Hayes Behounek',
-        role: 'Ring Bearer',
-        relation: 'Nephew of the Bride',
-      },
-      {
-        img: '/remi-behounek.jpg',
-        name: 'Remi Behounek',
-        role: 'Flower Girl',
-        relation: 'Niece of the Bride',
-      },
-    ],
-    parents: [
-      {
-        img: '/jeff-tami-reding.jpg',
-        name: 'Jeff & Tami Reding',
-        role: 'Parents',
-        relation: 'Parents of the Bride',
-      },
-      {
-        img: '/roby-natalie-shay.jpg',
-        name: 'Roby & Natalie Shay',
-        role: 'Parents',
-        relation: 'Parents of the Groom',
+        role: 'Bridesmaid',
       },
     ],
     grandparents: [
       {
         img: '/john-bertha-reding.jpg',
         name: 'John & Bertha Reding',
-        role: 'Grandparents',
         relation: 'Grandparents of the Bride',
+        role: 'Grandparents',
       },
       {
         img: '/lyle-dorothy-dahlgren.jpg',
         name: 'Lyle & Dorothy Dahlgren',
-        role: 'Grandparents',
         relation: 'Grandparents of the Bride',
+        role: 'Grandparents',
       },
       {
         img: '/jerry-dorothy-peters.jpg',
         name: 'Jerry & Dorothy Peters',
-        role: 'Grandparents',
         relation: 'Grandparents of the Groom',
+        role: 'Grandparents',
       },
       {
         img: '/kathi-kuhl.jpg',
         name: 'Kathi Kuhl',
-        role: 'Grandparent',
         relation: 'Grandparent of the Groom',
+        role: 'Grandparent',
       },
       {
         img: '/bob-shay.jpg',
         name: 'Bob Shay',
-        role: 'Grandparent',
         relation: 'Grandparent of the Groom',
+        role: 'Grandparent',
+      },
+    ],
+    groomsmen: [
+      {
+        img: '/brady-shay.jpg',
+        name: 'Brady Shay',
+        relation: 'Brother of the Groom',
+        role: 'Best Man',
+      },
+      {
+        img: '/jonny-behounek.jpg',
+        name: 'Jonny Behounek',
+        relation: 'Brother-in-law of the Bride',
+        role: 'Groomsman',
+      },
+      {
+        img: '/tyler-krueger.jpg',
+        name: 'Tyler Krueger',
+        relation: 'Friend of the Groom',
+        role: 'Groomsman',
+      },
+      {
+        img: '/nick-schiefelbein.jpg',
+        name: 'Nick Schiefelbein',
+        relation: 'Friend of the Couple',
+        role: 'Groomsman',
+      },
+    ],
+    others: [
+      {
+        img: '/hayes-behounek.jpg',
+        name: 'Hayes Behounek',
+        relation: 'Nephew of the Bride',
+        role: 'Ring Bearer',
+      },
+      {
+        img: '/remi-behounek.jpg',
+        name: 'Remi Behounek',
+        relation: 'Niece of the Bride',
+        role: 'Flower Girl',
+      },
+    ],
+    parents: [
+      {
+        img: '/jeff-tami-reding.jpg',
+        name: 'Jeff & Tami Reding',
+        relation: 'Parents of the Bride',
+        role: 'Parents',
+      },
+      {
+        img: '/roby-natalie-shay.jpg',
+        name: 'Roby & Natalie Shay',
+        relation: 'Parents of the Groom',
+        role: 'Parents',
       },
     ],
     ushers: [
       {
         img: '/jackson-helmers.jpg',
         name: 'Jackson Helmers',
-        role: 'Usher',
         relation: 'Friend of the Bride',
+        role: 'Usher',
       },
       {
         img: '/nick-stein.jpg',
         name: 'Nick Stein',
-        role: 'Usher',
         relation: 'Friend of the Bride',
+        role: 'Usher',
       },
       {
         img: '/dustin-white.jpg',
         name: 'Dustin White',
-        role: 'Usher',
         relation: 'Friend of the Bride',
+        role: 'Usher',
       },
     ],
-  },
-  env: {
-    recaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '',
   },
 };
 
