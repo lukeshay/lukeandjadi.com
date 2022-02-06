@@ -29,7 +29,7 @@ jobs:
       - run: ./scripts/fetch-crdb-cert.sh
         env:
           CLUSTER_ID: ${{ secrets.CRDB_CLUSTER_ID_DEV }}
-      - run: make db-up
+      - run: ./scripts/dbmate.sh --url ${{ MIGRATION_DSN }} up
         env:
           MIGRATION_DSN: '${{ secrets.MIGRATION_DSN_DEV }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt'
   pulumi-prd:
@@ -57,6 +57,6 @@ jobs:
       - run: ./scripts/fetch-crdb-cert.sh
         env:
           CLUSTER_ID: ${{ secrets.CRDB_CLUSTER_ID_PRD }}
-      - run: make db-up
+      - run: ./scripts/dbmate.sh --url ${{ MIGRATION_DSN }} up
         env:
           MIGRATION_DSN: '${{ secrets.MIGRATION_DSN_PRD }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt'
