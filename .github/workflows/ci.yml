@@ -13,25 +13,24 @@ jobs:
       - uses: calibreapp/image-actions@main
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-  pulumi:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14.18.3'
-          cache: 'npm'
-      - run: npm ci
-        working-directory: pulumi
-      - uses: pulumi/actions@v3
-        with:
-          command: preview
-          stack-name: dev
-          comment-on-pr: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          work-dir: pulumi
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+  pulumi-dev:
+    uses: ./.github/workflows/pulumi.yml
+    with:
+      stack: dev
+      command: preview
+      comment: true
+    secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
+      access_token: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+  pulumi-prd:
+    uses: ./.github/workflows/pulumi.yml
+    with:
+      stack: prod
+      command: preview
+      comment: true
+    secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
+      access_token: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   ci:
     name: ${{ matrix.command }}
     runs-on: ubuntu-20.04
@@ -70,8 +69,8 @@ jobs:
           docker run -d --name=roach -p 26257:26257 cockroachdb/cockroach:v21.2.4 start-single-node --insecure
           docker exec roach ./cockroach sql --insecure --execute "create role lukeandjadi_com"
       - run: |
-          ./scripts/dbmate.sh --url ${{ env.MIGRATION_DSN }} up
-          ./scripts/dbmate.sh --url ${{ env.MIGRATION_DSN }} --migrations-dir "db/seeds" up
+          ./scripts/dbmate.sh --url ${{ env.MIGRATION_DSN }} migrate
+          ./scripts/dbmate.sh --url ${{ env.MIGRATION_DSN }} --migrations-dir "db/seeds" migrate
         env:
           MIGRATION_DSN: postgresql://root@localhost:26257/defaultdb?sslmode=disable
       - uses: cypress-io/github-action@v2

@@ -12,4 +12,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: ./scripts/fetch-crdb-cert.sh ${{ secrets.cluster_id }}
-      - run: ./scripts/dbmate.sh --url "${{ secrets.cluster_id }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt" up
+      - run: ./scripts/dbmate.sh --url "${{ secrets.cluster_id }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt" migrate
