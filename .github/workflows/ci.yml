@@ -70,8 +70,8 @@ jobs:
           docker run -d --name=roach -p 26257:26257 cockroachdb/cockroach:v21.2.4 start-single-node --insecure
           docker exec roach ./cockroach sql --insecure --execute "create role lukeandjadi_com"
       - run: |
-          ./scripts/dbmate.sh --url ${{ MIGRATION_DSN }} up
-          ./scripts/dbmate.sh --url ${{ MIGRATION_DSN }} --migrations-dir "db/seeds" up
+          ./scripts/dbmate.sh --url ${{ env.MIGRATION_DSN }} up
+          ./scripts/dbmate.sh --url ${{ env.MIGRATION_DSN }} --migrations-dir "db/seeds" up
         env:
           MIGRATION_DSN: postgresql://root@localhost:26257/defaultdb?sslmode=disable
       - uses: cypress-io/github-action@v2

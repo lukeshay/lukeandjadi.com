@@ -1,0 +1,39 @@
+on:
+  workflow_call:
+    inputs:
+      command:
+        required: false
+        default: up
+        description: The Pulumi command to run
+        type: string
+      stack:
+        required: true
+        description: The Pulumi stack to run
+        type: string
+      dir:
+        required: false
+        default: pulumi
+        description: The working dir of Pulumi config
+        type: string
+    secrets:
+      access_token:
+        description: The Pulumi access token
+        required: true
+
+jobs:
+  pulumi-prd:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.18.3
+      - run: npm ci
+        working-directory: pulumi
+      - uses: pulumi/actions@v3
+        with:
+          command: ${{ inputs.command }}
+          stack-name: ${{ inputs.stack }}
+          work-dir: ${{ inputs.dir }}
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.access_token }}
