@@ -7,26 +7,26 @@ on:
 
 jobs:
   pulumi-dev:
-    uses: .github/workflows/pulumi.yml
+    uses: .github/workflows/pulumi.yml@main
     with:
       stack: dev
     secrets:
       access_token: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   migrate-dev:
-    uses: .github/workflows/migrate.yml
+    uses: .github/workflows/migrate.yml@main
     secrets:
       migration_dsn: ${{ secrets.MIGRATION_DSN_DEV }}
       cluster_id: ${{ secrets.CRDB_CLUSTER_ID_DEV }}
   pulumi-prd:
     needs: [pulumi-dev, migrate-dev]
-    uses: .github/workflows/pulumi.yml
+    uses: .github/workflows/pulumi.yml@main
     with:
       stack: prod
     secrets:
       access_token: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   migrate-prd:
     needs: [pulumi-dev, migrate-dev]
-    uses: .github/workflows/migrate.yml
+    uses: .github/workflows/migrate.yml@main
     secrets:
       migration_dsn: ${{ secrets.MIGRATION_DSN_PRD }}
       cluster_id: ${{ secrets.CRDB_CLUSTER_ID_PRD }}
