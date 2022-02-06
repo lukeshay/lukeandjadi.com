@@ -125,20 +125,32 @@ const clerkMail = new cloudflare.Record('clerk-mail', {
   proxied: false,
 });
 
-const config = {
-  vercel: vercel.id,
-  checkly: checkly.id,
-  zoho: zoho.id,
-  zoho2: zoho2.id,
-  zoho3: zoho3.id,
-  zohoVerification: zohoVerification.id,
-  zohoSPF: zohoSPF.id,
-  wwwRedirect: wwwRedirect.id,
-  clerkAccounts: clerkAccounts.id,
-  clerkFrontendApi: clerkFrontendApi.id,
-  clerkDomainKeyOne: clerkDomainKeyOne.id,
-  clerkDomainKeyTwo: clerkDomainKeyTwo.id,
-  clerkMail: clerkMail.id,
-};
+const vercelId = vercel.id;
+const checklyId = checkly.id;
+const zohoId = zoho.id;
+const zoho2Id = zoho2.id;
+const zoho3Id = zoho3.id;
+const zohoVerificationId = zohoVerification.id;
+const zohoSPFId = zohoSPF.id;
+const wwwRedirectId = wwwRedirect.id;
+const clerkAccountsId = clerkAccounts.id;
+const clerkFrontendApiId = clerkFrontendApi.id;
+const clerkDomainKeyOneId = clerkDomainKeyOne.id;
+const clerkDomainKeyTwoId = clerkDomainKeyTwo.id;
+const clerkMailId = clerkMail.id;
 
-export default config;
+export {
+  vercelId,
+  checklyId,
+  zohoId,
+  zoho2Id,
+  zoho3Id,
+  zohoVerificationId,
+  zohoSPFId,
+  wwwRedirectId,
+  clerkAccountsId,
+  clerkFrontendApiId,
+  clerkDomainKeyOneId,
+  clerkDomainKeyTwoId,
+  clerkMailId,
+};

@@ -1,13 +1,14 @@
 {
   "name": "pulumi",
-  "private": true,
   "version": "0.0.1",
-  "devDependencies": {
-    "@types/node": "17.0.14"
-  },
+  "private": true,
   "dependencies": {
     "@pulumi/cloudflare": "4.3.0",
-    "@pulumi/digitalocean": "4.11.1",
-    "@pulumi/pulumi": "3.23.2"
+    "@pulumi/pulumi": "3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.15",
+    "eslint": "^8.8.0",
+    "eslint-config-get-off-my-lawn": "^7.0.0"
   }
 }
