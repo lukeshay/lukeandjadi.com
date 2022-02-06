@@ -27,6 +27,7 @@ yarn-error.log*
 
 # local env files
 .env*
+!.envrc
 
 # vercel
 .vercel
@@ -49,4 +50,5 @@ cypress/screenshots
 .idea/
 
 db/certs/
+db/bin/
 .eslintcache
