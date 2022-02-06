@@ -31,7 +31,7 @@ jobs:
           CLUSTER_ID: ${{ secrets.CRDB_CLUSTER_ID_DEV }}
       - run: make db-up
         env:
-          MIGRATION_DSN: ${{ secrets.MIGRATION_DSN_DEV }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt
+          MIGRATION_DSN: '${{ secrets.MIGRATION_DSN_DEV }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt'
   pulumi-prd:
     runs-on: ubuntu-20.04
     needs: [pulumi-dev, migrate-dev]
@@ -51,6 +51,7 @@ jobs:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   migrate-prd:
     runs-on: ubuntu-20.04
+    needs: [pulumi-dev, migrate-dev]
     steps:
       - uses: actions/checkout@v2Ï
       - run: ./scripts/fetch-crdb-cert.sh
@@ -58,4 +59,4 @@ jobs:
           CLUSTER_ID: ${{ secrets.CRDB_CLUSTER_ID_PRD }}
       - run: make db-up
         env:
-          MIGRATION_DSN: ${{ secrets.MIGRATION_DSN_PRD }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt
+          MIGRATION_DSN: '${{ secrets.MIGRATION_DSN_PRD }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt'
