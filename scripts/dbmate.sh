@@ -35,4 +35,6 @@ if [[ ! -f "${DBMATE}" ]]; then
   chmod +x "${DBMATE}"
 fi
 
-eval "${DBMATE} ${@}"
+run() {
+  eval "${DBMATE} --url ${DSN} ${@}"
+}

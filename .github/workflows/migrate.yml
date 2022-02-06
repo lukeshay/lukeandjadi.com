@@ -12,4 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: ./scripts/fetch-crdb-cert.sh ${{ secrets.cluster_id }}
-      - run: ./scripts/dbmate.sh --url ${{ secrets.migration_dsn }}?sslmode=verify-full&sslrootcert=/db/certs/root.crt migrate
+      - run: ./scripts/migrate.sh
+        env:
+          DSN: ${{ secrets.migration_dsn }}?sslmode=verify-full&sslrootcert=./db/certs/root.crt
