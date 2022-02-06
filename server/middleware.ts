@@ -30,8 +30,8 @@ const withErrorHandler: Wrapper<Handler> = async (req, res, next) => {
 
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         message: error.message,
-        stack: error.stack,
         name: error.name,
+        stack: error.stack,
       });
     } else {
       logger.info(`an unknown error has occurred`, { error });

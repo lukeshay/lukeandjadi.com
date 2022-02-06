@@ -23,9 +23,9 @@ const scrubSensitiveData = <T>(value?: T): Partial<T | undefined> =>
     ? (flush({
         ...value,
         createdAt: undefined,
-        updatedAt: undefined,
         deletedAt: undefined,
         password: undefined,
+        updatedAt: undefined,
       }) as Partial<T>)
     : undefined;
 
@@ -41,11 +41,11 @@ const captureChange = async <T>(resource: string, resourceId: string, value?: T)
 
     if (!deepEqual(latestValue, flushedValue)) {
       await CDC.create({
+        currentValue: flushedValue,
+        delta: diff(latestValue, flushedValue),
+        previousValue: latestValue,
         resource,
         resourceId,
-        currentValue: flushedValue,
-        previousValue: latestValue,
-        delta: diff(latestValue, flushedValue),
       });
     }
   } catch (error) {
@@ -60,10 +60,10 @@ const captureChange = async <T>(resource: string, resourceId: string, value?: T)
 
 const getAllChangesByResource = async (resource: string): Promise<CDCAttributes[]> => {
   const cdcs = await CDC.findAll({
+    order: [['createdAt', 'DESC']],
     where: {
       resource,
     },
-    order: [['createdAt', 'DESC']],
   });
 
   return cdcs.map((cdc) => cdc.get());

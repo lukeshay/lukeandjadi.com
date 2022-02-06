@@ -3,7 +3,7 @@ import globby from 'globby';
 import prettier from 'prettier';
 
 const generate = async () => {
-  const prettierConfig = await prettier.resolveConfig('./.prettierrc.json');
+  const prettierConfig = await prettier.resolveConfig('./.prettierrc.cjs');
   const pages = await globby([
     'pages/**/*.tsx',
     '!pages/_*.tsx',

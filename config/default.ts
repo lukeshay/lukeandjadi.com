@@ -12,28 +12,21 @@ const config = {
     },
     schema: 'lukeandjadi_com',
   },
+  domain: 'http://localhost:3000',
+  email: {
+    from: 'contact@lukeandjadi.com',
+  },
   jwt: {
-    signIn: {
-      salt: {
-        ...defaults,
-        ttl: 43_200_000,
-      },
-      cookie: 'jwt-token',
-    },
     rsvp: {
+      cookie: 'rsvp-jwt-token',
       salt: {
         ...defaults,
         ttl: 1_800_000,
       },
-      cookie: 'rsvp-jwt-token',
     },
   },
   recaptcha: {
     url: 'https://www.google.com/recaptcha/api/siteverify',
-  },
-  domain: 'http://localhost:3000',
-  email: {
-    from: 'contact@lukeandjadi.com',
   },
 };
 

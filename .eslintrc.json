@@ -1,6 +1,6 @@
 {
   "extends": ["get-off-my-lawn"],
-  "ignorePatterns": ["pulumi", "cypress"],
+  "ignorePatterns": ["cypress", "pulumi"],
   "overrides": [
     {
       "files": ["pages/**/*", "client/**/*"],
@@ -9,12 +9,8 @@
       }
     }
   ],
-  "parserOptions": {
-    "project": ["tsconfig.json"]
-  },
+  "root": true,
   "rules": {
-    "react/jsx-sort-props": "off",
-    "sort-keys": "off",
     "unicorn/no-null": "off"
   }
 }

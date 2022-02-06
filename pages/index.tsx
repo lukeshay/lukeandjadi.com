@@ -109,10 +109,10 @@ const Home = (): JSX.Element => (
         <p className="text-sm font-bold md:text-lg lg:text-2xl">
           {Math.trunc((new Date(2022, 7, 20).getTime() - Date.now()) / (1000 * 60 * 60 * 24)) + 1} {'Days'}
         </p>
-        <Link href="/rsvp" prefetch passHref>
+        <Link href="/rsvp" passHref prefetch>
           <button
-            type="button"
             className="rounded bg-accent-500 px-4 py-2 font-serif text-base font-bold text-white shadow hover:no-underline md:text-lg lg:text-2xl"
+            type="button"
           >
             {'RSVP'}
           </button>

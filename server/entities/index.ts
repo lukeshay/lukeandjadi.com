@@ -9,8 +9,8 @@ import { config } from '../../config';
 
 const sequelize = new Sequelize(config.get('database.url'), {
   dialect: 'postgres',
-  dialectOptions: config.get<object>('database.options'),
   dialectModule: pg,
+  dialectOptions: config.get<object>('database.options'),
   logging: (sql, time): void => {
     if (config.get('environment') === 'development') {
       logger.debug(`${time ?? ''} - ${sql}`);
@@ -27,49 +27,49 @@ const commonOpts = {
 const RSVP: ModelDefined<RSVPAttributes, RSVPCreationAttributes> = sequelize.define(
   'rsvps',
   {
-    id: {
-      type: DataTypes.UUID,
-      primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    guests: {
-      type: DataTypes.SMALLINT,
-      allowNull: false,
-      defaultValue: 2,
-    },
-    maxGuests: {
-      type: DataTypes.SMALLINT,
-      allowNull: false,
-      defaultValue: 2,
-      field: 'max_guests',
-    },
-    userAgent: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      unique: false,
-      field: 'user_agent',
-    },
     createdAt: {
-      type: DataTypes.DATE,
       allowNull: true,
       defaultValue: Sequelize.fn('NOW'),
       field: 'created_at',
+      type: DataTypes.DATE,
+    },
+    email: {
+      allowNull: true,
+      type: DataTypes.STRING,
+    },
+    guests: {
+      allowNull: false,
+      defaultValue: 2,
+      type: DataTypes.SMALLINT,
+    },
+    id: {
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      type: DataTypes.UUID,
+    },
+    maxGuests: {
+      allowNull: false,
+      defaultValue: 2,
+      field: 'max_guests',
+      type: DataTypes.SMALLINT,
+    },
+    name: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      unique: true,
     },
     updatedAt: {
-      type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.fn('NOW'),
       field: 'updated_at',
       onUpdate: 'SET DEFAULT',
+      type: DataTypes.DATE,
+    },
+    userAgent: {
+      allowNull: true,
+      field: 'user_agent',
+      type: DataTypes.STRING,
+      unique: false,
     },
   },
   commonOpts,
@@ -78,39 +78,39 @@ const RSVP: ModelDefined<RSVPAttributes, RSVPCreationAttributes> = sequelize.def
 const CDC: ModelDefined<CDCAttributes, CDCCreationAttributes> = sequelize.define(
   'cdc',
   {
-    id: {
-      type: DataTypes.UUID,
-      primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
-    },
-    resource: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    resourceId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      field: 'resource_id',
-    },
-    currentValue: {
-      type: DataTypes.JSON,
-      allowNull: true,
-      field: 'current_value',
-    },
-    previousValue: {
-      type: DataTypes.JSON,
-      allowNull: true,
-      field: 'previous_value',
-    },
-    delta: {
-      type: DataTypes.JSON,
-      allowNull: true,
-    },
     createdAt: {
-      type: DataTypes.DATE,
       allowNull: true,
       defaultValue: Sequelize.fn('NOW'),
       field: 'created_at',
+      type: DataTypes.DATE,
+    },
+    currentValue: {
+      allowNull: true,
+      field: 'current_value',
+      type: DataTypes.JSON,
+    },
+    delta: {
+      allowNull: true,
+      type: DataTypes.JSON,
+    },
+    id: {
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      type: DataTypes.UUID,
+    },
+    previousValue: {
+      allowNull: true,
+      field: 'previous_value',
+      type: DataTypes.JSON,
+    },
+    resource: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
+    resourceId: {
+      allowNull: false,
+      field: 'resource_id',
+      type: DataTypes.UUID,
     },
   },
   commonOpts,

@@ -13,7 +13,7 @@ jobs:
       - uses: calibreapp/image-actions@main
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-  pulumi:
+  pulumi-dev:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -32,31 +32,47 @@ jobs:
           work-dir: pulumi
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-  ci:
-    name: ${{ matrix.command }}
+  pulumi-prd:
     runs-on: ubuntu-20.04
-    strategy:
-      fail-fast: false
-      matrix:
-        command: ['lint', 'prettier:check', 'test']
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '14.18.3'
           cache: 'npm'
-      - run: npm i -g npm@8 && npm ci
-      - run: npm run ${{ matrix.command }}
+      - run: npm ci
+        working-directory: pulumi
+      - uses: pulumi/actions@v3
+        with:
+          command: preview
+          stack-name: prod
+          comment-on-pr: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          work-dir: pulumi
         env:
-          CLERK_API_KEY: ${{ secrets.CLERK_API_KEY }}
-          DSN: ${{ secrets.DSN }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          NEXT_PUBLIC_CLERK_FRONTEND_API: ${{ secrets.NEXT_PUBLIC_CLERK_FRONTEND_API }}
-          NEXT_PUBLIC_DATADOG_CLIENT_TOKEN: ${{ secrets.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN }}
-          NEXT_PUBLIC_FATHOM_SITE_ID: ${{ secrets.NEXT_PUBLIC_FATHOM_SITE_ID }}
-          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
-          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
-          DOMAIN: http://localhost:3000
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+  validate:
+    runs-on: ubuntu-20.04
+    env:
+      CLERK_API_KEY: ${{ secrets.CLERK_API_KEY }}
+      DSN: ${{ secrets.DSN }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      NEXT_PUBLIC_CLERK_FRONTEND_API: ${{ secrets.NEXT_PUBLIC_CLERK_FRONTEND_API }}
+      NEXT_PUBLIC_DATADOG_CLIENT_TOKEN: ${{ secrets.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN }}
+      NEXT_PUBLIC_FATHOM_SITE_ID: ${{ secrets.NEXT_PUBLIC_FATHOM_SITE_ID }}
+      NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+      RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+      DOMAIN: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.18.3'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run prettier:check
+      - run: npm run test
   acceptance:
     runs-on: ubuntu-20.04
     steps:
@@ -70,8 +86,8 @@ jobs:
           docker run -d --name=roach -p 26257:26257 cockroachdb/cockroach:v21.2.4 start-single-node --insecure
           docker exec roach ./cockroach sql --insecure --execute "create role lukeandjadi_com"
       - run: |
-          ./scripts/dbmate.sh --url ${{ env.MIGRATION_DSN }} up
-          ./scripts/dbmate.sh --url ${{ env.MIGRATION_DSN }} --migrations-dir "db/seeds" up
+          ./scripts/dbmate.sh --url ${{ env.MIGRATION_DSN }} migrate
+          ./scripts/dbmate.sh --url ${{ env.MIGRATION_DSN }} --migrations-dir "db/seeds" migrate
         env:
           MIGRATION_DSN: postgresql://root@localhost:26257/defaultdb?sslmode=disable
       - uses: cypress-io/github-action@v2

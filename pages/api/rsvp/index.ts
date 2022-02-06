@@ -53,8 +53,8 @@ const put: Handler = async (req, res) => {
       userAgent,
     },
     {
-      name,
       id,
+      name,
     },
   );
 

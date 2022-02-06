@@ -10,12 +10,12 @@ class MyDocument extends Document {
 
     datadogLogs.init({
       clientToken: process.env.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN ?? '',
-      site: 'datadoghq.com',
+      env: process.env.VERCEL_ENV,
       forwardErrorsToLogs: true,
       sampleRate: 100,
-      env: process.env.VERCEL_ENV,
-      version: process.env.VERCEL_GIT_COMMIT_SHA,
       service: 'lukeandjadi.com',
+      site: 'datadoghq.com',
+      version: process.env.VERCEL_GIT_COMMIT_SHA,
     });
   }
 

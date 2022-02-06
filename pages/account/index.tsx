@@ -32,7 +32,7 @@ const TableRow = ({ id, name, email, guests }: RSVPAttributes): JSX.Element => (
         passHref
         prefetch
       >
-        <button type="button" className="cursor-pointer rounded-full p-2 text-gray-500 ring-accent-500 hover:ring">
+        <button className="cursor-pointer rounded-full p-2 text-gray-500 ring-accent-500 hover:ring" type="button">
           <PencilIcon height={20} width={20} />
         </button>
       </Link>
@@ -53,8 +53,8 @@ const getServerSideProps: GetServerSideProps<{ rsvps: RSVPAttributes[]; csv: str
 
       return {
         props: {
-          rsvps: rsvps.map((rsvp) => rsvp.get()),
           csv: `id, name, email, guests\n${rows.join('\n')}`,
+          rsvps: rsvps.map((rsvp) => rsvp.get()),
         },
       };
     } catch (error) {
@@ -63,8 +63,8 @@ const getServerSideProps: GetServerSideProps<{ rsvps: RSVPAttributes[]; csv: str
 
     return {
       props: {
-        rsvps: [],
         csv: '',
+        rsvps: [],
       },
     };
   },
