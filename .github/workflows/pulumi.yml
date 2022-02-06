@@ -15,7 +15,15 @@ on:
         default: pulumi
         description: The working dir of Pulumi config
         type: string
+      comment:
+        required: false
+        default: false
+        description: Whether Pulumi should comment on the PR
+        type: boolean
     secrets:
+      github_token:
+        description: The GitHub access token
+        required: false
       access_token:
         description: The Pulumi access token
         required: true
@@ -35,5 +43,7 @@ jobs:
           command: ${{ inputs.command }}
           stack-name: ${{ inputs.stack }}
           work-dir: ${{ inputs.dir }}
+          comment-on-pr: ${{ inputs.comment }}
+          github-token: ${{ secrets.github_token }}
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.access_token }}
