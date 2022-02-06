@@ -18,7 +18,7 @@ ifeq ($(UNAME_S),Darwin)
 		OS = macos
 endif
 
-ifeq ($(UNAME_P),i386)
+ifeq ($(filter %86,$(UNAME_P)),)
 		ARCH = amd64
 endif
 ifneq ($(UNAME_P),x86_64)
