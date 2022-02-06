@@ -8,6 +8,30 @@ PULUMI_ENV ?= $(if $(PROD),prod,dev)
 PULUMI_STACK ?= LukeShay/lukeandjadi.com
 PULUMI_FLAGS ?= --yes --debug
 
+UNAME_S := $(shell uname -s)
+UNAME_P := $(shell uname -p)
+
+ifeq ($(UNAME_S),Linux)
+		OS = linux
+endif
+ifeq ($(UNAME_S),Darwin)
+		OS = macos
+endif
+
+ifeq ($(UNAME_P),i386)
+		ARCH = amd64
+endif
+ifneq ($(UNAME_P),x86_64)
+		ARCH = amd64
+endif
+ifneq ($(filter arm%,$(UNAME_P)),)
+		ARCH = arm64
+endif
+
+DBMATE_BINARY ?= dbmate-$(OS)-$(ARCH)
+
+DBMATE ?= $(PWD)/db/bin/$(DBMATE_BINARY)
+
 .PHONY: pulumi
 pulumi:
 	@cd pulumi && \
@@ -19,21 +43,29 @@ dev:
 .PHONY: prod
 prod:
 
+.PHONY: install-dbmate
+install-dbmate:
+	@curl --create-dirs -fsSL -o "$(DBMATE)" https://github.com/amacneil/dbmate/releases/latest/download/$(DBMATE_BINARY)
+	@chmod +x "$(DBMATE)"
+
+$(DBMATE):
+	@ls "$(DBMATE)" || make install-dbmate
+
 .PHONY: db-up
-db-up:
-	@docker run --rm --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) up
+db-up: $(DBMATE)
+	@$(DBMATE) --url $(MIGRATION_DSN) up
 
 .PHONY: db-down
-db-down:
-	@docker run --rm --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) down
+db-down: $(DBMATE)
+	@$(DBMATE) --url $(MIGRATION_DSN) down
 
 .PHONY: seed-up
-seed-up:
-	@docker run --rm --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) --migrations-dir db/seeds up
+seed-up: $(DBMATE)
+	@$(DBMATE) --url $(MIGRATION_DSN) --migrations-dir db/seeds up
 
 .PHONY: seed-down
-seed-down:
-	@docker run --rm --network=host -v "$(PWD)/db:/db" ghcr.io/amacneil/dbmate:1.14.0 --url $(MIGRATION_DSN) --migrations-dir db/seeds down
+seed-down: $(DBMATE)
+	@$(DBMATE) --url $(MIGRATION_DSN) --migrations-dir db/seeds down
 
 .PHONY: croach
 croach:
