@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: ./scripts/fetch-crdb-cert.sh ${{ secrets.cluster_id }}
-      - run: ./scripts/migrate.sh
+      - run: make db-cert
         env:
-          DSN: ${{ secrets.migration_dsn }}?sslmode=verify-full&sslrootcert=./db/certs/root.crt
+          CLUSTER_ID: ${{ secrets.cluster_id }}
+      - run: make schema-migrate
+        env:
+          DSN: '${{ secrets.migration_dsn }}?sslmode=verify-full\\&sslrootcert=./db/certs/root.crt'

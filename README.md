@@ -5,12 +5,14 @@ I know there are many wedding website builders out there, but I wanted to build 
 ## Tech Stack
 
 - [Fathom Analytics](https://usefathom.com/ref/KTQXKQ)
-- Next.js
-- TypeScript
-- CockroachDB
-- Pulumi
-- Cloudflare
-- Clerk
-- TailwindCSS
+- [Doppler](https://doppler.com/join?invite=31A4693C)
+- [Next.js](https://nextjs.org/)
+- [TypeScript](http://typescriptlang.org/)
+- [CockroachDB](https://www.cockroachlabs.com/)
+- [Pulumi](https://www.pulumi.com/)
+- [Cloudflare](https://www.cloudflare.com/)
+- [Clerk](https://clerk.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
 
-This is not intended to be reused by others but it certainly can with some modification.
+This is not intended to be reused by others, but it certainly can with some modification.
+g

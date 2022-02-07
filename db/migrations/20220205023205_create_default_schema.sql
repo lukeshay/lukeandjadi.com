@@ -36,4 +36,4 @@ grant select, insert on table lukeandjadi_com.cdcs to lukeandjadi_com;
 
 -- migrate:down
 
-drop schema lukeandjadi_com cascade;
+drop schema if exists lukeandjadi_com cascade;
