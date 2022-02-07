@@ -14,10 +14,5 @@ I know there are many wedding website builders out there, but I wanted to build 
 - [Clerk](https://clerk.dev/)
 - [TailwindCSS](https://tailwindcss.com/)
 
-This is not intended to be reused by others but it certainly can with some modification.
-
-## Database Migrations
-
-Currently, these are not working in CI and I cannot figure out why. Here are the steps to run database migrations.
-
-1. `MIGRATION_DSN=$MIGRATION_DSN_ENV make schema-migrate`
+This is not intended to be reused by others, but it certainly can with some modification.
+g
