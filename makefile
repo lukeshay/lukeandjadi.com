@@ -44,7 +44,7 @@ install-dbmate:
 	@chmod +x "$(DBMATE)"
 
 $(DBMATE):
-	@ls "$(DBMATE)" || @make install-dbmate
+	@ls "$(DBMATE)" || make install-dbmate
 
 .PHONY: schema-migrate
 schema-migrate: $(DBMATE)
