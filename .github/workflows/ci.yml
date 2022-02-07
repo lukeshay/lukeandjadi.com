@@ -84,7 +84,7 @@ jobs:
       - run: npm i -g npm@8
       - run: |
           docker run -d --name=roach -p 26257:26257 cockroachdb/cockroach:v21.2.4 start-single-node --insecure
-          docker exec roach ./cockroach sql --insecure --execute "create role lukeandjadi_com with login password 'lukeandjadi_com_pw'"
+          docker exec roach ./cockroach sql --insecure --execute "create role lukeandjadi_com with login"
       - run: |
           make schema-migrate
           make seed-migrate
@@ -101,7 +101,7 @@ jobs:
           wait-on: 'http://localhost:3000'
         env:
           CLERK_API_KEY: ${{ secrets.CLERK_API_KEY }}
-          DSN: postgresql://lukeandjadi_com:lukeandjadi_com_pw@localhost:26257/defaultdb?sslmode=disable
+          DSN: postgresql://lukeandjadi_com@localhost:26257/defaultdb?sslmode=disable
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           NEXT_PUBLIC_CLERK_FRONTEND_API: ${{ secrets.NEXT_PUBLIC_CLERK_FRONTEND_API }}
           NEXT_PUBLIC_DATADOG_CLIENT_TOKEN: ${{ secrets.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN }}
