@@ -12,27 +12,10 @@ jobs:
       stack: dev
     secrets:
       access_token: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-  migrate-dev:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - run: ./scripts/fetch-crdb-cert.sh ${{ secrets.CRDB_CLUSTER_ID_DEV }}
-      - run: ./scripts/migrate.sh
-        env:
-          DSN: ${{ secrets.MIGRATION_DSN_DEV }}?sslmode=verify-full&sslrootcert=./db/certs/root.crt
   pulumi-prd:
-    needs: [pulumi-dev, migrate-dev]
+    needs: [pulumi-dev]
     uses: ./.github/workflows/pulumi.yml
     with:
       stack: prod
     secrets:
       access_token: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-  migrate-prd:
-    needs: [pulumi-dev, migrate-dev]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - run: ./scripts/fetch-crdb-cert.sh ${{ secrets.CRDB_CLUSTER_ID_PRD }}
-      - run: ./scripts/migrate.sh
-        env:
-          DSN: ${{ secrets.MIGRATION_DSN_PRD }}?sslmode=verify-full&sslrootcert=./db/certs/root.crt
