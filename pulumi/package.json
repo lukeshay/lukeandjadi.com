@@ -7,8 +7,6 @@
     "@pulumi/pulumi": "3.24.1"
   },
   "devDependencies": {
-    "@types/node": "17.0.15",
-    "eslint": "^8.8.0",
-    "eslint-config-get-off-my-lawn": "^7.0.0"
+    "@types/node": "17.0.15"
   }
 }
