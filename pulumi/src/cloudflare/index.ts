@@ -81,7 +81,7 @@ const wwwRedirect = new cloudflare.PageRule('www-redirect', {
 });
 
 const clerkAccounts = new cloudflare.Record('clerk-accounts', {
-  name: 'accounts',
+  name: `accounts.${url}`,
   proxied: false,
   ttl,
   type: 'CNAME',
@@ -90,7 +90,7 @@ const clerkAccounts = new cloudflare.Record('clerk-accounts', {
 });
 
 const clerkFrontendApi = new cloudflare.Record('clerk-frontend-api', {
-  name: 'clerk',
+  name: `clerk.${url}`,
   proxied: false,
   ttl,
   type: 'CNAME',
@@ -99,7 +99,7 @@ const clerkFrontendApi = new cloudflare.Record('clerk-frontend-api', {
 });
 
 const clerkDomainKeyOne = new cloudflare.Record('clerk-domain-key-one', {
-  name: 'clk._domainkey',
+  name: `clk._domainkey.${url}`,
   proxied: false,
   ttl,
   type: 'CNAME',
@@ -108,7 +108,7 @@ const clerkDomainKeyOne = new cloudflare.Record('clerk-domain-key-one', {
 });
 
 const clerkDomainKeyTwo = new cloudflare.Record('clerk-domain-key-two', {
-  name: 'clk2._domainkey',
+  name: `clk2._domainkey.${url}`,
   proxied: false,
   ttl,
   type: 'CNAME',
@@ -117,7 +117,7 @@ const clerkDomainKeyTwo = new cloudflare.Record('clerk-domain-key-two', {
 });
 
 const clerkMail = new cloudflare.Record('clerk-mail', {
-  name: 'clkmail',
+  name: `clkmail.${url}`,
   proxied: false,
   ttl,
   type: 'CNAME',
