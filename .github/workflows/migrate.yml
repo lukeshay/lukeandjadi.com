@@ -16,4 +16,4 @@ jobs:
           CLUSTER_ID: ${{ secrets.cluster_id }}
       - run: make schema-migrate
         env:
-          DSN: '${{ secrets.migration_dsn }}?sslmode=verify-full\\&sslrootcert=./db/certs/root.crt'
+          DSN: ${{ secrets.migration_dsn }}
