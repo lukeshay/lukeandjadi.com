@@ -1,6 +1,6 @@
 {
   "extends": ["get-off-my-lawn"],
-  "ignorePatterns": ["cypress", "pulumi"],
+  "ignorePatterns": ["cypress"],
   "overrides": [
     {
       "files": ["pages/**/*", "client/**/*"],

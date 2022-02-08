@@ -35,7 +35,8 @@
     "setup:prd": "npm run setup -- --config prd",
     "setup:stg": "npm run setup -- --config stg",
     "start": "next start",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "postinstall": "cd pulumi && npm ci"
   },
   "lint-staged": {
     "*.{ts,tsx,js,cjs,json}": "eslint --cache --fix",
