@@ -133,7 +133,9 @@ const Home = (): JSX.Element => (
       </span>
       <SubSection title="The Proposal">
         <p className="prose">
-          {'At the end of April 2021, I asked Luke to take graduation pictures with me on campus. He was less than thrilled but agreed because I said his mom would want pictures. (Thanks Natalie!) On May 1st, we got ready to take a few pictures on central campus. My sister, Jaclyn, took pictures of us and at our last spot Luke suggested we take a picture without our caps and gowns on. I said we already had a few without them and we could be done. He suggested just one more with the campanile in the background. Next thing I knew, Luke was on a knee and asking me to marry him. I am pretty sure I had my mouth wide open for about 5 minutes! Jaclyn and I were both surprised but luckily she got some great pictures! I am so lucky that I get to marry such an amazing guy and I cannot wait for our future together!'}
+          {
+            'At the end of April 2021, I asked Luke to take graduation pictures with me on campus. He was less than thrilled but agreed because I said his mom would want pictures. (Thanks Natalie!) On May 1st, we got ready to take a few pictures on central campus. My sister, Jaclyn, took pictures of us and at our last spot Luke suggested we take a picture without our caps and gowns on. I said we already had a few without them and we could be done. He suggested just one more with the campanile in the background. Next thing I knew, Luke was on a knee and asking me to marry him. I am pretty sure I had my mouth wide open for about 5 minutes! Jaclyn and I were both surprised but luckily she got some great pictures! I am so lucky that I get to marry such an amazing guy and I cannot wait for our future together!'
+          }
         </p>
       </SubSection>
     </Section>
@@ -192,7 +194,9 @@ const Home = (): JSX.Element => (
       </SubSection>
       <SubSection title="Parking">
         <p className="prose">
-          {'We recommend parking at the hotel if you are within walking distance. If you are not, the following parking lot will be available which is located across the street from The Conservatory.'}
+          {
+            'We recommend parking at the hotel if you are within walking distance. If you are not, the following parking lot will be available which is located across the street from The Conservatory.'
+          }
         </p>
         <div className="mt-2">
           <h3 className="text-lg font-semibold">{'LifeServe Blood Center'}</h3>
@@ -204,7 +208,9 @@ const Home = (): JSX.Element => (
       </SubSection>
       <SubSection title="Time Between Ceremony and Reception">
         <p className="prose">
-          {'This would be a great time to check in to your hotel or check out East Village. Some bars we recommend are:'}
+          {
+            'This would be a great time to check in to your hotel or check out East Village. Some bars we recommend are:'
+          }
         </p>
         <ul className="ml-4 list-inside list-disc text-gray-600">
           <li>{'Iowa Taproom'}</li>
