@@ -7,6 +7,9 @@ const nextConfig = {
   },
   reactStrictMode: true,
   swcMinify: true,
+  typescript: {
+    tsconfigPath: './tsconfig.build.json',
+  },
   webpack: (config, { dev, isServer }) => {
     // Replace React with Preact only in client production build
     if (!dev && !isServer) {
