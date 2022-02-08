@@ -1,6 +1,6 @@
 config:
   cloudflare:apiToken:
-    secure: AAABAJaBtv7nSxMCNj7jZSv5uyM3QRNwNKxHBqbXUc7GiLqK5+6RS+HTcv3gtNwilzSc/5Zh1U1EkoPBMg0aRLH6GljZ+oZw
+    secure: AAABAIkbW9yIhCT4k/wWTxMnfTD2fPXxuefRnMiOBUMXXtBjeQ2516gbPoAImWKt+u7hV1LTGaxq7hTRRkvnotUq9pjxfMnG
   lukeandjadi.com:url: lukeandjadi.com
   lukeandjadi.com:zone_id:
     secure: AAABAFS+kT4U6SGxd1Y7OxFO8nIJqi9Qw9pLoxrJBSbzmLgJbl9pwL9QOrtX3bcaKN+BVArkz7ZJn7yMtd7kxQ==
