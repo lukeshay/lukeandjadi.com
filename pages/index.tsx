@@ -124,40 +124,16 @@ const Home = (): JSX.Element => (
         <Image alt="campanile" src={campanile} />
       </span>
       <p className="prose">
-        {'Luke and I met in August 2017 on our second day at Iowa State. We lived'}
-        {'on the same floor in Eaton Hall and hung out with the same friends. I'}
-        {'started crushing on Luke within a week, even though for the first few'}
-        {'days I could not remember his name and referred to him as “the guy who'}
-        {'is always smiling.” If you know Luke, you know he is truly always'}
-        {'smiling! Luke took a little longer to make up his mind because he said'}
-        {'he did not know I was interested in him, despite my very obvious hints.'}
-        {';) Luke will say they were not obvious at all. I invited Luke to the'}
-        {'pool with our friends numerous times and he never did end up coming'}
-        {'along… In September, Luke FINALLY asked me on a date, which was the Iowa'}
-        {'vs. Iowa State game in Ames. We sat in the end zone together, and I'}
-        {'remember the kiss cam went on the people in front of us and I was'}
-        {'holding my breath thinking we were next. LOL. In October 2017, we'}
-        {'started dating and two years later we moved in together. We will forever'}
-        {'be grateful for Iowa State bringing us together and being the biggest'}
-        {'part of our first four years together.'}
+        {
+          'Luke and I met in August 2017 on our second day at Iowa State. We lived on the same floor in Eaton Hall and hung out with the same friends. I started crushing on Luke within a week, even though for the first few days I could not remember his name and referred to him as “the guy who is always smiling.” If you know Luke, you know he is truly always smiling! Luke took a little longer to make up his mind because he said he did not know I was interested in him, despite my very obvious hints. ;) Luke will say they were not obvious at all. I invited Luke to the pool with our friends numerous times and he never did end up coming along… In September, Luke FINALLY asked me on a date, which was the Iowa vs. Iowa State game in Ames. We sat in the end zone together, and I remember the kiss cam went on the people in front of us and I was holding my breath thinking we were next. LOL. In October 2017, we started dating and two years later we moved in together. We will forever be grateful for Iowa State bringing us together and being the biggest part of our first four years together.'
+        }
       </p>
       <span className="inline-block w-full py-4 md:hidden">
         <Image alt="campanile" src={campanile} />
       </span>
       <SubSection title="The Proposal">
         <p className="prose">
-          {'At the end of April 2021, I asked Luke to take graduation pictures'}
-          {'with me on campus. He was less than thrilled but agreed because I said'}
-          {'his mom would want pictures. (Thanks Natalie!) On May 1st, we got'}
-          {'ready to take a few pictures on central campus. My sister, Jaclyn,'}
-          {'took pictures of us and at our last spot Luke suggested we take a'}
-          {'picture without our caps and gowns on. I said we already had a few'}
-          {'without them and we could be done. He suggested just one more with the'}
-          {'campanile in the background. Next thing I knew, Luke was on a knee and'}
-          {'asking me to marry him. I am pretty sure I had my mouth wide open for'}
-          {'about 5 minutes! Jaclyn and I were both surprised but luckily she got'}
-          {'some great pictures! I am so lucky that I get to marry such an amazing'}
-          {'guy and I cannot wait for our future together!'}
+          {'At the end of April 2021, I asked Luke to take graduation pictures with me on campus. He was less than thrilled but agreed because I said his mom would want pictures. (Thanks Natalie!) On May 1st, we got ready to take a few pictures on central campus. My sister, Jaclyn, took pictures of us and at our last spot Luke suggested we take a picture without our caps and gowns on. I said we already had a few without them and we could be done. He suggested just one more with the campanile in the background. Next thing I knew, Luke was on a knee and asking me to marry him. I am pretty sure I had my mouth wide open for about 5 minutes! Jaclyn and I were both surprised but luckily she got some great pictures! I am so lucky that I get to marry such an amazing guy and I cannot wait for our future together!'}
         </p>
       </SubSection>
     </Section>
@@ -216,9 +192,7 @@ const Home = (): JSX.Element => (
       </SubSection>
       <SubSection title="Parking">
         <p className="prose">
-          {'We recommend parking at the hotel if you are within walking distance.'}
-          {'If you are not, the following parking lot will be available which is'}
-          {'located across the street from The Conservatory.'}
+          {'We recommend parking at the hotel if you are within walking distance. If you are not, the following parking lot will be available which is located across the street from The Conservatory.'}
         </p>
         <div className="mt-2">
           <h3 className="text-lg font-semibold">{'LifeServe Blood Center'}</h3>
@@ -230,8 +204,7 @@ const Home = (): JSX.Element => (
       </SubSection>
       <SubSection title="Time Between Ceremony and Reception">
         <p className="prose">
-          {'This would be a great time to check in to your hotel or check out East'}
-          {'Village. Some bars we recommend are:'}
+          {'This would be a great time to check in to your hotel or check out East Village. Some bars we recommend are:'}
         </p>
         <ul className="ml-4 list-inside list-disc text-gray-600">
           <li>{'Iowa Taproom'}</li>
