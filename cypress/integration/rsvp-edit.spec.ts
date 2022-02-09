@@ -34,5 +34,3 @@ describe('RSVPs', () => {
     cy.contains('Your RSVP has been updated!');
   });
 });
-
-export {};

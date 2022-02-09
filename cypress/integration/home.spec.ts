@@ -12,5 +12,3 @@ describe('The Home Page', () => {
     cy.contains('h1', 'Wedding Party');
   });
 });
-
-export {};
