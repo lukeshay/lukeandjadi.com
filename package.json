@@ -37,7 +37,7 @@
     "start": "next start",
     "test": "jest --passWithNoTests",
     "postinstall": "cd pulumi && npm ci",
-    "validate": "run-p prettier:check lint test",
+    "validate": "run-p -l prettier:check lint test",
     "docker:infra": "docker-compose up --build -d"
   },
   "lint-staged": {

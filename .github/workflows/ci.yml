@@ -70,9 +70,7 @@ jobs:
           node-version: '14.18.3'
           cache: 'npm'
       - run: npm ci
-      - run: npm run lint
-      - run: npm run prettier:check
-      - run: npm run test
+      - run: npm run validate
   acceptance:
     runs-on: ubuntu-20.04
     steps:
