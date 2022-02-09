@@ -92,7 +92,7 @@ jobs:
           wait-on: 'http://localhost:3000'
         env:
           CLERK_API_KEY: ${{ secrets.CLERK_API_KEY }}
-          DSN: postgresql://lukeandjadi_com@localhost:26257/defaultdb?sslmode=disable
+          DSN: postgresql://lukeandjadi_com@localhost:26666/defaultdb?sslmode=disable
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           NEXT_PUBLIC_CLERK_FRONTEND_API: ${{ secrets.NEXT_PUBLIC_CLERK_FRONTEND_API }}
           NEXT_PUBLIC_DATADOG_CLIENT_TOKEN: ${{ secrets.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN }}
