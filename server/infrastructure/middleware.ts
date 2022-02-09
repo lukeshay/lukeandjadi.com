@@ -5,7 +5,8 @@ import correlator from 'correlation-id';
 import type { NextApiHandler } from 'next';
 import { v4 } from 'uuid';
 
-import { isAPIError, isError } from './errors/api-error';
+import { isAPIError, isError } from '../errors/api-error';
+
 import logger from './logger';
 
 type Handler = NextApiHandler;

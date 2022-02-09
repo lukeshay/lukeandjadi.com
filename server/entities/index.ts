@@ -4,7 +4,7 @@ import * as pg from 'pg';
 import type { PoolOptions } from 'sequelize';
 
 import type { CDCAttributes, CDCCreationAttributes, RSVPAttributes, RSVPCreationAttributes } from '../../types';
-import logger from '../logger';
+import logger from '../infrastructure/logger';
 import { config } from '../../config';
 
 const sequelize = new Sequelize(config.get('database.url'), {

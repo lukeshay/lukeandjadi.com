@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { config } from '../../config';
 import { UnauthorizedError } from '../errors/unauthorized-error';
-import logger from '../logger';
+import logger from '../infrastructure/logger';
 
 const RECAPTCHA_URL: string = config.get('recaptcha.url');
 const RECAPTCHA_SECRET_KEY: string = config.get('recaptcha.secret');

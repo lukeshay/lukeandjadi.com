@@ -16,7 +16,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es2020"
+    "target": "es2020",
+    "types": ["jest"]
   },
   "exclude": ["node_modules", "cypress"],
   "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx"]

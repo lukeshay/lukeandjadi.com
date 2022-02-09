@@ -3,7 +3,7 @@ import { deepEqual } from 'fast-equals';
 import flush from 'just-flush';
 import type { WhereOptions } from 'sequelize';
 
-import logger from '../logger';
+import logger from '../infrastructure/logger';
 import type { CDCAttributes } from '../../types';
 import { CDC } from '../entities';
 import { BadRequestError } from '../errors/bad-request-error';

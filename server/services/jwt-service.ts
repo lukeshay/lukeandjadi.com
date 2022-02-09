@@ -2,7 +2,7 @@ import * as Iron from '@hapi/iron';
 
 import { config } from '../../config';
 import { UnauthorizedError } from '../errors/unauthorized-error';
-import logger from '../logger';
+import logger from '../infrastructure/logger';
 
 type RSVPJWTPayload = { id: string };
 
