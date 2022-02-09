@@ -38,7 +38,7 @@
     "test": "jest --passWithNoTests",
     "postinstall": "cd pulumi && npm ci",
     "validate": "run-p prettier:check lint test",
-    "docker:infra": "docker-compose up --build"
+    "docker:infra": "docker-compose up --build -d"
   },
   "lint-staged": {
     "*.{ts,tsx,js,cjs,json}": "eslint --cache --fix",
