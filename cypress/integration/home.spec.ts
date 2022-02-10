@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 describe('The Home Page', () => {
   it('successfully loads', () => {
     cy.visit('/');
@@ -14,5 +12,3 @@ describe('The Home Page', () => {
     cy.contains('h1', 'Wedding Party');
   });
 });
-
-export {};

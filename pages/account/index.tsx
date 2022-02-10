@@ -10,7 +10,7 @@ import { RSVP } from '../../server/entities';
 import type { CDCAttributes, RSVPAttributes } from '../../types';
 import AccountContainer from '../../components/containers/account-container';
 import Button from '../../components/button';
-import logger from '../../server/logger';
+import logger from '../../server/infrastructure/logger';
 
 const TableHeader = (): JSX.Element => (
   <tr className="bg-gray-200 p-2">

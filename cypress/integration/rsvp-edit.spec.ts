@@ -1,18 +1,13 @@
-/// <reference types="cypress" />
-
 import { Chance } from 'chance';
 
 const chance = new Chance();
 
 describe('RSVPs', () => {
   it('can be edited', () => {
-    cy.visit('/');
-    cy.contains('button', 'RSVP').click();
-
-    cy.url().should('include', '/rsvp');
+    cy.visit('/rsvp');
 
     cy.get('input[id="name"]').type('Luke Shay');
-    cy.contains('button', 'Search').click({ waitForAnimations: true });
+    cy.get('button[type=submit]').click({ waitForAnimations: true });
 
     cy.wait(3000);
 
@@ -36,5 +31,3 @@ describe('RSVPs', () => {
     cy.contains('Your RSVP has been updated!');
   });
 });
-
-export {};

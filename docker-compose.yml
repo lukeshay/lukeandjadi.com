@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  cockroach-db:
+    container_name: lukeandjadi-com-cockroach-db
+    build:
+      context: infrastructure/cockroach-db
+    networks:
+      - lukeandjadi-com
+    ports:
+      - '26666:26257'
+      - '8080:8080'
+  cockroach-db-migrator:
+    container_name: lukeandjadi-com-cockroach-db-migrator
+    build:
+      context: .
+      dockerfile: infrastructure/cockroach-db-migrator/Dockerfile
+    networks:
+      - lukeandjadi-com
+    environment:
+      MIGRATION_DSN: postgresql://root@cockroach-db:26257/defaultdb?sslmode=disable
+    depends_on:
+      - cockroach-db
+networks:
+  lukeandjadi-com:

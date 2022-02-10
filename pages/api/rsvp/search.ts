@@ -1,13 +1,13 @@
 import * as yup from 'yup';
 import { StatusCodes } from '@lukeshay/next-router';
 
-import logger from '../../../server/logger';
-import middleware from '../../../server/middleware';
-import type { Handler } from '../../../server/middleware';
+import logger from '../../../server/infrastructure/logger';
+import middleware from '../../../server/infrastructure/middleware';
+import type { Handler } from '../../../server/infrastructure/middleware';
 import { config } from '../../../config';
 import { generateRSVPJWT } from '../../../server/services/jwt-service';
 import { getRSVP } from '../../../server/services/rsvp-service';
-import { setCookie } from '../../../server/auth';
+import { setCookie } from '../../../server/services/cookie-service';
 import { validate } from '../../../server/services/schema-service';
 import { verifyReCaptchaToken } from '../../../server/services/recaptcha-service';
 

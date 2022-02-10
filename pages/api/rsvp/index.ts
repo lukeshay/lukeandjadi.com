@@ -1,11 +1,11 @@
 import * as yup from 'yup';
 import { StatusCodes } from '@lukeshay/next-router';
 
-import logger from '../../../server/logger';
-import middleware from '../../../server/middleware';
-import type { Handler } from '../../../server/middleware';
+import logger from '../../../server/infrastructure/logger';
+import middleware from '../../../server/infrastructure/middleware';
+import type { Handler } from '../../../server/infrastructure/middleware';
 import { config } from '../../../config';
-import { getCookie } from '../../../server/auth';
+import { getCookie } from '../../../server/services/cookie-service';
 import { getRSVP, updateRSVP } from '../../../server/services/rsvp-service';
 import { parseRSVPJWT } from '../../../server/services/jwt-service';
 import { RequestTimeoutError } from '../../../server/errors/request-timeout-error';
