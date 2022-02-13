@@ -51,7 +51,7 @@
     "@headlessui/react": "1.4.3",
     "@heroicons/react": "1.0.5",
     "@lukeshay/next-router": "0.4.0",
-    "@sendgrid/mail": "7.6.0",
+    "@sendgrid/mail": "7.6.1",
     "axios": "0.25.0",
     "classnames": "2.3.1",
     "cookies": "0.8.0",
