@@ -144,7 +144,7 @@ const Home = (): JSX.Element => (
         <SubSection title="Ceremony" wrapperClassName="w-full md:w-1/2">
           <h3 className="text-lg font-semibold">{'Lutheran Church of Hope'}</h3>
           <address>
-            <span className="mb-1">{'925 Jordan Creek Pkwy'}</span>
+            <span className="mb-1">{'925 Jordan Creek Pkwy\n'}</span>
             <span>{'West Des Moines, IA 50266'}</span>
           </address>
           <p className="py-2">
@@ -155,7 +155,7 @@ const Home = (): JSX.Element => (
         <SubSection title="Reception" wrapperClassName="w-full md:w-1/2">
           <h3 className="text-lg font-semibold">{'The Conservatory'}</h3>
           <address>
-            <span className="mb-1">{'315 E 5th St'}</span>
+            <span className="mb-1">{'315 E 5th St\n'}</span>
             <span>{'Des Moines, IA 50309'}</span>
           </address>
           <p className="py-2">
@@ -170,7 +170,7 @@ const Home = (): JSX.Element => (
         <div className="w-full md:w-1/2">
           <h3 className="text-lg font-semibold">{'AC Hotel by Marriott'}</h3>
           <address>
-            <span className="mb-1">{'401 E Grand Ave'}</span>
+            <span className="mb-1">{'401 E Grand Ave\n'}</span>
             <span>{'Des Moines, IA 50309'}</span>
           </address>
           <a href="https://www.marriott.com/events/start.mi?id=1630435281687&key=GRP" rel="noreferrer" target="_blank">
@@ -180,7 +180,7 @@ const Home = (): JSX.Element => (
         <div className="w-full pt-2 md:w-1/2 md:pt-0">
           <h3 className="text-lg font-semibold">{'Embassy Suites by Hilton'}</h3>
           <address>
-            <span className="mb-1">{'101 E Locust St'}</span>
+            <span className="mb-1">{'101 E Locust St\n'}</span>
             <span>{'Des Moines, IA 50309'}</span>
           </address>
           <a
@@ -201,7 +201,7 @@ const Home = (): JSX.Element => (
         <div className="mt-2">
           <h3 className="text-lg font-semibold">{'LifeServe Blood Center'}</h3>
           <address>
-            <span className="mb-1">{'431 E Locust St'}</span>
+            <span className="mb-1">{'431 E Locust St\n'}</span>
             <span>{'Des Moines, IA 50309'}</span>
           </address>
         </div>
