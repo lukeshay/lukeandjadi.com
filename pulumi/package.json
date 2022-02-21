@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@pulumi/cloudflare": "4.3.0",
+    "@pulumi/cloudflare": "4.4.0",
     "@pulumi/pulumi": "3.24.1"
   },
   "devDependencies": {
