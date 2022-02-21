@@ -95,7 +95,7 @@ const RegistryLink = ({ href, children }: { href: string; children: React.ReactN
   </a>
 );
 
-/* eslint-disable @typescript-eslint/no-require-imports,@typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-require-imports,@typescript-eslint/no-unsafe-assignment,react/forbid-elements */
 const Home = (): JSX.Element => (
   <Container>
     <div className="relative mt-6 text-center text-gray-100 md:-mt-8">
@@ -145,6 +145,7 @@ const Home = (): JSX.Element => (
           <h3 className="text-lg font-semibold">{'Lutheran Church of Hope'}</h3>
           <address>
             <span className="mb-1">{'925 Jordan Creek Pkwy'}</span>
+            <br />
             <span>{'West Des Moines, IA 50266'}</span>
           </address>
           <p className="py-2">
@@ -156,6 +157,7 @@ const Home = (): JSX.Element => (
           <h3 className="text-lg font-semibold">{'The Conservatory'}</h3>
           <address>
             <span className="mb-1">{'315 E 5th St'}</span>
+            <br />
             <span>{'Des Moines, IA 50309'}</span>
           </address>
           <p className="py-2">
@@ -171,6 +173,7 @@ const Home = (): JSX.Element => (
           <h3 className="text-lg font-semibold">{'AC Hotel by Marriott'}</h3>
           <address>
             <span className="mb-1">{'401 E Grand Ave'}</span>
+            <br />
             <span>{'Des Moines, IA 50309'}</span>
           </address>
           <a href="https://www.marriott.com/events/start.mi?id=1630435281687&key=GRP" rel="noreferrer" target="_blank">
@@ -181,6 +184,7 @@ const Home = (): JSX.Element => (
           <h3 className="text-lg font-semibold">{'Embassy Suites by Hilton'}</h3>
           <address>
             <span className="mb-1">{'101 E Locust St'}</span>
+            <br />
             <span>{'Des Moines, IA 50309'}</span>
           </address>
           <a
@@ -202,6 +206,7 @@ const Home = (): JSX.Element => (
           <h3 className="text-lg font-semibold">{'LifeServe Blood Center'}</h3>
           <address>
             <span className="mb-1">{'431 E Locust St'}</span>
+            <br />
             <span>{'Des Moines, IA 50309'}</span>
           </address>
         </div>
