@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "3.0.0-alpha.3",
-    "@datadog/browser-logs": "4.4.0",
+    "@datadog/browser-logs": "4.5.0",
     "@hapi/iron": "6.0.0",
     "@headlessui/react": "1.5.0",
     "@heroicons/react": "1.0.5",
