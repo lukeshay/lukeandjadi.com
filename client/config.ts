@@ -54,7 +54,7 @@ const config = {
       text: 'Amazon',
     },
     {
-      href: 'https://tgt.gifts/jadiandluke',
+      href: 'https://www.target.com/gift-registry/gift-giver?registryId=c9b458a0-b4d7-11eb-9189-157cffde39cf&type=WEDDING',
       text: 'Target',
     },
     {
