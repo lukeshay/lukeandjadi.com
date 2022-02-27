@@ -39,7 +39,14 @@ const put: Handler = async (req, res) => {
   });
   const userAgent = req.headers['user-agent'];
 
-  logger.info('validating token');
+  logger.info('validating token', {
+    email,
+    guests,
+    maxGuests,
+    name,
+    token,
+    userAgent,
+  });
 
   await verifyReCaptchaToken(token);
 

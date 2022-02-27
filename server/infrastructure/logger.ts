@@ -1,6 +1,8 @@
 import process from 'node:process';
 
 import { createLogger, format, transports } from 'winston';
+import { Logtail } from '@logtail/node';
+import { LogtailTransport } from '@logtail/winston';
 import correlator from 'correlation-id';
 
 const logger = createLogger({
@@ -13,6 +15,7 @@ const logger = createLogger({
     },
     environment: process.env.NEXT_PUBLIC_VERCEL_ENV,
     region: process.env.VERCEL_REGION,
+    source: 'winston',
   },
   exitOnError: false,
   format: format.json(),
@@ -23,5 +26,11 @@ const logger = createLogger({
     }),
   ],
 });
+
+if (process.env.LOGTAIL_SOURCE_TOKEN) {
+  const logtail = new Logtail(process.env.LOGTAIL_SOURCE_TOKEN);
+
+  logger.transports.push(new LogtailTransport(logtail));
+}
 
 export default logger;

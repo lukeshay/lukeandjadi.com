@@ -48,19 +48,19 @@ $(DBMATE):
 
 .PHONY: schema-migrate
 schema-migrate: $(DBMATE)
-	@$(DBMATE) --url $(MIGRATION_DSN) migrate
+	$(DBMATE) --url "$(MIGRATION_DSN)" migrate
 
 .PHONY: schema-down
 schema-down: $(DBMATE)
-	@$(DBMATE) --url $(MIGRATION_DSN) down
+	$(DBMATE) --url "$(MIGRATION_DSN)" down
 
 .PHONY: seed-migrate
 seed-migrate: $(DBMATE)
-	@$(DBMATE) --url $(MIGRATION_DSN) --migrations-dir db/seeds migrate
+	$(DBMATE) --url "$(MIGRATION_DSN)" --migrations-dir db/seeds migrate
 
 .PHONY: seed-down
 seed-down: $(DBMATE)
-	@$(DBMATE) --url $(MIGRATION_DSN) --migrations-dir db/seeds down
+	$(DBMATE) --url "$(MIGRATION_DSN)" --migrations-dir db/seeds down
 
 .PHONY: db-cert
 db-cert:
