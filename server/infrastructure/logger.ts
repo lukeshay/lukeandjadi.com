@@ -1,11 +1,9 @@
 import process from 'node:process';
 
 import { createLogger, format, transports } from 'winston';
-import correlator from 'correlation-id';
 import { Logtail } from '@logtail/node';
 import { LogtailTransport } from '@logtail/winston';
-
-const logtail = new Logtail(process.env.LOGTAIL_SOURCE_TOKEN ?? '');
+import correlator from 'correlation-id';
 
 const logger = createLogger({
   defaultMeta: {
@@ -26,8 +24,13 @@ const logger = createLogger({
     new transports.Console({
       format: format.json(),
     }),
-    new LogtailTransport(logtail),
   ],
 });
+
+if (process.env.LOGTAIL_SOURCE_TOKEN) {
+  const logtail = new Logtail(process.env.LOGTAIL_SOURCE_TOKEN);
+
+  logger.transports.push(new LogtailTransport(logtail));
+}
 
 export default logger;
