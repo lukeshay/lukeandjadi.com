@@ -6,6 +6,7 @@ import type { NextApiHandler } from 'next';
 import { v4 } from 'uuid';
 
 import { isAPIError, isError } from '../errors/api-error';
+import { getStackTrace } from '../utils/error-util';
 
 import logger from './logger';
 
@@ -35,7 +36,10 @@ const withErrorHandler: Wrapper<Handler> = async (req, res, next) => {
         stack: error.stack,
       });
     } else {
-      logger.info(`an unknown error has occurred`, { error });
+      logger.info('an unknown error has occurred', {
+        error,
+        stack: getStackTrace(error as object),
+      });
 
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'an unknown error occurred' });
     }

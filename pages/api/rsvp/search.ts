@@ -21,7 +21,8 @@ const get: Handler = async (req, res) => {
 
   await verifyReCaptchaToken(token);
 
-  const rsvp = await getRSVP({ name });
+  // eslint-disable-next-line unicorn/prefer-string-replace-all
+  const rsvp = await getRSVP({ name: name.replace(/and/gu, '&') });
 
   logger.debug(`found rsvp with the name ${name}`);
 
