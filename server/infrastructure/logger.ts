@@ -24,7 +24,7 @@ const logger = createLogger({
   level: 'silly',
   transports: [
     new transports.Console({
-      format: format.prettyPrint(),
+      format: format.json(),
     }),
   ],
 });
