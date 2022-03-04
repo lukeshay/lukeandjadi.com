@@ -1,11 +1,13 @@
 import process from 'node:process';
 
-import { createLogger, transports } from 'winston';
+import { createLogger, format, transports } from 'winston';
 import { Logtail } from '@logtail/node';
 import { LogtailTransport } from '@logtail/winston';
 import correlator from 'correlation-id';
 
 import { config } from '../../config';
+
+const { combine, metadata, printf, timestamp, align, uncolorize } = format;
 
 const logger = createLogger({
   defaultMeta: {
@@ -19,6 +21,24 @@ const logger = createLogger({
     logger: 'winston',
     region: process.env.VERCEL_REGION,
   },
+  /* eslint-disable @typescript-eslint/no-shadow,@typescript-eslint/no-unsafe-assignment,@typescript-eslint/restrict-template-expressions */
+  format: combine(
+    metadata(),
+    uncolorize(),
+    timestamp({
+      format: 'YYYY-MM-DD hh:mm:ss.SSS A',
+    }),
+    align(),
+    printf(({ timestamp, level, message, metadata }) =>
+      JSON.stringify({
+        level,
+        message: `${timestamp} ${level}: ${message}`,
+        metadata,
+        timestamp,
+      }),
+    ),
+  ),
+  /* eslint-enable @typescript-eslint/no-shadow,@typescript-eslint/no-unsafe-assignment,@typescript-eslint/restrict-template-expressions */
   level: 'silly',
   transports: [new transports.Console(), new LogtailTransport(new Logtail(config.get<string>('logtail.sourceToken')))],
 });
