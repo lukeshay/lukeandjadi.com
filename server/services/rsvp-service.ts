@@ -1,7 +1,7 @@
-import type { WhereOptions } from 'sequelize';
+import type { WhereOptions } from 'sequelize-cockroachdb';
 
-import { RSVP } from '../entities';
-import type { RSVPAttributes } from '../../types';
+import { RSVP, RSVPVariant } from '../entities';
+import type { RSVPAttributes, RSVPVariantAttributes } from '../../types';
 import { BadRequestError } from '../errors/bad-request-error';
 
 import { captureChange } from './cdc-service';
@@ -15,6 +15,21 @@ const getRSVP = async (properties: WhereOptions<RSVPAttributes>): Promise<RSVPAt
 
   return rsvp.get();
 };
+
+const getRSVPByVariant = async (properties: WhereOptions<RSVPVariantAttributes>): Promise<RSVPAttributes> => {
+  const rsvpVariant = await RSVPVariant.findOne({ where: properties });
+
+  if (!rsvpVariant) {
+    throw new BadRequestError('RSVP not found');
+  }
+
+  return getRSVP({ id: rsvpVariant.get().rsvpId });
+};
+
+const getRSVPByName = async (name: string): Promise<RSVPAttributes> =>
+  getRSVPByVariant({ variant: name.toLowerCase() });
+
+new Date().getSeconds();
 
 const updateRSVP = async (
   model: Parameters<typeof RSVP.update>[0],
@@ -33,4 +48,4 @@ const updateRSVP = async (
   return updatedRsvp;
 };
 
-export { getRSVP, updateRSVP };
+export { getRSVP, updateRSVP, getRSVPByName };

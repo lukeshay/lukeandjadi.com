@@ -17,6 +17,12 @@ type CDCAttributes = BaseAttributes & {
 
 type CDCCreationAttributes = Optional<CDCAttributes, 'id'> & {};
 
+type RSVPVariantAttributes = {
+  id: string;
+  rsvpId: string;
+  variant: string;
+};
+
 type RSVPAttributes = BaseAttributes & {
   id: string;
   email?: string | null;
@@ -24,8 +30,16 @@ type RSVPAttributes = BaseAttributes & {
   maxGuests: number;
   name: string;
   userAgent?: string | null;
+  variants: RSVPVariantAttributes[];
 };
 
 type RSVPCreationAttributes = Optional<RSVPAttributes, 'email' | 'guests' | 'id' | 'maxGuests'> & {};
 
-export type { BaseAttributes, CDCAttributes, CDCCreationAttributes, RSVPAttributes, RSVPCreationAttributes };
+export type {
+  BaseAttributes,
+  CDCAttributes,
+  CDCCreationAttributes,
+  RSVPAttributes,
+  RSVPCreationAttributes,
+  RSVPVariantAttributes,
+};

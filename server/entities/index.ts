@@ -3,7 +3,13 @@ import { Sequelize, DataTypes } from 'sequelize-cockroachdb';
 import * as pg from 'pg';
 import type { PoolOptions } from 'sequelize';
 
-import type { CDCAttributes, CDCCreationAttributes, RSVPAttributes, RSVPCreationAttributes } from '../../types';
+import type {
+  CDCAttributes,
+  CDCCreationAttributes,
+  RSVPAttributes,
+  RSVPCreationAttributes,
+  RSVPVariantAttributes,
+} from '../../types';
 import logger from '../infrastructure/logger';
 import { config } from '../../config';
 
@@ -23,6 +29,28 @@ const sequelize = new Sequelize(config.get('database.url'), {
 const commonOpts = {
   timestamps: false,
 };
+
+const RSVPVariant: ModelDefined<RSVPVariantAttributes, never> = sequelize.define(
+  'rsvp_variants',
+  {
+    id: {
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      type: DataTypes.UUID,
+    },
+    rsvpId: {
+      allowNull: false,
+      defaultValue: 2,
+      field: 'rsvp_id',
+      type: DataTypes.UUID,
+    },
+    variant: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
+  },
+  commonOpts,
+);
 
 const RSVP: ModelDefined<RSVPAttributes, RSVPCreationAttributes> = sequelize.define(
   'rsvps',
@@ -75,6 +103,8 @@ const RSVP: ModelDefined<RSVPAttributes, RSVPCreationAttributes> = sequelize.def
   commonOpts,
 );
 
+RSVP.hasMany(RSVPVariant, { as: 'variants' });
+
 const CDC: ModelDefined<CDCAttributes, CDCCreationAttributes> = sequelize.define(
   'cdc',
   {
@@ -116,4 +146,4 @@ const CDC: ModelDefined<CDCAttributes, CDCCreationAttributes> = sequelize.define
   commonOpts,
 );
 
-export { sequelize, RSVP, CDC };
+export { sequelize, RSVP, CDC, RSVPVariant };

@@ -6,7 +6,7 @@ import middleware from '../../../server/infrastructure/middleware';
 import type { Handler } from '../../../server/infrastructure/middleware';
 import { config } from '../../../config';
 import { generateRSVPJWT } from '../../../server/services/jwt-service';
-import { getRSVP } from '../../../server/services/rsvp-service';
+import { getRSVPByName } from '../../../server/services/rsvp-service';
 import { setCookie } from '../../../server/services/cookie-service';
 import { validate } from '../../../server/services/schema-service';
 import { verifyReCaptchaToken } from '../../../server/services/recaptcha-service';
@@ -21,8 +21,7 @@ const get: Handler = async (req, res) => {
 
   await verifyReCaptchaToken(token);
 
-  // eslint-disable-next-line unicorn/prefer-string-replace-all
-  const rsvp = await getRSVP({ name: name.replace(/and/gu, '&') });
+  const rsvp = await getRSVPByName(name);
 
   logger.debug(`found rsvp with the name ${name}`);
 
