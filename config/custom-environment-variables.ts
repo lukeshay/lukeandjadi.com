@@ -4,9 +4,6 @@ const config = {
   database: {
     url: process.env.DSN,
   },
-  datadog: {
-    apiKey: process.env.DATADOG_API_KEY,
-  },
   env: process.env.NODE_ENV,
   environment: process.env.NODE_ENV,
   jwt: {

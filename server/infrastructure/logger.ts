@@ -1,6 +1,6 @@
 import process from 'node:process';
 
-import { createLogger, format, transports } from 'winston';
+import { createLogger, transports } from 'winston';
 import { Logtail } from '@logtail/node';
 import { LogtailTransport } from '@logtail/winston';
 import correlator from 'correlation-id';
@@ -19,33 +19,8 @@ const logger = createLogger({
     logger: 'winston',
     region: process.env.VERCEL_REGION,
   },
-  exitOnError: false,
-  format: format.json(),
   level: 'silly',
-  transports: [
-    new transports.Console({
-      format: format.json(),
-    }),
-  ],
+  transports: [new transports.Console(), new LogtailTransport(new Logtail(config.get<string>('logtail.sourceToken')))],
 });
-
-try {
-  logger.transports.push(new LogtailTransport(new Logtail(config.get<string>('logtail.sourceToken'))));
-
-  logger.info('Added Logtail transport');
-} catch {}
-
-try {
-  logger.transports.push(
-    new transports.Http({
-      format: format.json(),
-      host: 'http-intake.logs.datadoghq.com',
-      path: `/api/v2/logs?dd-api-key=${config.get<string>('datadog.apiKey')}&ddsource=nodejs&service=lukeandjadi.com`,
-      ssl: true,
-    }),
-  );
-
-  logger.info('Added Datadog transport');
-} catch {}
 
 export default logger;
