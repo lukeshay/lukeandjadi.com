@@ -1,22 +1,11 @@
 import type { DocumentProps } from 'next/document';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { datadogLogs } from '@datadog/browser-logs';
 
 import config from '../client/config';
 
 class MyDocument extends Document {
   public constructor(props: DocumentProps) {
     super(props);
-
-    datadogLogs.init({
-      clientToken: process.env.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN ?? '',
-      env: process.env.VERCEL_ENV,
-      forwardErrorsToLogs: true,
-      sampleRate: 100,
-      service: 'lukeandjadi.com',
-      site: 'datadoghq.com',
-      version: process.env.VERCEL_GIT_COMMIT_SHA,
-    });
   }
 
   public render(): JSX.Element {
