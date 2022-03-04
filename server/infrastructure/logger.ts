@@ -14,8 +14,8 @@ const logger = createLogger({
       return correlator.getId();
     },
     environment: process.env.NEXT_PUBLIC_VERCEL_ENV,
+    logger: 'winston',
     region: process.env.VERCEL_REGION,
-    source: 'winston',
   },
   exitOnError: false,
   format: format.json(),

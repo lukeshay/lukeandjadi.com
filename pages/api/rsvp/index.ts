@@ -24,15 +24,24 @@ const put: Handler = async (req, res) => {
   const jwt = getCookie(req, res, config.get('jwt.rsvp.cookie'));
 
   if (!jwt) {
-    logger.error('no jwt cookie found');
+    logger.error('no jwt cookie found', { jwt });
 
     throw new RequestTimeoutError('no jwt cookie found');
   }
 
-  logger.error('parsing jwt');
+  logger.error('parsing jwt', { jwt });
 
   const { id } = await parseRSVPJWT(jwt);
-  const { maxGuests } = await getRSVP({ id });
+
+  logger.info('parsed jwt', { id });
+
+  const { maxGuests, ...rest } = await getRSVP({ id });
+
+  logger.info('got rsvp', {
+    ...rest,
+    maxGuests,
+  });
+
   const { token, email, guests, name } = await validate(bodySchema, {
     ...req.body,
     maxGuests,
@@ -50,7 +59,14 @@ const put: Handler = async (req, res) => {
 
   await verifyReCaptchaToken(token);
 
-  logger.info('updating rsvp');
+  logger.info('updating rsvp', {
+    email,
+    guests,
+    maxGuests,
+    name,
+    token,
+    userAgent,
+  });
 
   const saved = await updateRSVP(
     {

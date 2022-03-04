@@ -27,7 +27,7 @@ const getRSVPByVariant = async (properties: WhereOptions<RSVPVariantAttributes>)
 };
 
 const getRSVPByName = async (name: string): Promise<RSVPAttributes> =>
-  getRSVPByVariant({ variant: name.toLowerCase() });
+  getRSVPByVariant({ variant: name.toLowerCase().trim() });
 
 new Date().getSeconds();
 

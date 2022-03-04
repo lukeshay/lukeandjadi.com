@@ -21,9 +21,11 @@ const get: Handler = async (req, res) => {
 
   await verifyReCaptchaToken(token);
 
+  logger.info(`getting rsvp by name ${name}`, { name });
+
   const rsvp = await getRSVPByName(name);
 
-  logger.debug(`found rsvp with the name ${name}`);
+  logger.debug(`found rsvp with the name ${name}`, { name });
 
   const jwt = await generateRSVPJWT({ id: rsvp.id });
 

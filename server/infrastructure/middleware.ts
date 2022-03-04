@@ -48,6 +48,18 @@ const withErrorHandler: Wrapper<Handler> = async (req, res, next) => {
 
 const wrapper: Wrapper<Handler> = async (req, res, handler) => {
   await withCorrelationId(req, res, async (nestedReq, nestedRes) => {
+    logger.info(`received request: ${nestedReq.method ?? ''} ${nestedReq.url ?? ''}`, {
+      body: nestedReq.body as Record<string, unknown>,
+      cookies: nestedReq.cookies,
+      env: nestedReq.env,
+      headers: nestedReq.headers,
+      httpVersionMajor: nestedReq.httpVersionMajor,
+      httpVersionMinor: nestedReq.httpVersionMinor,
+      method: nestedReq.method,
+      query: nestedReq.query,
+      url: nestedReq.url,
+    });
+
     await withErrorHandler(nestedReq, nestedRes, handler);
   });
 };
