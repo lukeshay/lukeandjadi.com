@@ -13,7 +13,7 @@ import { validate } from '../../../server/services/schema-service';
 import { verifyReCaptchaToken } from '../../../server/services/recaptcha-service';
 
 const bodySchema = yup.object().shape({
-  email: yup.string().email().required(),
+  email: yup.string().email().optional(),
   guests: yup.number().min(0).max(yup.ref('maxGuests')).required(),
   maxGuests: yup.number().positive().required(),
   name: yup.string().required(),

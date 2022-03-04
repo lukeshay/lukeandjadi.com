@@ -87,6 +87,7 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
 
       const res = await rsvpPut({
         ...values,
+        email: values.email?.toLowerCase(),
         guests: values.attending ? values.guests : 0,
         token,
       });
@@ -151,7 +152,7 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
           className="max-w-xl"
           notSplit
           onSubmit={handleSubmit}
-          subTitle="Please fill out all required fields, this information will help us in planning for our wedding! Enter 0 (zero) guests if you cannot attend."
+          subTitle="Please fill out all required fields, this information will help us in planning for our wedding!"
           title="RSVP"
         >
           <Input
@@ -163,16 +164,6 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
             onChange={handleChange}
             required
             value={values.name}
-          />
-          <Input
-            autoComplete="email"
-            disabled={loading}
-            id="email"
-            label="Email"
-            name="email"
-            onChange={handleChange}
-            required
-            value={values.email}
           />
           <Select
             autoComplete="attending"
@@ -207,6 +198,15 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
               selected={values.guests}
             />
           )}
+          <Input
+            autoComplete="email"
+            disabled={loading}
+            id="email"
+            label="Email"
+            name="email"
+            onChange={handleChange}
+            value={values.email}
+          />
           <Button className="my-6 w-full px-6 md:float-right md:w-auto" loading={loading} type="submit">
             {'Update'}
           </Button>

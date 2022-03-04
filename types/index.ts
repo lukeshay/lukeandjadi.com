@@ -19,11 +19,11 @@ type CDCCreationAttributes = Optional<CDCAttributes, 'id'> & {};
 
 type RSVPAttributes = BaseAttributes & {
   id: string;
-  email?: string;
+  email?: string | null;
   guests: number;
   maxGuests: number;
   name: string;
-  userAgent?: string;
+  userAgent?: string | null;
 };
 
 type RSVPCreationAttributes = Optional<RSVPAttributes, 'email' | 'guests' | 'id' | 'maxGuests'> & {};
