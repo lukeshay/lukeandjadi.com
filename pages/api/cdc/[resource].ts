@@ -3,7 +3,7 @@ import { StatusCodes } from '@lukeshay/next-router';
 
 import { validate } from '../../../server/services/schema-service';
 import type { Handler } from '../../../server/infrastructure/middleware';
-import middleware, { requireSession } from '../../../server/infrastructure/middleware';
+import { requireSession, createRouter } from '../../../server/infrastructure/middleware';
 import { getAllChangesByResource } from '../../../server/services/cdc-service';
 
 const querySchema = yup.object().shape({
@@ -18,4 +18,4 @@ const get: Handler = async (req, res) => {
   res.status(StatusCodes.OK).json(changes);
 };
 
-export default middleware.get(requireSession(get)).handler();
+export default createRouter().get(requireSession(get)).handler();

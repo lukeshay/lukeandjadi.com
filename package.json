@@ -22,7 +22,7 @@
     "cy:run:dev": "npm run cy:run -- --config baseUrl=\"https://dev.lukeandjadi.com\"",
     "cy:run:lcl": "npm run cy:run -- --config baseUrl=\"http://localhost:3000\"",
     "cy:run:ord": "npm run cy:run -- --config baseUrl=\"https://lukeandjadi.com\"",
-    "dev": "next dev",
+    "dev": "NODE_ENV=local next dev",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install",

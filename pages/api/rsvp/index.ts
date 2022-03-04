@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import { StatusCodes } from '@lukeshay/next-router';
 
 import logger from '../../../server/infrastructure/logger';
-import middleware from '../../../server/infrastructure/middleware';
+import { createRouter } from '../../../server/infrastructure/middleware';
 import type { Handler } from '../../../server/infrastructure/middleware';
 import { config } from '../../../config';
 import { getCookie } from '../../../server/services/cookie-service';
@@ -84,4 +84,4 @@ const put: Handler = async (req, res) => {
   res.status(StatusCodes.OK).json(saved);
 };
 
-export default middleware.put(put).handler();
+export default createRouter().put(put).handler();

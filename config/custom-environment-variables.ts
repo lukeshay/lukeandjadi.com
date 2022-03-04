@@ -4,10 +4,16 @@ const config = {
   database: {
     url: process.env.DSN,
   },
+  datadog: {
+    apiKey: process.env.DATADOG_API_KEY,
+  },
   env: process.env.NODE_ENV,
   environment: process.env.NODE_ENV,
   jwt: {
     secret: process.env.JWT_SECRET,
+  },
+  logtail: {
+    sourceToken: process.env.LOGTAIL_SOURCE_TOKEN,
   },
   recaptcha: {
     secret: process.env.RECAPTCHA_SECRET_KEY,

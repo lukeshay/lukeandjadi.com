@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import { StatusCodes } from '@lukeshay/next-router';
 
 import logger from '../../../server/infrastructure/logger';
-import middleware from '../../../server/infrastructure/middleware';
+import { createRouter } from '../../../server/infrastructure/middleware';
 import type { Handler } from '../../../server/infrastructure/middleware';
 import { config } from '../../../config';
 import { generateRSVPJWT } from '../../../server/services/jwt-service';
@@ -41,4 +41,4 @@ const get: Handler = async (req, res) => {
   res.status(StatusCodes.OK).json(rsvp);
 };
 
-export default middleware.get(get).handler();
+export default createRouter().get(get).handler();

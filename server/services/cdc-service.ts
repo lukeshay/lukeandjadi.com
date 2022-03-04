@@ -6,13 +6,12 @@ import type { WhereOptions } from 'sequelize';
 import logger from '../infrastructure/logger';
 import type { CDCAttributes } from '../../types';
 import { CDC } from '../entities';
-import { BadRequestError } from '../errors/bad-request-error';
 
-const getCDC = async (properties: WhereOptions<CDCAttributes>): Promise<CDCAttributes> => {
+const getCDC = async (properties: WhereOptions<CDCAttributes>): Promise<CDCAttributes | undefined> => {
   const cdc = await CDC.findOne({ where: properties });
 
   if (!cdc) {
-    throw new BadRequestError('CDC not found');
+    return undefined;
   }
 
   return cdc.get();
@@ -36,7 +35,7 @@ const captureChange = async <T>(resource: string, resourceId: string, value?: T)
       resourceId,
     });
 
-    const latestValue = cdc.currentValue ?? undefined;
+    const latestValue = cdc?.currentValue ?? undefined;
     const flushedValue = scrubSensitiveData(value);
 
     if (!deepEqual(latestValue, flushedValue)) {

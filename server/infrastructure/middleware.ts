@@ -1,5 +1,5 @@
 import { requireSession as clerkRequireSession } from '@clerk/nextjs/api';
-import type { Wrapper } from '@lukeshay/next-router';
+import type { Router, Wrapper } from '@lukeshay/next-router';
 import { router, StatusCodes } from '@lukeshay/next-router';
 import correlator from 'correlation-id';
 import type { NextApiHandler } from 'next';
@@ -50,9 +50,6 @@ const wrapper: Wrapper<Handler> = async (req, res, handler) => {
   await withCorrelationId(req, res, async (nestedReq, nestedRes) => {
     logger.info(`received request: ${nestedReq.method ?? ''} ${nestedReq.url ?? ''}`, {
       body: nestedReq.body as Record<string, unknown>,
-      cookies: nestedReq.cookies,
-      env: nestedReq.env,
-      headers: nestedReq.headers,
       httpVersionMajor: nestedReq.httpVersionMajor,
       httpVersionMinor: nestedReq.httpVersionMinor,
       method: nestedReq.method,
@@ -64,6 +61,7 @@ const wrapper: Wrapper<Handler> = async (req, res, handler) => {
   });
 };
 
+const createRouter = (): Router<Handler> => router<Handler>(wrapper);
+
 export type { Handler };
-export { requireSession };
-export default router<Handler>(wrapper);
+export { requireSession, createRouter };
