@@ -5,6 +5,12 @@ import type { GetServerSideProps } from 'next';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
+import { config as conf } from '../../config';
+import { getCookie } from '../../server/services/cookie-service';
+import { getRecaptchaToken } from '../../client/recaptcha';
+import { getRSVP } from '../../server/services/rsvp-service';
+import { parseRSVPJWT } from '../../server/services/jwt-service';
+import { rsvpPut } from '../../client/api';
 import Button from '../../components/button';
 import config from '../../client/config';
 import Container from '../../components/containers/container';
@@ -14,12 +20,6 @@ import logger from '../../server/infrastructure/logger';
 import Select from '../../components/select';
 import type { Option } from '../../components/select';
 import type { RSVPAttributes } from '../../types';
-import { config as conf } from '../../config';
-import { getCookie } from '../../server/services/cookie-service';
-import { getRecaptchaToken } from '../../client/recaptcha';
-import { getRSVP } from '../../server/services/rsvp-service';
-import { parseRSVPJWT } from '../../server/services/jwt-service';
-import { rsvpPut } from '../../client/api';
 
 const REDIRECT = {
   redirect: {
@@ -63,15 +63,16 @@ const getServerSideProps: GetServerSideProps = async (ctx) => {
 const AccountPage = (props: RSVPAttributes): JSX.Element => {
   const guestOptions: Option[] = [];
 
-  for (let i = 0; i <= props.maxGuests; i++) {
+  for (let i = 1; i <= props.maxGuests; i++) {
     guestOptions.push({
       key: String(i),
       value: String(i),
     });
   }
 
-  const [values, setValues] = React.useState<RSVPAttributes>({
+  const [values, setValues] = React.useState<RSVPAttributes & { attending: boolean }>({
     ...props,
+    attending: props.guests > 0,
   });
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
@@ -86,11 +87,13 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
 
       const res = await rsvpPut({
         ...values,
+        guests: values.attending ? values.guests : 0,
         token,
       });
 
       setValues({
         ...res.data,
+        attending: res.data.guests > 0,
       });
 
       toast(router.query.message ?? 'Your RSVP has been updated!', {
@@ -133,6 +136,14 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
     });
   };
 
+  const handleAttendingChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
+    setValues({
+      ...values,
+      attending: event.target.value === 'yes',
+      guests: Number(1),
+    });
+  };
+
   return (
     <Container>
       <div className="mt-6 flex w-full flex-row justify-center md:-mt-8">
@@ -164,16 +175,38 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
             value={values.email}
           />
           <Select
-            autoComplete="guests"
+            autoComplete="attending"
             disabled={loading}
-            id="guests"
-            label="Guests"
-            name="guests"
-            onChange={handleGuestsChange}
-            options={guestOptions}
+            id="attending"
+            label="Attending"
+            name="attending"
+            onChange={handleAttendingChange}
+            options={[
+              {
+                key: 'yes',
+                value: 'Yes',
+              },
+              {
+                key: 'no',
+                value: 'No',
+              },
+            ]}
             required
-            selected={values.guests}
+            selected={values.attending ? 'yes' : 'no'}
           />
+          {values.attending && (
+            <Select
+              autoComplete="guests"
+              disabled={loading}
+              id="guests"
+              label="Guests"
+              name="guests"
+              onChange={handleGuestsChange}
+              options={guestOptions}
+              required
+              selected={values.guests}
+            />
+          )}
           <Button className="my-6 w-full px-6 md:float-right md:w-auto" loading={loading} type="submit">
             {'Update'}
           </Button>
