@@ -26,7 +26,7 @@ const logger = createLogger({
     metadata(),
     uncolorize(),
     timestamp({
-      format: 'YYYY-MM-DD hh:mm:ss.SSS A',
+      format: () => new Date().toISOString(),
     }),
     align(),
     printf(({ timestamp, level, message, metadata }) =>
