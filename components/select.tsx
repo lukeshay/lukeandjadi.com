@@ -1,7 +1,7 @@
 import type { ChangeEventHandler } from 'react';
 import classNames from 'classnames';
 
-type Option = { key: number | string; value: number | string; disabled?: boolean };
+type Option = { key: number | string | undefined; value: number | string; disabled?: boolean };
 
 type SelectProps = {
   label: string;
@@ -10,7 +10,7 @@ type SelectProps = {
   options: Option[];
   required?: boolean;
   loading?: boolean;
-  selected: number | string;
+  selected: number | string | undefined;
   id: string;
   name: string;
   autoComplete: string;

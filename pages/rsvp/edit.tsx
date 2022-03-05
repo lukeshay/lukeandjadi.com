@@ -143,7 +143,8 @@ const AccountPage = (props: AccountPageProps): JSX.Element => {
     setValues({
       ...values,
       attending: event.target.value === 'yes',
-      guests: Number(1),
+      changed: true,
+      guests: values.guests || Number(1),
     });
   };
 
@@ -214,7 +215,12 @@ const AccountPage = (props: AccountPageProps): JSX.Element => {
             onChange={handleChange}
             value={values.email}
           />
-          <Button className="my-6 w-full px-6 md:float-right md:w-auto" loading={loading} type="submit">
+          <Button
+            className="my-6 w-full px-6 md:float-right md:w-auto"
+            disabled={!values.changed}
+            loading={loading}
+            type="submit"
+          >
             {'Update'}
           </Button>
         </Form>
