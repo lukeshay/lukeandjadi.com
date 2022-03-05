@@ -13,76 +13,59 @@ import RSVPTableRow from '../../components/admin/rsvp-table-row';
 import type { CDCAttributes, SerializedRSVPAttributes } from '../../types';
 import { downloadFile } from '../../client/file-downloads';
 
-const getServerSideProps: GetServerSideProps = withServerSideAuth(
-  async (context) => {
-    const { session } = context;
+const getServerSideProps: GetServerSideProps = withServerSideAuth(async () => {
+  try {
+    const rsvps = await RSVP.findAll({
+      include: {
+        as: 'variants',
+        model: RSVPVariant,
+      },
+      order: [['name', 'ASC']],
+    });
 
-    if (!session) {
-      return {
-        redirect: {
-          destination: '/signin',
-          permanent: false,
-        },
-      };
-    }
+    let totalGuests = 0;
+    let totalMaxGuests = 0;
+    let totalEdited = 0;
 
-    try {
-      const rsvps = await RSVP.findAll({
-        include: {
-          as: 'variants',
-          model: RSVPVariant,
-        },
-        order: [['name', 'ASC']],
-      });
+    const rows = rsvps.map((rsvp) => {
+      const { id, name, email, guests, maxGuests, changed, updatedAt } = serialize(rsvp.get());
 
-      let totalGuests = 0;
-      let totalMaxGuests = 0;
-      let totalEdited = 0;
+      totalGuests += guests;
+      totalMaxGuests += maxGuests;
 
-      const rows = rsvps.map((rsvp) => {
-        const { id, name, email, guests, maxGuests, changed, updatedAt } = serialize(rsvp.get());
+      if (changed) {
+        totalEdited++;
+      }
 
-        totalGuests += guests;
-        totalMaxGuests += maxGuests;
+      return [id, name, changed, email, guests, maxGuests, updatedAt].join(', ');
+    });
 
-        if (changed) {
-          totalEdited++;
-        }
-
-        return [id, name, changed, email, guests, maxGuests, updatedAt].join(', ');
-      });
-
-      const csvRows = [
-        ['ID', 'Name', 'Edited', 'Email', 'Guests', 'Max Guests', 'Updated At'].join(', '),
-        ...rows,
-        ['Totals', '', totalEdited, '', totalGuests, totalMaxGuests, ''].join(', '),
-      ];
-
-      return {
-        props: {
-          csv: csvRows.join('\n'),
-          rsvps: rsvps.map((rsvp) => serialize(rsvp.get({ plain: true }))),
-          totalEdited,
-          totalGuests,
-          totalMaxGuests,
-        },
-      };
-    } catch (error) {
-      logger.error(`error getting all rsvps: ${(error as Error).message}`, error);
-    }
+    const csvRows = [
+      ['ID', 'Name', 'Edited', 'Email', 'Guests', 'Max Guests', 'Updated At'].join(', '),
+      ...rows,
+      ['Totals', '', totalEdited, '', totalGuests, totalMaxGuests, ''].join(', '),
+    ];
 
     return {
       props: {
-        csv: '',
-        rsvps: [],
+        csv: csvRows.join('\n'),
+        rsvps: rsvps.map((rsvp) => serialize(rsvp.get({ plain: true }))),
+        totalEdited,
+        totalGuests,
+        totalMaxGuests,
       },
     };
-  },
-  {
-    loadSession: true,
-    loadUser: true,
-  },
-);
+  } catch (error) {
+    logger.error(`error getting all rsvps: ${(error as Error).message}`, error);
+  }
+
+  return {
+    props: {
+      csv: '',
+      rsvps: [],
+    },
+  };
+});
 
 const handleDownloadChangesClick = async (): Promise<void> => {
   try {
