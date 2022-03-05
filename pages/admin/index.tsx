@@ -15,9 +15,9 @@ import { downloadFile } from '../../client/file-downloads';
 
 const getServerSideProps: GetServerSideProps = withServerSideAuth(
   async (context) => {
-    const { user } = context;
+    const { session } = context;
 
-    if (!user) {
+    if (!session) {
       return {
         redirect: {
           destination: '/signin',
