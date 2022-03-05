@@ -12,7 +12,7 @@ const AccountContainer = ({ children }: ContainerProps): JSX.Element => (
   <BaseContainer title="Luke & Jadi | Admin">
     <SignedIn>
       <main className="min-h-screen">
-        <div className="col-span-6 flex justify-center p-4">
+        <div className="flex justify-center p-4">
           <div>{children}</div>
         </div>
       </main>

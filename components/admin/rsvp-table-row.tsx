@@ -1,39 +1,47 @@
-import { PencilIcon, XIcon, CheckIcon, ChevronRightIcon } from '@heroicons/react/outline';
-import Link from 'next/link';
+import { XIcon, CheckIcon } from '@heroicons/react/outline';
+import { useState } from 'react';
 
 import type { SerializedRSVPAttributes } from '../../types';
 
 type RSVPTableRowProps = SerializedRSVPAttributes;
 
-const RSVPTableRow = ({ changed, email, guests, id, maxGuests, name }: RSVPTableRowProps): JSX.Element => (
-  <tr className="border-t p-2" key={id}>
-    <td className="p-2">
-      <ChevronRightIcon className="h-6 w-6 cursor-pointer text-gray-500" />
-    </td>
-    <td className="p-2">{name}</td>
-    <td className="flex items-center justify-center p-2">
-      {changed ? (
-        <CheckIcon className="text-green-500" height={20} width={20} />
-      ) : (
-        <XIcon className="text-red-500" height={20} width={20} />
+const RSVPTableRow = ({ changed, email, guests, id, maxGuests, name, variants }: RSVPTableRowProps): JSX.Element => {
+  const [open, setOpen] = useState(false);
+
+  const handleClick = (): void => {
+    setOpen(!open);
+  };
+
+  return (
+    <button className="w-full cursor-pointer border text-left" onClick={handleClick} type="button">
+      <div className="grid grid-cols-10 gap-2" key={id}>
+        <p className="col-span-3 truncate p-2">{name}</p>
+        <p className="col-span-1 flex items-center justify-center p-2">
+          {changed ? (
+            <CheckIcon className="text-green-500" height={20} width={20} />
+          ) : (
+            <XIcon className="text-red-500" height={20} width={20} />
+          )}
+        </p>
+        <p className="col-span-3 p-2 text-center">{email ?? 'Not set'}</p>
+        <p className="col-span-1 p-2 text-center">{guests}</p>
+        <p className="col-span-2 p-2 text-center">{maxGuests}</p>
+      </div>
+      {open && (
+        <div className="w-full px-4 pb-4 text-left">
+          <p>
+            <strong>{'Variations:'}</strong>
+          </p>
+          <ul className="list-disc pl-4">
+            {variants.map((variant) => (
+              <li key={variant.id}>{variant.variant}</li>
+            ))}
+          </ul>
+        </div>
       )}
-    </td>
-    <td className="p-2 text-center">{email ?? 'Not set'}</td>
-    <td className="p-2 text-center">{guests}</td>
-    <td className="p-2 text-center">{maxGuests}</td>
-    <td className="flex items-center justify-center p-2">
-      <Link
-        href={`/rsvp/edit/${id}?redirectURI=/account/rsvps&message=${name}'s RSVP has been updated!&autoClose=true`}
-        passHref
-        prefetch
-      >
-        <button className="cursor-pointer rounded-full p-2 text-gray-500 ring-accent-500 hover:ring" type="button">
-          <PencilIcon height={20} width={20} />
-        </button>
-      </Link>
-    </td>
-  </tr>
-);
+    </button>
+  );
+};
 
 export type { RSVPTableRowProps };
 export default RSVPTableRow;

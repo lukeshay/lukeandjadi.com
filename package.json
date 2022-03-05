@@ -45,7 +45,7 @@
     "*": "prettier --ignore-unknown --no-error-on-unmatched-pattern --ignore-path .gitignore --write"
   },
   "dependencies": {
-    "@clerk/nextjs": "3.0.0-alpha.3",
+    "@clerk/nextjs": "3.0.0-alpha.8",
     "@hapi/iron": "6.0.0",
     "@headlessui/react": "1.5.0",
     "@heroicons/react": "1.0.6",
@@ -57,7 +57,7 @@
     "classnames": "2.3.1",
     "cookies": "0.8.0",
     "correlation-id": "4.0.0",
-    "date-fns": "^2.28.0",
+    "date-fns": "2.28.0",
     "deep-diff": "1.0.2",
     "fast-equals": "3.0.0",
     "fathom-client": "3.4.1",

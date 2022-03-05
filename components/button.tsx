@@ -25,7 +25,8 @@ const Button = ({
     // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     disabled={loading || disabled}
     onClick={onClick}
-    type={type} // eslint-disable-line react/button-has-type
+    // eslint-disable-next-line react/button-has-type
+    type={type}
   >
     {loading && <div className="lds-dual-ring" />}
     {children}

@@ -120,7 +120,7 @@ const AccountPage = ({ rsvps, csv, totalGuests, totalMaxGuests, totalEdited }: A
 
   return (
     <AccountContainer>
-      <div className="flex items-center justify-between">
+      <div className="flex max-w-6xl items-center justify-between">
         <h1 className="text-bold px-2 py-4 text-3xl">{'RSVPs'}</h1>
         <div>
           <Button onClick={handleDownloadChangesClick}>{'Download Changes'}</Button>
@@ -131,31 +131,23 @@ const AccountPage = ({ rsvps, csv, totalGuests, totalMaxGuests, totalEdited }: A
           </div>
         )}
       </div>
-      <table className="border border-gray-200">
-        <thead>
-          <tr className="bg-gray-200 p-2">
-            <th className="w-16 rounded-tl p-2" />
-            <th className="w-52 p-2">{'Name'}</th>
-            <th className="w-52 p-2">{'Edited'}</th>
-            <th className="w-52 p-2">{'Email'}</th>
-            <th className="w-52 p-2">{'Guests'}</th>
-            <th className="w-52 p-2">{'Max Guests'}</th>
-            <th className="w-52 rounded-tr p-2">{'Edit'}</th>
-          </tr>
-        </thead>
-        <tbody>{rsvps.map(RSVPTableRow)}</tbody>
-        <tfoot>
-          <tr className="bg-gray-200 p-2">
-            <th className="w-52 rounded-bl p-2" />
-            <th className="w-52 p-2">{'Totals'}</th>
-            <th className="w-52 p-2">{totalEdited}</th>
-            <th className="w-52 p-2" />
-            <th className="w-52 p-2">{totalGuests}</th>
-            <th className="w-52 p-2">{totalMaxGuests}</th>
-            <th className="w-52 rounded-br p-2" />
-          </tr>
-        </tfoot>
-      </table>
+      <div className="w-full max-w-6xl rounded border border-gray-200">
+        <div className="grid grid-cols-10  gap-2 rounded-t bg-gray-200">
+          <p className="col-span-3 rounded-tl p-2 text-center">{'Name'}</p>
+          <p className="col-span-1 p-2 text-center">{'Edited'}</p>
+          <p className="col-span-3 p-2 text-center">{'Email'}</p>
+          <p className="col-span-1 p-2 text-center">{'Guests'}</p>
+          <p className="col-span-2 rounded-tr p-2 text-center">{'Max Guests'}</p>
+        </div>
+        <div className="border-collapse">{rsvps.map(RSVPTableRow)}</div>
+        <div className="grid grid-cols-10  gap-2 rounded-b bg-gray-200">
+          <p className="col-span-3 rounded-bl p-2">{'Totals'}</p>
+          <p className="col-span-1 p-2 text-center">{totalEdited}</p>
+          <p className="col-span-3 p-2 text-center" />
+          <p className="col-span-1 p-2 text-center">{totalGuests}</p>
+          <p className="col-span-2 rounded-br p-2 text-center">{totalMaxGuests}</p>
+        </div>
+      </div>
     </AccountContainer>
   );
 };

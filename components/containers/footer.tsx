@@ -64,6 +64,9 @@ const Footer = (): JSX.Element => (
     </div>
     <div className="w-full pt-10 pb-2 text-center">&#169;{'2022 Luke Shay and Jadi Reding'}</div>
     <div className="w-full pb-6 text-center">{'Built by Luke Shay'}</div>
+    <div className="w-full pb-6 text-center">
+      <Link href="/admin">{'Admin'}</Link>
+    </div>
   </footer>
 );
 
