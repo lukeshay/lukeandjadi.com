@@ -1,5 +1,4 @@
-import { SignedIn, SignedOut } from '@clerk/nextjs';
-import Link from 'next/link';
+import { RedirectToSignIn, SignedIn, SignedOut } from '@clerk/nextjs';
 import type { ReactNode } from 'react';
 
 import BaseContainer from './base-container';
@@ -18,15 +17,7 @@ const AccountContainer = ({ children }: ContainerProps): JSX.Element => (
       </main>
     </SignedIn>
     <SignedOut>
-      <main>
-        <p>
-          {'Please '}
-          <Link href="/account/sign-in" passHref>
-            <button type="button">{'sign in'}</button>
-          </Link>{' '}
-          {' to access this page.'}
-        </p>
-      </main>
+      <RedirectToSignIn redirectUrl="/admin" />
     </SignedOut>
   </BaseContainer>
 );

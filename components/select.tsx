@@ -1,7 +1,7 @@
 import type { ChangeEventHandler } from 'react';
 import classNames from 'classnames';
 
-type Option = { key: number | string; value: number | string };
+type Option = { key: number | string; value: number | string; disabled?: boolean };
 
 type SelectProps = {
   label: string;
@@ -47,8 +47,8 @@ const Select = ({
         required={required}
         value={selected}
       >
-        {options.map(({ key, value }) => (
-          <option key={key} value={key}>
+        {options.map(({ key, value, disabled: optionDisabled }) => (
+          <option disabled={optionDisabled} key={key} value={key}>
             {value}
           </option>
         ))}

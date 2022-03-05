@@ -19,7 +19,8 @@ import Input from '../../components/input';
 import logger from '../../server/infrastructure/logger';
 import Select from '../../components/select';
 import type { Option } from '../../components/select';
-import type { RSVPAttributes } from '../../types';
+import type { SerializedRSVPAttributes } from '../../types';
+import { serialize } from '../../server/utils/entity-util';
 
 const REDIRECT = {
   redirect: {
@@ -48,9 +49,8 @@ const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     return {
       props: {
-        ...res,
-        createdAt: null,
-        updatedAt: null,
+        ...serialize(res),
+        variants: null,
       },
     };
   } catch (error) {
@@ -60,7 +60,9 @@ const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 };
 
-const AccountPage = (props: RSVPAttributes): JSX.Element => {
+type AccountPageProps = Omit<SerializedRSVPAttributes, 'createdAt' | 'updatedAt' | 'variants'>;
+
+const AccountPage = (props: AccountPageProps): JSX.Element => {
   const guestOptions: Option[] = [];
 
   for (let i = 1; i <= props.maxGuests; i++) {
@@ -70,7 +72,7 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
     });
   }
 
-  const [values, setValues] = React.useState<RSVPAttributes & { attending: boolean }>({
+  const [values, setValues] = React.useState<AccountPageProps & { attending: boolean }>({
     ...props,
     attending: props.guests > 0,
   });
@@ -174,6 +176,11 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
             onChange={handleAttendingChange}
             options={[
               {
+                disabled: true,
+                key: 'select',
+                value: 'Select',
+              },
+              {
                 key: 'yes',
                 value: 'Yes',
               },
@@ -183,7 +190,7 @@ const AccountPage = (props: RSVPAttributes): JSX.Element => {
               },
             ]}
             required
-            selected={values.attending ? 'yes' : 'no'}
+            selected={!values.changed ? 'select' : values.attending ? 'yes' : 'no'}
           />
           {values.attending && (
             <Select

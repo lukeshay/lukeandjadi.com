@@ -35,6 +35,14 @@ type RSVPAttributes = BaseAttributes & {
 
 type RSVPCreationAttributes = Optional<RSVPAttributes, 'email' | 'guests' | 'id' | 'maxGuests'> & {};
 
+type SerializedAttributes<T extends BaseAttributes> = Omit<T, 'createdAt' | 'updatedAt'> & {
+  createdAt?: string;
+  updatedAt?: string;
+  changed: boolean;
+};
+
+type SerializedRSVPAttributes = SerializedAttributes<RSVPAttributes>;
+
 export type {
   BaseAttributes,
   CDCAttributes,
@@ -42,4 +50,6 @@ export type {
   RSVPAttributes,
   RSVPCreationAttributes,
   RSVPVariantAttributes,
+  SerializedRSVPAttributes,
+  SerializedAttributes,
 };

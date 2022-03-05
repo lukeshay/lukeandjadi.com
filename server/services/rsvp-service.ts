@@ -35,7 +35,13 @@ const updateRSVP = async (
   model: Parameters<typeof RSVP.update>[0],
   where: WhereOptions<RSVPAttributes>,
 ): Promise<RSVPAttributes> => {
-  const [updated] = await RSVP.update(model, { where });
+  const [updated] = await RSVP.update(
+    {
+      ...model,
+      updatedAt: new Date(),
+    },
+    { where },
+  );
 
   if (!updated) {
     throw new BadRequestError('RSVP not found');

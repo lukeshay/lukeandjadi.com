@@ -11,6 +11,7 @@ import { parseRSVPJWT } from '../../../server/services/jwt-service';
 import { RequestTimeoutError } from '../../../server/errors/request-timeout-error';
 import { validate } from '../../../server/services/schema-service';
 import { verifyReCaptchaToken } from '../../../server/services/recaptcha-service';
+import { serialize } from '../../../server/utils/entity-util';
 
 const bodySchema = yup.object().shape({
   email: yup.string().email().optional(),
@@ -81,7 +82,7 @@ const put: Handler = async (req, res) => {
     },
   );
 
-  res.status(StatusCodes.OK).json(saved);
+  res.status(StatusCodes.OK).json(serialize(saved));
 };
 
 export default createRouter().put(put).handler();
