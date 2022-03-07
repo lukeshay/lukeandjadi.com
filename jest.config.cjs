@@ -7,10 +7,10 @@ const createJestConfig = nextJest({
 
 // Add any custom config to be passed to Jest
 const customJestConfig = {
-  roots: ['<rootDir>'],
-  testPathIgnorePatterns: ['<rootDir>/cypress/'],
   moduleDirectories: ['node_modules', '<rootDir>/'],
+  roots: ['<rootDir>'],
   testEnvironment: 'jest-environment-jsdom',
+  testPathIgnorePatterns: ['<rootDir>/cypress/'],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

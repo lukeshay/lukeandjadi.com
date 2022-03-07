@@ -21,7 +21,7 @@ const config = {
       cookie: 'rsvp-jwt-token',
       salt: {
         ...defaults,
-        ttl: 1_800_000,
+        ttl: 600_000,
       },
     },
   },

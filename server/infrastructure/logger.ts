@@ -40,7 +40,11 @@ const logger = createLogger({
   ),
   /* eslint-enable @typescript-eslint/no-shadow,@typescript-eslint/no-unsafe-assignment,@typescript-eslint/restrict-template-expressions */
   level: 'silly',
-  transports: [new transports.Console(), new LogtailTransport(new Logtail(config.get<string>('logtail.sourceToken')))],
+  transports: [new transports.Console()],
 });
+
+try {
+  logger.transports.push(new LogtailTransport(new Logtail(config.get<string>('logtail.sourceToken'))));
+} catch {}
 
 export default logger;
