@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@pulumi/cloudflare": "4.3.0",
-    "@pulumi/pulumi": "3.24.1"
+    "@pulumi/pulumi": "3.26.1"
   },
   "devDependencies": {
     "@types/node": "17.0.15"
