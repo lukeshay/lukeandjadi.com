@@ -170,7 +170,10 @@ const Home = (): JSX.Element => (
     <Section id="guest-accommodations" title="Guest Accommodations">
       <SubSection className="block w-full md:flex" title="Hotels Within Walking Distance">
         <div className="w-full md:w-1/2">
-          <h3 className="text-lg font-semibold">{'AC Hotel by Marriott'}</h3>
+          <h3 className="text-lg font-semibold">
+            {'AC Hotel by Marriott - '}
+            <span className="text-red-500">{'Fully Booked'}</span>
+          </h3>
           <address>
             <span className="mb-1">{'401 E Grand Ave'}</span>
             <br />
