@@ -1,4 +1,4 @@
-import { requireSession as clerkRequireSession } from '@clerk/nextjs/api';
+import { requireAuth } from '@clerk/nextjs/api';
 import type { Router, Wrapper } from '@lukeshay/next-router';
 import { router, StatusCodes } from '@lukeshay/next-router';
 import correlator from 'correlation-id';
@@ -12,7 +12,7 @@ import logger from './logger';
 
 type Handler = NextApiHandler;
 
-const requireSession = (handler: Handler): Handler => clerkRequireSession(handler) as unknown as Handler;
+const requireSession = (handler: Handler): Handler => requireAuth(handler) as unknown as Handler;
 
 const withCorrelationId: Wrapper<Handler> = async (req, res, next) => {
   await correlator.withId(v4(), async () => next(req, res));
