@@ -59,7 +59,7 @@
     "correlation-id": "4.0.0",
     "date-fns": "2.28.0",
     "deep-diff": "1.0.2",
-    "fast-equals": "3.0.0",
+    "fast-equals": "3.0.1",
     "fathom-client": "3.4.1",
     "just-flush": "2.1.0",
     "merge-anything": "5.0.2",
