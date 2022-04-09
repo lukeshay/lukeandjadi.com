@@ -124,7 +124,7 @@ const AccountPage = ({ rsvps, csv, totalGuests, totalMaxGuests, totalEdited }: A
         </div>
         <div className="border-collapse">{rsvps.map(RSVPTableRow)}</div>
         <div className="grid grid-cols-10  gap-2 rounded-b bg-gray-200">
-          <p className="col-span-3 rounded-bl p-2">{'Totals'}</p>
+          <p className="col-span-3 rounded-bl p-2">{rsvps.length}</p>
           <p className="col-span-1 p-2 text-center">{totalEdited}</p>
           <p className="col-span-3 p-2 text-center" />
           <p className="col-span-1 p-2 text-center">{totalGuests}</p>
