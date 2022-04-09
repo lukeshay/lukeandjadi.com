@@ -62,6 +62,7 @@ const config = {
       text: 'Zola Cash Funds',
     },
   ],
+  restaurants: ['Iowa Taproom', 'The Republic on Grand', 'Beechwood Lounge', 'The New Northwestern', 'Bellhop'],
   weddingLinks: [
     {
       href: '/',

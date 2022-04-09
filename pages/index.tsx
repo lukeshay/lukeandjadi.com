@@ -90,9 +90,11 @@ const SubSection = ({
 );
 
 const RegistryLink = ({ href, children }: { href: string; children: React.ReactNode }): JSX.Element => (
-  <a className="block" href={href} rel="noreferrer" target="_blank">
-    {children}
-  </a>
+  <li>
+    <a href={href} rel="noreferrer" target="_blank">
+      {children}
+    </a>
+  </li>
 );
 
 /* eslint-disable @typescript-eslint/no-require-imports,@typescript-eslint/no-unsafe-assignment,react/forbid-elements */
@@ -221,19 +223,20 @@ const Home = (): JSX.Element => (
           }
         </p>
         <ul className="ml-4 list-inside list-disc text-gray-600">
-          <li>{'Iowa Taproom'}</li>
-          <li>{'The Republic on Grand'}</li>
-          <li>{'Beechwood Lounge'}</li>
-          <li>{'The New Northwestern'}</li>
+          {config.restaurants.map((restaurant) => (
+            <li key={restaurant}>{restaurant}</li>
+          ))}
         </ul>
       </SubSection>
     </Section>
     <Section id="registries" title="Registries">
-      {config.registries.map((r) => (
-        <RegistryLink href={r.href} key={r.href}>
-          {r.text}
-        </RegistryLink>
-      ))}
+      <ul className="ml-4 list-inside list-disc text-gray-600">
+        {config.registries.map((r) => (
+          <RegistryLink href={r.href} key={r.href}>
+            {r.text}
+          </RegistryLink>
+        ))}
+      </ul>
     </Section>
     <Section id="wedding-party" title="Wedding Party">
       <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
