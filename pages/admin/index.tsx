@@ -23,9 +23,10 @@ const getServerSideProps: GetServerSideProps = withServerSideAuth(async () => {
       order: [['name', 'ASC']],
     });
 
-    let totalGuests = 0;
-    let totalMaxGuests = 0;
-    let totalEdited = 0;
+    let totalGuests = 0,
+      totalMaxGuests = 0,
+      totalEdited = 0,
+      totalGuestsEdited = 0;
 
     const rows = rsvps.map((rsvp) => {
       const { id, name, email, guests, maxGuests, changed, updatedAt } = serialize(rsvp.get());
@@ -35,6 +36,7 @@ const getServerSideProps: GetServerSideProps = withServerSideAuth(async () => {
 
       if (changed) {
         totalEdited++;
+        totalGuestsEdited += maxGuests;
       }
 
       return [id, name, changed, email, guests, maxGuests, updatedAt].join(', ');
@@ -43,7 +45,7 @@ const getServerSideProps: GetServerSideProps = withServerSideAuth(async () => {
     const csvRows = [
       ['ID', 'Name', 'Edited', 'Email', 'Guests', 'Max Guests', 'Updated At'].join(', '),
       ...rows,
-      ['Totals', '', totalEdited, '', totalGuests, totalMaxGuests, ''].join(', '),
+      ['Totals', '', totalEdited, '', `${totalGuests} / ${totalGuestsEdited}`, totalMaxGuests, ''].join(', '),
     ];
 
     return {
@@ -51,7 +53,7 @@ const getServerSideProps: GetServerSideProps = withServerSideAuth(async () => {
         csv: csvRows.join('\n'),
         rsvps: rsvps.map((rsvp) => serialize(rsvp.get({ plain: true }))),
         totalEdited,
-        totalGuests,
+        totalGuests: `${totalGuests} / ${totalGuestsEdited}`,
         totalMaxGuests,
       },
     };
