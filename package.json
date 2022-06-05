@@ -82,7 +82,7 @@
         "@types/cookies": "0.7.7",
         "@types/correlation-id": "2.1.2",
         "@types/deep-diff": "1.0.1",
-        "@types/jest": "27.5.1",
+        "@types/jest": "27.5.2",
         "@types/pg": "8.6.5",
         "@types/react": "18.0.11",
         "@types/react-dom": "18.0.5",
