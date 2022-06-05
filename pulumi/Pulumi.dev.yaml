@@ -1,6 +1,6 @@
 config:
-  cloudflare:apiToken:
-    secure: AAABAM4sbokZx21ePc1mkW40U4og3SIlxf4PUXaF8aHIxBITAQ71f1V/j8Nl8nHTtNhyI4CIitpUGtXPjuhvA1BlyanhNNSN
-  lukeandjadi.com:url: dev.lukeandjadi.com
-  lukeandjadi.com:zone_id:
-    secure: AAABAMXysucnNYbCnAfoXd91yvR8R/BTqprFsdoRYGPWBYZy3f7+9e6DZIEx+54ZcdOaQypVYjU2HbgRC3QMIA==
+    cloudflare:apiToken:
+        secure: AAABAM4sbokZx21ePc1mkW40U4og3SIlxf4PUXaF8aHIxBITAQ71f1V/j8Nl8nHTtNhyI4CIitpUGtXPjuhvA1BlyanhNNSN
+    lukeandjadi.com:url: dev.lukeandjadi.com
+    lukeandjadi.com:zone_id:
+        secure: AAABAMXysucnNYbCnAfoXd91yvR8R/BTqprFsdoRYGPWBYZy3f7+9e6DZIEx+54ZcdOaQypVYjU2HbgRC3QMIA==

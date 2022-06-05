@@ -1,12 +1,12 @@
 {
-  "name": "pulumi",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "@pulumi/cloudflare": "4.6.0",
-    "@pulumi/pulumi": "3.30.0"
-  },
-  "devDependencies": {
-    "@types/node": "17.0.15"
-  }
+    "name": "pulumi",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "@pulumi/cloudflare": "4.6.0",
+        "@pulumi/pulumi": "3.30.0"
+    },
+    "devDependencies": {
+        "@types/node": "17.0.15"
+    }
 }

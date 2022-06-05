@@ -1,16 +1,16 @@
 {
-  "extends": ["get-off-my-lawn"],
-  "ignorePatterns": ["cypress"],
-  "overrides": [
-    {
-      "files": ["pages/**/*", "client/**/*"],
-      "rules": {
-        "node/prefer-global/process": "off"
-      }
+    "extends": ["get-off-my-lawn"],
+    "ignorePatterns": ["cypress"],
+    "overrides": [
+        {
+            "files": ["pages/**/*", "client/**/*"],
+            "rules": {
+                "node/prefer-global/process": "off"
+            }
+        }
+    ],
+    "root": true,
+    "rules": {
+        "unicorn/no-null": "off"
     }
-  ],
-  "root": true,
-  "rules": {
-    "unicorn/no-null": "off"
-  }
 }

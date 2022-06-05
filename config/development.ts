@@ -1,5 +1,5 @@
 const config = {
-  domain: 'https://dev.lukeandjadi.com',
+    domain: 'https://dev.lukeandjadi.com',
 };
 
 export default config;

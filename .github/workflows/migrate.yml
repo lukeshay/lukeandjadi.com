@@ -1,17 +1,17 @@
 on:
-  workflow_call:
-    secrets:
-      migration_dsn:
-        required: true
-      cluster_id:
-        required: true
+    workflow_call:
+        secrets:
+            migration_dsn:
+                required: true
+            cluster_id:
+                required: true
 
 jobs:
-  migrate:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - run: |
-          make schema-migrate
-        env:
-          DSN: ${{ secrets.migration_dsn }}?sslmode=disable
+    migrate:
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v3
+            - run: |
+                  make schema-migrate
+              env:
+                  DSN: ${{ secrets.migration_dsn }}?sslmode=disable

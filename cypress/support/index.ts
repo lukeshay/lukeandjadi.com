@@ -14,18 +14,18 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands';
+import './e2e';
 
 /// <reference types="cypress" />
 
 declare global {
-  namespace Cypress {
-    interface Chainable {
-      getById(id: string): Chainable<JQuery<HTMLElement>>;
-      getByTestId(id: string): Chainable<JQuery<HTMLElement>>;
-      getSubmitButton(): Chainable<JQuery<HTMLElement>>;
-      searchRSVP(name: string): void;
-      visitRSVPSearchPage(): void;
+    namespace Cypress {
+        interface Chainable {
+            getById(id: string): Chainable<JQuery<HTMLElement>>;
+            getByTestId(id: string): Chainable<JQuery<HTMLElement>>;
+            getSubmitButton(): Chainable<JQuery<HTMLElement>>;
+            searchRSVP(name: string): void;
+            visitRSVPSearchPage(): void;
+        }
     }
-  }
 }

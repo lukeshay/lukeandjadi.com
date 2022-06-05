@@ -1,44 +1,44 @@
 import * as yup from 'yup';
-import { StatusCodes } from '@lukeshay/next-router';
+import {StatusCodes} from '@lukeshay/next-router';
 
 import logger from '../../../server/infrastructure/logger';
-import { createRouter } from '../../../server/infrastructure/middleware';
-import type { Handler } from '../../../server/infrastructure/middleware';
-import { config } from '../../../config';
-import { generateRSVPJWT } from '../../../server/services/jwt-service';
-import { getRSVPByName } from '../../../server/services/rsvp-service';
-import { setCookie } from '../../../server/services/cookie-service';
-import { validate } from '../../../server/services/schema-service';
-import { verifyReCaptchaToken } from '../../../server/services/recaptcha-service';
+import {createRouter} from '../../../server/infrastructure/middleware';
+import type {Handler} from '../../../server/infrastructure/middleware';
+import {config} from '../../../config';
+import {generateRSVPJWT} from '../../../server/services/jwt-service';
+import {getRSVPByName} from '../../../server/services/rsvp-service';
+import {setCookie} from '../../../server/services/cookie-service';
+import {validate} from '../../../server/services/schema-service';
+import {verifyReCaptchaToken} from '../../../server/services/recaptcha-service';
 
 const querySchema = yup.object().shape({
-  name: yup.string().required(),
-  token: yup.string().required(),
+    name: yup.string().required(),
+    token: yup.string().required(),
 });
 
 const get: Handler = async (req, res) => {
-  const { name, token } = await validate(querySchema, req.query);
+    const {name, token} = await validate(querySchema, req.query);
 
-  await verifyReCaptchaToken(token);
+    await verifyReCaptchaToken(token);
 
-  logger.info(`getting rsvp by name ${name}`, { name });
+    logger.info(`getting rsvp by name ${name}`, {name});
 
-  const rsvp = await getRSVPByName(name);
+    const rsvp = await getRSVPByName(name);
 
-  logger.debug(`found rsvp with the name ${name}`, { name });
+    logger.debug(`found rsvp with the name ${name}`, {name});
 
-  const jwt = await generateRSVPJWT({ id: rsvp.id });
+    const jwt = await generateRSVPJWT({id: rsvp.id});
 
-  logger.debug('setting jwt cookie');
+    logger.debug('setting jwt cookie');
 
-  setCookie(req, res, config.get('jwt.rsvp.cookie'), jwt, {
-    httpOnly: true,
-    maxAge: config.get<number>('jwt.rsvp.salt.ttl') * 1000,
-    overwrite: true,
-    sameSite: 'strict',
-  });
+    setCookie(req, res, config.get('jwt.rsvp.cookie'), jwt, {
+        httpOnly: true,
+        maxAge: config.get<number>('jwt.rsvp.salt.ttl') * 1000,
+        overwrite: true,
+        sameSite: 'strict',
+    });
 
-  res.status(StatusCodes.OK).json(rsvp);
+    res.status(StatusCodes.OK).json(rsvp);
 };
 
 export default createRouter().get(get).handler();

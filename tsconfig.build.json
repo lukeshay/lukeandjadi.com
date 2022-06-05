@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.json",
-  "exclude": ["node_modules", "cypress", "pulumi"],
-  "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx"]
+    "extends": "./tsconfig.json",
+    "exclude": ["node_modules", "cypress", "pulumi"],
+    "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx"]
 }
