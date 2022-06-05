@@ -4,4 +4,4 @@ const config = {
     siteUrl: process.env.SITE_URL || 'https://lukeandjadi.com',
 };
 
-export default config;
+module.exports = config;
