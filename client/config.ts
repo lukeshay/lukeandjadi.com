@@ -210,7 +210,7 @@ const config = {
             {
                 img: '/dustin-white.jpg',
                 name: 'Dustin White',
-                relation: 'Friend of the Bride',
+                relation: 'Friend of the Couple',
                 role: 'Usher',
             },
         ],
