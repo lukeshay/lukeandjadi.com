@@ -20,7 +20,7 @@ const FooterLink = ({
             </a>
         ) : (
             <Link href={href}>
-                { }
+                {}
                 <a className="text-gray-500">{children}</a>
             </Link>
         )}

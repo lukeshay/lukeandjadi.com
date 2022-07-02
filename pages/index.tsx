@@ -198,10 +198,9 @@ const Home = (): JSX.Element => (
                 </div>
             </SubSection>
             <SubSection title="Parking">
-                <p className="prose">
+                <p className="text-gray-700 leading-6">
                     {
-                        'We recommend parking at the hotel if you are within walking distance. If you are not, the following parking lot will be available which is located across the street from The Conservatory.'
-                    }
+                        'We recommend parking at the hotel if you are within walking distance. If you are not, the following parking lot located across the street from The Conservatory will be available until 12:00 PM on Sunday.'}
                 </p>
                 <div className="mt-2">
                     <h3 className="text-lg font-semibold">{'LifeServe Blood Center'}</h3>
@@ -213,12 +212,12 @@ const Home = (): JSX.Element => (
                 </div>
             </SubSection>
             <SubSection title="Time Between Ceremony and Reception">
-                <p className="prose">
+              <p className="text-gray-700 leading-6 mb-2">
                     {
                         'This would be a great time to check in to your hotel or check out East Village. Some bars we recommend are:'
                     }
                 </p>
-                <ul className="ml-4 list-inside list-disc text-gray-600">
+                <ul className="ml-4 list-inside list-disc text-gray-700">
                     {config.restaurants.map((restaurant) => (
                         <li key={restaurant}>{restaurant}</li>
                     ))}
