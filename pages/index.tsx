@@ -200,7 +200,7 @@ const Home = (): JSX.Element => (
             <SubSection title="Parking">
                 <p className="text-gray-700 leading-6">
                     {
-                        'We recommend parking at the hotel if you are within walking distance. If you are not, the following parking lot located across the street from The Conservatory will be available until 12:00 PM on Sunday.'}
+                        'We recommend parking at the hotel if you are within walking distance. If you are not, the following parking lot will be available located across the street from The Conservatory. Cars must be out of the lot by noon on Sunday.'}
                 </p>
                 <div className="mt-2">
                     <h3 className="text-lg font-semibold">{'LifeServe Blood Center'}</h3>
