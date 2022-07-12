@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import Link from 'next/link';
 
 import config from '../client/config';
@@ -37,8 +37,9 @@ const Divider = (): JSX.Element => <div className="my-8 w-full border-b border-a
 const Header = ({children, id, className = ''}: {children: string; id: string; className?: string}): JSX.Element => (
     <>
         <Divider />
-        {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
         <a
+            aria-hidden
+            href={`#${id}`}
             id={id}
             style={{
                 display: 'block',
@@ -46,7 +47,9 @@ const Header = ({children, id, className = ''}: {children: string; id: string; c
                 top: '-120px',
                 visibility: 'hidden',
             }}
-        />
+        >
+            {children}
+        </a>
         <h1 className={`"${className} pb-2 text-2xl font-bold md:pb-4 md:text-4xl`}>{children}</h1>
     </>
 );
@@ -166,7 +169,7 @@ const Home = (): JSX.Element => (
                 <div className="w-full md:w-1/2">
                     <h3 className="text-lg font-semibold">
                         {'AC Hotel by Marriott - '}
-                        <span className="text-red-500">{'Fully Booked'}</span>
+                        <span className="text-red-800">{'Fully Booked'}</span>
                     </h3>
                     <address>
                         <span className="mb-1">{'401 E Grand Ave'}</span>
@@ -198,9 +201,10 @@ const Home = (): JSX.Element => (
                 </div>
             </SubSection>
             <SubSection title="Parking">
-                <p className="text-gray-700 leading-6">
+                <p className="leading-6 text-gray-700">
                     {
-                        'We recommend parking at the hotel if you are within walking distance. If you are not, the following parking lot will be available located across the street from The Conservatory. Cars must be out of the lot by noon on Sunday.'}
+                        'We recommend parking at the hotel if you are within walking distance. If you are not, the following parking lot will be available located across the street from The Conservatory. Cars must be out of the lot by noon on Sunday.'
+                    }
                 </p>
                 <div className="mt-2">
                     <h3 className="text-lg font-semibold">{'LifeServe Blood Center'}</h3>
@@ -212,12 +216,12 @@ const Home = (): JSX.Element => (
                 </div>
             </SubSection>
             <SubSection title="Time Between Ceremony and Reception">
-              <p className="text-gray-700 leading-6 mb-2">
+                <p className="mb-2 leading-6 text-gray-700">
                     {
                         'This would be a great time to check in to your hotel or check out East Village. Some bars we recommend are:'
                     }
                 </p>
-                <ul className="ml-4 list-inside list-disc text-gray-700">
+                <ul className="ml-4 list-inside list-disc space-y-1 text-gray-700">
                     {config.restaurants.map((restaurant) => (
                         <li key={restaurant}>{restaurant}</li>
                     ))}
@@ -225,7 +229,7 @@ const Home = (): JSX.Element => (
             </SubSection>
         </Section>
         <Section id="registries" title="Registries">
-            <ul className="ml-4 list-inside list-disc text-gray-600">
+            <ul className="ml-4 list-inside list-disc space-y-1">
                 {config.registries.map((r) => (
                     <RegistryLink href={r.href} key={r.href}>
                         {r.text}

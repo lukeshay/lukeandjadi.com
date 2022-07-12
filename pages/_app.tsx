@@ -8,10 +8,10 @@ import type {AppProps} from 'next/app';
 import '../styles/globals.css';
 
 const MyApp = ({Component, pageProps}: AppProps): JSX.Element => (
-        <ClerkProvider>
-            <Component {...pageProps} />
-            <ToastContainer hideProgressBar limit={1} position="bottom-center" transition={Slide} />
-        </ClerkProvider>
-    );
+    <ClerkProvider>
+        <Component {...pageProps} />
+        <ToastContainer hideProgressBar limit={1} position="bottom-center" transition={Slide} />
+    </ClerkProvider>
+);
 
 export default MyApp;

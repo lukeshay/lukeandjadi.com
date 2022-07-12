@@ -36,7 +36,7 @@ const Footer = (): JSX.Element => {
                 <div className="block w-full max-w-screen-lg justify-between px-2 sm:flex lg:px-0">
                     <div>
                         <h4 className="text-lg font-semibold">{'Wedding Information'}</h4>
-                        <ul>
+                        <ul className="space-y-1">
                             {config.weddingLinks.map(({href, text}) => (
                                 <FooterLink external href={href} key={`${href}-${text}`}>
                                     {text}
@@ -46,7 +46,7 @@ const Footer = (): JSX.Element => {
                     </div>
                     <div className="pt-4 sm:pt-0">
                         <h4 className="text-lg font-semibold">{'Guest Information'}</h4>
-                        <ul>
+                        <ul className="space-y-1">
                             {config.guestLinks.map(({href, text}) => (
                                 <FooterLink external href={href} key={`${href}-${text}`}>
                                     {text}
@@ -56,7 +56,7 @@ const Footer = (): JSX.Element => {
                     </div>
                     <div className="pt-4 sm:pt-0">
                         <h4 className="text-lg font-semibold">{'Registries'}</h4>
-                        <ul>
+                        <ul className="space-y-1">
                             {config.registries.map(({href, text}) => (
                                 <FooterLink external href={href} key={`${href}-${text}`}>
                                     {text}

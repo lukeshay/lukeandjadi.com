@@ -55,6 +55,7 @@ const MobileNavbar = ({links}: {links: {href: string; text: string}[]}): JSX.Ele
                 </Link>
                 <button className="px-2 text-gray-700" onClick={toggleOpen} type="button">
                     {open ? <XIcon height={24} width={24} /> : <MenuIcon height={24} width={24} />}
+                    <span className="sr-only">{'Toggle Navigation'}</span>
                 </button>
             </div>
             <Transition.Root as={Fragment} show={open}>
@@ -82,7 +83,7 @@ const MobileNavbar = ({links}: {links: {href: string; text: string}[]}): JSX.Ele
                             leaveFrom="translate-x-0"
                             leaveTo="translate-x-full"
                         >
-                            <ul className="flex flex-col bg-white pt-8 pr-2">
+                            <ul className="flex flex-col space-y-1 bg-white pt-8 pr-2">
                                 {links.map(({href, text}) => (
                                     <NavLink href={href} key={`${href}-${text}`} onClick={toggleOpen}>
                                         {text}

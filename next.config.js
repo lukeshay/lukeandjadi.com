@@ -5,6 +5,13 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
+    experimental: {
+        browsersListForSwc: true,
+        images: {
+            allowFutureImage: true,
+        },
+        legacyBrowsers: false,
+    },
     reactStrictMode: true,
     swcMinify: true,
     typescript: {
