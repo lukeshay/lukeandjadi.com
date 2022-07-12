@@ -55,6 +55,7 @@ const MobileNavbar = ({links}: {links: {href: string; text: string}[]}): JSX.Ele
                 </Link>
                 <button className="px-2 text-gray-700" onClick={toggleOpen} type="button">
                     {open ? <XIcon height={24} width={24} /> : <MenuIcon height={24} width={24} />}
+                    <span className="sr-only">{'Toggle Navigation'}</span>
                 </button>
             </div>
             <Transition.Root as={Fragment} show={open}>
