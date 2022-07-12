@@ -14,7 +14,9 @@ const BaseContainer = ({children, title}: BaseContainerProps): JSX.Element => (
     <div className="font-serif">
         <NextSeo
             canonical="https://lukeandjadi.com/"
-            description={"Luke & Jadi's wedding website!"}
+            description={
+                "Luke & Jadi's wedding website! Contains information about the wedding, the venue, the registry, and the couple's story."
+            }
             openGraph={{
                 description: "Luke & Jadi's wedding website!",
                 images: [

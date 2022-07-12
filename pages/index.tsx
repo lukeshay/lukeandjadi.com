@@ -198,9 +198,10 @@ const Home = (): JSX.Element => (
                 </div>
             </SubSection>
             <SubSection title="Parking">
-                <p className="text-gray-700 leading-6">
+                <p className="leading-6 text-gray-700">
                     {
-                        'We recommend parking at the hotel if you are within walking distance. If you are not, the following parking lot will be available located across the street from The Conservatory. Cars must be out of the lot by noon on Sunday.'}
+                        'We recommend parking at the hotel if you are within walking distance. If you are not, the following parking lot will be available located across the street from The Conservatory. Cars must be out of the lot by noon on Sunday.'
+                    }
                 </p>
                 <div className="mt-2">
                     <h3 className="text-lg font-semibold">{'LifeServe Blood Center'}</h3>
@@ -212,7 +213,7 @@ const Home = (): JSX.Element => (
                 </div>
             </SubSection>
             <SubSection title="Time Between Ceremony and Reception">
-              <p className="text-gray-700 leading-6 mb-2">
+                <p className="mb-2 leading-6 text-gray-700">
                     {
                         'This would be a great time to check in to your hotel or check out East Village. Some bars we recommend are:'
                     }
