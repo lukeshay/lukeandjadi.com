@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import Link from 'next/link';
 
 import config from '../client/config';
@@ -37,8 +37,9 @@ const Divider = (): JSX.Element => <div className="my-8 w-full border-b border-a
 const Header = ({children, id, className = ''}: {children: string; id: string; className?: string}): JSX.Element => (
     <>
         <Divider />
-        {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
         <a
+            aria-hidden
+            href={`#${id}`}
             id={id}
             style={{
                 display: 'block',
@@ -46,7 +47,9 @@ const Header = ({children, id, className = ''}: {children: string; id: string; c
                 top: '-120px',
                 visibility: 'hidden',
             }}
-        />
+        >
+            {children}
+        </a>
         <h1 className={`"${className} pb-2 text-2xl font-bold md:pb-4 md:text-4xl`}>{children}</h1>
     </>
 );
@@ -218,7 +221,7 @@ const Home = (): JSX.Element => (
                         'This would be a great time to check in to your hotel or check out East Village. Some bars we recommend are:'
                     }
                 </p>
-                <ul className="ml-4 list-inside list-disc text-gray-700">
+                <ul className="ml-4 list-inside list-disc space-y-1 text-gray-700">
                     {config.restaurants.map((restaurant) => (
                         <li key={restaurant}>{restaurant}</li>
                     ))}
@@ -226,7 +229,7 @@ const Home = (): JSX.Element => (
             </SubSection>
         </Section>
         <Section id="registries" title="Registries">
-            <ul className="ml-4 list-inside list-disc text-gray-600">
+            <ul className="ml-4 list-inside list-disc space-y-1">
                 {config.registries.map((r) => (
                     <RegistryLink href={r.href} key={r.href}>
                         {r.text}
