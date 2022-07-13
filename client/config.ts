@@ -18,6 +18,7 @@ const config = {
             text: 'RSVP',
         },
     ],
+    imageUploadLink: 'https://weduploader.com/upload/OhYY3QExMum22oQ2',
     links: [
         {
             href: '/',

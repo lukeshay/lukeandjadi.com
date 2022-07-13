@@ -46,6 +46,7 @@
     },
     "dependencies": {
         "@clerk/nextjs": "3.7.1",
+        "@growthbook/growthbook-react": "0.9.0",
         "@hapi/iron": "7.0.0",
         "@headlessui/react": "1.6.6",
         "@heroicons/react": "1.0.6",

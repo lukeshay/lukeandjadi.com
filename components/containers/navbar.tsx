@@ -1,9 +1,10 @@
 import type {MouseEventHandler} from 'react';
 import React, {Fragment} from 'react';
-import Link from 'next/link';
 import {MenuIcon, XIcon} from '@heroicons/react/outline';
 import {Transition, Dialog} from '@headlessui/react';
+import {useFeature} from '@growthbook/growthbook-react';
 
+import {Link} from '../link';
 import config from '../../client/config';
 
 const NavLink = ({
@@ -16,7 +17,7 @@ const NavLink = ({
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }): JSX.Element => (
     <li className="px-4 py-2 md:px-2 md:py-0 lg:px-4">
-        <Link href={href} passHref>
+        <Link href={href}>
             <button
                 className="select-none border-b-2 border-accent-500 px-0 py-0.5 text-base text-gray-700 outline-none hover:no-underline hover:opacity-75 md:px-2 md:text-sm lg:text-base"
                 onClick={onClick}
@@ -50,7 +51,7 @@ const MobileNavbar = ({links}: {links: {href: string; text: string}[]}): JSX.Ele
     return (
         <nav className="sticky top-0 z-20 block border-b border-gray-50 bg-white p-4 font-serif shadow-lg md:hidden">
             <div className="flex justify-between">
-                <Link href="/" passHref>
+                <Link href="/">
                     <h1 className="w-40 cursor-pointer text-xl font-bold text-black lg:text-2xl">{'Luke & Jadi'}</h1>
                 </Link>
                 <button className="px-2 text-gray-700" onClick={toggleOpen} type="button">
@@ -98,11 +99,54 @@ const MobileNavbar = ({links}: {links: {href: string; text: string}[]}): JSX.Ele
     );
 };
 
-const Navbar = (): JSX.Element => (
-    <>
-        <DesktopNavbar links={config.links} />
-        <MobileNavbar links={config.links} />
-    </>
-);
+const Navbar = (): JSX.Element => {
+    const {on: imageUploadsOn} = useFeature('image-uploads');
+
+    const links = [
+        {
+            href: '/',
+            text: 'Home',
+        },
+        {
+            href: '/#our-story',
+            text: 'Our Story',
+        },
+        {
+            href: '/#the-wedding',
+            text: 'The Wedding',
+        },
+        {
+            href: '/#guest-accommodations',
+            text: 'Guest Accommodations',
+        },
+        {
+            href: '/#registries',
+            text: 'Registries',
+        },
+        {
+            href: '/#wedding-party',
+            text: 'Wedding Party',
+        },
+    ];
+
+    links.push(
+        imageUploadsOn
+            ? {
+                  href: config.imageUploadLink,
+                  text: 'Upload',
+              }
+            : {
+                  href: '/rsvp',
+                  text: 'RSVP',
+              }
+    );
+
+    return (
+        <>
+            <DesktopNavbar links={links} />
+            <MobileNavbar links={links} />
+        </>
+    );
+};
 
 export default Navbar;
