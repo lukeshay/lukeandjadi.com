@@ -36,8 +36,8 @@ jobs:
                   RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
                   DOMAIN: http://localhost:3000
             - name: Initialize CodeQL
-              uses: github/codeql-action/init@v1
+              uses: github/codeql-action/init@v2
               with:
                   languages: javascript
-            - uses: github/codeql-action/autobuild@v1
-            - uses: github/codeql-action/analyze@v1
+            - uses: github/codeql-action/autobuild@v2
+            - uses: github/codeql-action/analyze@v2
